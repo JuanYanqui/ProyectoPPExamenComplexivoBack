@@ -58,6 +58,7 @@ public class Usuario {
 	@OneToOne(mappedBy = "usuario_director")
 	private Aprobacion_Estudiante aprobacionEstudiante_dir;
 
+
 	@JsonIgnore
 	@OneToOne(mappedBy = "usuario_responsable")
 	private Aprobacion_Estudiante aprobacionEstudiante_res;

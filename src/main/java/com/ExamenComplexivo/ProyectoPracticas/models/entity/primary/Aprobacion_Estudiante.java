@@ -19,7 +19,7 @@ import java.util.Date;
 public class Aprobacion_Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idUsuario", insertable = false, updatable = false)
+
     private Long idAprobacionEstudiante;
     private Date fecha;
     private Boolean check_director;
@@ -31,11 +31,11 @@ public class Aprobacion_Estudiante {
     private Solicitud_Convocatoria solicitudConvocatoria;
 
     @OneToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idUsuarioDirector",  insertable = false, updatable = false)
     private Usuario usuario_director;
 
     @OneToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idUsuarioResponsable",  insertable = false, updatable = false)
     private Usuario usuario_responsable;
 
     @JsonIgnore
