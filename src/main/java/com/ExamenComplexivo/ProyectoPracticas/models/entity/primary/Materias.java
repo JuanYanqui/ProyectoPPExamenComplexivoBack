@@ -23,4 +23,8 @@ public class Materias {
     @JsonIgnore
     @OneToOne(mappedBy = "materias")
     private Detalle_Actividades detalleActividades;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "materias")
+    private Detalle_Materia detalleMateria;
 }

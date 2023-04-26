@@ -25,8 +25,9 @@ public class Actividades {
     @JoinColumn(name = "idSolicitudPracticas",referencedColumnName = "idSolicitudPracticas")
     private Solicitud_Practicas solicitudPracticas;
 
+
     @JsonIgnore
-    @OneToMany(mappedBy = "actividades",cascade = CascadeType.ALL)
-    private List<Detalle_Actividades> detalleActividades;
+    @OneToOne(mappedBy = "actividades")
+    private Detalle_Actividades detalleActividades;
 
 }

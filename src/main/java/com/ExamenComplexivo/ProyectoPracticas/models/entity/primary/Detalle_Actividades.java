@@ -26,7 +26,8 @@ public class Detalle_Actividades {
     @JoinColumn(name = "idMaterias")
     private Materias materias;
 
-    @ManyToOne
-    @JoinColumn(name = "idActividades",referencedColumnName = "idActividades")
+
+    @OneToOne
+    @JoinColumn(name = "idActividades")
     private Actividades actividades;
 }

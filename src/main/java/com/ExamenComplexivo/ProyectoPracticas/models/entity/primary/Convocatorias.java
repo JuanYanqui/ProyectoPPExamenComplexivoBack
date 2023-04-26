@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,19 @@ public class Convocatorias {
     private Date fecha_envio;
     private String descripcion;
 
+    private byte documento_convocatoria;
+
+
+    @OneToOne
+    @JoinColumn(name = "idSolicitudPracticas")
+    private Solicitud_Practicas solicitudPracticas;
+
+
+    @JsonIgnore
     @OneToMany(mappedBy = "convocatorias",cascade = CascadeType.ALL)
-    private List<Solicitud_Practicas> solicitudPracticas;
+    private List<Detalle_Materia> detalleMaterias;
+
+    @JsonIgnore
+    @ManyToOne
+    private Solicitud_Convocatoria solicitudConvocatoria;
 }

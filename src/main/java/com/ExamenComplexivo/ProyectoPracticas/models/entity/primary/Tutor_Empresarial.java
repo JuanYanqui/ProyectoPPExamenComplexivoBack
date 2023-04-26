@@ -28,6 +28,18 @@ public class Tutor_Empresarial {
     private Empresa empresa;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tutor_empresarial",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tutorEmpresarial",cascade = CascadeType.ALL)
     private List<Solicitud_Practicas> solicitudPracticas;
+
+    @OneToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario_tutor_empresarial;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "tutorEmpresarial")
+    private Aprobacion_Empresa aprobacionEmpresa;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "tutorEmpresarial")
+    private Detalle_Practica detallePractica;
 }

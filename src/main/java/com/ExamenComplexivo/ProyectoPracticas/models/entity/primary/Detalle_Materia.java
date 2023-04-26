@@ -19,4 +19,12 @@ public class Detalle_Materia {
     private Long idDetalleMateria;
     private String resultados_esperados;
     private String objetivos;
+
+    @OneToOne
+    @JoinColumn(name = "idMaterias")
+    private Materias materias;
+
+    @ManyToOne
+    @JoinColumn(name = "idConvocatorias",referencedColumnName = "idConvocatorias")
+    private Convocatorias convocatorias;
 }

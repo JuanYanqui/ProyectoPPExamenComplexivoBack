@@ -22,9 +22,9 @@ public class Detalle_Convenio {
     private Date fecha_aprobacion;
     private Date fecha_caducidad;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "detalle_convenio")
-    private Detalle_Convenio detalleConvenio;
+    @OneToOne
+    @JoinColumn(name = "idConvenio")
+    private Convenio convenio;
 
     @ManyToOne
     @JoinColumn(name = "idEmpresa",referencedColumnName = "idEmpresa")

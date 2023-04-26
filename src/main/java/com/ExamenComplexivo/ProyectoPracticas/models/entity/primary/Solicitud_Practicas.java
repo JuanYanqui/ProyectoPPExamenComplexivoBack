@@ -23,20 +23,21 @@ public class Solicitud_Practicas {
     private Date fecha_solicitud;
     private Integer numero_estudiantes;
 
+    private byte documento_solicitud_practicas;
+
     @ManyToOne
     @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial")
     private Tutor_Empresarial tutorEmpresarial;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
-    private Usuario usuario;
+    private Usuario usuario_responsable_pp;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "solicitud_practicas",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "solicitudPracticas",cascade = CascadeType.ALL)
     private List<Actividades> actividades;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "idConvocatorias",referencedColumnName = "idConvocatorias")
+    @OneToOne(mappedBy = "solicitudPracticas")
     private Convocatorias convocatorias;
 }

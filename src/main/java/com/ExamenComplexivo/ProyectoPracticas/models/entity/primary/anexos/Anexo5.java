@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Detalle_Practica;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,11 @@ public class Anexo5 {
 	private Date hasta;
 	private String actividades_seguimiento;
 	private String observaciones;
+
+	private byte documento_anexo5;
+
+	@OneToOne
+	@JoinColumn(name = "idDetallePractica")
+	private Detalle_Practica detallePractica;
 
 }

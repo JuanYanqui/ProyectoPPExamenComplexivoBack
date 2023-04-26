@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,22 @@ public class Aprobacion_Empresa {
     private Long idAprobacionEmpresa;
     private Date fecha;
     private String estado;
+
+    @OneToOne
+    @JoinColumn(name = "idAprobacionEstudiante")
+    private Aprobacion_Estudiante aprobacionEstudiante;
+
+    @OneToOne
+    @JoinColumn(name = "idTutorEmpresarial")
+    private Tutor_Empresarial tutorEmpresarial;
+
+    @OneToOne
+    @JoinColumn(name = "idPractica")
+    private Practica practica;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "aprobacionEmpresa")
+    private Detalle_Practica detallePractica;
+
+
 }

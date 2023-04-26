@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +24,17 @@ public class Convenio {
     private Date fecha_elaboracion;
     private Integer numero_itv;
     private String descripcion;
-    private byte documento;
+    private byte documento_convenio;
 
-    @OneToOne
-    @JoinColumn(name = "idDetalleConvenio")
+
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "convenio")
     private Detalle_Convenio detalleConvenio;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
+    private Usuario usuario_cord_vin;
 
 
 

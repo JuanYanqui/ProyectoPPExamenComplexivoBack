@@ -38,16 +38,32 @@ public class Usuario {
 
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario_cord_vin",cascade = CascadeType.ALL)
 	private List<Convenio> convenios;
 
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-//	private List<Solicitud_Practicas> solicitudPracticas;
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuario_responsable_pp",cascade = CascadeType.ALL)
+	private List<Solicitud_Practicas> solicitudPracticas;
 
-//	@JsonIgnore
-//	@OneToOne(mappedBy = "usuario")
-//	private Estudiante_Practicante estudiantePracticante;
+	@JsonIgnore
+	@OneToOne(mappedBy = "usuario_estudiante_practicante")
+	private Estudiante_Practicante estudiantePracticante;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "usuario_tutor_empresarial")
+	private Tutor_Empresarial tutorEmpresarial;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "usuario_director")
+	private Aprobacion_Estudiante aprobacionEstudiante_dir;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "usuario_responsable")
+	private Aprobacion_Estudiante aprobacionEstudiante_res;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "usuario_tutor_academico")
+	private Detalle_Practica detallePractica;
 
 	public Usuario(String cedula, String nombre, String apellido, String contrasenia, String correo) {
 		this.cedula = cedula;

@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Detalle_Practica;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,10 @@ public class Anexo4 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo4;
 	private Date fecha_actual;
-	private byte documentoAnexo4;
+	private byte documento_anexo4;
+
+
+	@OneToOne
+	@JoinColumn(name = "idDetallePractica")
+	private Detalle_Practica detallePractica;
 }
