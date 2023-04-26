@@ -23,6 +23,7 @@ import java.util.Set;
 				@UniqueConstraint(columnNames = "correo")
 		})
 public class Usuario {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idUsuario;

@@ -21,7 +21,8 @@ public class Estudiante_Practicante {
         private Boolean Estado;
 
 
-        @OneToOne(mappedBy = "idUsuario")
+        @OneToOne
+        @JoinColumn(name = "idUsuario")
         private Usuario usuario_estudiante_practicante;
 
         @JsonIgnore

@@ -19,6 +19,7 @@ import java.util.Date;
 public class Aprobacion_Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idUsuario", insertable = false, updatable = false)
     private Long idAprobacionEstudiante;
     private Date fecha;
     private Boolean check_director;
