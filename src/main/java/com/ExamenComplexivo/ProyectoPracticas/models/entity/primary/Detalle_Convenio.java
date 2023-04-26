@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,24 +14,19 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "convenio")
-public class Convenio {
-
+@Table(name = "detalle_convenio")
+public class Detalle_Convenio {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idConvenio;
-    private Integer numero_convenio;
-    private Date fecha_elaboracion;
-    private Integer numero_itv;
-    private String descripcion;
-    private byte documento;
+    private Long idDetalleConvenio;
+    private Date fecha_aprobacion;
+    private Date fecha_caducidad;
 
-    @OneToOne
-    @JoinColumn(name = "idDetalleConvenio")
+    @JsonIgnore
+    @OneToOne(mappedBy = "detalle_convenio")
     private Detalle_Convenio detalleConvenio;
 
-
-
-
-
+    @ManyToOne
+    @JoinColumn(name = "idEmpresa",referencedColumnName = "idEmpresa")
+    private Empresa empresa;
 }

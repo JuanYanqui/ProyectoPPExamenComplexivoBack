@@ -9,19 +9,18 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "rol")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Rol {
-	@Id
-	private Long idRol;
-	private String rolNombre;
+@Table(name = "materias")
+public class Materias {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idMaterias;
+    private String nombre_materia;
 
-	@JsonIgnore
-	@OneToOne(mappedBy = "rol")
-	private Usuario usuario;
-
-
+    @JsonIgnore
+    @OneToOne(mappedBy = "materias")
+    private Detalle_Actividades detalleActividades;
 }

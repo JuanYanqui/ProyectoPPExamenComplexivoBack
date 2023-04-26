@@ -6,22 +6,25 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "anexo1")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Anexo1 implements Serializable {
+public class Anexo1 {
 
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_anexo1;
-	private Long id_practica_real;
-	private String estado_firma;
-	private String url_doc;
-	private boolean estado;
+	private Long idAnexo1;
+	private String itv;
+	private Date fecha_inicio;
+	private Date fecha_final;
+	private String objetivos;
+	private String actividades;
+	private String areas;
+	private Integer horas;
 
 }

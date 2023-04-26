@@ -7,22 +7,21 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "anexo5")
-public class Anexo5 {
+@Table(name = "anexo7")
+public class Anexo7 {
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idAnexo5;
-	private Date fecha_actual;
-	private Date fecha_desde;
-	private Date hasta;
-	private String actividades_seguimiento;
-	private String observaciones;
+	private Long idAnexo7;
+	private String parametro_calificar;
+	private Double calificacion;
+	private Double puntaje_total;
 
 }

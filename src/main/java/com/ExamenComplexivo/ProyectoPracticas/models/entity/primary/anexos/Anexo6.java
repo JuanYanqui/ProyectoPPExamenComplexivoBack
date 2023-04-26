@@ -13,16 +13,21 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "anexo5")
-public class Anexo5 {
+@Table(name = "anexo6")
+public class Anexo6 {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idAnexo5;
-	private Date fecha_actual;
-	private Date fecha_desde;
-	private Date hasta;
-	private String actividades_seguimiento;
-	private String observaciones;
+	private Long idAnexo6;
+	private Integer numero_semana;
 
+	private String dia;
+
+	private Date hora_ingreso;
+
+	private Date hora_salida;
+
+	private Integer horas_diarias;
+
+	private Integer total_horas;
 }

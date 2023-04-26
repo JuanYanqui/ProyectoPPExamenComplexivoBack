@@ -1,7 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.primary;
 
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convenio;
-
 import java.util.List;
 
 public interface IConvenioService {

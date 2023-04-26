@@ -13,24 +13,11 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "convenio")
-public class Convenio {
-
+@Table(name = "practica")
+public class Practica {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idConvenio;
-    private Integer numero_convenio;
-    private Date fecha_elaboracion;
-    private Integer numero_itv;
-    private String descripcion;
-    private byte documento;
-
-    @OneToOne
-    @JoinColumn(name = "idDetalleConvenio")
-    private Detalle_Convenio detalleConvenio;
-
-
-
-
-
+    private Long idPractica;
+    private Date fecha_inicio;
+    private Date fecha_fin;
 }

@@ -14,14 +14,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "anexo2")
-public class Anexo2 implements Serializable {
+public class Anexo2 {
 
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_anexo2;
-	private Long id_practicante;
-	private Byte[] documentoAnexo2;
+	private Long idAnexo2;
+
+	private byte documentoAnexo2;
 
 }

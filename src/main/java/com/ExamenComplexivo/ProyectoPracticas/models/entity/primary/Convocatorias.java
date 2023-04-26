@@ -7,30 +7,22 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "convenio")
-public class Convenio {
-
+@Table(name = "convocatorias")
+public class Convocatorias {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idConvenio;
-    private Integer numero_convenio;
-    private Date fecha_elaboracion;
-    private Integer numero_itv;
+    private Long idConvocatorias;
+    private String nombre_convocatoria;
+    private Date fecha_envio;
     private String descripcion;
-    private byte documento;
 
-    @OneToOne
-    @JoinColumn(name = "idDetalleConvenio")
-    private Detalle_Convenio detalleConvenio;
-
-
-
-
-
+    @OneToMany(mappedBy = "convocatorias",cascade = CascadeType.ALL)
+    private List<Solicitud_Practicas> solicitudPracticas;
 }
