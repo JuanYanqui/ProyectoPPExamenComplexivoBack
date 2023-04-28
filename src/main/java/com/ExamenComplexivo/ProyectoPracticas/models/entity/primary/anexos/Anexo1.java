@@ -1,17 +1,16 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos;
 
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Detalle_Practica;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "anexo1")
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Anexo1 {
@@ -31,7 +30,7 @@ public class Anexo1 {
 	private byte documento_anexo1;
 
 	@OneToOne
-	@JoinColumn(name = "idDetallePractica")
-	private Detalle_Practica detallePractica;
+	@JoinColumn(name = "idPractica")
+	private Practica practica;
 
 }

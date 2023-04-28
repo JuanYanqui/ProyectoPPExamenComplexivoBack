@@ -19,15 +19,14 @@ public class Actividades {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idActividades;
-    private String descripcion;
+    private String detalleActividad;
+    private String herramientas;
 
-    @ManyToOne
-    @JoinColumn(name = "idSolicitudPracticas",referencedColumnName = "idSolicitudPracticas")
-    private Solicitud_Practicas solicitudPracticas;
-
-
+    //Relacionado con requerimientos de uno a muchos
     @JsonIgnore
-    @OneToOne(mappedBy = "actividades")
-    private Detalle_Actividades detalleActividades;
+    @OneToMany(mappedBy = "actividades",cascade = CascadeType.ALL)
+    private List<Requerimientos> requerimientos;
+
+
 
 }

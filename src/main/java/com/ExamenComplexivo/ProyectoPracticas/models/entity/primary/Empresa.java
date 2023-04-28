@@ -20,19 +20,23 @@ public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idEmpresa;
-    private String ruc_empresa;
-    private String nombre_empresa;
+    private String rucEmpresa;
+    private String nombreEmpresa;
     private String correo;
     private String ciudad;
-    private String numero_telefono;
+    private String numeroTelefono;
     private String direccion;
-    private String codigo_postal;
+    private String codigoPostal;
     private String descripcion;
 
+
+    //Relacionado con detalle convenio de uno a muchos
     @JsonIgnore
     @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
     private List<Detalle_Convenio> detalleConvenios;
 
+
+    //Relacionado con tutor empresarial de uno a muchos
     @JsonIgnore
     @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
     private List<Tutor_Empresarial> tutorEmpresarials;

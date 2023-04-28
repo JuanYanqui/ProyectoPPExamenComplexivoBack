@@ -28,50 +28,50 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idUsuario;
 	private String cedula;
-	private String nombres;
-	private String apellidos;
 	private String correo;
+	private String username;
 	private String contrasenia;
+	private String estado;
 
+
+	//Relacionado con rol de uno a uno
 	@OneToOne
 	@JoinColumn(name = "idRol")
 	private Rol rol;
 
-
+	//Relacionado con responsable de ppp un a uno
 	@JsonIgnore
-	@OneToMany(mappedBy = "usuario_cord_vin",cascade = CascadeType.ALL)
-	private List<Convenio> convenios;
+	@OneToOne(mappedBy = "usuario")
+	private Responsable_PPP responsablePPP;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "usuario_responsable_pp",cascade = CascadeType.ALL)
-	private List<Solicitud_Practicas> solicitudPracticas;
-
+	//Relacionado con estudiante practicante uno a uno
 	@JsonIgnore
 	@OneToOne(mappedBy = "usuario_estudiante_practicante")
 	private Estudiante_Practicante estudiantePracticante;
 
+
+	//Relacionado de uno a uno con tutor empresarial
 	@JsonIgnore
 	@OneToOne(mappedBy = "usuario_tutor_empresarial")
 	private Tutor_Empresarial tutorEmpresarial;
 
+	//Relacionado con solicitud convocatoria de uno a muchos
 	@JsonIgnore
-	@OneToOne(mappedBy = "usuario_director")
-	private Aprobacion_Estudiante aprobacionEstudiante_dir;
+	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+	private List<Solicitud_Convocatoria> solicitudConvocatorias;
 
-
+	//Relacionado con solicitud convocatoria de uno a muchos
 	@JsonIgnore
-	@OneToOne(mappedBy = "usuario_responsable")
-	private Aprobacion_Estudiante aprobacionEstudiante_res;
+	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+	private List<Practica> practicas;
 
-	@JsonIgnore
-	@OneToOne(mappedBy = "usuario_tutor_academico")
-	private Detalle_Practica detallePractica;
 
-	public Usuario(String cedula, String nombre, String apellido, String contrasenia, String correo) {
+	public Usuario(Long idUsuario, String cedula, String correo, String username, String contrasenia, String estado) {
+		this.idUsuario = idUsuario;
 		this.cedula = cedula;
-		this.nombres = nombre;
-		this.apellidos = apellido;
-		this.contrasenia = contrasenia;
 		this.correo = correo;
+		this.username = username;
+		this.contrasenia = contrasenia;
+		this.estado = estado;
 	}
 }

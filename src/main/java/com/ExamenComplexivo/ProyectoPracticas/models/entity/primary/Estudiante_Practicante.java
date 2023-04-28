@@ -7,28 +7,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "materias")
+@Table(name = "estudiante_practicante")
 public class Estudiante_Practicante {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long idEstudiantePracticas;
-        private Boolean Estado;
+        private Boolean estado;
 
-
+        //Relacionado con usuario de uno a uno
         @OneToOne
         @JoinColumn(name = "idUsuario")
         private Usuario usuario_estudiante_practicante;
 
+        //Relacionado con solicitud convocatoria de muchos a uno
         @JsonIgnore
-        @ManyToOne
-        private Solicitud_Convocatoria solicitudConvocatoria;
-
+        @OneToMany(mappedBy = "estudiantePracticante",cascade = CascadeType.ALL)
+        private List<Solicitud_Convocatoria> solicitudConvocatorias;
 }
 
 

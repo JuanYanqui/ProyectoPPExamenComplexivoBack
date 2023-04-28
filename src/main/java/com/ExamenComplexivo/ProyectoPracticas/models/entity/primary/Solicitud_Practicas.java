@@ -20,24 +20,32 @@ public class Solicitud_Practicas {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idSolicitudPracticas;
-    private Date fecha_solicitud;
-    private Integer numero_estudiantes;
-
+    private Date fechaEnvioSolicitud;
+    private Integer numeroEstudiantes;
+    private boolean estadoSolicitud;
+    private Date fechaAceptacion;
     private byte documento_solicitud_practicas;
 
+
+    //Relacionado con tutor empresarial de muchos a uno
     @ManyToOne
     @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial")
     private Tutor_Empresarial tutorEmpresarial;
 
+    //Relacionado con responsable de practicas de muchos a uno
     @ManyToOne
-    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
-    private Usuario usuario_responsable_pp;
+    @JoinColumn(name = "idResponsablePPP",referencedColumnName = "idResponsablePPP")
+    private Responsable_PPP responsablePPP;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "solicitudPracticas",cascade = CascadeType.ALL)
-    private List<Actividades> actividades;
 
+    //Relacionado con convocatoria de uno a uno
     @JsonIgnore
     @OneToOne(mappedBy = "solicitudPracticas")
     private Convocatorias convocatorias;
+
+
+    //Relacionado con requerimientos de uno a muchos
+    @JsonIgnore
+    @OneToMany(mappedBy = "solicitudPracticas",cascade = CascadeType.ALL)
+    private List<Requerimientos> requerimientos;
 }

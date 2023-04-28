@@ -20,20 +20,41 @@ public class Solicitud_Convocatoria {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idSolicitudConvocatoria;
-    private Date fecha;
-    private String estado;
+    private Date fechaEnvio;
+    private Date fechaAprobacion;
+    private boolean checkDirector;
+    private boolean checkResponsable;
+    private boolean checkEmpresarial;
+    private boolean estadoSolicitudConvo;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idEstudiantePracticas")
-    private List<Estudiante_Practicante> estudiantePracticantes;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //Relacionado con estudiante practicass de uno a muchos
+    @ManyToOne
+    @JoinColumn(name = "idEstudiantePracticas",referencedColumnName = "idEstudiantePracticas")
+    private Estudiante_Practicante estudiantePracticante;
+
+    //Relacion con usuario de uno a uno
+    @OneToOne
     @JoinColumn(name = "idConvocatorias")
-    private List<Convocatorias> convocatorias;
+    private Convocatorias convocatoria;
 
+    //Relacionado con tutor_empresarial de muchos a uno
+    @ManyToOne
+    @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial")
+    private Tutor_Empresarial tutorEmpresarial;
+
+    //Relacionado con responsable practicas de muchos a uno
+    @ManyToOne
+    @JoinColumn(name = "idResponsablePPP",referencedColumnName = "idResponsablePPP")
+    private Responsable_PPP responsablePPP;
+
+    //Relacionado con usuario de muchos a uno
+    @ManyToOne
+    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
+    private Usuario usuario;
+
+    //Relacionado con practica de uno a uno
     @JsonIgnore
     @OneToOne(mappedBy = "solicitudConvocatoria")
-    private Aprobacion_Estudiante aprobacionEstudiante;
-
-
+    private Practica practica;
 }

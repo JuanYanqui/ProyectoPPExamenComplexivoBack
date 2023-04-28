@@ -19,13 +19,17 @@ public class Detalle_Convenio {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idDetalleConvenio;
-    private Date fecha_aprobacion;
+    private Date fechaAprobacion;
     private Date fecha_caducidad;
 
+
+    //Relacionado con convenio de uno a uno
     @OneToOne
     @JoinColumn(name = "idConvenio")
     private Convenio convenio;
 
+
+    //Relacionado con empresa de machos a uno
     @ManyToOne
     @JoinColumn(name = "idEmpresa",referencedColumnName = "idEmpresa")
     private Empresa empresa;

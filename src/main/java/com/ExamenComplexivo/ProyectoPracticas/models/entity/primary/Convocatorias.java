@@ -20,23 +20,19 @@ public class Convocatorias {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idConvocatorias;
-    private String nombre_convocatoria;
-    private Date fecha_envio;
-    private String descripcion;
-
+    private String nombreConvocatoria;
+    private Date fechaPublicacion;
+    private Date fechaExpiracion;
+    private boolean estadoConvocatoria;
     private byte documento_convocatoria;
 
-
+    //Relacionado con solicitud practicas de uno a uno
     @OneToOne
     @JoinColumn(name = "idSolicitudPracticas")
     private Solicitud_Practicas solicitudPracticas;
 
-
+    //Relacionado con solicitud convocatoria de uno a uno
     @JsonIgnore
-    @OneToMany(mappedBy = "convocatorias",cascade = CascadeType.ALL)
-    private List<Detalle_Materia> detalleMaterias;
-
-    @JsonIgnore
-    @ManyToOne
-    private Solicitud_Convocatoria solicitudConvocatoria;
+    @OneToOne(mappedBy = "convocatoria")
+    private Solicitud_Convocatoria solicitudConvocatoria ;
 }

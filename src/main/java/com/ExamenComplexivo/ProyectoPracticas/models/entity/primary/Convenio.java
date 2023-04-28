@@ -24,17 +24,16 @@ public class Convenio {
     private Date fecha_elaboracion;
     private Integer numero_itv;
     private String descripcion;
+
+    private boolean estado;
+
     private byte documento_convenio;
 
 
-
+    //Relacion de uno a uno con detalle convenio
     @JsonIgnore
     @OneToOne(mappedBy = "convenio")
     private Detalle_Convenio detalleConvenio;
-
-    @ManyToOne
-    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
-    private Usuario usuario_cord_vin;
 
 
 
