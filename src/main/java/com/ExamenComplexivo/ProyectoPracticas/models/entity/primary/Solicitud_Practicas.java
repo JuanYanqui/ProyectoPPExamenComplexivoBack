@@ -22,8 +22,10 @@ public class Solicitud_Practicas {
     private Long idSolicitudPracticas;
     private Date fechaEnvioSolicitud;
     private Integer numeroEstudiantes;
+    private String nombreSolicitud;
     private boolean estadoSolicitud;
     private Date fechaAceptacion;
+    private boolean estadoActividad;
     private byte documento_solicitud_practicas;
 
 
