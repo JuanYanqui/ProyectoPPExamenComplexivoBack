@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tutor_empresarial")
-public class Tutor_Empresarial {
+public class Tutor_Empresarial implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idTutorEmpresarial;

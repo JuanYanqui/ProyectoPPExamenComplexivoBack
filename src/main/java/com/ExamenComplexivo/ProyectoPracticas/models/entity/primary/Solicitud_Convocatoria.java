@@ -1,22 +1,20 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "solicitud_convocatoria")
-public class Solicitud_Convocatoria {
+public class Solicitud_Convocatoria implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idSolicitudConvocatoria;
@@ -26,6 +24,8 @@ public class Solicitud_Convocatoria {
     private boolean checkResponsable;
     private boolean checkEmpresarial;
     private boolean estadoSolicitudConvo;
+
+    private byte documnetoSolicitudConvocatoria;
 
 
     //Relacionado con estudiante practicass de uno a muchos

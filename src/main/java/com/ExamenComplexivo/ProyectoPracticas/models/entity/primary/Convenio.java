@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -15,8 +16,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "convenio")
-public class Convenio {
-
+public class Convenio implements Serializable{
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idConvenio;
