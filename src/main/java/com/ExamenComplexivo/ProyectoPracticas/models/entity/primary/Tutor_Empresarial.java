@@ -22,7 +22,7 @@ public class Tutor_Empresarial implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idTutorEmpresarial;
     private String departamento;
-    private  byte titulo;
+    private String titulo;
     private String cargo;
 
 

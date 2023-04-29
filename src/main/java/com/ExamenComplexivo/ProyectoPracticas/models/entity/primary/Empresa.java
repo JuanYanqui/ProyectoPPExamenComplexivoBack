@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -22,12 +24,16 @@ public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idEmpresa;
+    //@Pattern(regexp = "^[0-9]{13}$", message = "RUC longitud permitida de 13 digitos")
     private String rucEmpresa;
     private String nombreEmpresa;
+    //@Email(message = "El correo electrónico no tiene un formato válido.")
     private String correo;
     private String ciudad;
+    //@Pattern(regexp = "^[0-9]{1,10}$", message = "El número de teléfono debe contener máximo 10 dígitos numéricos.")
     private String numeroTelefono;
     private String direccion;
+    //@Pattern(regexp = "^[0-9]{6}$", message = "El código postal debe contener 6 dígitos numéricos.")
     private String codigoPostal;
     private String descripcion;
 

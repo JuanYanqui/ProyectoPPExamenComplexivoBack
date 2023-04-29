@@ -6,8 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +25,11 @@ public class Practica implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPractica;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "La fecha de inicio es obligatoria.")
     private Date fechaInicio;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "La fecha de fin es obligatoria.")
     private Date fechaFin;
     private boolean estadoPractica;
     private String horario;

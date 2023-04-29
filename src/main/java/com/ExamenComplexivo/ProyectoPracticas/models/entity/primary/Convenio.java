@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,28 +18,29 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "convenio")
-public class Convenio implements Serializable{
+public class Convenio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idConvenio;
-    private Integer numero_convenio;
+    //@Pattern(regexp = "PPP-ISTA-\\d{1,}-\\d{4}", message = "El formato de numero de convenio ingresado no es válido.")
+    private String numero_convenio;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_elaboracion;
-    private Integer numero_itv;
+    //@Pattern(regexp = "SIES-ISTA-\\d{1,}-\\d{4}", message = "El formato de numero de ITV ingresado no es válido.")
+    private String numero_itv;
     private String descripcion;
-
     private boolean estado;
-
-    private byte documento_convenio;
-
+    /*
+    @Column(name = "documento_convenio",columnDefinition = "bytea")
+    private byte[] documentoConvenio;
+*/
 
     //Relacion de uno a uno con detalle convenio
     @JsonIgnore
     @OneToOne(mappedBy = "convenio")
     private Detalle_Convenio detalleConvenio;
-
-
-
 
 
 }

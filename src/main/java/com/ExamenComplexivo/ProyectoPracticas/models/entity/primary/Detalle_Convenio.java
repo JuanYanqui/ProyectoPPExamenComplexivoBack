@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,7 +23,11 @@ public class Detalle_Convenio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idDetalleConvenio;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "La fecha de aprobacion es obligatoria.")
     private Date fechaAprobacion;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "La fecha de caducidad es obligatoria.")
     private Date fecha_caducidad;
 
 

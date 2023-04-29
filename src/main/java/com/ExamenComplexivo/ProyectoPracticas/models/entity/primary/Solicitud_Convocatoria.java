@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 @Entity
@@ -18,16 +21,20 @@ public class Solicitud_Convocatoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idSolicitudConvocatoria;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "La fecha de envio es obligatoria.")
     private Date fechaEnvio;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "La fecha de aprobacion es obligatoria.")
     private Date fechaAprobacion;
     private boolean checkDirector;
     private boolean checkResponsable;
     private boolean checkEmpresarial;
     private boolean estadoSolicitudConvo;
-
-    private byte documnetoSolicitudConvocatoria;
-
-
+/*
+    @Column(name = "documentoSC", columnDefinition = "bytea")
+    private byte[] documentoSC;
+*/
     //Relacionado con estudiante practicass de uno a muchos
     @ManyToOne
     @JoinColumn(name = "idEstudiantePracticas",referencedColumnName = "idEstudiantePracticas")
