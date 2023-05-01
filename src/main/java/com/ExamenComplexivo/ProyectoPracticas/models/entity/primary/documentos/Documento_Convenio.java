@@ -1,5 +1,6 @@
-package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
+package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convenio;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

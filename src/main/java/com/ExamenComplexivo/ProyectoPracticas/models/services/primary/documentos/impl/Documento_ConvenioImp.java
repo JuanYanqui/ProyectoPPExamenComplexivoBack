@@ -1,7 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.impl;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_ConvenioDao;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Documento_Convenio;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_ConvenioService;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,6 +3,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convenio;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IConvenioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.util.List;
 
 @CrossOrigin(origins = { "*" })
@@ -20,6 +23,7 @@ import java.util.List;
 public class ConvenioController {
     @Autowired
     IConvenioService convenioService;
+
 
     @GetMapping("/listar")
     public ResponseEntity<List<Convenio>> obtenerLista() {

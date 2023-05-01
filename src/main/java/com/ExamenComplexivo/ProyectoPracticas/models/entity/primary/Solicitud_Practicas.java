@@ -1,5 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,9 +39,10 @@ public class Solicitud_Practicas implements Serializable {
     private boolean estadoConvocatoria;
     private boolean estadoActividad;
 
-    @Column(name = "documento_solicitud_practicas", columnDefinition = "bytea")
-    private byte[] documento_solicitud_practicas;
 
+    @OneToOne
+    @JoinColumn(name = "id_documentoSolicitudPrc")
+    private Documento_SolicitudPracticas documentoSolicitudPracticas;
 
 
     //Relacionado con tutor empresarial de muchos a uno

@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +9,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 

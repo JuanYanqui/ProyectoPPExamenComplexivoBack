@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Convenios" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f45e3e5-90a8-42a7-8ecd-aaeaa3ed1cb3">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexionDBPPP"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT idconvenio,
+	descripcion,
+	estado,
+	numero_convenio,
+	fecha_elaboracion
+FROM convenio
+WHERE idconvenio = 3]]>
+	</queryString>
+	<field name="idconvenio" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idconvenio"/>
+		<property name="com.jaspersoft.studio.field.label" value="idconvenio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convenio"/>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descripcion"/>
+		<property name="com.jaspersoft.studio.field.label" value="descripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convenio"/>
+	</field>
+	<field name="estado" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convenio"/>
+	</field>
+	<field name="numero_convenio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="numero_convenio"/>
+		<property name="com.jaspersoft.studio.field.label" value="numero_convenio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convenio"/>
+	</field>
+	<field name="fecha_elaboracion" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_elaboracion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_elaboracion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convenio"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="30" uuid="295b9cdd-ac8d-49df-bf8f-964120f4d3e3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a11d9b70-2255-44a9-a797-f8ccb70f2326"/>
+				</reportElement>
+				<text><![CDATA[idconvenio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="30" uuid="68eebc97-666a-4855-96ba-e8517f8b6cfb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d5f3beb-eb6d-4436-8261-37f75e1cd17b"/>
+				</reportElement>
+				<text><![CDATA[descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="30" uuid="e09c8174-9687-489e-aff9-fd49b75202a5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ed70278e-9d38-46a7-8049-e77c2fc04eec"/>
+				</reportElement>
+				<text><![CDATA[estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="30" uuid="5fb41141-2013-492d-b953-cbb2504893c2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6cd164bc-9d54-444b-a7b4-124a45101e6f"/>
+				</reportElement>
+				<text><![CDATA[numero_convenio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="30" uuid="2d475a1c-8216-42fe-b979-a57313c742de">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62ba5b3b-b1fa-46fa-9010-87ec8628866a"/>
+				</reportElement>
+				<text><![CDATA[fecha_elaboracion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="30" uuid="45dfd654-6152-4300-a7a9-2323819ed0d7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a11d9b70-2255-44a9-a797-f8ccb70f2326"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{idconvenio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="30" uuid="d8387bc4-e005-4041-a841-2c0fba69c05f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d5f3beb-eb6d-4436-8261-37f75e1cd17b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="30" uuid="2b95bcd7-259e-4f88-b18c-b663408a17b2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ed70278e-9d38-46a7-8049-e77c2fc04eec"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="30" uuid="9903b80e-26c8-4374-8606-73d55016189e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6cd164bc-9d54-444b-a7b4-124a45101e6f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{numero_convenio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="111" height="30" uuid="f98da86b-5852-41a8-8808-c0d9a12c992e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62ba5b3b-b1fa-46fa-9010-87ec8628866a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{fecha_elaboracion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
