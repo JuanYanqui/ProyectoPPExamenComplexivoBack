@@ -32,15 +32,17 @@ public class Convenio implements Serializable {
     private String numero_itv;
     private String descripcion;
     private boolean estado;
-    /*
-    @Column(name = "documento_convenio",columnDefinition = "bytea")
-    private byte[] documentoConvenio;
-*/
+
 
     //Relacion de uno a uno con detalle convenio
     @JsonIgnore
     @OneToOne(mappedBy = "convenio")
     private Detalle_Convenio detalleConvenio;
+
+    //Relacionado de uno a uno con documento_convenio
+    @OneToOne
+    @JoinColumn(name = "id_documentoCnv")
+    private Documento_Convenio documentoConvenio;
 
 
 }

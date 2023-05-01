@@ -9,6 +9,6 @@ import java.io.IOException;
 public interface IConvenioService extends IGenericService<Convenio,Long> {
 
     //Guardamos el documento de convenio
-    public Convenio guardarDocumento(byte[] documento);
+    //public Convenio guardarDocumento(byte[] documento);
 
 }

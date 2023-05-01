@@ -31,10 +31,10 @@ public class Solicitud_Convocatoria implements Serializable {
     private boolean checkResponsable;
     private boolean checkEmpresarial;
     private boolean estadoSolicitudConvo;
-/*
+
     @Column(name = "documentoSC", columnDefinition = "bytea")
     private byte[] documentoSC;
-*/
+
     //Relacionado con estudiante practicass de uno a muchos
     @ManyToOne
     @JoinColumn(name = "idEstudiantePracticas",referencedColumnName = "idEstudiantePracticas")

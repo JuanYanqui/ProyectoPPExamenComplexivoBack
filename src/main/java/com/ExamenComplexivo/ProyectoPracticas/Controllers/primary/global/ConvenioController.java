@@ -54,9 +54,7 @@ public class ConvenioController {
         if (file == null || file.isEmpty()) {
             return ResponseEntity.badRequest().body("No se ha encontrado ningún archivo.");
         }
-
         byte[] bytesDocumento = file.getBytes();
-
         return new ResponseEntity<>(convenioService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
     }
 */
@@ -81,7 +79,7 @@ public class ConvenioController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                //convenio.setDocumento_convenio(p.getDocumento_convenio());
+                convenio.setDocumentoConvenio(p.getDocumentoConvenio());
                 convenio.setNumero_convenio(p.getNumero_convenio());
                 convenio.setDescripcion(p.getDescripcion());
                 convenio.setNumero_itv(p.getNumero_itv());

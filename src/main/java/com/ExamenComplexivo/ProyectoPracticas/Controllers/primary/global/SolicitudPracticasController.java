@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = { "*" })
@@ -26,7 +27,6 @@ public class SolicitudPracticasController {
         }
     }
 
-
     @GetMapping("/buscar/{id}")
     public ResponseEntity<Solicitud_Practicas> getById(@PathVariable("id") Long id) {
         try {
@@ -35,19 +35,6 @@ public class SolicitudPracticasController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    /*
-    @PostMapping("/crear")
-    public ResponseEntity<Solicitud_Practicas> crear(@RequestParam("file") MultipartFile file, @RequestBody Solicitud_Practicas solicitud) {
-        try {
-            byte[] bytes = file.getBytes();
-            solicitud.setDocumento_solicitud_practicas(bytes);
-            Solicitud_Practicas solicitudGuardada = solicitudConvocatoriaService.save(solicitud);
-            return new ResponseEntity<>(solicitudGuardada, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    */
 
     @PostMapping("/crear")
     public ResponseEntity<Solicitud_Practicas> crear(@RequestBody Solicitud_Practicas p) {
@@ -58,6 +45,14 @@ public class SolicitudPracticasController {
         }
     }
 
+    @PostMapping("/crear/documento")
+    public ResponseEntity<?> guardar(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty()) {
+            return ResponseEntity.badRequest().body("No se ha encontrado ningún archivo.");
+        }
+        byte[] bytesDocumento = file.getBytes();
+        return new ResponseEntity<>(solicitudPracticaService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
+    }
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
@@ -71,6 +66,15 @@ public class SolicitudPracticasController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /*
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Solicitud_Practicas> actualizar(@RequestBody Solicitud_Practicas p,@PathVariable Long id){
+        Solicitud_Practicas solicitud = solicitudPracticaService.findById(id);
+        solicitud.setDocumento_solicitud_practicas(p.getDocumento_solicitud_practicas());
+        return new ResponseEntity<>(solicitudPracticaService.save(solicitud), HttpStatus.CREATED);
+    }
+    */
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Solicitud_Practicas> actualizarUsuario(@PathVariable Long id, @RequestBody Solicitud_Practicas p) {
@@ -86,7 +90,7 @@ public class SolicitudPracticasController {
                 solicitudPracticas.setEstadoConvocatoria(p.isEstadoConvocatoria());
                 solicitudPracticas.setEstadoSolicitud(p.isEstadoSolicitud());
                 solicitudPracticas.setNumeroEstudiantes(p.getNumeroEstudiantes());
-                //solicitudPracticas.setDocumento_solicitud_practicas(p.getDocumento_solicitud_practicas());
+                solicitudPracticas.setDocumento_solicitud_practicas(p.getDocumento_solicitud_practicas());
                 return new ResponseEntity<>(solicitudPracticaService.save(solicitudPracticas), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

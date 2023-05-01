@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = { "*" })
@@ -37,20 +38,6 @@ public class ConvocatoriasController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-/*
-    @PostMapping("/crear")
-    public ResponseEntity<Convocatorias> crear(@RequestParam("file") MultipartFile file, @RequestBody Convocatorias solicitud) {
-        try {
-            byte[] bytes = file.getBytes();
-            solicitud.setDocumento_convocatoria(bytes);
-            Convocatorias solicitudGuardada = convocatoriaService.save(solicitud);
-            return new ResponseEntity<>(solicitudGuardada, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
- */
 
     @PostMapping("/crear")
     public ResponseEntity<Convocatorias> crear(@Valid @RequestBody Convocatorias p) {
@@ -59,6 +46,15 @@ public class ConvocatoriasController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/crear/documento")
+    public ResponseEntity<?> guardar(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty()) {
+            return ResponseEntity.badRequest().body("No se ha encontrado ningún archivo.");
+        }
+        byte[] bytesDocumento = file.getBytes();
+        return new ResponseEntity<>(convocatoriaService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/eliminar/{id}")
@@ -85,8 +81,7 @@ public class ConvocatoriasController {
                 convocatorias.setFechaPublicacion(p.getFechaPublicacion());
                 convocatorias.setFechaExpiracion(p.getFechaExpiracion());
                 convocatorias.setEstadoConvocatoria(p.isEstadoConvocatoria());
-                //convocatorias.setDocumento_convocatoria(p.getDocumento_convocatoria());
-
+                convocatorias.setDocumento_convocatoria(p.getDocumento_convocatoria());
                 return new ResponseEntity<>(convocatoriaService.save(convocatorias), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

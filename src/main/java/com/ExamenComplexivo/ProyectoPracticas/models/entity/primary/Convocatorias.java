@@ -35,10 +35,10 @@ public class Convocatorias implements Serializable {
     @NotNull(message = "La fecha de expiración es obligatoria.")
     private Date fechaExpiracion;
     private boolean estadoConvocatoria;
-    /*
+
     @Column(name = "documento_convocatoria", columnDefinition = "bytea")
     private byte[] documento_convocatoria;
-*/
+
     //Relacionado con solicitud practicas de uno a uno
     @OneToOne
     @JoinColumn(name = "idSolicitudPracticas")

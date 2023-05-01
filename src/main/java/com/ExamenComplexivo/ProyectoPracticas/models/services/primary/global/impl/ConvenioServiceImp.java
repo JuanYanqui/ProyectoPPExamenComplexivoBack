@@ -27,12 +27,13 @@ public class ConvenioServiceImp extends GenericServiceImpl<Convenio,Long> implem
 
     @PersistenceContext
     private EntityManager entityManager;
-
+    /*
     @Override
     @Transactional
     public Convenio guardarDocumento(byte[] documento) {
         Convenio convenio=new Convenio();
-        //convenio.setDocumentoConvenio(documento);
+        convenio.setDocumentoConvenio(documento);
         return convenioDao.save(convenio);
     }
+    */
 }

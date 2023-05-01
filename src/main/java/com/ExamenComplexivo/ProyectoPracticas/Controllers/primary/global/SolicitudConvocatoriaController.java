@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = { "*" })
@@ -36,7 +37,6 @@ public class SolicitudConvocatoriaController {
         }
     }
 
-    /*
     @PostMapping("/crear")
     public ResponseEntity<Solicitud_Convocatoria> crear(@RequestBody Solicitud_Convocatoria p) {
         try {
@@ -45,7 +45,16 @@ public class SolicitudConvocatoriaController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-*/
+
+    @PostMapping("/crear/documento")
+    public ResponseEntity<?> guardar(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty()) {
+            return ResponseEntity.badRequest().body("No se ha encontrado ningún archivo.");
+        }
+        byte[] bytesDocumento = file.getBytes();
+        return new ResponseEntity<>(solicitudConvocatoriaService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
 
@@ -71,7 +80,7 @@ public class SolicitudConvocatoriaController {
                 solicitudConvocatoria.setCheckDirector(p.isCheckDirector());
                 solicitudConvocatoria.setCheckResponsable(p.isCheckResponsable());
                 solicitudConvocatoria.setCheckEmpresarial(p.isCheckEmpresarial());
-                //solicitudConvocatoria.setDocumnetoSolicitudConvocatoria(p.getDocumnetoSolicitudConvocatoria());
+                solicitudConvocatoria.setDocumentoSC(p.getDocumentoSC());
                 solicitudConvocatoria.setEstadoSolicitudConvo(p.isEstadoSolicitudConvo());
 
                 return new ResponseEntity<>(solicitudConvocatoriaService.save(solicitudConvocatoria), HttpStatus.CREATED);
