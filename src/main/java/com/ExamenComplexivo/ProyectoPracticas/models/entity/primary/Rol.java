@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "rol")
@@ -22,8 +23,8 @@ public class Rol implements Serializable {
 	private String rolNombre;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "rol")
-	private Usuario usuario;
+	@OneToMany(mappedBy = "tipoRol",cascade = CascadeType.ALL)
+	private List<Usuario> usuarios;
 
 
 }

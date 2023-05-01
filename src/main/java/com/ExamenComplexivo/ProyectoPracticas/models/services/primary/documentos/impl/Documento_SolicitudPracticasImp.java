@@ -8,10 +8,13 @@ import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
+@Service
 public class Documento_SolicitudPracticasImp extends GenericServiceImpl<Documento_SolicitudPracticas, Long> implements IDocumento_SolicitudPracticasService {
 
     @Autowired

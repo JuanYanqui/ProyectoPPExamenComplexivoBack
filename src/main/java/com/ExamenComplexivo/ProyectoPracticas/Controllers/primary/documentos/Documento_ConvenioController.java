@@ -83,7 +83,7 @@ public class Documento_ConvenioController {
     }
 
 
-    @PostMapping("/crear")
+    @PostMapping("/subir")
     public ResponseEntity<?> guardarFichaMedica(@RequestParam("file") MultipartFile file) throws IOException {
         if (file == null || file.isEmpty()) {
             return ResponseEntity.badRequest().body("No se ha proporcionado ningún archivo.");

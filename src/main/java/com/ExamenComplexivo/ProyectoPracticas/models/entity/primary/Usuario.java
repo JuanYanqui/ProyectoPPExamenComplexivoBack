@@ -34,16 +34,20 @@ public class Usuario implements Serializable {
 	private String contrasenia;
 	private String estado;
 
+	private String nombres;
+	private String apellidos;
+	private String telefono;
 
 	//Relacionado con rol de uno a uno
-	@OneToOne
-	@JoinColumn(name = "idRol")
-	private Rol rol;
+	@ManyToOne
+	@JoinColumn(name = "idRol",referencedColumnName = "idRol")
+	private Rol tipoRol;
 
 	//Relacionado con responsable de ppp un a uno
 	@JsonIgnore
-	@OneToOne(mappedBy = "usuario")
-	private Responsable_PPP responsablePPP;
+	@OneToMany(mappedBy = "usuario_responsable",cascade = CascadeType.ALL)
+	private List<Responsable_PPP> responsablePPP;
+
 
 	//Relacionado con estudiante practicante uno a uno
 	@JsonIgnore
@@ -53,8 +57,8 @@ public class Usuario implements Serializable {
 
 	//Relacionado de uno a uno con tutor empresarial
 	@JsonIgnore
-	@OneToOne(mappedBy = "usuario_tutor_empresarial")
-	private Tutor_Empresarial tutorEmpresarial;
+	@OneToMany(mappedBy = "usuario_empresarial",cascade = CascadeType.ALL)
+	private List<Tutor_Empresarial> tutorEmpresarial;
 
 	//Relacionado con solicitud convocatoria de uno a muchos
 	@JsonIgnore

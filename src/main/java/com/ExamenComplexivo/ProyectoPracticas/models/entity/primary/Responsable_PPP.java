@@ -25,9 +25,9 @@ public class Responsable_PPP implements Serializable {
 
 
     //Relacion con usuario de uno a uno
-    @OneToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
+    private Usuario usuario_responsable;
 
     //Relacionado con solicitud de practicass de uno a muchos
     @JsonIgnore

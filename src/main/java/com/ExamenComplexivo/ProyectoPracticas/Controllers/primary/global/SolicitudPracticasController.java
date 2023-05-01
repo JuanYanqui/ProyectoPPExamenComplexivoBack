@@ -45,14 +45,6 @@ public class SolicitudPracticasController {
         }
     }
 
-    @PostMapping("/crear/documento")
-    public ResponseEntity<?> guardar(@RequestParam("file") MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().body("No se ha encontrado ningún archivo.");
-        }
-        byte[] bytesDocumento = file.getBytes();
-        return new ResponseEntity<>(solicitudPracticaService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
-    }
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
@@ -90,7 +82,6 @@ public class SolicitudPracticasController {
                 solicitudPracticas.setEstadoConvocatoria(p.isEstadoConvocatoria());
                 solicitudPracticas.setEstadoSolicitud(p.isEstadoSolicitud());
                 solicitudPracticas.setNumeroEstudiantes(p.getNumeroEstudiantes());
-                solicitudPracticas.setDocumento_solicitud_practicas(p.getDocumento_solicitud_practicas());
                 return new ResponseEntity<>(solicitudPracticaService.save(solicitudPracticas), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

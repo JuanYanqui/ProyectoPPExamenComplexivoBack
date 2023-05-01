@@ -6,6 +6,4 @@ import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.IG
 
 public interface ISolicitudPracticaService extends IGenericService<Solicitud_Practicas,Long> {
 
-    public Solicitud_Practicas guardarDocumento(byte[] documento);
-
 }

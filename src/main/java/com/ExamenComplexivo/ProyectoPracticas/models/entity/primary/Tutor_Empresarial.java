@@ -23,13 +23,14 @@ public class Tutor_Empresarial implements Serializable {
     private Long idTutorEmpresarial;
     private String departamento;
     private String titulo;
+    private String numeroContacto;
     private String cargo;
 
 
     //Relacionado con usuario de uno a uno
-    @OneToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario_tutor_empresarial;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
+    private Usuario usuario_empresarial;
 
     //Relacionado con empresa de muchos a uno
     @ManyToOne

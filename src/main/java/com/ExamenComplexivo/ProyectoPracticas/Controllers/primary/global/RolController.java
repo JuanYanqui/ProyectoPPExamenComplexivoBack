@@ -52,7 +52,6 @@ public class RolController {
         } else {
             try {
                 rol.setRolNombre(p.getRolNombre());
-                rol.setUsuario(p.getUsuario());
                 return new ResponseEntity<>(rolService.save(rol), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -23,10 +23,5 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public Solicitud_Practicas guardarDocumento(byte[] documento) {
-        Solicitud_Practicas solicitud=new Solicitud_Practicas();
-        solicitud.setDocumento_solicitud_practicas(documento);
-        return solicitudPracticasDao.save(solicitud);
-    }
+
 }
