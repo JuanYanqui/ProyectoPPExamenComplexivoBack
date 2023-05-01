@@ -33,7 +33,6 @@ public class Usuario implements Serializable {
 	private String username;
 	private String contrasenia;
 	private String estado;
-
 	private String nombres;
 	private String apellidos;
 	private String telefono;
