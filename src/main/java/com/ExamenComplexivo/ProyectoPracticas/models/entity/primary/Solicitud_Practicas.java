@@ -38,7 +38,7 @@ public class Solicitud_Practicas implements Serializable {
     private boolean estadoSolicitud;
     private boolean estadoConvocatoria;
     private boolean estadoActividad;
-
+    private String nombre_carrera;
     private String descripcionActividades;
 
 
