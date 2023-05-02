@@ -1,12 +1,17 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.jfr.ContentType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,27 +21,31 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "convocatorias")
-public class Convocatorias {
+public class Convocatorias implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idConvocatorias;
-    private String nombre_convocatoria;
-    private Date fecha_envio;
-    private String descripcion;
+    //@Pattern(regexp = "^(CONVOCATORIA – TSDS -PPP-)(\\d{4})-(\\d{3})$", message = "El formato del nombre de la convocatoria no es válido.")
+    private String nombreConvocatoria;
 
-    private byte documento_convocatoria;
+    @Temporal(TemporalType.DATE)
+    private Date fechaPublicacion;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "La fecha de expiración es obligatoria.")
+    private Date fechaExpiracion;
+    private boolean estadoConvocatoria;
 
+    @Column(name = "documento_convocatoria", columnDefinition = "bytea")
+    private byte[] documento_convocatoria;
 
+    //Relacionado con solicitud practicas de uno a uno
     @OneToOne
     @JoinColumn(name = "idSolicitudPracticas")
     private Solicitud_Practicas solicitudPracticas;
 
-
+    //Relacionado con solicitud convocatoria de uno a uno
     @JsonIgnore
-    @OneToMany(mappedBy = "convocatorias",cascade = CascadeType.ALL)
-    private List<Detalle_Materia> detalleMaterias;
-
-    @JsonIgnore
-    @ManyToOne
-    private Solicitud_Convocatoria solicitudConvocatoria;
+    @OneToOne(mappedBy = "convocatoria")
+    private Solicitud_Convocatoria solicitudConvocatoria ;
 }

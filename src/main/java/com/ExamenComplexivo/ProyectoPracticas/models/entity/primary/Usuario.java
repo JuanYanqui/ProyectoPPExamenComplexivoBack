@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +22,6 @@ import java.util.Set;
 				@UniqueConstraint(columnNames = "correo")
 		})
 public class Usuario {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idUsuario;
@@ -31,46 +29,48 @@ public class Usuario {
 	private String nombres;
 	private String apellidos;
 	private String correo;
+	private String carrera;
 	private String contrasenia;
 
-	@OneToOne
-	@JoinColumn(name = "idRol")
-	private Rol rol;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "usuarioRoles",
+			joinColumns = @JoinColumn(name = "idUsuario"),
+			inverseJoinColumns = @JoinColumn(name = "idRol"))
+	private Set<Rol> roles = new HashSet<>();
 
-
+	//Relacionado con responsable de ppp un a uno
 	@JsonIgnore
-	@OneToMany(mappedBy = "usuario_cord_vin",cascade = CascadeType.ALL)
-	private List<Convenio> convenios;
+	@OneToMany(mappedBy = "usuario_responsable",cascade = CascadeType.ALL)
+	private List<Responsable_PPP> responsablePPP;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "usuario_responsable_pp",cascade = CascadeType.ALL)
-	private List<Solicitud_Practicas> solicitudPracticas;
 
+	//Relacionado con estudiante practicante uno a uno
 	@JsonIgnore
 	@OneToOne(mappedBy = "usuario_estudiante_practicante")
 	private Estudiante_Practicante estudiantePracticante;
 
+
+	//Relacionado de uno a uno con tutor empresarial
 	@JsonIgnore
-	@OneToOne(mappedBy = "usuario_tutor_empresarial")
-	private Tutor_Empresarial tutorEmpresarial;
+	@OneToMany(mappedBy = "usuario_empresarial",cascade = CascadeType.ALL)
+	private List<Tutor_Empresarial> tutorEmpresarial;
 
+	//Relacionado con solicitud convocatoria de uno a muchos
 	@JsonIgnore
-	@OneToOne(mappedBy = "usuario_director")
-	private Aprobacion_Estudiante aprobacionEstudiante_dir;
+	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+	private List<Solicitud_Convocatoria> solicitudConvocatorias;
 
-
+	//Relacionado con solicitud convocatoria de uno a muchos
 	@JsonIgnore
-	@OneToOne(mappedBy = "usuario_responsable")
-	private Aprobacion_Estudiante aprobacionEstudiante_res;
+	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+	private List<Practica> practicas;
 
-	@JsonIgnore
-	@OneToOne(mappedBy = "usuario_tutor_academico")
-	private Detalle_Practica detallePractica;
 
-	public Usuario(String cedula, String nombre, String apellido, String contrasenia, String correo) {
+	public Usuario(String cedula, String nombre, String apellido, String carrera, String contrasenia, String correo) {
 		this.cedula = cedula;
 		this.nombres = nombre;
 		this.apellidos = apellido;
+		this.carrera = carrera;
 		this.contrasenia = contrasenia;
 		this.correo = correo;
 	}

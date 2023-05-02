@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -15,31 +16,42 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tutor_empresarial")
-public class Tutor_Empresarial {
+public class Tutor_Empresarial implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idTutorEmpresarial;
     private String departamento;
-    private  byte titulo;
+    private String titulo;
+    private String numeroContacto;
     private String cargo;
 
+
+    //Relacionado con usuario de uno a uno
+    @ManyToOne
+    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
+    private Usuario usuario_empresarial;
+
+    //Relacionado con empresa de muchos a uno
     @ManyToOne
     @JoinColumn(name = "idEmpresa",referencedColumnName = "idEmpresa")
     private Empresa empresa;
 
+    //Relacionado con solicitud de practicass de uno a muchos
     @JsonIgnore
     @OneToMany(mappedBy = "tutorEmpresarial",cascade = CascadeType.ALL)
     private List<Solicitud_Practicas> solicitudPracticas;
 
-    @OneToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario_tutor_empresarial;
-
+    //Relacionado con solicitud convocatoria de uno a muchos
     @JsonIgnore
-    @OneToOne(mappedBy = "tutorEmpresarial")
-    private Aprobacion_Empresa aprobacionEmpresa;
+    @OneToMany(mappedBy = "tutorEmpresarial",cascade = CascadeType.ALL)
+    private List<Solicitud_Convocatoria> solicitudConvocatorias;
 
+    //Relacionado con practica de uno a muchos
     @JsonIgnore
-    @OneToOne(mappedBy = "tutorEmpresarial")
-    private Detalle_Practica detallePractica;
+    @OneToMany(mappedBy = "tutorEmpresarial",cascade = CascadeType.ALL)
+    private List<Practica> practicas;
+
+
+
 }

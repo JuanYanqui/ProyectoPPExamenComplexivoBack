@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -15,19 +16,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "actividades")
-public class Actividades {
+public class Actividades implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idActividades;
-    private String descripcion;
+    private String detalleActividad;
+    private String herramientas;
+    private String nombre_materia;
 
-    @ManyToOne
-    @JoinColumn(name = "idSolicitudPracticas",referencedColumnName = "idSolicitudPracticas")
-    private Solicitud_Practicas solicitudPracticas;
-
-
+    //Relacionado con requerimientos de uno a muchos
     @JsonIgnore
-    @OneToOne(mappedBy = "actividades")
-    private Detalle_Actividades detalleActividades;
+    @OneToMany(mappedBy = "actividades",cascade = CascadeType.ALL)
+    private List<Requerimientos> requerimientos;
+
+
 
 }
