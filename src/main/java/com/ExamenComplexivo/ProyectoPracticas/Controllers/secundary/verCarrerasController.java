@@ -8,19 +8,19 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.secundary.verCarrera
 import java.util.List;
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping("/api/verCarreas")
+@RequestMapping("/api/verCarreras")
 public class verCarrerasController {
     @Autowired
     IverCarreraService carreraService;
 
-    // Metodo para listar Alumnos
+    // Metodo para listar carreras
     @GetMapping("/listar")
     public List<verCarreras> index() {
         return carreraService.findAll();
     }
 
     // Metodo para buscar por id
-    @GetMapping("/listAlumnosF/{id}")
+    @GetMapping("/list/{id}")
     public verCarreras show(@PathVariable Integer id) {
         return carreraService.findById(id);
 

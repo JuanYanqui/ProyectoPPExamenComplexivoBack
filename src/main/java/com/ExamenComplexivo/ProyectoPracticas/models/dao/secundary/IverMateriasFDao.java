@@ -4,6 +4,4 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.secundary.vermateria
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IverMateriasFDao extends JpaRepository<vermateriasf, Integer> {
-
-    Boolean existsById_carrera(Integer id_materia);
 }
