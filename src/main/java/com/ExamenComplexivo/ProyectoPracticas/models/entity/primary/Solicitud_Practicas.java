@@ -39,8 +39,7 @@ public class Solicitud_Practicas implements Serializable {
     private boolean estadoConvocatoria;
     private boolean estadoActividad;
 
-    @ElementCollection
-    private List<String> descripcionActividades;
+    private String descripcionActividades;
 
 
     @OneToOne
