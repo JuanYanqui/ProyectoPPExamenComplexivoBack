@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,24 +21,22 @@ import java.util.Set;
 				@UniqueConstraint(columnNames = "cedula"),
 				@UniqueConstraint(columnNames = "correo")
 		})
-public class Usuario implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idUsuario;
 	private String cedula;
-	private String correo;
-	private String username;
-	private String contrasenia;
-	private String estado;
 	private String nombres;
 	private String apellidos;
-	private String telefono;
+	private String correo;
+	private String carrera;
+	private String contrasenia;
 
-	//Relacionado con rol de uno a uno
-	@ManyToOne
-	@JoinColumn(name = "idRol",referencedColumnName = "idRol")
-	private Rol tipoRol;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "usuarioRoles",
+			joinColumns = @JoinColumn(name = "idUsuario"),
+			inverseJoinColumns = @JoinColumn(name = "idRol"))
+	private Set<Rol> roles = new HashSet<>();
 
 	//Relacionado con responsable de ppp un a uno
 	@JsonIgnore
@@ -70,12 +66,12 @@ public class Usuario implements Serializable {
 	private List<Practica> practicas;
 
 
-	public Usuario(Long idUsuario, String cedula, String correo, String username, String contrasenia, String estado) {
-		this.idUsuario = idUsuario;
+	public Usuario(String cedula, String nombre, String apellido, String carrera, String contrasenia, String correo) {
 		this.cedula = cedula;
-		this.correo = correo;
-		this.username = username;
+		this.nombres = nombre;
+		this.apellidos = apellido;
+		this.carrera = carrera;
 		this.contrasenia = contrasenia;
-		this.estado = estado;
+		this.correo = correo;
 	}
 }
