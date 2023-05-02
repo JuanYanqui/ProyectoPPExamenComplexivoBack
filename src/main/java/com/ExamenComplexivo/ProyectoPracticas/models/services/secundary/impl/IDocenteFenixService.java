@@ -1,12 +1,12 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.secundary.impl;
 
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.secundary.verpersonaf;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.secundary.verdocentef;
 
 import java.util.List;
 
 public interface IDocenteFenixService {
-    public List<verpersonaf> findAll();
+    public List<verdocentef> findAll();
 
-    public verpersonaf findById(String cedula);
+    public verdocentef findById(String cedula);
 
 }

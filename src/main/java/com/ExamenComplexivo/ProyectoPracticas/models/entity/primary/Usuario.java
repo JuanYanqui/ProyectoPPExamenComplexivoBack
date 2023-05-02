@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,8 +22,12 @@ import java.util.Set;
 				@UniqueConstraint(columnNames = "cedula"),
 				@UniqueConstraint(columnNames = "correo")
 		})
+
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+public class Usuario {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idUsuario;
@@ -36,6 +39,14 @@ public class Usuario implements Serializable {
 	private String nombres;
 	private String apellidos;
 	private String telefono;
+
+	private String correo;
+	private String contrasenia;
+
+	@OneToOne
+	@JoinColumn(name = "idRol")
+	private Rol rol;
+
 
 	//Relacionado con rol de uno a uno
 	@ManyToOne
@@ -70,9 +81,23 @@ public class Usuario implements Serializable {
 	private List<Practica> practicas;
 
 
+	@JsonIgnore
+	@OneToOne(mappedBy = "usuario_tutor_academico")
+	private Detalle_Practica detallePractica;
+
 	public Usuario(Long idUsuario, String cedula, String correo, String username, String contrasenia, String estado) {
 		this.idUsuario = idUsuario;
 		this.cedula = cedula;
+		this.nombres = nombre;
+		this.apellidos = apellido;
+
+	public Usuario(String cedula, String nombre, String apellido, String carrera, String contrasenia, String correo) {
+		this.cedula = cedula;
+		this.nombres = nombre;
+		this.apellidos = apellido;
+		this.carrera = carrera;
+		this.contrasenia = contrasenia;
+
 		this.correo = correo;
 		this.username = username;
 		this.contrasenia = contrasenia;

@@ -1,6 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +10,20 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "rol")
+@Table(name="roles")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Rol implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+public class Rol {
+
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idRol;
 	private String rolNombre;
 

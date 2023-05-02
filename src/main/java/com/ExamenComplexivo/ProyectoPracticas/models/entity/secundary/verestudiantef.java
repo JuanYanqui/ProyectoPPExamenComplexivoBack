@@ -4,14 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
-@Table(name = "verpersonaf")
+@Table(name = "verestudiantef")
 @NoArgsConstructor
 @AllArgsConstructor
-public class verpersonaf {
+public class verestudiantef {
 
 	@Id
 	@Column(name = "cedula", nullable = false,updatable = false)
@@ -19,5 +22,7 @@ public class verpersonaf {
 	private String correo_institucional;
 	private String nombres;
 	private String apellidos;
+	private String carrera;
+	
 
 }
