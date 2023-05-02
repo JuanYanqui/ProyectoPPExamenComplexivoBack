@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+<<<<<<< Updated upstream
 import java.util.Date;
+=======
+>>>>>>> Stashed changes
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +26,10 @@ import java.util.Set;
 				@UniqueConstraint(columnNames = "correo")
 		})
 public class Usuario {
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idUsuario;
@@ -31,11 +37,22 @@ public class Usuario {
 	private String nombres;
 	private String apellidos;
 	private String correo;
+<<<<<<< Updated upstream
 	private String contrasenia;
 
 	@OneToOne
 	@JoinColumn(name = "idRol")
 	private Rol rol;
+=======
+	private String carrera;
+	private String contrasenia;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "usuarioRoles",
+			joinColumns = @JoinColumn(name = "idUsuario"),
+			inverseJoinColumns = @JoinColumn(name = "idRol"))
+	private Set<Rol> roles = new HashSet<>();
+>>>>>>> Stashed changes
 
 
 	@JsonIgnore
@@ -63,6 +80,7 @@ public class Usuario {
 	@OneToOne(mappedBy = "usuario_responsable")
 	private Aprobacion_Estudiante aprobacionEstudiante_res;
 
+<<<<<<< Updated upstream
 	@JsonIgnore
 	@OneToOne(mappedBy = "usuario_tutor_academico")
 	private Detalle_Practica detallePractica;
@@ -71,6 +89,13 @@ public class Usuario {
 		this.cedula = cedula;
 		this.nombres = nombre;
 		this.apellidos = apellido;
+=======
+	public Usuario(String cedula, String nombre, String apellido, String carrera, String contrasenia, String correo) {
+		this.cedula = cedula;
+		this.nombres = nombre;
+		this.apellidos = apellido;
+		this.carrera = carrera;
+>>>>>>> Stashed changes
 		this.contrasenia = contrasenia;
 		this.correo = correo;
 	}

@@ -1,7 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.secundary.service;
 
-import com.ExamenComplexivo.ProyectoPracticas.models.dao.secundary.IVerpersonafDao;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.secundary.verpersonaf;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.secundary.IverDocentesFDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.secundary.verdocentef;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.secundary.impl.IDocenteFenixService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,22 +10,22 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class IDocenteFenixServiceImpl implements IDocenteFenixService {
+public class DocenteFenixServiceImpl implements IDocenteFenixService {
 
     @Autowired
-    private IVerpersonafDao verpersonafDao;
+    private IverDocentesFDao iverDocentesFDao;
 
     @Override
     @Transactional(readOnly= true)
-    public List<verpersonaf> findAll() {
+    public List<verdocentef> findAll() {
         // TODO Auto-generated method stub
-        return (List<verpersonaf>) verpersonafDao.findAll();
+        return (List<verdocentef>) iverDocentesFDao.findAll();
     }
 
     @Override
     @Transactional (readOnly= true)
-    public verpersonaf findById(String id) {
+    public verdocentef findById(String id) {
         // TODO Auto-generated method stub
-        return verpersonafDao.findById(id).orElse(null);
+        return iverDocentesFDao.findById(id).orElse(null);
     }
 }
