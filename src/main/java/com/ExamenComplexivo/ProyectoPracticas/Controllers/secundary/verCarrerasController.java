@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.secundary.verCarreras;
 
 import java.util.List;
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/verCarreras")
 public class verCarrerasController {
@@ -24,5 +24,10 @@ public class verCarrerasController {
     public verCarreras show(@PathVariable Integer id) {
         return carreraService.findById(id);
 
+    }
+
+    @GetMapping("/nombrescarrera")
+    public List<String> obtenerNombresCarreras() {
+        return carreraService.obtenerNombresCarreras();
     }
 }

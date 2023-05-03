@@ -24,4 +24,8 @@ public class IverCarreraServiceImp implements IverCarreraService {
     public verCarreras findById(Integer id) {
         return carrerasfDao.findById(id).orElse(null);
     }
+
+    public List<String> obtenerNombresCarreras() {
+        return carrerasfDao.findAllNombres();
+    }
 }

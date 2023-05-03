@@ -60,7 +60,7 @@ public class SecurityConfigImpl { // extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.authorizeRequests().antMatchers("/api/auth/**", "/api/docentefenix/{cedula}", "/api/estudiantefenix/{cedula}", "/api/user/**", "/api/empresa/**", "/swagger-ui/index.html#/**").permitAll()
+				.authorizeRequests().antMatchers("/api/auth/**", "/api/docentefenix/{cedula}", "/api/estudiantefenix/{cedula}", "/api/user/**", "/api/empresa/**", "/api/verMaterias/**", "/api/verCarreras/**").permitAll()
 				.anyRequest().authenticated();
 
 		http.authenticationProvider(authenticationProvider());
