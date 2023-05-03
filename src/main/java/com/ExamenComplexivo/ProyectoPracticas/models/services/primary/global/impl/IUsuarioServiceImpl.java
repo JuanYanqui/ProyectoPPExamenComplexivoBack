@@ -1,7 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.impl;
 
 
-
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.RolRepositoryDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.UsuariosRepositoryDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Rol;
@@ -50,7 +49,7 @@ public class IUsuarioServiceImpl implements IUsuarioService {
     public List<Usuario> getUsusarios() {
         log.info("Recorrido de todos los usuarios");
         return usuariosDao.findAll();
-    }
+    } 
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {

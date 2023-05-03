@@ -18,7 +18,6 @@ public interface IUsuarioService extends UserDetailsService{
     Usuario findbyCedula(String cedula);
 
     List<Usuario>getUsusarios();
-
     
     public List<Usuario> findAllUsuario();
 	

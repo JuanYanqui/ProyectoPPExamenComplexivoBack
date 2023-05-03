@@ -29,7 +29,7 @@ public class Detalle_Convenio implements Serializable {
     @Temporal(TemporalType.DATE)
     @NotNull(message = "La fecha de caducidad es obligatoria.")
     private Date fecha_caducidad;
-
+    private String nombre_carrera;
 
     //Relacionado con convenio de uno a uno
     @OneToOne

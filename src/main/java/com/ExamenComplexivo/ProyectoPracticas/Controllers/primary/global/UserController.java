@@ -33,8 +33,7 @@ public class UserController {
     private RolRepositoryDao rolrepo;
     @Autowired
     private UsuariosRepositoryDao usuariosDao;
-
-
+   
     @GetMapping("/all")
     public ResponseEntity<List<Usuario>> getUsuarios(){
         return ResponseEntity.ok().body(iUsuarioService.getUsusarios());
@@ -109,3 +108,4 @@ class RolToUser {
     private String cedula;
 
 }
+//git juan
