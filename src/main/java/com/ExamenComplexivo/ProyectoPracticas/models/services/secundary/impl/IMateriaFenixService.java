@@ -9,4 +9,6 @@ public interface IMateriaFenixService {
     public List<vermateriasf> findAll();
 
     public vermateriasf findById(Integer id_materia);
+
+    List<String> obtenerMateriasPorCarrera(String nombreCarrera);
 }

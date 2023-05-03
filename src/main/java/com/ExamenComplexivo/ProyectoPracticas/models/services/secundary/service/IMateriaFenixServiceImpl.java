@@ -31,4 +31,8 @@ public class IMateriaFenixServiceImpl implements IMateriaFenixService {
         return verMateriasFDao.findById(id).orElse(null);
     }
 
+    public List<String> obtenerMateriasPorCarrera(String nombreCarrera) {
+        return verMateriasFDao.obtenerMateriasPorCarrera(nombreCarrera);
+    }
+
 }
