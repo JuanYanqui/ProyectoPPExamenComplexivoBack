@@ -23,12 +23,10 @@ public class Detalle_Convenio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idDetalleConvenio;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de aprobacion es obligatoria.")
-    private Date fechaAprobacion;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de caducidad es obligatoria.")
-    private Date fecha_caducidad;
+
+    private String fechaAprobacion;
+
+    private String fecha_caducidad;
     private String nombre_carrera;
 
     //Relacionado con convenio de uno a uno
