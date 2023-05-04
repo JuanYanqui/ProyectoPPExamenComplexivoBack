@@ -63,8 +63,8 @@ public class SecurityConfigImpl { // extends WebSecurityConfigurerAdapter {
 				.authorizeRequests().antMatchers("/api/auth/**", "/api/docentefenix/{cedula}", "/api/estudiantefenix/{cedula}",
 						"/api/user/**","/api/personaemp/**", "/api/tutorEmp/**","/apitutorEmp/buscar/{id}/**", 	"/api/empresa/**",
 						"/swagger-ui/index.html#/**", "/api/solicitudPractica/**", "/api/convenio/**",
-						"/api/detalleConvenio/**", "/api/verMaterias/**", "/api/verCarreras/**", "/api/representantePPP/**",
-						"/api/empresa/listar/**",  "/api/empresa/buscar{id}/**").permitAll()
+						"/api/detalleConvenio/**", "/api/verMaterias/**", "/api/verCarreras/**",
+						"/api/representantePPP/**").permitAll()
 				.anyRequest().authenticated();
 //
 //						.authorizeRequests().antMatchers("/api/auth/**", "/api/docentefenix/{cedula}",
