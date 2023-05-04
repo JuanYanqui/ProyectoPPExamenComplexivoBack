@@ -99,7 +99,20 @@ public class AuthCtrl {
         }
 
     }
-
+    @PostMapping("/crear")
+    public ResponseEntity<?> registerPersona(@RequestBody SignupRequest signUpRequest) {
+        Usuario user = new Usuario(signUpRequest.getCedula(),
+                signUpRequest.getNombres(),
+                signUpRequest.getApellidos(),
+                signUpRequest.getCarrera(),
+                passwordEncoder.encode(signUpRequest.getContrasenia()),
+                signUpRequest.getCorreo());
+        Set<String> strRoles = signUpRequest.getRoles();
+        Set<Rol> roles = new HashSet<>();
+        user.setRoles(roles);
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
     @PostMapping("/signupdocente")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
         //Estamos verificando si esa en nuestra bd..

@@ -34,4 +34,10 @@ public class Personas_empresa implements Serializable {
     private String correo;
     @Column(name = "foto", nullable = true)
     private String foto;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario_persona_empresa")
+    private List<Usuario> Usuario_empresa;
+
 }

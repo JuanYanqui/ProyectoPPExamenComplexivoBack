@@ -76,7 +76,7 @@ public class Usuario {
 	}
 	//Relacion de usuario con persona empresa 1:1
 	@OneToOne
-	@JoinColumn(name = "idpersonaemp",referencedColumnName = "idpersonaemp")
+	@JoinColumn(name = "idpersonaemp")
 	private Personas_empresa usuario_persona_empresa;
 
 }
