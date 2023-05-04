@@ -25,4 +25,9 @@ public class verCarrerasController {
         return carreraService.findById(id);
 
     }
+
+    @GetMapping("/nombrescarrera")
+    public List<String> obtenerNombresCarreras() {
+        return carreraService.obtenerNombresCarreras();
+    }
 }

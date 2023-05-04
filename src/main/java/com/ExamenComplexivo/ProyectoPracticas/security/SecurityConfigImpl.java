@@ -65,6 +65,8 @@ public class SecurityConfigImpl { // extends WebSecurityConfigurerAdapter {
 						"/api/empresa/listar/**",  "/api/empresa/buscar{id}/**").permitAll()
 				.anyRequest().authenticated();
 
+
+
 		http.authenticationProvider(authenticationProvider());
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

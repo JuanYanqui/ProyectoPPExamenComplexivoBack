@@ -26,35 +26,30 @@ public class Solicitud_Practicas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idSolicitudPracticas;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de envio de solicitud es obligatoria.")
-    private Date fechaEnvioSolicitud;
-    @NotNull(message = "El numero de estudiantes es obligatorio")
+
+    private String fechaEnvioSolicitud;
     private Integer numeroEstudiantes;
     private String nombreSolicitud;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de aceptacion de solicitud es obligatoria.")
-    private Date fechaAceptacion;
+    private String fechaAceptacion;
     private boolean estadoSolicitud;
     private boolean estadoConvocatoria;
     private boolean estadoActividad;
-
+    private String nombre_carrera;
     private String descripcionActividades;
 
-
     @OneToOne
-    @JoinColumn(name = "id_documentoSolicitudPrc")
+    @JoinColumn(name = "id_documentoSolicitudPrc", nullable = true)
     private Documento_SolicitudPracticas documentoSolicitudPracticas;
 
 
     //Relacionado con tutor empresarial de muchos a uno
     @ManyToOne
-    @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial")
+    @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial", nullable = true)
     private Tutor_Empresarial tutorEmpresarial;
 
     //Relacionado con responsable de practicas de muchos a uno
     @ManyToOne
-    @JoinColumn(name = "idResponsablePPP",referencedColumnName = "idResponsablePPP")
+    @JoinColumn(name = "idResponsablePPP",referencedColumnName = "idResponsablePPP", nullable = true)
     private Responsable_PPP responsablePPP;
 
 

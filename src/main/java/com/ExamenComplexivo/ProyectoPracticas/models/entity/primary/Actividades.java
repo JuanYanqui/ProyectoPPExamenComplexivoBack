@@ -23,6 +23,7 @@ public class Actividades implements Serializable {
     private Long idActividades;
     private String detalleActividad;
     private String herramientas;
+    private String nombre_materia;
 
     //Relacionado con requerimientos de uno a muchos
     @JsonIgnore
