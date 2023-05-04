@@ -22,4 +22,11 @@ public class ResponsablePPPServiceImp extends GenericServiceImpl<Responsable_PPP
     public List<String> getNombresCompletosDeResponsablesPorCarrera(String carrera) {
         return responsablePppDao.getNombresCompletosDeResponsablesPorCarrera(carrera);
     }
+
+    @Override
+    public Integer buscarResponsablePorCarrera(String nombreCarrera) {
+        return responsablePppDao.buscarResponsablePorCarrera(nombreCarrera);
+    }
+
+
 }

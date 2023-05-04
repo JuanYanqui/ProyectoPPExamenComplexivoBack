@@ -82,4 +82,14 @@ public class ResponsablePPPController {
         return ResponseEntity.ok(nombresCompletos);
     }
 
+
+    @GetMapping("/carreraID/{nombreCarrera}")
+    public ResponseEntity<Integer> buscarResponsablePorCarrera(@PathVariable String nombreCarrera) {
+        try {
+            Integer idResponsable = responsableService.buscarResponsablePorCarrera(nombreCarrera);
+            return ResponseEntity.ok(idResponsable);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

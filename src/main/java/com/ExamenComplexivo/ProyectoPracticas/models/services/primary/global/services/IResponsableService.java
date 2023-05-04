@@ -9,4 +9,6 @@ public interface IResponsableService extends IGenericService<Responsable_PPP,Lon
 
     List<String> getNombresCompletosDeResponsablesPorCarrera(String carrera);
 
+
+    Integer buscarResponsablePorCarrera(String nombreCarrera);
 }
