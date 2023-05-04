@@ -9,4 +9,6 @@ public interface IverCarreraService{
 
     public verCarreras findById(Integer id);
 
+    List<String> obtenerNombresCarreras();
+
 }

@@ -75,4 +75,11 @@ public class ResponsablePPPController {
 
         }
     }
+
+    @GetMapping("/carrera/{carrera}")
+    public ResponseEntity<List<String>> getNombresCompletosDeResponsablesPorCarrera(@PathVariable String carrera) {
+        List<String> nombresCompletos = responsableService.getNombresCompletosDeResponsablesPorCarrera(carrera);
+        return ResponseEntity.ok(nombresCompletos);
+    }
+
 }

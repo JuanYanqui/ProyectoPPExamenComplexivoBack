@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ResponsablePPPServiceImp extends GenericServiceImpl<Responsable_PPP,Long> implements IResponsableService {
     @Autowired
@@ -15,5 +17,9 @@ public class ResponsablePPPServiceImp extends GenericServiceImpl<Responsable_PPP
     @Override
     public CrudRepository<Responsable_PPP, Long> getDao() {
         return responsablePppDao;
+    }
+
+    public List<String> getNombresCompletosDeResponsablesPorCarrera(String carrera) {
+        return responsablePppDao.getNombresCompletosDeResponsablesPorCarrera(carrera);
     }
 }
