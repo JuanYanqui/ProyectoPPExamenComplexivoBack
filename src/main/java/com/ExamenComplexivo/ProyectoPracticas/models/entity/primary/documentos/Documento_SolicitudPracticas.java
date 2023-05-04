@@ -29,7 +29,6 @@ public class Documento_SolicitudPracticas implements Serializable {
     @Column(name = "documento_solicitud_practicas",columnDefinition = "bytea")
     private byte[] documento_solicitud_practicas;
 
-
     @JsonIgnore
     @OneToOne(mappedBy = "documentoSolicitudPracticas")
     private Solicitud_Practicas solicitudPracticas;
