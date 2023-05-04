@@ -74,4 +74,9 @@ public class Usuario {
 		this.contrasenia = contrasenia;
 		this.correo = correo;
 	}
+	//Relacion de usuario con persona empresa 1:1
+	@OneToOne
+	@JoinColumn(name = "idpersonaemp")
+	private Personas_empresa usuario_persona_empresa;
+
 }

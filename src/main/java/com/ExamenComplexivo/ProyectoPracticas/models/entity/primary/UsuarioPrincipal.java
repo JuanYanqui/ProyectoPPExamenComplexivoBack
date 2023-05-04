@@ -86,4 +86,5 @@ public class UsuarioPrincipal implements UserDetails {
         return Objects.equals(idUsuario, user.idUsuario);
     }
 
+
 }
