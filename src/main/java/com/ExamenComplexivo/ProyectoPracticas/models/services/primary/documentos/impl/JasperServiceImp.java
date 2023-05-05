@@ -39,7 +39,7 @@ public class JasperServiceImp implements JasperService {
             byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
 
             response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=report.pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=solicitudpracticas.pdf");
             response.setContentLength(reportContent.length);
 
             OutputStream outStream = response.getOutputStream();

@@ -65,7 +65,8 @@ public class SecurityConfigImpl { // extends WebSecurityConfigurerAdapter {
 						"/api/solicitudPractica/**", "/api/convenio/**",
 						"/api/detalleConvenio/**", "/api/verMaterias/**", "/api/verCarreras/**", "/api/representantePPP/**",
 						"/api/empresa/listar/**",  "/api/empresa/buscar{id}/**",
-						"/api/jasperReport/**", "/api/documentoSolicitudPracticas/**").permitAll()
+						"/api/jasperReport/**", "/api/documentoSolicitudPracticas/**",
+						"/api/jasperReport/descargar/**").permitAll()
 				.anyRequest().authenticated();
 //
 //						.authorizeRequests().antMatchers("/api/auth/**", "/api/docentefenix/{cedula}",
