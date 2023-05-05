@@ -4,4 +4,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Tutor_Empres
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.IGenericService;
 
 public interface ITutorEmpresarialService extends IGenericService<Tutor_Empresarial,Long> {
+
+
+    Tutor_Empresarial findByUsuarioId(Long idUsuario);
 }
