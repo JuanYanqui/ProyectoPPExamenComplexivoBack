@@ -3,7 +3,6 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documento
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.JasperService;
 import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -52,4 +51,40 @@ public class JasperServiceImp implements JasperService {
             System.out.println(e.getMessage());
         }
     }
+
+
+    @Override
+    public void reportConvocatorias(HttpServletResponse response, long idConvocatorias) {
+        try {
+
+            Connection conn = dataSource.getConnection();
+
+            InputStream reportStream = getClass().getResourceAsStream("/reports/01_Convocatorias.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+            // Crea un mapa de parámetros para generar documento con el id que se le proporcione
+            Map<String, Object> params = new HashMap<>();
+
+            //parametro que necesita jasper para ejecutar la consulta
+            params.put("idConvocatorias", idConvocatorias);
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=convocatorias.pdf");
+            response.setContentLength(reportContent.length);
+
+            OutputStream outStream = response.getOutputStream();
+            outStream.write(reportContent);
+            outStream.flush();
+            outStream.close();
+        }catch (Exception e){
+
+            System.out.println("No encuentra");
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

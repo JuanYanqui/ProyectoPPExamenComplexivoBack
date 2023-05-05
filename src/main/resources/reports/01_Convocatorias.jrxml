@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Solicitud" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d252c5c-578c-412a-9e6a-4bce94f87144">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexion Documento PPP"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="idConvocatorias" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+    con.nombreconvocatoria as nombreconvocatoria, 
+    con.fechapublicacion as fechapublicacion,
+    con.fechaexpiracion as fechaexpiracion,
+    emp.nombreempresa,
+    soli.descripcionactividades, soli.nombre_carrera,
+	remitente.nombres ||' '|| remitente.apellidos as nombrereponsable, remitente.correo as correoresponsable,
+
+    string_agg(act.detalleactividad ||' ('|| act.herramientas ||')', E'\n') as detallesactividad
+	FROM 
+    convocatorias con
+    JOIN solicitud_practicas soli ON soli.idsolicitudpracticas = con.idsolicitudpracticas
+    JOIN tutor_empresarial tut ON tut.idtutorempresarial = soli.idtutorempresarial
+    JOIN empresa emp ON emp.idempresa = tut.idempresa
+    JOIN requerimientos req ON req.idsolicitudpracticas = soli.idsolicitudpracticas
+    JOIN actividades act ON act.idactividades = req.idactividades
+	
+	JOIN responsable_ppp resp ON resp.idresponsableppp = soli.idresponsableppp
+	JOIN usuarios remitente ON resp.idusuario = remitente.idusuario
+	
+WHERE 
+    idconvocatorias =  $P{idConvocatorias} 
+GROUP BY 
+    con.nombreconvocatoria, 
+    con.fechapublicacion, 
+    con.fechaexpiracion, 
+    emp.nombreempresa, 
+    soli.descripcionactividades,
+	soli.nombre_carrera,
+	remitente.correo,
+	remitente.nombres ||' '|| remitente.apellidos ;]]>
+	</queryString>
+	<field name="nombreconvocatoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreconvocatoria"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreconvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="fechapublicacion" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fechapublicacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechapublicacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="fechaexpiracion" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fechaexpiracion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaexpiracion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="nombreempresa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreempresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreempresa"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="descripcionactividades" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descripcionactividades"/>
+		<property name="com.jaspersoft.studio.field.label" value="descripcionactividades"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="solicitud_practicas"/>
+	</field>
+	<field name="nombre_carrera" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre_carrera"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre_carrera"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="solicitud_practicas"/>
+	</field>
+	<field name="nombrereponsable" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombrereponsable"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombrereponsable"/>
+	</field>
+	<field name="correoresponsable" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="correoresponsable"/>
+		<property name="com.jaspersoft.studio.field.label" value="correoresponsable"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuarios"/>
+	</field>
+	<field name="detallesactividad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="detallesactividad"/>
+		<property name="com.jaspersoft.studio.field.label" value="detallesactividad"/>
+	</field>
+	<variable name="detallesactividad1" class="java.lang.Integer" resetType="Column" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{detallesactividad}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="325" y="0" width="225" height="20" uuid="9ffa3966-2741-4ad1-95d6-f7d80410ed57"/>
+				<textFieldExpression><![CDATA[$F{nombreconvocatoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="20" width="100" height="25" uuid="5f6a20dc-6c25-42c0-90f7-071ccc20c18e"/>
+				<textFieldExpression><![CDATA[$F{fechapublicacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="20" uuid="eeadd7ac-1ea6-4e0b-b77d-2a262be372fc"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[A los estudiantes Interesados:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="390" height="20" uuid="de27e734-00ce-4f7b-8a99-4a8ef3a696db"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Se convoca a los estudiantes de quinto ciclo en adelante de la carrera:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="41" width="430" height="20" uuid="50e8e4ca-6209-4e35-92d7-c552ffba1149"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_carrera}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="280" height="20" uuid="c1684d08-ad09-407c-8c9b-663b1bb96926"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[que deseen realizar sus prácticas pre profesionales]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="365" y="60" width="130" height="20" uuid="41fb37a5-56fb-4c83-84d4-83e9611742a4"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreempresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="80" width="390" height="20" uuid="8df97619-18b2-4b63-a9d7-c4cf81a3b650"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[, a presentar la solicitud correspondiente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="60" width="170" height="20" uuid="e3cbb062-5da1-4a9f-a61c-98f3a4f4cf97"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[en la empresa]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="645" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="200" height="20" uuid="a07c066a-1eaa-4f3e-9cc2-94a207d6babd"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Las actividades a desarrollar son:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="550" height="20" uuid="3878e3d0-314d-4572-9061-b1013fe81fab"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Por lo que los postulantes deberán haber aprobado las siguientes asignaturas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="210" width="360" height="20" uuid="fe9580d7-c48d-42f9-b356-84a59892606e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[La fecha máxima en la que se receptarán las solicitudes es el día]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="210" width="140" height="20" uuid="0722843b-2050-4962-972a-6eaef75b3986"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaexpiracion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="230" width="260" height="20" uuid="56ab31fe-e0a9-4e31-afd7-7a71e31f2dc6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Para mayor información contactarse con el Ing.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="270" width="160" height="20" uuid="f669cc37-64d4-45cc-bfb3-85fe7fd4a8e9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Adjunto a la solicitud se debe ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="270" width="40" height="20" uuid="a358b4ad-cb98-4004-97b3-ee7414661302"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nota: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="270" width="180" height="20" uuid="a369dfbf-a9de-4d29-98ac-2dd160e25e7c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[remitir la hoja de vida,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="270" width="210" height="20" uuid="dd3936e1-b6d3-4261-b76e-dc2e1ed366d4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[para lo cual deberá registrarse en
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="290" width="70" height="20" uuid="c4615ca1-653f-4a4d-9984-fd0c480968f0"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[el portal web]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="290" width="380" height="20" uuid="4b300cf7-c087-4589-ba3d-d040eddb989c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[,    e imprimir el currículo en formato moderno a través del siguiente enlace:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="290" width="100" height="20" forecolor="#125BA3" uuid="5ae8a083-6c58-432c-b51e-723589bb03b2"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[encuentraempleo,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="310" width="40" height="20" uuid="ff4fd513-77ce-4837-9f0f-4e99b79e76f2"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[enlace:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="310" width="240" height="20" forecolor="#125BA3" uuid="ad971f35-2096-4479-a009-285a1739a105"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[https://encuentraempleo.trabajo.gob.ec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="340" width="330" height="20" uuid="b558e375-aed4-4636-bb52-d2e70161de5f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Los formatos para el proceso pueden ser descargados de la]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="340" width="90" height="20" forecolor="#125BA3" uuid="08f4e1cf-4395-4c30-b304-539dcff84591"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[la página web ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="340" width="130" height="20" uuid="9614fb0a-1e1a-4a20-9729-fe07faa35ed6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[institucional desde el]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="360" width="50" height="20" uuid="f6de294f-038c-4a12-91e7-b5f56945b2c1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menú de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="360" width="70" height="20" forecolor="#125BA3" uuid="8cd37401-e2bb-49aa-8de5-7668fb282474"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Vinculación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="360" width="310" height="20" uuid="f68fb962-e6c9-4238-b287-3a2b10d9ede7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[,en la opción prácticas pre profesionales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="390" width="170" height="20" uuid="c461911e-5cc8-4c66-99d8-5e3c84dfdf75"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Enviar las solicitudes al correo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="390" width="260" height="20" forecolor="#125BA3" uuid="a57738a9-bad1-43bb-ba36-6748e501cbe1"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[vinculacion.tsds@tecazuay.edu.ec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="410" width="545" height="50" uuid="042d1415-29a7-4be4-99c8-9b0622171b16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EL FORMATO DE ENVÍO DEL ASUNTO DEL CORREO DEBERÁ TENER EL NUMERO DE CONVOCATORIA SEGUIDO DE SU NOMBRE. EJEMPLO: CONVOCATORIA – TSDS -PPP-2023-007-NOMBRE-APELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="460" width="545" height="20" uuid="7df124ca-82d3-4c80-8776-0b6ca7491a47"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[* En caso de que la solicitud no cumpla con el formato no será tomada en cuenta.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="480" width="545" height="20" uuid="e29d6749-11d0-491a-b0b9-aba5984c5064"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Atentamente,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="545" width="240" height="20" uuid="02ee411e-dca1-46b9-81b6-b6905741c47e"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombrereponsable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="585" width="430" height="20" uuid="1594a323-6d5e-4dd4-9783-d70f0b68c0c5"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_carrera}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="565" width="310" height="20" uuid="9af51767-8cc7-49c0-a102-dee5ee11e0e7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Responsable de Prácticas pre profesionales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="605" width="310" height="20" uuid="1c5c1695-d941-448e-9006-51965e47343b"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="625" width="300" height="20" uuid="373079d0-1db6-4a1a-8945-be1dd9774d04"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{correoresponsable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="230" width="280" height="20" uuid="00e143c5-4ed1-46a2-b248-4740e182428f"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombrereponsable}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="250" width="550" height="20" uuid="94f2a9be-9e74-4960-af06-176a7f6f398d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[, docente responsable de prácticas pre profesionales de la carrera.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="30" width="525" height="60" uuid="10629c14-b6a5-4f89-be27-70582067b595"/>
+				<textFieldExpression><![CDATA[$F{descripcionactividades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="140" width="245" height="70" uuid="2de4fc7f-9439-450b-b194-16095e53a239"/>
+				<textFieldExpression><![CDATA[$F{detallesactividad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="525" width="545" height="20" uuid="fa1f2411-7b26-4d97-b2ac-c7031c9d8b1a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[_______________________]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
