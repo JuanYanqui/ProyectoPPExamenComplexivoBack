@@ -17,4 +17,8 @@ public class TutorEmpresarialServiceImp extends GenericServiceImpl<Tutor_Empresa
     public CrudRepository<Tutor_Empresarial, Long> getDao() {
         return tutorEmpresarialDao;
     }
+
+    public Tutor_Empresarial findByUsuarioId(Long idUsuario) {
+        return tutorEmpresarialDao.findByUsuarioId(idUsuario);
+    }
 }

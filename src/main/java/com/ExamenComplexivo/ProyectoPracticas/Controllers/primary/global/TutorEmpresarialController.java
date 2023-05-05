@@ -74,4 +74,14 @@ public class TutorEmpresarialController {
 
         }
     }
+
+    @GetMapping("/extraer/{idUsuario}")
+    public ResponseEntity<Tutor_Empresarial> findByUsuarioId(@PathVariable Long idUsuario) {
+        Tutor_Empresarial tutorEmpresarial = tutorEmpresarialService.findByUsuarioId(idUsuario);
+        if (tutorEmpresarial == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tutorEmpresarial);
+    }
+
 }

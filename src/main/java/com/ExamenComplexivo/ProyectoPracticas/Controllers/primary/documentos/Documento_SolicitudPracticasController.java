@@ -37,6 +37,8 @@ public class Documento_SolicitudPracticasController {
     @Autowired
     private DataSource dataSource;
 
+
+
     @GetMapping("/listar")
     public ResponseEntity<List<Documento_SolicitudPracticas>> obtenerLista() {
         return new ResponseEntity<>(documentoSolicitudPracticasService.findByAll(), HttpStatus.OK);
