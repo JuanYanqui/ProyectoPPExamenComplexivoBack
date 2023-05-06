@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Personas_empresa;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Usuario;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPersonaEmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -72,6 +73,9 @@ public class PersonaEmpController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @GetMapping(value = "/buscarcedula/{cedula}")
+    public Personas_empresa findByCedula(@PathVariable("cedula") String cedula) {
+        return this.personaService.findbyCedula(cedula);
+    }
 
 }
