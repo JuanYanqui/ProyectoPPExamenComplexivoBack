@@ -36,10 +36,6 @@ public class Documento_ConvenioController {
     @Autowired
     private DataSource dataSource;
 
-    @GetMapping("/listar")
-    public ResponseEntity<List<Documento_Convenio>> obtenerLista() {
-        return new ResponseEntity<>(documentoConvenioService.findByAll(), HttpStatus.OK);
-    }
 
     @GetMapping("/reporte")
     public ResponseEntity<ByteArrayResource> descargarReporte() throws JRException, SQLException {
@@ -63,24 +59,6 @@ public class Documento_ConvenioController {
                 .body(resource);
     }
 
-    @GetMapping("/descargar/{id}")
-    public ResponseEntity<ByteArrayResource> descargarFichaMedica(@PathVariable Long id) {
-        Documento_Convenio convenio = documentoConvenioService.findById(id);
-        if (convenio == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        ByteArrayResource resource = new ByteArrayResource(convenio.getDocumentoConvenio());
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=ficha_medica.pdf");
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentLength(convenio.getDocumentoConvenio().length)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(resource);
-    }
-
     //Metodo para subir documento a la base de datos
     @PostMapping("/upload")
     public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
@@ -95,7 +73,7 @@ public class Documento_ConvenioController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("download/{id}")
     public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
         Optional<Documento_Convenio> optionalPdfFile = convenioDao.findById(id);
         if (optionalPdfFile.isPresent()) {
@@ -111,22 +89,51 @@ public class Documento_ConvenioController {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
-    public void eliminar(@PathVariable("id_fichaMedica") Long id) {
-        documentoConvenioService.delete(id);
+    @GetMapping("/listar")
+    public ResponseEntity<List<String>> getAllPdfFiles() {
+        List<Documento_Convenio> pdfFiles = convenioDao.findAll();
+        if (!pdfFiles.isEmpty()) {
+            List<String> encodedFiles = new ArrayList<>();
+            for (Documento_Convenio pdfFile : pdfFiles) {
+                byte[] fileContent = pdfFile.getDocumentoConvenio();
+                String encodedFile = Base64.getEncoder().encodeToString(fileContent);
+                encodedFiles.add(encodedFile);
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity<>(encodedFiles, headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Documento_Convenio> actualizar(@RequestBody Documento_Convenio p, @PathVariable Long id) {
-        Documento_Convenio documentoConvenio = documentoConvenioService.findById(id);
-        documentoConvenio.setDocumentoConvenio(p.getDocumentoConvenio());
-        return new ResponseEntity<>(documentoConvenioService.save(documentoConvenio), HttpStatus.CREATED);
+    @PutMapping("editar/{id}")
+    public ResponseEntity<Documento_Convenio> updatePdfFile(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        Optional<Documento_Convenio> optionalPdfFile = convenioDao.findById(id);
+        if (optionalPdfFile.isPresent()) {
+            Documento_Convenio pdfFile = optionalPdfFile.get();
+            try {
+                pdfFile.setDocumentoConvenio(file.getBytes());
+                Documento_Convenio updatedPdfFile = convenioDao.save(pdfFile);
+                return ResponseEntity.ok().body(updatedPdfFile);
+            } catch (IOException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-    /*
-    @GetMapping("/buscar/{id}")
-    public ResponseEntity<Documento_Convenio> buscar(@PathVariable("id_documentoCnv") Long id_documentoCnv) {
-        return new ResponseEntity<>(documentoConvenioService.findById(id_documentoCnv), HttpStatus.OK);
+
+    @DeleteMapping("eliminar/{id}")
+    public ResponseEntity<?> deleteDocumento(@PathVariable Long id) {
+        Optional<Documento_Convenio> optionalDocumento = convenioDao.findById(id);
+        if (optionalDocumento.isPresent()) {
+            Documento_Convenio documento = optionalDocumento.get();
+            convenioDao.delete(documento);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-    */
 
 }
