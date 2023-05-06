@@ -2,6 +2,7 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.im
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPersonaEmpDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Personas_empresa;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Usuario;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPersonaEmpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +17,9 @@ public class PersonaEmpImp extends GenericServiceImpl<Personas_empresa,Long> imp
     public CrudRepository<Personas_empresa, Long> getDao() {
         return persona_empDao;
     }
+
+
+    @Override
+    public Personas_empresa findbyCedula(String cedula) {return persona_empDao.findByCedula(cedula);
+}
 }
