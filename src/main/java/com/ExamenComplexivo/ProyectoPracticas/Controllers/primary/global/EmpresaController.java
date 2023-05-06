@@ -81,4 +81,10 @@ public class EmpresaController {
 
         }
     }
+
+    @RequestMapping(value = "/byRuc/{rucEmpresa}", method = RequestMethod.GET)
+    @ResponseBody
+    public Empresa porRucEmpresa(@PathVariable String rucEmpresa){
+        return empresaService.porRucEmpresa(rucEmpresa);
+    }
 }

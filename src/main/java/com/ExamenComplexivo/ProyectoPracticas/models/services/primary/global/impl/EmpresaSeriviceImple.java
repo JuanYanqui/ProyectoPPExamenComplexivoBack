@@ -16,4 +16,9 @@ public class EmpresaSeriviceImple extends GenericServiceImpl<Empresa,Long> imple
     public CrudRepository<Empresa, Long> getDao() {
         return empresaDao;
     }
+
+    @Override
+    public Empresa porRucEmpresa(String rucEmpresa) {
+        return empresaDao.findByRucEmpresa(rucEmpresa);
+    }
 }

@@ -4,4 +4,6 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Empresa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IEmpresaDao extends JpaRepository<Empresa,Long> {
+
+    Empresa findByRucEmpresa(String rucEmpresa);
 }
