@@ -66,13 +66,14 @@ public class Usuario {
 	private List<Practica> practicas;
 
 
-	public Usuario(String cedula, String nombre, String apellido, String carrera, String contrasenia, String correo) {
+	public Usuario(String cedula, String nombre, String apellido, String carrera, String contrasenia, String correo, Personas_empresa usuario_persona_empresa) {
 		this.cedula = cedula;
 		this.nombres = nombre;
 		this.apellidos = apellido;
 		this.carrera = carrera;
 		this.contrasenia = contrasenia;
 		this.correo = correo;
+		this.usuario_persona_empresa = usuario_persona_empresa;
 	}
 	//Relacion de usuario con persona empresa 1:1
 	@OneToOne
