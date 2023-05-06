@@ -1,17 +1,16 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_ConvenioDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_ConvenioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -21,8 +20,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.sql.DataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperReport;
@@ -32,6 +29,8 @@ import net.sf.jasperreports.engine.JasperReport;
 @RequestMapping("/api/documentoConvenio")
 public class Documento_ConvenioController {
 
+    @Autowired
+    IDocumento_ConvenioDao convenioDao;
     @Autowired
     IDocumento_ConvenioService documentoConvenioService;
     @Autowired
@@ -82,16 +81,34 @@ public class Documento_ConvenioController {
                 .body(resource);
     }
 
-
-    @PostMapping("/subir")
-    public ResponseEntity<?> guardarFichaMedica(@RequestParam("file") MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().body("No se ha proporcionado ningún archivo.");
+    //Metodo para subir documento a la base de datos
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+        try {
+            Documento_Convenio pdfFile = new Documento_Convenio();
+            pdfFile.setDocumentoConvenio(file.getBytes());
+            convenioDao.save(pdfFile);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
 
-        byte[] bytesDocumento = file.getBytes();
-
-        return new ResponseEntity<>(documentoConvenioService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
+    @GetMapping("/{id}")
+    public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
+        Optional<Documento_Convenio> optionalPdfFile = convenioDao.findById(id);
+        if (optionalPdfFile.isPresent()) {
+            Documento_Convenio pdfFile = optionalPdfFile.get();
+            byte[] fileContent = pdfFile.getDocumentoConvenio();
+            String encodedFile = Base64.getEncoder().encodeToString(fileContent);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("inline").build());
+            return new ResponseEntity<>(encodedFile, headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/eliminar/{id}")
@@ -105,9 +122,11 @@ public class Documento_ConvenioController {
         documentoConvenio.setDocumentoConvenio(p.getDocumentoConvenio());
         return new ResponseEntity<>(documentoConvenioService.save(documentoConvenio), HttpStatus.CREATED);
     }
-
+    /*
     @GetMapping("/buscar/{id}")
     public ResponseEntity<Documento_Convenio> buscar(@PathVariable("id_documentoCnv") Long id_documentoCnv) {
         return new ResponseEntity<>(documentoConvenioService.findById(id_documentoCnv), HttpStatus.OK);
     }
+    */
+
 }

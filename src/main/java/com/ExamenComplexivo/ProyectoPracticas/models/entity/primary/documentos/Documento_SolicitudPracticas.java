@@ -27,6 +27,7 @@ public class Documento_SolicitudPracticas implements Serializable {
     private Long id_documentoSolicitudPrc;
 
     @Column(name = "documento_solicitud_practicas",columnDefinition = "bytea")
+    //@Lob
     private byte[] documento_solicitud_practicas;
 
     @JsonIgnore

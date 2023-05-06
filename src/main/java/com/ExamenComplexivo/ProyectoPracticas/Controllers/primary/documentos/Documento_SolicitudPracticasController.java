@@ -1,17 +1,9 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
-
-
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_SolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
-import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_ConvenioService;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudPracticasService;
-import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,9 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
@@ -30,15 +20,47 @@ import java.util.Map;
 
 public class Documento_SolicitudPracticasController {
 
-
+    @Autowired
+    IDocumento_SolicitudPracticasDao documentoDao;
 
     @Autowired
     IDocumento_SolicitudPracticasService documentoSolicitudPracticasService;
     @Autowired
     private DataSource dataSource;
 
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+        try {
+            Documento_SolicitudPracticas pdfFile = new Documento_SolicitudPracticas();
+            pdfFile.setDocumento_solicitud_practicas(file.getBytes());
+            documentoDao.save(pdfFile);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
 
+    //Metodo para consultar
+    @GetMapping("/{id}")
+    public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
+        Optional<Documento_SolicitudPracticas> optionalPdfFile = documentoDao.findById(id);
+        if (optionalPdfFile.isPresent()) {
+            Documento_SolicitudPracticas pdfFile = optionalPdfFile.get();
+            byte[] fileContent = pdfFile.getDocumento_solicitud_practicas();
+            String encodedFile = Base64.getEncoder().encodeToString(fileContent);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("inline").build());
+            return new ResponseEntity<>(encodedFile, headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    /*
     @GetMapping("/listar")
     public ResponseEntity<List<Documento_SolicitudPracticas>> obtenerLista() {
         return new ResponseEntity<>(documentoSolicitudPracticasService.findByAll(), HttpStatus.OK);
@@ -63,17 +85,6 @@ public class Documento_SolicitudPracticasController {
     }
 
 
-    @PostMapping("/subir")
-    public ResponseEntity<?> guardarSolicitudPractica(@RequestParam("file") MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().body("No se ha proporcionado ningún archivo.");
-        }
-
-        byte[] bytesDocumento = file.getBytes();
-
-        return new ResponseEntity<>(documentoSolicitudPracticasService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
-    }
-
     @DeleteMapping("/eliminar/{id}")
     public void eliminar(@PathVariable("id_fichaMedica") Long id) {
         documentoSolicitudPracticasService.delete(id);
@@ -90,6 +101,6 @@ public class Documento_SolicitudPracticasController {
     public ResponseEntity<Documento_SolicitudPracticas> buscar(@PathVariable("id_documentoSolicitudPrc") Long id_documentoSolicitudPrc) {
         return new ResponseEntity<>(documentoSolicitudPracticasService.findById(id_documentoSolicitudPrc), HttpStatus.OK);
     }
-
+    */
 
 }
