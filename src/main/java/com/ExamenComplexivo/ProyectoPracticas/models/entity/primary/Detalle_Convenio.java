@@ -21,7 +21,7 @@ import java.util.Date;
 public class Detalle_Convenio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDetalleConvenio;
 
     private String fechaAprobacion;

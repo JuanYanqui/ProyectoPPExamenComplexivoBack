@@ -22,7 +22,7 @@ import java.util.List;
 public class Empresa implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmpresa;
     //@Pattern(regexp = "^[0-9]{13}$", message = "RUC longitud permitida de 13 digitos")
     private String rucEmpresa;

@@ -21,7 +21,7 @@ import java.util.Date;
 public class Convenio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConvenio;
     //@Pattern(regexp = "PPP-ISTA-\\d{1,}-\\d{4}", message = "El formato de numero de convenio ingresado no es válido.")
     private String numero_convenio;

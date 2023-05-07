@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.dtos.request;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Personas_empresa;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,8 @@ public class SignupRequest {
     private String carrera;
     @NotBlank
     private String contrasenia;
+    @NotBlank
+    private Personas_empresa persona_empresa;
     @NotNull
     private Set<String> roles;
 
