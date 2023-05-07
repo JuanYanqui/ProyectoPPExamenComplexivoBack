@@ -24,7 +24,7 @@ import java.util.List;
 public class Convocatorias implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConvocatorias;
     //@Pattern(regexp = "^(CONVOCATORIA – TSDS -PPP-)(\\d{4})-(\\d{3})$", message = "El formato del nombre de la convocatoria no es válido.")
     private String nombreConvocatoria;

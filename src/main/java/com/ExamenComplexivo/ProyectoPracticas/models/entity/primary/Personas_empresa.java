@@ -23,7 +23,7 @@ import java.util.List;
 public class Personas_empresa implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idpersonaemp;
     private String cedula;
     private String primer_nombre;

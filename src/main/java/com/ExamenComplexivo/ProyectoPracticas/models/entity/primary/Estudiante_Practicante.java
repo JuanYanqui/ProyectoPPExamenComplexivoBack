@@ -19,7 +19,7 @@ import java.util.List;
 public class Estudiante_Practicante implements Serializable {
         private static final long serialVersionUID = 1L;
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long idEstudiantePracticas;
         private Boolean estado;
 

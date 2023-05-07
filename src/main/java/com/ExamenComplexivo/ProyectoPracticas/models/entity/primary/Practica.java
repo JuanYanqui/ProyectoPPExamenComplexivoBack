@@ -23,7 +23,7 @@ import java.util.List;
 public class Practica implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPractica;
     @Temporal(TemporalType.DATE)
     @NotNull(message = "La fecha de inicio es obligatoria.")
