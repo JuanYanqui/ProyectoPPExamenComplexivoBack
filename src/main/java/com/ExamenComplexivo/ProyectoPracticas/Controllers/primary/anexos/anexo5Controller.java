@@ -41,7 +41,6 @@ public class anexo5Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo.setDocumento_anexo5(c.getDocumento_anexo5());
                 anexo.setFecha_actual(c.getFecha_actual());
                 anexo.setFecha_desde(c.getFecha_desde());
                 anexo.setHasta(c.getHasta());

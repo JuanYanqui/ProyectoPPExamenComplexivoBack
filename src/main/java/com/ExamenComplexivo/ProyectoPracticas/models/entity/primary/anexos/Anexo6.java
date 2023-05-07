@@ -1,6 +1,8 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo6;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -31,9 +35,18 @@ public class Anexo6 {
 
 	private Integer total_horas;
 
-	private byte documento_anexo6;
-
+	//Relacionado con practica de muchos a uno
 	@ManyToOne
 	@JoinColumn(name = "idPractica",referencedColumnName = "idPractica")
 	private Practica practica;
+
+	/*
+	@OneToMany(mappedBy = "anexo6")
+	private List<Documento_Anexo6> documentoAnexo6;
+	*/
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "documento_anexo6_id", referencedColumnName = "id_documentoAnexo1")
+	private Documento_Anexo6 documento_anexo6;
+
 }

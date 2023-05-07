@@ -1,36 +1,32 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
-import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_SolicitudPracticasDao;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
-import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudPracticasService;
+
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_Anexo6Dao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo6;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
-@RequestMapping("/api/documentoSolicitudPracticas")
-
-public class Documento_SolicitudPracticasController {
-
-    @Autowired
-    IDocumento_SolicitudPracticasDao documentoDao;
+@RequestMapping("/api/documentoAnexo6")
+public class Documento_Anexo6Controller {
 
     @Autowired
-    IDocumento_SolicitudPracticasService documentoSolicitudPracticasService;
-    @Autowired
-    private DataSource dataSource;
+    IDocumento_Anexo6Dao documentoAnexo6Dao;
 
     @PostMapping("/upload")
     public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
         try {
-            Documento_SolicitudPracticas pdfFile = new Documento_SolicitudPracticas();
-            pdfFile.setDocumento_solicitud_practicas(file.getBytes());
-            documentoDao.save(pdfFile);
+            Documento_Anexo6 pdfFile = new Documento_Anexo6();
+            pdfFile.setDocumento_anexo6(file.getBytes());
+            documentoAnexo6Dao.save(pdfFile);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,10 +38,10 @@ public class Documento_SolicitudPracticasController {
     //Metodo para descargar
     @GetMapping("download/{id}")
     public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
-        Optional<Documento_SolicitudPracticas> optionalPdfFile = documentoDao.findById(id);
+        Optional<Documento_Anexo6> optionalPdfFile = documentoAnexo6Dao.findById(id);
         if (optionalPdfFile.isPresent()) {
-            Documento_SolicitudPracticas pdfFile = optionalPdfFile.get();
-            byte[] fileContent = pdfFile.getDocumento_solicitud_practicas();
+            Documento_Anexo6 pdfFile = optionalPdfFile.get();
+            byte[] fileContent = pdfFile.getDocumento_anexo6();
             String encodedFile = Base64.getEncoder().encodeToString(fileContent);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
@@ -58,11 +54,11 @@ public class Documento_SolicitudPracticasController {
 
     @GetMapping("/listar")
     public ResponseEntity<List<String>> getAllPdfFiles() {
-        List<Documento_SolicitudPracticas> pdfFiles = documentoDao.findAll();
+        List<Documento_Anexo6> pdfFiles = documentoAnexo6Dao.findAll();
         if (!pdfFiles.isEmpty()) {
             List<String> encodedFiles = new ArrayList<>();
-            for (Documento_SolicitudPracticas pdfFile : pdfFiles) {
-                byte[] fileContent = pdfFile.getDocumento_solicitud_practicas();
+            for (Documento_Anexo6 pdfFile : pdfFiles) {
+                byte[] fileContent = pdfFile.getDocumento_anexo6();
                 String encodedFile = Base64.getEncoder().encodeToString(fileContent);
                 encodedFiles.add(encodedFile);
             }
@@ -75,13 +71,13 @@ public class Documento_SolicitudPracticasController {
     }
 
     @PutMapping("editar/{id}")
-    public ResponseEntity<Documento_SolicitudPracticas> updatePdfFile(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
-        Optional<Documento_SolicitudPracticas> optionalPdfFile = documentoDao.findById(id);
+    public ResponseEntity<Documento_Anexo6> updatePdfFile(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        Optional<Documento_Anexo6> optionalPdfFile = documentoAnexo6Dao.findById(id);
         if (optionalPdfFile.isPresent()) {
-            Documento_SolicitudPracticas pdfFile = optionalPdfFile.get();
+            Documento_Anexo6 pdfFile = optionalPdfFile.get();
             try {
-                pdfFile.setDocumento_solicitud_practicas(file.getBytes());
-                Documento_SolicitudPracticas updatedPdfFile = documentoDao.save(pdfFile);
+                pdfFile.setDocumento_anexo6(file.getBytes());
+                Documento_Anexo6 updatedPdfFile = documentoAnexo6Dao.save(pdfFile);
                 return ResponseEntity.ok().body(updatedPdfFile);
             } catch (IOException e) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -93,17 +89,15 @@ public class Documento_SolicitudPracticasController {
 
     @DeleteMapping("eliminar/{id}")
     public ResponseEntity<?> deleteDocumento(@PathVariable Long id) {
-        Optional<Documento_SolicitudPracticas> optionalDocumento = documentoDao.findById(id);
+        Optional<Documento_Anexo6> optionalDocumento = documentoAnexo6Dao.findById(id);
         if (optionalDocumento.isPresent()) {
-            Documento_SolicitudPracticas documento = optionalDocumento.get();
-            documentoDao.delete(documento);
+            Documento_Anexo6 documento = optionalDocumento.get();
+            documentoAnexo6Dao.delete(documento);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-
-
-
 }
+

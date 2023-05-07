@@ -1,4 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IDetalleConvenioDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Detalle_Convenio;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IDetalleConvenioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/detalleConvenio")
 public class DetalleConvenioController {
+
+    @Autowired
+    IDetalleConvenioDao detalleConvenioDao;
     @Autowired
     IDetalleConvenioService detalleConvenioService;
 
@@ -25,6 +29,10 @@ public class DetalleConvenioController {
         }
     }
 
+    @GetMapping("listarXempresa/{idTutorEmpresarial}")
+    public List<Detalle_Convenio> getDetallesConvenioPorEmpresa(@PathVariable Long idTutorEmpresarial) {
+        return detalleConvenioDao.BuscarXempresa(idTutorEmpresarial);
+    }
 
     @GetMapping("/buscar/{id}")
     public ResponseEntity<Detalle_Convenio> getById(@PathVariable("id") Long id) {
