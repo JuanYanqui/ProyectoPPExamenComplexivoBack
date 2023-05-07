@@ -22,4 +22,9 @@ public class PersonaEmpImp extends GenericServiceImpl<Personas_empresa,Long> imp
     @Override
     public Personas_empresa findbyCedula(String cedula) {return persona_empDao.findByCedula(cedula);
 }
+
+    @Override
+    public Personas_empresa findbyCorreo(String correo) {
+        return persona_empDao.findByCorreo(correo);
+    }
 }
