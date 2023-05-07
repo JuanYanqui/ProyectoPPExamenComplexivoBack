@@ -77,5 +77,8 @@ public class PersonaEmpController {
     public Personas_empresa findByCedula(@PathVariable("cedula") String cedula) {
         return this.personaService.findbyCedula(cedula);
     }
-
+    @GetMapping(value = "/buscarcorreo/{correo}")
+    public Personas_empresa findByCorreo(@PathVariable("correo") String correo) {
+        return this.personaService.findbyCorreo(correo);
+    }
 }

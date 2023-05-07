@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IPersonaEmpDao extends JpaRepository<Personas_empresa,Long> {
     public Personas_empresa findByCedula(String cedula);
+    public Personas_empresa findByCorreo(String correo);
 
 }

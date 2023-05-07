@@ -7,4 +7,5 @@ import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.IG
 
 public interface IPersonaEmpService extends IGenericService<Personas_empresa,Long> {
     Personas_empresa findbyCedula(String cedula);
+    Personas_empresa findbyCorreo(String correo);
 }

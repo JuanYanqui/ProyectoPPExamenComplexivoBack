@@ -106,7 +106,8 @@ public class AuthCtrl {
                 signUpRequest.getApellidos(),
                 signUpRequest.getCarrera(),
                 passwordEncoder.encode(signUpRequest.getContrasenia()),
-                signUpRequest.getCorreo());
+                signUpRequest.getCorreo(),
+                signUpRequest.getPersona_empresa());
         Set<String> strRoles = signUpRequest.getRoles();
         Set<Rol> roles = new HashSet<>();
         user.setRoles(roles);
@@ -128,7 +129,8 @@ public class AuthCtrl {
                             signUpRequest.getApellidos(),
                             signUpRequest.getCarrera(),
                             passwordEncoder.encode(signUpRequest.getContrasenia()),
-                            signUpRequest.getCorreo());
+                            signUpRequest.getCorreo(),
+                            signUpRequest.getPersona_empresa());
 
 
                     Set<String> strRoles = signUpRequest.getRoles();
@@ -175,7 +177,8 @@ public class AuthCtrl {
                             signUpRequest.getApellidos(),
                             signUpRequest.getCarrera(),
                             passwordEncoder.encode(signUpRequest.getContrasenia()),
-                            signUpRequest.getCorreo());
+                            signUpRequest.getCorreo(),
+                            signUpRequest.getPersona_empresa());
 
                     Set<String> strRoles = signUpRequest.getRoles();
                     Set<Rol> roles = new HashSet<>();
