@@ -19,7 +19,7 @@ import java.util.Date;
 public class Solicitud_Convocatoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSolicitudConvocatoria;
     @Temporal(TemporalType.DATE)
     @NotNull(message = "La fecha de envio es obligatoria.")
