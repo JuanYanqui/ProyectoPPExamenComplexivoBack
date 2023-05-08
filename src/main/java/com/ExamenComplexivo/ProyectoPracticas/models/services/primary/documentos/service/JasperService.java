@@ -8,4 +8,6 @@ public interface JasperService {
     public void reportSolicitudPracticas(HttpServletResponse response, long idSolicitudPracticas);
 
     public void reportConvocatorias(HttpServletResponse response, long idConvocatorias);
+
+    public void reportSolicitudConvocatoria(HttpServletResponse response, long idSolicitudConvocatoria);
 }
