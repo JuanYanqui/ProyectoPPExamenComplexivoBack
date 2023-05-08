@@ -63,7 +63,7 @@ public class SecurityConfigImpl { // extends WebSecurityConfigurerAdapter {
 				.authorizeRequests().antMatchers("/swagger-ui/index.html", "/api/auth/**", "/api/docentefenix/{cedula}", "/api/estudiantefenix/{cedula}",
 						"/api/user/**","/api/personaemp/**", "/api/tutorEmp/**","/apitutorEmp/buscar/{id}/**", 	"/api/empresa/**",
 						"/swagger-ui/index.html#/**", "/api/solicitudPractica/**", "/api/convenio/**",
-						
+						"/api/convocatorias/listar/**","/api/convocatorias/crear/**",
 						"/api/solicitudPractica/**", "/api/convenio/**",
 						"/api/detalleConvenio/**", "/api/verMaterias/**", "/api/verCarreras/**", "/api/representantePPP/**",
 						"/api/empresa/listar/**",  "/api/empresa/buscar{id}/**",

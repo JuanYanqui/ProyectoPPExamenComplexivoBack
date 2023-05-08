@@ -28,5 +28,7 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
     @Override
     public List<Solicitud_Practicas> findByEstadoActividadTrue() {
         return solicitudPracticasDao.findByEstadoActividadTrue();
+    public List<Solicitud_Practicas> buscarPorEstadoSolicitud(boolean estado) {
+        return solicitudPracticasDao.findByEstadoSolicitud(estado);
     }
 }

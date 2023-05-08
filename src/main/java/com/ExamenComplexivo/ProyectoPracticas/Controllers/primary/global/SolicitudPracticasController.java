@@ -102,4 +102,15 @@ public class SolicitudPracticasController {
     }
 
 
+    @GetMapping("/listarestado")
+    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitud() {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(true);
+        return ResponseEntity.ok(solicitudes);
+    }
+
+    @GetMapping("/listarestadofalse")
+    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitudfalse() {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(false);
+        return ResponseEntity.ok(solicitudes);
+    }
 }

@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface ISolicitudPracticasDao extends JpaRepository<Solicitud_Practicas,Long> {
 
     @Query("SELECT s FROM Solicitud_Practicas s WHERE s.estadoActividad = true")
     List<Solicitud_Practicas> findByEstadoActividadTrue();
+    List<Solicitud_Practicas> findByEstadoSolicitud(boolean estado);
 
 }
