@@ -97,6 +97,16 @@ public class UserController {
         return this.iUsuarioService.findbyCedula(cedula);
     }
 
+    @GetMapping("/correo/{correo}")
+    public ResponseEntity<Usuario> buscarPorCorreo(@PathVariable String correo) {
+        Usuario usuario = iUsuarioService.buscarPorCorreo(correo);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
 

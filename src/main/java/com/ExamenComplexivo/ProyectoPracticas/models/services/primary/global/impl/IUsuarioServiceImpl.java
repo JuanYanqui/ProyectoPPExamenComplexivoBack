@@ -102,4 +102,8 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return usuariosDao.findById(id).orElse(null);
     }
 
+    public Usuario buscarPorCorreo(String correo) {
+        return usuariosDao.findByCorreo(correo);
+    }
+
 }
