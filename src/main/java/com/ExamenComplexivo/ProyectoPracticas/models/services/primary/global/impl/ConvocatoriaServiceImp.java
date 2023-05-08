@@ -27,7 +27,6 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
     @Override
     public Convocatorias guardarDocumento(byte[] documento) {
         Convocatorias convocatorias=new Convocatorias();
-        convocatorias.setDocumento_convocatoria(documento);
         return convocatoriaDao.save(convocatorias);
     }
 }

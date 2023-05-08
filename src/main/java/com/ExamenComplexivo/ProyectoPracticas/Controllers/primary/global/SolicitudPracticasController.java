@@ -89,4 +89,17 @@ public class SolicitudPracticasController {
 
         }
     }
+
+
+    @GetMapping("/activas")
+    public ResponseEntity<List<Solicitud_Practicas>> obtenerSolicitudesActivas() {
+        try {
+            List<Solicitud_Practicas> solicitudesActivas = solicitudPracticaService.findByEstadoActividadTrue();
+            return new ResponseEntity<>(solicitudesActivas, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
