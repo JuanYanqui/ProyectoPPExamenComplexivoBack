@@ -1,4 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudConvocatoria;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,43 +23,44 @@ public class Solicitud_Convocatoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSolicitudConvocatoria;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de envio es obligatoria.")
-    private Date fechaEnvio;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de aprobacion es obligatoria.")
-    private Date fechaAprobacion;
+    private String fechaEnvio;
+    private String fechaAprobacion;
+    private String ciclo;
+    private String periodo;
+    private String numero_contacto;
     private boolean checkDirector;
     private boolean checkResponsable;
     private boolean checkEmpresarial;
     private boolean estadoSolicitudConvo;
 
-    @Column(name = "documentoSC", columnDefinition = "bytea")
-    private byte[] documentoSC;
+
+    @OneToOne
+    @JoinColumn(name = "id_documento_solicitud", nullable = true)
+    private Documento_SolicitudConvocatoria documentoSolicitudConvocatoria;
 
     //Relacionado con estudiante practicass de uno a muchos
     @ManyToOne
-    @JoinColumn(name = "idEstudiantePracticas",referencedColumnName = "idEstudiantePracticas")
+    @JoinColumn(name = "idEstudiantePracticas",referencedColumnName = "idEstudiantePracticas", nullable = true)
     private Estudiante_Practicante estudiantePracticante;
 
     //Relacion con usuario de uno a uno
     @OneToOne
-    @JoinColumn(name = "idConvocatorias")
+    @JoinColumn(name = "idConvocatorias", nullable = true)
     private Convocatorias convocatoria;
 
     //Relacionado con tutor_empresarial de muchos a uno
     @ManyToOne
-    @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial")
+    @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial", nullable = true)
     private Tutor_Empresarial tutorEmpresarial;
 
     //Relacionado con responsable practicas de muchos a uno
     @ManyToOne
-    @JoinColumn(name = "idResponsablePPP",referencedColumnName = "idResponsablePPP")
+    @JoinColumn(name = "idResponsablePPP",referencedColumnName = "idResponsablePPP", nullable = true)
     private Responsable_PPP responsablePPP;
 
     //Relacionado con usuario de muchos a uno
     @ManyToOne
-    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
+    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario", nullable = true)
     private Usuario usuario;
 
     //Relacionado con practica de uno a uno

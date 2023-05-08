@@ -80,7 +80,6 @@ public class SolicitudConvocatoriaController {
                 solicitudConvocatoria.setCheckDirector(p.isCheckDirector());
                 solicitudConvocatoria.setCheckResponsable(p.isCheckResponsable());
                 solicitudConvocatoria.setCheckEmpresarial(p.isCheckEmpresarial());
-                solicitudConvocatoria.setDocumentoSC(p.getDocumentoSC());
                 solicitudConvocatoria.setEstadoSolicitudConvo(p.isEstadoSolicitudConvo());
 
                 return new ResponseEntity<>(solicitudConvocatoriaService.save(solicitudConvocatoria), HttpStatus.CREATED);
