@@ -59,7 +59,7 @@ public class JasperServiceImp implements JasperService {
 
             Connection conn = dataSource.getConnection();
 
-            InputStream reportStream = getClass().getResourceAsStream("/reports/01_Convocatorias.jrxml");
+            InputStream reportStream = getClass().getResourceAsStream("/reports/Solicitud.jrxml");
             JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
 
             // Crea un mapa de parámetros para generar documento con el id que se le proporcione
