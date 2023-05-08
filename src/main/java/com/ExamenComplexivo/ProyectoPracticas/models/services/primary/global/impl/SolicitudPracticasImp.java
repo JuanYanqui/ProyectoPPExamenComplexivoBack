@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Service
 public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practicas,Long> implements ISolicitudPracticaService {
@@ -24,4 +25,7 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
     private EntityManager entityManager;
 
 
+    public List<Solicitud_Practicas> buscarPorEstadoSolicitud(boolean estado) {
+        return solicitudPracticasDao.findByEstadoSolicitud(estado);
+    }
 }
