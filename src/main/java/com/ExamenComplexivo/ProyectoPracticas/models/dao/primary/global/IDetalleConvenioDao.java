@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IDetalleConvenioDao extends JpaRepository<Detalle_Convenio,Long> {
 
-    @Query("SELECT d FROM Detalle_Convenio d INNER JOIN Tutor_Empresarial t ON d.empresa.idEmpresa = t.empresa.idEmpresa WHERE t.idTutorEmpresarial = :idTutorEmpresarial")
-    List<Detalle_Convenio> BuscarXempresa(@Param("idTutorEmpresarial") Long idTutorEmpresarial);
+    @Query("SELECT dc FROM Detalle_Convenio dc WHERE dc.empresa.idEmpresa = :idEmpresa")
+    List<Detalle_Convenio> findByEmpresaId(@Param("idEmpresa") Long idEmpresa);
 
 }

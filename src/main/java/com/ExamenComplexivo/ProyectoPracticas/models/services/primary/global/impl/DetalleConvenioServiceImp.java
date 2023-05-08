@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DetalleConvenioServiceImp extends GenericServiceImpl<Detalle_Convenio,Long> implements IDetalleConvenioService {
     @Autowired
@@ -16,4 +18,9 @@ public class DetalleConvenioServiceImp extends GenericServiceImpl<Detalle_Conven
     public CrudRepository<Detalle_Convenio, Long> getDao() {
         return detalleConvenioDao;
     }
+
+    public List<Detalle_Convenio> findByEmpresaId(Long idEmpresa) {
+        return detalleConvenioDao.findByEmpresaId(idEmpresa);
+    }
+
 }

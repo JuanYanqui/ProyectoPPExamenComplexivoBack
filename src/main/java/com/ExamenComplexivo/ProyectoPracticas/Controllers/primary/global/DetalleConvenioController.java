@@ -29,9 +29,9 @@ public class DetalleConvenioController {
         }
     }
 
-    @GetMapping("listarXempresa/{idTutorEmpresarial}")
-    public List<Detalle_Convenio> getDetallesConvenioPorEmpresa(@PathVariable Long idTutorEmpresarial) {
-        return detalleConvenioDao.BuscarXempresa(idTutorEmpresarial);
+    @GetMapping("listarXempresa/{idEmpresa}")
+    public List<Detalle_Convenio> getDetallesConvenioPorEmpresa(@PathVariable Long idEmpresa) {
+        return detalleConvenioDao.findByEmpresaId(idEmpresa);
     }
 
     @GetMapping("/buscar/{id}")
