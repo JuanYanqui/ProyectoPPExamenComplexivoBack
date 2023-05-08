@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class Documento_Convenio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_documentoCnv;
 
     @Column(name = "documento_convenio",columnDefinition = "bytea")

@@ -33,4 +33,6 @@ public class Documento_SolicitudPracticasImp extends GenericServiceImpl<Document
         archivo.setDocumento_solicitud_practicas(documento);
         return documentoSolicitudPracticasDao.save(archivo);
     }
+
+
 }
