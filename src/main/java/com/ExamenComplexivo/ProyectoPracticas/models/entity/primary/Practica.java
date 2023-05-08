@@ -25,29 +25,26 @@ public class Practica implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPractica;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de inicio es obligatoria.")
-    private Date fechaInicio;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de fin es obligatoria.")
-    private Date fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
     private boolean estadoPractica;
+    private boolean estadoHorario;
     private String horario;
 
     //Relacion con Solicitud de convocatoria de uno a uno
     @OneToOne
-    @JoinColumn(name = "idSolicitudConvocatoria")
+    @JoinColumn(name = "idSolicitudConvocatoria", nullable = true)
     private Solicitud_Convocatoria solicitudConvocatoria;
 
 
     //Relacionado con tutor empresarials  de muchos a uno
     @ManyToOne
-    @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial")
+    @JoinColumn(name = "idTutorEmpresarial",referencedColumnName = "idTutorEmpresarial", nullable = true)
     private Tutor_Empresarial tutorEmpresarial;
 
     //Relacionado con tutor academico  de muchos a uno
     @ManyToOne
-    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
+    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario",  nullable = true)
     private Usuario usuario;
 
     //Anexo1
