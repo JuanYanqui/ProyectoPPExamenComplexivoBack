@@ -82,6 +82,7 @@ public class SolicitudConvocatoriaController {
                 solicitudConvocatoria.setCheckEmpresarial(p.isCheckEmpresarial());
                 solicitudConvocatoria.setEstadoSolicitudConvo(p.isEstadoSolicitudConvo());
                 solicitudConvocatoria.setResponsablePPP(p.getResponsablePPP());
+                solicitudConvocatoria.setUsuario(p.getUsuario());
                 return new ResponseEntity<>(solicitudConvocatoriaService.save(solicitudConvocatoria), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
