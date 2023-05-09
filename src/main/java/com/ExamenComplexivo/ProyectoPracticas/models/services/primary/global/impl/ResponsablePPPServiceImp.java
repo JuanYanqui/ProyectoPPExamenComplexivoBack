@@ -28,5 +28,9 @@ public class ResponsablePPPServiceImp extends GenericServiceImpl<Responsable_PPP
         return responsablePppDao.buscarResponsablePorCarrera(nombreCarrera);
     }
 
+    public Responsable_PPP findByCedulaUsuario(String cedulaUsuario) {
+        return responsablePppDao.findByCedulaUsuario(cedulaUsuario);
+    }
+
 
 }
