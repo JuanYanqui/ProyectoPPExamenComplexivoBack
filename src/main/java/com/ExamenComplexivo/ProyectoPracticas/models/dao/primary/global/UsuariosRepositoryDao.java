@@ -4,6 +4,7 @@ package com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,6 +25,9 @@ public interface UsuariosRepositoryDao extends JpaRepository<Usuario,Long> {
  				nativeQuery = true
  				)
      List<Usuario> buscarUsuario(String cedula);
+
+    @Query("select u.nombres ||' '|| u.apellidos as nombres, s.fechaEnvio, u.carrera from Usuario u join u.estudiantePracticante e join e.solicitudConvocatorias s join s.convocatoria c where c.idConvocatorias = :idConvocatoria")
+    List<Usuario> findUsuariosPorConvocatoria(@Param("idConvocatoria") Long idConvocatoria);
     
    
 

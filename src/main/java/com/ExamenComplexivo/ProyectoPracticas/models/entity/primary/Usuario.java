@@ -75,6 +75,7 @@ public class Usuario {
 		this.correo = correo;
 		this.usuario_persona_empresa = usuario_persona_empresa;
 	}
+
 	//Relacion de usuario con persona empresa 1:1
 	@OneToOne
 	@JoinColumn(name = "idpersonaemp")

@@ -106,4 +106,8 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return usuariosDao.findByCorreo(correo);
     }
 
+    public List<Usuario> findUsuariosPorConvocatoria(Long idConvocatoria) {
+        return usuariosDao.findUsuariosPorConvocatoria(idConvocatoria);
+    }
+
 }

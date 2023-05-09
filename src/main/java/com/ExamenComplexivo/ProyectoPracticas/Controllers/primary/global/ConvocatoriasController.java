@@ -29,6 +29,15 @@ public class ConvocatoriasController {
         }
     }
 
+    @GetMapping("/listarconvocatoria")
+    public ResponseEntity<List<Convocatorias>> obtenerdatos() {
+        try {
+            return new ResponseEntity<>(convocatoriaService.findByAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @GetMapping("/buscar/{id}")
     public ResponseEntity<Convocatorias> getById(@PathVariable("id") Long id) {
@@ -88,4 +97,5 @@ public class ConvocatoriasController {
 
         }
     }
+
 }
