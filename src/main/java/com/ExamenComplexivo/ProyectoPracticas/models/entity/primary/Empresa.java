@@ -37,6 +37,9 @@ public class Empresa implements Serializable {
     private String codigoPostal;
     private String descripcion;
 
+    private boolean status;
+
+
 
     //Relacionado con detalle convenio de uno a muchos
     @JsonIgnore
