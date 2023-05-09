@@ -1,5 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.jfr.ContentType;
 import lombok.AllArgsConstructor;
@@ -29,15 +31,14 @@ public class Convocatorias implements Serializable {
     //@Pattern(regexp = "^(CONVOCATORIA – TSDS -PPP-)(\\d{4})-(\\d{3})$", message = "El formato del nombre de la convocatoria no es válido.")
     private String nombreConvocatoria;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaPublicacion;
-    @Temporal(TemporalType.DATE)
-    @NotNull(message = "La fecha de expiración es obligatoria.")
-    private Date fechaExpiracion;
+    private String fechaPublicacion;
+
+    private String fechaExpiracion;
     private boolean estadoConvocatoria;
 
-    @Column(name = "documento_convocatoria", columnDefinition = "bytea")
-    private byte[] documento_convocatoria;
+    @OneToOne
+    @JoinColumn(name = "id_documentoConvocatoria", nullable = true)
+    private Documento_Convocatoria documentoConvocatoria;
 
     //Relacionado con solicitud practicas de uno a uno
     @OneToOne

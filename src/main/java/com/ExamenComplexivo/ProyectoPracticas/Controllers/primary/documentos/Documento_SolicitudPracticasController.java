@@ -1,28 +1,17 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
-
-
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_SolicitudPracticasDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Empresa;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
-import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_ConvenioService;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudPracticasService;
-import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
@@ -30,66 +19,102 @@ import java.util.Map;
 
 public class Documento_SolicitudPracticasController {
 
-
+    @Autowired
+    IDocumento_SolicitudPracticasDao documentoDao;
 
     @Autowired
     IDocumento_SolicitudPracticasService documentoSolicitudPracticasService;
     @Autowired
     private DataSource dataSource;
 
-
-
-    @GetMapping("/listar")
-    public ResponseEntity<List<Documento_SolicitudPracticas>> obtenerLista() {
-        return new ResponseEntity<>(documentoSolicitudPracticasService.findByAll(), HttpStatus.OK);
+    @PostMapping("/upload")
+    public ResponseEntity<Documento_SolicitudPracticas> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+        try {
+            Documento_SolicitudPracticas pdfFile = new Documento_SolicitudPracticas();
+            pdfFile.setDocumento_solicitud_practicas(file.getBytes());
+            documentoDao.save(pdfFile);
+            return ResponseEntity.status(HttpStatus.CREATED).body(pdfFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    @GetMapping("/descargar/{id}")
-    public ResponseEntity<ByteArrayResource> descargarFichaMedica(@PathVariable Long id) {
-        Documento_SolicitudPracticas solicitudPracticas = documentoSolicitudPracticasService.findById(id);
-        if (solicitudPracticas == null) {
+    @GetMapping("/listarDoc")
+    public ResponseEntity<List<Documento_SolicitudPracticas>> obtenerLista() {
+        try {
+            return new ResponseEntity<>(documentoSolicitudPracticasService.findByAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    //Metodo para descargar
+    @GetMapping("download/{id}")
+    public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
+        Optional<Documento_SolicitudPracticas> optionalPdfFile = documentoDao.findById(id);
+        if (optionalPdfFile.isPresent()) {
+            Documento_SolicitudPracticas pdfFile = optionalPdfFile.get();
+            byte[] fileContent = pdfFile.getDocumento_solicitud_practicas();
+            String encodedFile = Base64.getEncoder().encodeToString(fileContent);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("inline").build());
+            return new ResponseEntity<>(encodedFile, headers, HttpStatus.OK);
+        } else {
             return ResponseEntity.notFound().build();
         }
-
-        ByteArrayResource resource = new ByteArrayResource(solicitudPracticas.getDocumento_solicitud_practicas());
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=ficha_medica.pdf");
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentLength(solicitudPracticas.getDocumento_solicitud_practicas().length)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(resource);
     }
 
-
-    @PostMapping("/subir")
-    public ResponseEntity<?> guardarSolicitudPractica(@RequestParam("file") MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().body("No se ha proporcionado ningún archivo.");
+    @GetMapping("/listar")
+    public ResponseEntity<List<String>> getAllPdfFiles() {
+        List<Documento_SolicitudPracticas> pdfFiles = documentoDao.findAll();
+        if (!pdfFiles.isEmpty()) {
+            List<String> encodedFiles = new ArrayList<>();
+            for (Documento_SolicitudPracticas pdfFile : pdfFiles) {
+                byte[] fileContent = pdfFile.getDocumento_solicitud_practicas();
+                String encodedFile = Base64.getEncoder().encodeToString(fileContent);
+                encodedFiles.add(encodedFile);
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity<>(encodedFiles, headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
         }
-
-        byte[] bytesDocumento = file.getBytes();
-
-        return new ResponseEntity<>(documentoSolicitudPracticasService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/eliminar/{id}")
-    public void eliminar(@PathVariable("id_fichaMedica") Long id) {
-        documentoSolicitudPracticasService.delete(id);
+    @PutMapping("editar/{id}")
+    public ResponseEntity<Documento_SolicitudPracticas> updatePdfFile(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        Optional<Documento_SolicitudPracticas> optionalPdfFile = documentoDao.findById(id);
+        if (optionalPdfFile.isPresent()) {
+            Documento_SolicitudPracticas pdfFile = optionalPdfFile.get();
+            try {
+                pdfFile.setDocumento_solicitud_practicas(file.getBytes());
+                Documento_SolicitudPracticas updatedPdfFile = documentoDao.save(pdfFile);
+                return ResponseEntity.ok().body(updatedPdfFile);
+            } catch (IOException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Documento_SolicitudPracticas> actualizar(@RequestBody Documento_Convenio p, @PathVariable Long id) {
-        Documento_SolicitudPracticas documentoSolicitudPracticas = documentoSolicitudPracticasService.findById(id);
-        documentoSolicitudPracticas.setDocumento_solicitud_practicas(p.getDocumentoConvenio());
-        return new ResponseEntity<>(documentoSolicitudPracticasService.save(documentoSolicitudPracticas), HttpStatus.CREATED);
+    @DeleteMapping("eliminar/{id}")
+    public ResponseEntity<?> deleteDocumento(@PathVariable Long id) {
+        Optional<Documento_SolicitudPracticas> optionalDocumento = documentoDao.findById(id);
+        if (optionalDocumento.isPresent()) {
+            Documento_SolicitudPracticas documento = optionalDocumento.get();
+            documentoDao.delete(documento);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping("/buscar/{id}")
-    public ResponseEntity<Documento_SolicitudPracticas> buscar(@PathVariable("id_documentoSolicitudPrc") Long id_documentoSolicitudPrc) {
-        return new ResponseEntity<>(documentoSolicitudPracticasService.findById(id_documentoSolicitudPrc), HttpStatus.OK);
-    }
+
 
 
 }

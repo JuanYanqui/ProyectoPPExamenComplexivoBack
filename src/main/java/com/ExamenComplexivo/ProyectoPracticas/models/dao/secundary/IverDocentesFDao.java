@@ -6,3 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface IverDocentesFDao extends JpaRepository<verdocentef, String> {
     Boolean existsByCedula(String cedula);
 }
+
+

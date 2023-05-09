@@ -28,7 +28,6 @@ public class SolicitudConvocatoriaServiceImpl extends GenericServiceImpl<Solicit
     @Override
     public Solicitud_Convocatoria guardarDocumento(byte[] documento) {
         Solicitud_Convocatoria solicitud=new Solicitud_Convocatoria();
-        solicitud.setDocumentoSC(documento);
         return solicitudConvocatoriaDao.save(solicitud);
     }
 }

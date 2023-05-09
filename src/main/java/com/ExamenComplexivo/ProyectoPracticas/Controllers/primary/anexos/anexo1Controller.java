@@ -24,6 +24,8 @@ public class anexo1Controller {
     public ResponseEntity<Anexo1> crear(@RequestBody Anexo1 c){
         return new ResponseEntity<>(anexo1Service.save(c), HttpStatus.CREATED);
     }
+
+
     /*
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id,@RequestBody Anexo1 c) {
@@ -57,7 +59,6 @@ public class anexo1Controller {
                 anexo1.setObjetivos(c.getObjetivos());
                 anexo1.setFecha_inicio(c.getFecha_inicio());
                 anexo1.setFecha_final(c.getFecha_final());
-                anexo1.setDocumento_anexo1(c.getDocumento_anexo1());
                 anexo1.setAreas(c.getAreas());
                 anexo1.setActividades(c.getActividades());
                 return new ResponseEntity<>(anexo1Service.save(anexo1), HttpStatus.CREATED);

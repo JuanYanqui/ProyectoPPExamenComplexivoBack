@@ -42,7 +42,6 @@ public class anexo8Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo.setDocumento_anexo8(c.getDocumento_anexo8());
                 anexo.setTiempo_duracion(c.getTiempo_duracion());
                 anexo.setConclusiones(c.getConclusiones());
                 return new ResponseEntity<>(anexo8Service.save(anexo), HttpStatus.CREATED);

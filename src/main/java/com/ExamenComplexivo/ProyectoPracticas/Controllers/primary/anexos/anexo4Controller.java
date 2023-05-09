@@ -41,7 +41,6 @@ public class anexo4Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo.setDocumento_anexo4(c.getDocumento_anexo4());
                 anexo.setFecha_actual(c.getFecha_actual());
                 return new ResponseEntity<>(anexo4Service.save(anexo), HttpStatus.CREATED);
             } catch (Exception e) {

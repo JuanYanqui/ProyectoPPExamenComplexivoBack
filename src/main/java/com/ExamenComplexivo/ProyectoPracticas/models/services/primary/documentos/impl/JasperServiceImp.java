@@ -59,7 +59,7 @@ public class JasperServiceImp implements JasperService {
 
             Connection conn = dataSource.getConnection();
 
-            InputStream reportStream = getClass().getResourceAsStream("/reports/01_Convocatorias.jrxml");
+            InputStream reportStream = getClass().getResourceAsStream("/reports/Solicitud.jrxml");
             JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
 
             // Crea un mapa de parámetros para generar documento con el id que se le proporcione
@@ -86,5 +86,41 @@ public class JasperServiceImp implements JasperService {
             System.out.println(e.getMessage());
         }
     }
+
+
+    @Override
+    public void reportSolicitudConvocatoria(HttpServletResponse response, long idSolicitudConvocatoria) {
+        try {
+
+            Connection conn = dataSource.getConnection();
+
+            InputStream reportStream = getClass().getResourceAsStream("/reports/Solicitud.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+            // Crea un mapa de parámetros para generar documento con el id que se le proporcione
+            Map<String, Object> params = new HashMap<>();
+
+            //parametro que necesita jasper para ejecutar la consulta
+            params.put("idSolicitudConvocatoria", idSolicitudConvocatoria);
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=solicitudconvocatoria.pdf");
+            response.setContentLength(reportContent.length);
+
+            OutputStream outStream = response.getOutputStream();
+            outStream.write(reportContent);
+            outStream.flush();
+            outStream.close();
+        }catch (Exception e){
+
+            System.out.println("No encuentra");
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.im
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ISolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.ISolicitudPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Service
 public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practicas,Long> implements ISolicitudPracticaService {
@@ -22,6 +24,16 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
 
     @PersistenceContext
     private EntityManager entityManager;
+
+
+    @Override
+    public List<Solicitud_Practicas> findByEstadoActividadTrue() {
+        return solicitudPracticasDao.findByEstadoActividadTrue();
+
+    }
+    public List<Solicitud_Practicas> buscarPorEstadoSolicitud(boolean estado) {
+        return solicitudPracticasDao.findByEstadoSolicitud(estado);
+    }
 
 
 }

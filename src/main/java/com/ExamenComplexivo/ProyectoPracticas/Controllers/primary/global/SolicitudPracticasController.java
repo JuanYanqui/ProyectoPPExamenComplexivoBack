@@ -1,4 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ISolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.ISolicitudPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ import java.util.List;
 public class SolicitudPracticasController {
     @Autowired
     ISolicitudPracticaService solicitudPracticaService;
-
+    @Autowired
+    ISolicitudPracticasDao solicitudPracticasDao;
     @GetMapping("/listar")
     public ResponseEntity<List<Solicitud_Practicas>> obtenerLista() {
         try {
@@ -88,5 +90,34 @@ public class SolicitudPracticasController {
             }
 
         }
+    }
+
+
+    @GetMapping("/activas")
+    public ResponseEntity<List<Solicitud_Practicas>> obtenerSolicitudesActivas() {
+        try {
+            List<Solicitud_Practicas> solicitudesActivas = solicitudPracticaService.findByEstadoActividadTrue();
+            return new ResponseEntity<>(solicitudesActivas, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @GetMapping("/listarestado")
+    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitud() {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(true);
+        return ResponseEntity.ok(solicitudes);
+    }
+
+    @GetMapping("/listarestadofalse")
+    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitudfalse() {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(false);
+        return ResponseEntity.ok(solicitudes);
+    }
+
+    @PutMapping("/updateDocument/{id}")
+    public void actualizarDocumentoSolicitudPrc(@PathVariable Long id, @RequestParam Long idDocumento) {
+        solicitudPracticasDao.actualizarDocumentoSolicitudPrc(idDocumento, id);
     }
 }

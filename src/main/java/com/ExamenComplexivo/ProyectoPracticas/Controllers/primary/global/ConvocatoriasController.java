@@ -81,7 +81,6 @@ public class ConvocatoriasController {
                 convocatorias.setFechaPublicacion(p.getFechaPublicacion());
                 convocatorias.setFechaExpiracion(p.getFechaExpiracion());
                 convocatorias.setEstadoConvocatoria(p.isEstadoConvocatoria());
-                convocatorias.setDocumento_convocatoria(p.getDocumento_convocatoria());
                 return new ResponseEntity<>(convocatoriaService.save(convocatorias), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

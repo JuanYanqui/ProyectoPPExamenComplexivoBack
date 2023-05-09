@@ -38,7 +38,6 @@ public class anexo7Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo.setDocumento_anexo7(c.getDocumento_anexo7());
                 anexo.setCalificacion(c.getCalificacion());
                 anexo.setPuntaje_total(c.getPuntaje_total());
                 anexo.setParametro_calificar(c.getParametro_calificar());

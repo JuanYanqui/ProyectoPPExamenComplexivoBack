@@ -41,7 +41,6 @@ public class anexo6Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo.setDocumento_anexo6(c.getDocumento_anexo6());
                 anexo.setDia(c.getDia());
                 anexo.setHora_ingreso(c.getHora_ingreso());
                 anexo.setHora_salida(c.getHora_salida());
