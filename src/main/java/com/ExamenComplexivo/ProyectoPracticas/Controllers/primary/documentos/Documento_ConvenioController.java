@@ -2,6 +2,7 @@ package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_ConvenioDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudConvocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_ConvenioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,12 +62,12 @@ public class Documento_ConvenioController {
 
     //Metodo para subir documento a la base de datos
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Documento_Convenio> uploadPdfFile(@RequestParam("file") MultipartFile file) {
         try {
             Documento_Convenio pdfFile = new Documento_Convenio();
             pdfFile.setDocumentoConvenio(file.getBytes());
             convenioDao.save(pdfFile);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(pdfFile);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

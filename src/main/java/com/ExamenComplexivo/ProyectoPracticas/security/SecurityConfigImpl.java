@@ -72,7 +72,7 @@ public class SecurityConfigImpl { // extends WebSecurityConfigurerAdapter {
 						"/api/documentoAnexo6/**","/api/documentoAnexo7/**","/api/documentoAnexo8/**","/api/requerimientos/**",
 						"/api/documentoAnexo6/**","/api/documentoAnexo7/**","/api/documentoAnexo8/**","/api/requerimientos/**",
 						"/api/actividades/**", "/api/convocatorias/**","/api/documentoConvocatoria/**","/api/documentoConvenio/**",
-						"/api/solicitudConvocatoria/**").permitAll()
+						"/api/solicitudConvocatoria/**","/api/documentoSolicitudConvocatoria/**").permitAll()
 				.anyRequest().authenticated();
 
 
