@@ -3,6 +3,7 @@ package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_ConvocatoriaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_ConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -30,12 +31,12 @@ public class Documento_ConvocatoriaController {
     private DataSource dataSource;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Documento_Convocatoria> uploadPdfFile(@RequestParam("file") MultipartFile file) {
         try {
             Documento_Convocatoria pdfFile = new Documento_Convocatoria();
             pdfFile.setDocumento_convocatoria(file.getBytes());
             documentoDao.save(pdfFile);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(pdfFile);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

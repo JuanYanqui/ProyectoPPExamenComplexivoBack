@@ -3,6 +3,7 @@ package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_SolicitudConvocatoriaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_SolicitudPracticasDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudConvocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudConvocatoriaService;
@@ -33,18 +34,6 @@ public class Documento_SolicitudConvocatoriaController {
     @Autowired
     private DataSource dataSource;
 
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
-        try {
-            Documento_SolicitudConvocatoria pdfFile = new Documento_SolicitudConvocatoria();
-            pdfFile.setDocumento_solicitud_convocatoria(file.getBytes());
-            documentoDao.save(pdfFile);
-            return ResponseEntity.ok().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
 
 
     //Metodo para descargar
@@ -61,6 +50,19 @@ public class Documento_SolicitudConvocatoriaController {
             return new ResponseEntity<>(encodedFile, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<Documento_SolicitudConvocatoria> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+        try {
+            Documento_SolicitudConvocatoria pdfFile = new Documento_SolicitudConvocatoria();
+            pdfFile.setDocumento_solicitud_convocatoria(file.getBytes());
+            documentoDao.save(pdfFile);
+            return ResponseEntity.status(HttpStatus.CREATED).body(pdfFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

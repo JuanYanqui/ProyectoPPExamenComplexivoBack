@@ -1,4 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IConvocatoriaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class ConvocatoriasController {
     @Autowired
     IConvocatoriaService convocatoriaService;
 
+    @Autowired
+    IConvocatoriaDao convocatoriaDao;
     @GetMapping("/listar")
     public ResponseEntity<List<Convocatorias>> obtenerLista() {
         try {
@@ -93,4 +96,9 @@ public class ConvocatoriasController {
         Long documentoId = convocatoriaService.findDocumentoIdByConvocatoriaId(id);
         return ResponseEntity.ok(documentoId);
 }
+
+    @PutMapping("/updateDocument/{id}")
+    public void actualizarDocumentoSolicitudPrc(@PathVariable Long id, @RequestParam Long idDocumento) {
+        convocatoriaDao.actualizarDocumentoConvocatoria(idDocumento, id);
+    }
 }

@@ -1,4 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IConvenioDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convenio;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IConvenioService;
@@ -24,6 +25,8 @@ public class ConvenioController {
     @Autowired
     IConvenioService convenioService;
 
+    @Autowired
+    IConvenioDao convenioDao;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Convenio>> obtenerLista() {
@@ -52,16 +55,7 @@ public class ConvenioController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    /*
-    @PostMapping("/crear/documento")
-    public ResponseEntity<?> guardar(@RequestParam("file") MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().body("No se ha encontrado ningún archivo.");
-        }
-        byte[] bytesDocumento = file.getBytes();
-        return new ResponseEntity<>(convenioService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
-    }
-*/
+
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
@@ -94,5 +88,10 @@ public class ConvenioController {
             }
 
         }
+    }
+
+    @PutMapping("/updateDocument/{id}")
+    public void actualizarDocumentoSolicitudPrc(@PathVariable Long id, @RequestParam Long idDocumento) {
+        convenioDao.actualizarDocumentoConvenio(idDocumento, id);
     }
 }

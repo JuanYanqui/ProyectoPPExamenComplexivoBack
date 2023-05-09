@@ -41,7 +41,7 @@ public class Convenio implements Serializable {
 
     //Relacionado de uno a uno con documento_convenio
     @OneToOne
-    @JoinColumn(name = "id_documentoCnv")
+    @JoinColumn(name = "id_documentoCnv",nullable = true)
     private Documento_Convenio documentoConvenio;
 
 

@@ -1,4 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ISolicitudConvocatoriaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ISolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.ISolicitudConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ import java.util.List;
 public class SolicitudConvocatoriaController {
     @Autowired
     ISolicitudConvocatoriaService solicitudConvocatoriaService;
+
+    @Autowired
+    ISolicitudConvocatoriaDao solicitudConvocatoriaDao;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Solicitud_Convocatoria>> obtenerLista() {
@@ -89,4 +94,10 @@ public class SolicitudConvocatoriaController {
 
         }
     }
+
+    @PutMapping("/updateDocument/{id}")
+    public void actualizarDocumentoSolicitudPrc(@PathVariable Long id, @RequestParam Long idDocumento) {
+        solicitudConvocatoriaDao.actualizarDocumentoSolicitudCnv(idDocumento, id);
+    }
+
 }
