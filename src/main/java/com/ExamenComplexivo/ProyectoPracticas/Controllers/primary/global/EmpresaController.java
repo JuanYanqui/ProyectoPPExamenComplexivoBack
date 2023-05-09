@@ -73,6 +73,7 @@ public class EmpresaController {
                 empresa.setCodigoPostal(p.getCodigoPostal());
                 empresa.setNumeroTelefono(p.getNumeroTelefono());
                 empresa.setDireccion(p.getDireccion());
+                empresa.setStatus(p.isStatus());
 
                 return new ResponseEntity<>(empresaService.save(empresa), HttpStatus.CREATED);
             } catch (Exception e) {
