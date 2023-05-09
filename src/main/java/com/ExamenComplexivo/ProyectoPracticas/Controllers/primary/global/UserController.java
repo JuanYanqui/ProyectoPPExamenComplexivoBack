@@ -107,6 +107,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("listarconvo/{idConvocatoria}")
+    public List<Usuario> getUsuariosPorConvocatoria(@PathVariable Long idConvocatoria) {
+        return iUsuarioService.findUsuariosPorConvocatoria(idConvocatoria);
+    }
+
 
 }
 

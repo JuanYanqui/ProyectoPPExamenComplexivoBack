@@ -47,6 +47,6 @@ public class Convocatorias implements Serializable {
 
     //Relacionado con solicitud convocatoria de uno a uno
     @JsonIgnore
-    @OneToOne(mappedBy = "convocatoria")
-    private Solicitud_Convocatoria solicitudConvocatoria ;
+    @OneToMany(mappedBy = "convocatoria",cascade = CascadeType.ALL)
+    private List<Solicitud_Convocatoria> solicitudConvocatorias;
 }

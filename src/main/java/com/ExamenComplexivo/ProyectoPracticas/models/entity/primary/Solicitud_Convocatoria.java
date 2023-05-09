@@ -44,8 +44,10 @@ public class Solicitud_Convocatoria implements Serializable {
     private Estudiante_Practicante estudiantePracticante;
 
     //Relacion con usuario de uno a uno
-    @OneToOne
-    @JoinColumn(name = "idConvocatorias", nullable = true)
+
+//////
+    @ManyToOne
+    @JoinColumn(name = "idConvocatorias",referencedColumnName = "idConvocatorias", nullable = true)
     private Convocatorias convocatoria;
 
     //Relacionado con tutor_empresarial de muchos a uno

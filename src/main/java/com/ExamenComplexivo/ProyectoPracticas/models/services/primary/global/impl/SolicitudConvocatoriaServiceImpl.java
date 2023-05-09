@@ -37,5 +37,12 @@ public class SolicitudConvocatoriaServiceImpl extends GenericServiceImpl<Solicit
     }
 
 
+    public List<Solicitud_Convocatoria> getSolicitudesPorConvocatoria(Long convocatoriaId) {
+        return solicitudConvocatoriaDao.findByConvocatoriaId(convocatoriaId);
+    }
+
+    public List<Solicitud_Convocatoria> getSolicitudesPorConvocatoriatrue(Long convocatoriaId) {
+        return solicitudConvocatoriaDao.findByConvocatoriaIdtrue(convocatoriaId);
+    }
 
 }

@@ -17,6 +17,11 @@ public interface ISolicitudConvocatoriaDao extends JpaRepository<Solicitud_Convo
     @Modifying
     @Query("UPDATE Solicitud_Convocatoria s SET s.documentoSolicitudConvocatoria.id_documentoSolicitudConvocatoria = :id_documentoSolicitudConvocatoria WHERE s.idSolicitudConvocatoria = :idSolicitudConvocatoria")
     void actualizarDocumentoSolicitudCnv(@Param("id_documentoSolicitudConvocatoria") Long id_documentoSolicitudConvocatoria, @Param("idSolicitudConvocatoria") Long idSolicitudConvocatoria);
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE sc.checkDirector = true and c.idConvocatorias = :convocatoriaId")
+    List<Solicitud_Convocatoria> findByConvocatoriaId(@Param("convocatoriaId") Long convocatoriaId);
+
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE sc.checkDirector = true and sc.checkResponsable= true and c.idConvocatorias = :convocatoriaId")
+    List<Solicitud_Convocatoria> findByConvocatoriaIdtrue(@Param("convocatoriaId") Long convocatoriaId);
 
 
     @Query("SELECT sol FROM Solicitud_Convocatoria sol "

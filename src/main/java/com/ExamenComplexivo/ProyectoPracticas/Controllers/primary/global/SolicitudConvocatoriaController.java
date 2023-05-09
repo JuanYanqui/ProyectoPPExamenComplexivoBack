@@ -86,7 +86,8 @@ public class SolicitudConvocatoriaController {
                 solicitudConvocatoria.setCheckResponsable(p.isCheckResponsable());
                 solicitudConvocatoria.setCheckEmpresarial(p.isCheckEmpresarial());
                 solicitudConvocatoria.setEstadoSolicitudConvo(p.isEstadoSolicitudConvo());
-
+                solicitudConvocatoria.setResponsablePPP(p.getResponsablePPP());
+                solicitudConvocatoria.setUsuario(p.getUsuario());
                 return new ResponseEntity<>(solicitudConvocatoriaService.save(solicitudConvocatoria), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -113,4 +114,13 @@ public class SolicitudConvocatoriaController {
         }
     }
 
+    @GetMapping("/porconvocatoria/{id}")
+    public List<Solicitud_Convocatoria> getSolicitudesPorConvocatoria(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.getSolicitudesPorConvocatoria(convocatoriaId);
+    }
+
+    @GetMapping("/porconvocatoriatrue/{id}")
+    public List<Solicitud_Convocatoria> getSolicitudesPorConvocatoriatrue(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.getSolicitudesPorConvocatoriatrue(convocatoriaId);
+    }
 }
