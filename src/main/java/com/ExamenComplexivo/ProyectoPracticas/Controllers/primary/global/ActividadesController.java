@@ -75,4 +75,10 @@ public class ActividadesController {
 
         }
     }
+
+
+    @GetMapping("/convocatoriasid/{convocatoriaId}")
+    public List<Actividades> obtenerActividadesPorConvocatoria(@PathVariable Long convocatoriaId) {
+        return actividadesService.obtenerActividadesPorConvocatoria(convocatoriaId);
+    }
 }

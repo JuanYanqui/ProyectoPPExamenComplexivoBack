@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ActividadesServiceImp extends GenericServiceImpl<Actividades,Long> implements IActividadesService {
     @Autowired
@@ -15,5 +17,9 @@ public class ActividadesServiceImp extends GenericServiceImpl<Actividades,Long> 
     @Override
     public CrudRepository<Actividades, Long> getDao() {
         return actividadesDao;
+    }
+
+    public List<Actividades> obtenerActividadesPorConvocatoria(Long convocatoriaId) {
+        return actividadesDao.findActividadesByConvocatoriaId(convocatoriaId);
     }
 }

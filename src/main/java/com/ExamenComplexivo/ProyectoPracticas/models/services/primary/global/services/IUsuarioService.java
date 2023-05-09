@@ -26,5 +26,6 @@ public interface IUsuarioService extends UserDetailsService{
     public Usuario findById(Long id);
 
     public Usuario findByIdUsuario(Long id);
-    
+
+    Usuario buscarPorCorreo(String correo);
 }
