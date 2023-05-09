@@ -100,4 +100,17 @@ public class SolicitudConvocatoriaController {
         solicitudConvocatoriaDao.actualizarDocumentoSolicitudCnv(idDocumento, id);
     }
 
+
+    @GetMapping("/aprobados/{idSolicitudPracticas}")
+    public ResponseEntity<List<Solicitud_Convocatoria>> findByCheckResponsableAndIdSolicitudPracticas(
+            @PathVariable Long idSolicitudPracticas) {
+        List<Solicitud_Convocatoria> solicitudes =
+                solicitudConvocatoriaDao.findByCheckResponsableAndIdSolicitudPracticas(idSolicitudPracticas);
+        if (solicitudes.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(solicitudes, HttpStatus.OK);
+        }
+    }
+
 }
