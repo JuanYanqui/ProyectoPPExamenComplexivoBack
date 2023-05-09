@@ -61,15 +61,6 @@ public class SolicitudPracticasController {
         }
     }
 
-    /*
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Solicitud_Practicas> actualizar(@RequestBody Solicitud_Practicas p,@PathVariable Long id){
-        Solicitud_Practicas solicitud = solicitudPracticaService.findById(id);
-        solicitud.setDocumento_solicitud_practicas(p.getDocumento_solicitud_practicas());
-        return new ResponseEntity<>(solicitudPracticaService.save(solicitud), HttpStatus.CREATED);
-    }
-    */
-
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Solicitud_Practicas> actualizarUsuario(@PathVariable Long id, @RequestBody Solicitud_Practicas p) {
         Solicitud_Practicas solicitudPracticas = solicitudPracticaService.findById(id);
@@ -116,8 +107,15 @@ public class SolicitudPracticasController {
         return ResponseEntity.ok(solicitudes);
     }
 
+
     @PutMapping("/updateDocument/{id}")
-    public void actualizarDocumentoSolicitudPrc(@PathVariable Long id, @RequestParam Long idDocumento) {
-        solicitudPracticasDao.actualizarDocumentoSolicitudPrc(idDocumento, id);
+    public ResponseEntity<String> actualizarDocumentoSolicitudPrc(@PathVariable Long id, @RequestParam Long idDocumento) {
+        try {
+            solicitudPracticasDao.actualizarDocumentoSolicitudPrc(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
     }
 }

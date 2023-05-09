@@ -20,7 +20,7 @@ import java.io.Serializable;
 public class Documento_Anexo1 implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_documentoAnexo1;
 
     @Column(name = "documento_anexo1",columnDefinition = "bytea")

@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo6_DetallePracticaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo5;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo6;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo5Service;
@@ -17,6 +18,8 @@ import java.util.List;
 public class anexo6Controller {
     @Autowired
     IAnexo6Service anexo6Service;
+    @Autowired
+    IAnexo6_DetallePracticaDao anexo6Dao;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo6>> obtenerLista() {
@@ -53,5 +56,16 @@ public class anexo6Controller {
             }
         }
 
+    }
+
+    @PutMapping("/updateDocument/{id}")
+    public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        try {
+            anexo6Dao.actualizarAnexo6(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
     }
 }

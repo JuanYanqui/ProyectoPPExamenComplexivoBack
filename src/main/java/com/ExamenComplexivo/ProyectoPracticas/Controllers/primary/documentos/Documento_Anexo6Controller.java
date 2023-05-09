@@ -22,18 +22,17 @@ public class Documento_Anexo6Controller {
     IDocumento_Anexo6Dao documentoAnexo6Dao;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Documento_Anexo6> uploadPdfFile(@RequestParam("file") MultipartFile file) {
         try {
             Documento_Anexo6 pdfFile = new Documento_Anexo6();
             pdfFile.setDocumento_anexo6(file.getBytes());
             documentoAnexo6Dao.save(pdfFile);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(pdfFile);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
 
     //Metodo para descargar
     @GetMapping("download/{id}")

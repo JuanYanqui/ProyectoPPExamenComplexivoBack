@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Setter
@@ -21,13 +22,13 @@ public class Documento_Anexo6 implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_documentoAnexo1;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_documentoAnexo6;
 
     @Column(name = "documento_anexo6",columnDefinition = "bytea")
     private byte[] documento_anexo6;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "documento_anexo6")
-    private Anexo6 anexo6;
+    @OneToMany(mappedBy = "documento_anexo6",cascade = CascadeType.ALL)
+    private List<Anexo6> anexo6;
 }

@@ -23,7 +23,7 @@ public class Documento_SolicitudPracticas implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_documentoSolicitudPrc;
 
     @Column(name = "documento_solicitud_practicas",columnDefinition = "bytea")

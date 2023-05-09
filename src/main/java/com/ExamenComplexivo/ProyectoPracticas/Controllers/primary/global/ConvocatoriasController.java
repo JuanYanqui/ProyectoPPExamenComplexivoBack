@@ -98,7 +98,14 @@ public class ConvocatoriasController {
 }
 
     @PutMapping("/updateDocument/{id}")
-    public void actualizarDocumentoSolicitudPrc(@PathVariable Long id, @RequestParam Long idDocumento) {
-        convocatoriaDao.actualizarDocumentoConvocatoria(idDocumento, id);
+    public ResponseEntity<String> actualizarConvocatoria(@PathVariable Long id, @RequestParam Long idDocumento) {
+        try {
+            convocatoriaDao.actualizarDocumentoConvocatoria(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
     }
+
 }

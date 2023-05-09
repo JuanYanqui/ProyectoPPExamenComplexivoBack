@@ -32,6 +32,6 @@ public class Anexo8 {
 
 	//Relacionado de uno a uno con documento anexo 8
 	@OneToOne
-	@JoinColumn(name = "id_documentoAnexo8")
+	@JoinColumn(name = "id_documentoAnexo8", nullable = true)
 	private Documento_Anexo8 documentoAnexo8;
 }

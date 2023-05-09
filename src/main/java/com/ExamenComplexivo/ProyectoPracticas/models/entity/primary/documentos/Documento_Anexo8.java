@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class Documento_Anexo8 {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_documentoAnexo8;
 
     @Column(name = "documento_anexo8",columnDefinition = "bytea")

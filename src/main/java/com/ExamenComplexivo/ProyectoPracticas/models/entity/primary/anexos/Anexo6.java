@@ -27,9 +27,9 @@ public class Anexo6 {
 
 	private String dia;
 
-	private Date hora_ingreso;
+	private String hora_ingreso;
 
-	private Date hora_salida;
+	private String hora_salida;
 
 	private Integer horas_diarias;
 
@@ -40,13 +40,7 @@ public class Anexo6 {
 	@JoinColumn(name = "idPractica",referencedColumnName = "idPractica")
 	private Practica practica;
 
-	/*
-	@OneToMany(mappedBy = "anexo6")
-	private List<Documento_Anexo6> documentoAnexo6;
-	*/
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "documento_anexo6_id", referencedColumnName = "id_documentoAnexo1")
+	@ManyToOne
+	@JoinColumn(name = "id_documentoAnexo6",referencedColumnName = "id_documentoAnexo6", nullable = true)
 	private Documento_Anexo6 documento_anexo6;
-
 }

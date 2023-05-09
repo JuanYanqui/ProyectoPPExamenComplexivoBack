@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_Anexo1Dao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo1;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -20,18 +21,17 @@ public class Documento_Anexo1Controller {
     IDocumento_Anexo1Dao documentoAnexo1Dao;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Documento_Anexo1> uploadPdfFile(@RequestParam("file") MultipartFile file) {
         try {
             Documento_Anexo1 pdfFile = new Documento_Anexo1();
             pdfFile.setDocumento_anexo1(file.getBytes());
             documentoAnexo1Dao.save(pdfFile);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(pdfFile);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
 
     //Metodo para descargar
     @GetMapping("download/{id}")

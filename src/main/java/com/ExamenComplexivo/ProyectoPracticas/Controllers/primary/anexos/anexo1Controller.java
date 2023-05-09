@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo1Dao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo1Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ import java.util.List;
 public class anexo1Controller {
     @Autowired
     IAnexo1Service anexo1Service;
-
+    @Autowired
+    IAnexo1Dao anexo1Dao;
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo1>> obtenerLista() {
         return new ResponseEntity<>(anexo1Service.findByAll(), HttpStatus.OK);
@@ -68,4 +70,22 @@ public class anexo1Controller {
         }
 
     }
+    /*
+    @PutMapping("/updateDocument/{id}")
+    public void actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        anexo1Dao.actualizarAnexo1(idDocumento, id);
+    }*/
+
+    @PutMapping("/updateDocument/{id}")
+    public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        try {
+            anexo1Dao.actualizarAnexo1(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
+    }
+
+
 }

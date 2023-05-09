@@ -19,7 +19,7 @@ public class Documento_Anexo7 {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_documentoAnexo7;
 
     @Column(name = "documento_anexo7",columnDefinition = "bytea")
@@ -27,6 +27,6 @@ public class Documento_Anexo7 {
 
     //Relacion con anexo 7
     @JsonIgnore
-    @OneToOne(mappedBy = "documentoAnexo7")
+    @OneToOne(mappedBy = "documentoAnexo7" )
     private Anexo7 anexo7;
 }
