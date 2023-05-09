@@ -36,9 +36,9 @@ public class JasperController {
     }
 
     @GetMapping("/obtener/{idSolicitudConvocatoria}")
-    public void generateSolicitudConvocatorias(HttpServletResponse response, @PathVariable("idConvocatorias") Long idConvocatorias) {
+    public void generateSolicitudConvocatorias(HttpServletResponse response, @PathVariable("idSolicitudConvocatoria") Long idSolicitudConvocatoria) {
         try {
-            jasperServiceImp.reportSolicitudConvocatoria(response,idConvocatorias);
+            jasperServiceImp.reportSolicitudConvocatoria(response,idSolicitudConvocatoria);
         }catch (Exception e){
             System.out.println(e);
         }

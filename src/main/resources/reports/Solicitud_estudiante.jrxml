@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Solicitud_estudiante" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2a129177-b217-4a65-94b4-dd93a60b6591">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexion Documento PPP"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="idSolicitudConvocatoria" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[
+SELECT soli.fechaenvio, resp.carrera, 
+	destinatario.nombres||' '|| destinatario.apellidos AS nombresdestinatario,
+	remitente.nombres||' '|| remitente.apellidos AS nombresremitente,
+	remitente.cedula as cedulaestudiante,
+	emp.nombreempresa as empresa, con.nombreconvocatoria as nombreconvocatoria,
+	remitente.correo as correoestudiante,
+	soli.ciclo, soli.periodo, soli.numero_contacto
+
+FROM solicitud_convocatoria soli
+JOIN convocatorias con ON soli.idconvocatorias = con.idconvocatorias
+JOIN solicitud_practicas solip ON solip.idsolicitudpracticas = con.idsolicitudpracticas
+JOIN responsable_ppp resp ON resp.idresponsableppp = solip.idresponsableppp
+JOIN usuarios destinatario ON destinatario.idusuario = resp.idusuario
+JOIN estudiante_practicante estud ON estud.idestudiantepracticas = soli.idestudiantepracticas
+JOIN usuarios remitente ON remitente.idusuario = estud.idusuario
+JOIN tutor_empresarial tut ON tut.idtutorempresarial = solip.idtutorempresarial
+JOIN empresa emp ON tut.idempresa = emp.idempresa
+
+WHERE idsolicitudconvocatoria =  $P{idSolicitudConvocatoria} ]]>
+	</queryString>
+	<field name="fechaenvio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fechaenvio"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaenvio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="solicitud_convocatoria"/>
+	</field>
+	<field name="carrera" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="carrera"/>
+		<property name="com.jaspersoft.studio.field.label" value="carrera"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="responsable_ppp"/>
+	</field>
+	<field name="nombresdestinatario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombresdestinatario"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombresdestinatario"/>
+	</field>
+	<field name="nombresremitente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombresremitente"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombresremitente"/>
+	</field>
+	<field name="cedulaestudiante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cedulaestudiante"/>
+		<property name="com.jaspersoft.studio.field.label" value="cedulaestudiante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuarios"/>
+	</field>
+	<field name="empresa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="empresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="empresa"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="nombreconvocatoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreconvocatoria"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreconvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="correoestudiante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="correoestudiante"/>
+		<property name="com.jaspersoft.studio.field.label" value="correoestudiante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuarios"/>
+	</field>
+	<field name="ciclo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ciclo"/>
+		<property name="com.jaspersoft.studio.field.label" value="ciclo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="solicitud_convocatoria"/>
+	</field>
+	<field name="periodo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="periodo"/>
+		<property name="com.jaspersoft.studio.field.label" value="periodo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="solicitud_convocatoria"/>
+	</field>
+	<field name="numero_contacto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="numero_contacto"/>
+		<property name="com.jaspersoft.studio.field.label" value="numero_contacto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="solicitud_convocatoria"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="339" height="20" uuid="9738d9ff-8bd3-436a-b923-de0743e33283"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENTO: Solicitud estudiantes carreras tradicionales
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="50" width="180" height="17" uuid="ae80432d-2d9e-4fae-b1f5-e3d54ae54462"/>
+				<textFieldExpression><![CDATA[$F{fechaenvio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="105" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="350" height="15" uuid="f0e7c61a-a9bf-4159-9e7c-e5830507eaad"/>
+				<text><![CDATA[RESPONSABLE DE PRÁCTICAS PRE PROFESIONALES DE ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="370" height="35" uuid="fac282f3-d321-47c2-86ab-753964e443f8"/>
+				<text><![CDATA[INSTITUTO SUPERIOR UNIVERSITARIO TECNOLÓGICO DEL AZUAY
+Su Despacho
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="370" height="15" uuid="d69ea630-a247-49d1-a53a-c629534f4a63"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[De mi consideración:
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="33" width="430" height="17" uuid="01bd455a-df8e-4191-86e4-9178d35f9bdf"/>
+				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="230" height="17" uuid="fc76357d-fac1-45b6-8911-195396469522"/>
+				<textFieldExpression><![CDATA[$F{nombresdestinatario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="350" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="140" height="15" uuid="b2359b63-6e7d-4793-bdb7-0987ad50f14e"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Por medio de la presente, Yo,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="-1" width="180" height="15" uuid="5a7ca8af-de33-4be8-8a4e-ee5deb968656"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{nombresremitente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="0" width="110" height="15" uuid="98bf42af-88a1-430d-86a5-815811d1f185"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[ con número de cédula ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="-1" width="120" height="15" uuid="3d86fcdc-856f-45fc-b556-873cecfac6bd"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{cedulaestudiante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="15" width="70" height="15" uuid="210b6140-184b-423d-8a8b-f6035e6c53ee"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[estudiante del]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="15" width="90" height="15" uuid="8843e113-9624-41d5-8f98-b9643ccb0bcb"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{ciclo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="15" width="110" height="15" uuid="d1b8a89e-182a-40ee-befd-831f9c1cb35b"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[del periodo académico]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="270" y="14" width="180" height="16" uuid="e35a1841-6387-4555-afa1-ecdb14e6fe80"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="450" y="15" width="100" height="15" uuid="40c60139-4dc3-44c9-807e-1277cdffe034"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[ de la carrera de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="30" width="210" height="15" uuid="3ef7abd9-bae4-4774-847e-9aec8ae610f7"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[solicito comedidamente se autorice mi ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="380" height="15" uuid="43e2cb29-4445-4e2a-9bb3-0fde76103a60"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[postulación para realizar las 240 horas de prácticas pre profesionales en la empresa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="30" width="340" height="15" uuid="baa4c9c3-462e-45e3-b701-6183614f30ed"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="45" width="170" height="15" uuid="3350be86-6595-48d6-850f-92f822efb27a"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="80" height="15" uuid="cb22af53-c316-4ca0-b4db-f57b409187db"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[. según solicitud:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="60" width="340" height="15" uuid="605523c3-bd95-4116-85c9-246553b2382c"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{nombreconvocatoria}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="112" width="550" height="78" uuid="31775fa7-a3b9-406f-879e-a14b1aea8319"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Acepto realizar el proceso de selección determinado por la empresa receptora y en caso de ser elegido, me comprometo a cumplir con la normativa de la empresa, presentar los requisitos solicitados por el Instituto Superior Tecnológico del Azuay como prueba de las actividades realizadas y demostrar profesionalismo, dedicación y honestidad en todo momento, dejando en alto el nombre de la institución educativa y colaborando en el fortalecimiento de la empresa receptora que me brinda la posibilidad de formarme en sus instalaciones.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="190" width="550" height="15" uuid="38d1fe98-7170-44e8-8f85-c3504980186c"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Sin más que informar me despido agradeciendo de antemano su colaboración.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="260" width="550" height="15" uuid="ac05f560-f559-4a1e-81dc-3f1f55083ea7"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Atentamente
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="290" width="550" height="15" uuid="57ea19ad-5202-491f-b742-108060039c6b"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[______________________
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="335" width="240" height="15" uuid="8bf9e4ad-4a73-4f15-b895-4a97e5d1f973"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{correoestudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="305" width="240" height="15" uuid="60a49614-e20a-4ed5-8e22-4b2e4122752c"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{nombresremitente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="320" width="240" height="15" uuid="892234de-9af9-48a0-8467-fc17837847a6"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{numero_contacto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="75" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
