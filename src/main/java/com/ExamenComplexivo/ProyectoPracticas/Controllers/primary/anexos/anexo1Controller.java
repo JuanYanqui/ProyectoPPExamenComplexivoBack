@@ -78,10 +78,16 @@ public class anexo1Controller {
 
     @PutMapping("/updateDocument/{id}")
     public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        if (!anexo1Dao.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El documento con ID " + idDocumento + " no existe.");
+        }
         try {
+
             anexo1Dao.actualizarAnexo1(idDocumento, id);
             return ResponseEntity.ok("Documento actualizado correctamente.");
         } catch (Exception e) {
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
         }
