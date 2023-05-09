@@ -1,4 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ISolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.ISolicitudPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ import java.util.List;
 public class SolicitudPracticasController {
     @Autowired
     ISolicitudPracticaService solicitudPracticaService;
-
+    @Autowired
+    ISolicitudPracticasDao solicitudPracticasDao;
     @GetMapping("/listar")
     public ResponseEntity<List<Solicitud_Practicas>> obtenerLista() {
         try {
@@ -112,5 +114,10 @@ public class SolicitudPracticasController {
     public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitudfalse() {
         List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(false);
         return ResponseEntity.ok(solicitudes);
+    }
+
+    @PutMapping("/updateDocument/{id}")
+    public void actualizarDocumentoSolicitudPrc(@PathVariable Long id, @RequestParam Long idDocumento) {
+        solicitudPracticasDao.actualizarDocumentoSolicitudPrc(idDocumento, id);
     }
 }

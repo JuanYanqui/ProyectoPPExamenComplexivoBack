@@ -34,4 +34,6 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
     public List<Solicitud_Practicas> buscarPorEstadoSolicitud(boolean estado) {
         return solicitudPracticasDao.findByEstadoSolicitud(estado);
     }
+
+
 }

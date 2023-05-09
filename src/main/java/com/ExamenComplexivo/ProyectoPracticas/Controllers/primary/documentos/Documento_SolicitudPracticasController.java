@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_SolicitudPracticasDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Empresa;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudPracticasService;
@@ -27,15 +28,24 @@ public class Documento_SolicitudPracticasController {
     private DataSource dataSource;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadPdfFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Documento_SolicitudPracticas> uploadPdfFile(@RequestParam("file") MultipartFile file) {
         try {
             Documento_SolicitudPracticas pdfFile = new Documento_SolicitudPracticas();
             pdfFile.setDocumento_solicitud_practicas(file.getBytes());
             documentoDao.save(pdfFile);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(pdfFile);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/listarDoc")
+    public ResponseEntity<List<Documento_SolicitudPracticas>> obtenerLista() {
+        try {
+            return new ResponseEntity<>(documentoSolicitudPracticasService.findByAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
