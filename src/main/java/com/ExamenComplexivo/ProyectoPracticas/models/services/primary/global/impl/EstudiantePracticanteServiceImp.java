@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EstudiantePracticanteServiceImp extends GenericServiceImpl<Estudiante_Practicante,Long> implements IEstudiantePracticanteService {
     @Autowired
@@ -15,5 +17,13 @@ public class EstudiantePracticanteServiceImp extends GenericServiceImpl<Estudian
     @Override
     public CrudRepository<Estudiante_Practicante, Long> getDao() {
         return estudiantePracticanteDao;
+    }
+
+    public List<Estudiante_Practicante> findByCedula(String cedula) {
+        return estudiantePracticanteDao.findByCedula(cedula);
+    }
+
+    public Long findIdByCedula(String cedula) {
+        return estudiantePracticanteDao.findIdByCedula(cedula);
     }
 }
