@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface IConvocatoriaDao extends JpaRepository<Convocatorias,Long> {
+    //Metodo para buscar id de convocatoria
     @Query("SELECT doc.id_documentoConvocatoria FROM Convocatorias con JOIN con.documentoConvocatoria doc WHERE con.idConvocatorias = :id")
     Long findDocumentoIdByConvocatoriaId(@Param("id")Long id);
 
+    //Metodo para actualizar documento
     @Modifying
     @Query("UPDATE Convocatorias s SET s.documentoConvocatoria.id_documentoConvocatoria = :id_documentoConvocatoria WHERE s.idConvocatorias = :idConvocatorias")
     void actualizarDocumentoConvocatoria(@Param("id_documentoConvocatoria") Long id_documentoConvocatoria, @Param("idConvocatorias") Long idConvocatorias);

@@ -43,23 +43,22 @@ public class Documento_ConvocatoriaController {
         }
     }
 
-
     //Metodo para descargar
     @GetMapping("download/{id}")
-    public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getPdfFile(@PathVariable Long id) {
         Optional<Documento_Convocatoria> optionalPdfFile = documentoDao.findById(id);
         if (optionalPdfFile.isPresent()) {
             Documento_Convocatoria pdfFile = optionalPdfFile.get();
             byte[] fileContent = pdfFile.getDocumento_convocatoria();
-            String encodedFile = Base64.getEncoder().encodeToString(fileContent);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("inline").build());
-            return new ResponseEntity<>(encodedFile, headers, HttpStatus.OK);
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvocatoria.pdf").build());
+            return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
 
     @GetMapping("/listar")
     public ResponseEntity<List<String>> getAllPdfFiles() {

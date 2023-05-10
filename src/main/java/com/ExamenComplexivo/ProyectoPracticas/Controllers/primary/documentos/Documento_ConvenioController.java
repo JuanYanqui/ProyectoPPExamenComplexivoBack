@@ -74,17 +74,17 @@ public class Documento_ConvenioController {
         }
     }
 
+    //Metodo para descargar
     @GetMapping("download/{id}")
-    public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getPdfFile(@PathVariable Long id) {
         Optional<Documento_Convenio> optionalPdfFile = convenioDao.findById(id);
         if (optionalPdfFile.isPresent()) {
             Documento_Convenio pdfFile = optionalPdfFile.get();
             byte[] fileContent = pdfFile.getDocumentoConvenio();
-            String encodedFile = Base64.getEncoder().encodeToString(fileContent);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("inline").build());
-            return new ResponseEntity<>(encodedFile, headers, HttpStatus.OK);
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvocatoria.pdf").build());
+            return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
         }

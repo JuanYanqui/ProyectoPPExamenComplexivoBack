@@ -21,4 +21,8 @@ public interface ISolicitudPracticasDao extends JpaRepository<Solicitud_Practica
     @Query("UPDATE Solicitud_Practicas s SET s.documentoSolicitudPracticas.id_documentoSolicitudPrc = :id_documentoSolicitudPrc WHERE s.idSolicitudPracticas = :idSolicitudPracticas")
     void actualizarDocumentoSolicitudPrc(@Param("id_documentoSolicitudPrc") Long id_documentoSolicitudPrc, @Param("idSolicitudPracticas") Long idSolicitudPracticas);
 
+    //Metodo para buscar el id del documento
+    @Query("SELECT doc.id_documentoSolicitudPrc FROM Solicitud_Practicas con JOIN con.documentoSolicitudPracticas doc WHERE con.idSolicitudPracticas = :id")
+    Long findDocumentoIdBySolicitudId(@Param("id")Long id);
+
 }

@@ -35,5 +35,10 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
         return solicitudPracticasDao.findByEstadoSolicitud(estado);
     }
 
+    @Override
+    public Long findDocumentoIdBySolicitudId(Long id) {
+        return solicitudPracticasDao.findDocumentoIdBySolicitudId(id);
+    }
+
 
 }
