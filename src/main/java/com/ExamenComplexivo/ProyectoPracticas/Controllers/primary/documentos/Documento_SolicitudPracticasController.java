@@ -2,6 +2,7 @@ package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_SolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Empresa;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_OficioPreseleccion;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudPracticasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,19 +50,17 @@ public class Documento_SolicitudPracticasController {
         }
     }
 
-
     //Metodo para descargar
     @GetMapping("download/{id}")
-    public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getPdfFile(@PathVariable Long id) {
         Optional<Documento_SolicitudPracticas> optionalPdfFile = documentoDao.findById(id);
         if (optionalPdfFile.isPresent()) {
             Documento_SolicitudPracticas pdfFile = optionalPdfFile.get();
             byte[] fileContent = pdfFile.getDocumento_solicitud_practicas();
-            String encodedFile = Base64.getEncoder().encodeToString(fileContent);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("inline").build());
-            return new ResponseEntity<>(encodedFile, headers, HttpStatus.OK);
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvocatoria.pdf").build());
+            return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
         }

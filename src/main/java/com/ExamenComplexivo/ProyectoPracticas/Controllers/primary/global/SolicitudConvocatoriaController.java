@@ -51,14 +51,6 @@ public class SolicitudConvocatoriaController {
         }
     }
 
-    @PostMapping("/crear/documento")
-    public ResponseEntity<?> guardar(@RequestParam("file") MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().body("No se ha encontrado ningún archivo.");
-        }
-        byte[] bytesDocumento = file.getBytes();
-        return new ResponseEntity<>(solicitudConvocatoriaService.guardarDocumento(bytesDocumento), HttpStatus.CREATED);
-    }
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {

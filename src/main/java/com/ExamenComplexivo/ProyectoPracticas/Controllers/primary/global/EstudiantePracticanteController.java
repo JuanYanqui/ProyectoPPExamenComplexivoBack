@@ -62,14 +62,6 @@ public class EstudiantePracticanteController {
         }
     }
 
-    /*
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Solicitud_Practicas> actualizar(@RequestBody Solicitud_Practicas p,@PathVariable Long id){
-        Solicitud_Practicas solicitud = solicitudPracticaService.findById(id);
-        solicitud.setDocumento_solicitud_practicas(p.getDocumento_solicitud_practicas());
-        return new ResponseEntity<>(solicitudPracticaService.save(solicitud), HttpStatus.CREATED);
-    }
-    */
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Estudiante_Practicante> actualizarUsuario(@PathVariable Long id, @RequestBody Estudiante_Practicante p) {

@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.documentos;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_Anexo1Dao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo1;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo4;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convenio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -35,16 +36,15 @@ public class Documento_Anexo1Controller {
 
     //Metodo para descargar
     @GetMapping("download/{id}")
-    public ResponseEntity<String> getPdfFile(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getPdfFile(@PathVariable Long id) {
         Optional<Documento_Anexo1> optionalPdfFile = documentoAnexo1Dao.findById(id);
         if (optionalPdfFile.isPresent()) {
             Documento_Anexo1 pdfFile = optionalPdfFile.get();
             byte[] fileContent = pdfFile.getDocumento_anexo1();
-            String encodedFile = Base64.getEncoder().encodeToString(fileContent);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("inline").build());
-            return new ResponseEntity<>(encodedFile, headers, HttpStatus.OK);
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvocatoria.pdf").build());
+            return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
         }
