@@ -123,4 +123,11 @@ public class SolicitudPracticasController {
                     .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
         }
     }
+
+    @GetMapping("/buscardocument/{id}")
+    public ResponseEntity<Long> findDocumentoIdByConvocatoriaId(@PathVariable Long id) {
+        Long documentoId = solicitudPracticasDao.findDocumentoIdBySolicitudId(id);
+        return ResponseEntity.ok(documentoId);
+    }
+
 }
