@@ -8,4 +8,6 @@ public interface IConvocatoriaService extends IGenericService<Convocatorias,Long
 
     //Guardamos el documento de convocatoria
     public Convocatorias guardarDocumento(byte[] documento);
+
+    Long findDocumentoIdByConvocatoriaId(Long id);
 }

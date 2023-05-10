@@ -97,5 +97,10 @@ public class ConvocatoriasController {
 
         }
     }
+    @GetMapping("/convocatoria/documento/{id}")
+    public ResponseEntity<Long> findDocumentoIdByConvocatoriaId(@PathVariable Long id) {
+        Long documentoId = convocatoriaService.findDocumentoIdByConvocatoriaId(id);
+        return ResponseEntity.ok(documentoId);
+    }
 
 }

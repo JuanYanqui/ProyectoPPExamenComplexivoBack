@@ -66,7 +66,7 @@ public class SecurityConfigImpl { // extends WebSecurityConfigurerAdapter {
 						"/api/convocatorias/listar/**","/api/convocatorias/crear/**",
 						"/api/solicitudPractica/**", "/api/convenio/**",
 						"/api/detalleConvenio/**", "/api/verMaterias/**", "/api/verCarreras/**", "/api/representantePPP/**",
-						"/api/empresa/listar/**",  "/api/empresa/buscar{id}/**",
+						"/api/empresa/listar/**",  "/api/empresa/buscar{id}/**","/api/documentoConvocatoria/download/**",
 						"/api/jasperReport/**", "/api/documentoSolicitudPracticas/**","/api/imagen/crear/**",
 						"/api/jasperReport/descargar/**","/api/documentoAnexo1/**","/api/documentoAnexo4/**","/api/documentoAnexo5/**",
 						"/api/documentoAnexo6/**","/api/documentoAnexo7/**","/api/documentoAnexo8/**","/api/requerimientos/**",

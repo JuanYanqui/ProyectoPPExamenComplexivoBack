@@ -8,4 +8,7 @@ import org.springframework.data.repository.query.Param;
 public interface IConvocatoriaDao extends JpaRepository<Convocatorias,Long> {
     @Query("SELECT doc.id_documentoConvocatoria FROM Convocatorias con JOIN con.documentoConvocatoria doc WHERE con.idConvocatorias = :id")
     Long findDocumentoIdByConvocatoriaId(@Param("id") Long id);
+
+
+
 }
