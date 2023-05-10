@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo4Dao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo4;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo3Service;
@@ -17,7 +18,8 @@ import java.util.List;
 public class anexo4Controller {
     @Autowired
     IAnexo4Service anexo4Service;
-
+    @Autowired
+    IAnexo4Dao anexo4Dao;
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo4>> obtenerLista() {
         return new ResponseEntity<>(anexo4Service.findByAll(), HttpStatus.OK);
@@ -48,5 +50,22 @@ public class anexo4Controller {
             }
         }
 
+    }
+
+    @PutMapping("/updateDocument/{id}")
+    public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        if (!anexo4Dao.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El documento con ID " + idDocumento + " no existe.");
+        }
+        try {
+
+            anexo4Dao.actualizarAnexo4(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
     }
 }

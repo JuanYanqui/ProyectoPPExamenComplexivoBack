@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo8_InformeFDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo6;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo7;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo8;
@@ -18,6 +19,9 @@ import java.util.List;
 public class anexo8Controller {
     @Autowired
     IAnexo8Service anexo8Service;
+
+    @Autowired
+    IAnexo8_InformeFDao anexo8Dao;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo8>> obtenerLista() {
@@ -50,5 +54,22 @@ public class anexo8Controller {
             }
         }
 
+    }
+
+    @PutMapping("/updateDocument/{id}")
+    public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        if (!anexo8Dao.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El documento con ID " + idDocumento + " no existe.");
+        }
+        try {
+
+            anexo8Dao.actualizarAnexo8(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
     }
 }

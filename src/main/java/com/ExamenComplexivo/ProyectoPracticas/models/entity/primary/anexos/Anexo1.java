@@ -22,8 +22,8 @@ public class Anexo1 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo1;
 	private String itv;
-	private Date fecha_inicio;
-	private Date fecha_final;
+	private String fecha_inicio;
+	private String fecha_final;
 	private String objetivos;
 	private String actividades;
 	private String areas;
@@ -36,7 +36,7 @@ public class Anexo1 {
 
 	//Relacionado de uno a uno con documento anexo 1
 	@OneToOne
-	@JoinColumn(name = "id_documentoAnexo1")
+	@JoinColumn(name = "id_documentoAnexo1", nullable = true)
 	private Documento_Anexo1 documentoAnexo1;
 
 }

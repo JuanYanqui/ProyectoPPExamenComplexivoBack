@@ -22,7 +22,7 @@ public class Anexo4 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo4;
-	private Date fecha_actual;
+	private String fecha_actual;
 
 	@OneToOne
 	@JoinColumn(name = "idPractica")
@@ -30,6 +30,6 @@ public class Anexo4 {
 
 	//Relacionado de uno a uno con documento anexo4
 	@OneToOne
-	@JoinColumn(name = "id_documentoAnexo4")
+	@JoinColumn(name = "id_documentoAnexo4", nullable = true)
 	private Documento_Anexo4 documentoAnexo4;
 }

@@ -60,20 +60,18 @@ public class SecurityConfigImpl { // extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.authorizeRequests().antMatchers("/swagger-ui/index.html", "/api/auth/**", "/api/docentefenix/{cedula}", "/api/estudiantefenix/{cedula}",
-						"/api/user/**","/api/personaemp/**", "/api/tutorEmp/**","/apitutorEmp/buscar/{id}/**", 	"/api/empresa/**",
-						"/swagger-ui/index.html#/**", "/api/solicitudPractica/**", "/api/convenio/**",
-						"/api/convocatorias/listar/**","/api/convocatorias/crear/**",
-						"/api/solicitudPractica/**", "/api/convenio/**",
-						"/api/detalleConvenio/**", "/api/verMaterias/**", "/api/verCarreras/**", "/api/representantePPP/**",
-						"/api/empresa/listar/**",  "/api/empresa/buscar{id}/**",
-						"/api/jasperReport/**", "/api/documentoSolicitudPracticas/**",
-						"/api/jasperReport/descargar/**","/api/documentoAnexo1/**","/api/documentoAnexo4/**","/api/documentoAnexo5/**",
-						"/api/documentoAnexo6/**","/api/documentoAnexo7/**","/api/documentoAnexo8/**","/api/requerimientos/**",
-						"/api/documentoAnexo6/**","/api/documentoAnexo7/**","/api/documentoAnexo8/**","/api/requerimientos/**",
-						"/api/actividades/**", "/api/convocatorias/**","/api/documentoConvocatoria/**","/api/documentoConvenio/**",
+				.authorizeRequests().antMatchers("/swagger-ui/index.html", "/api/auth/**", "/api/docentefenix/{cedula}",
+						"/api/estudiantefenix/{cedula}","/api/user/**","/api/personaemp/**", "/api/tutorEmp/**","/apitutorEmp/buscar/{id}/**",
+						"/api/empresa/**","/swagger-ui/index.html#/**", "/api/solicitudPractica/**", "/api/convenio/**",
+						"/api/convocatorias/listar/**","/api/convocatorias/crear/**","/api/solicitudPractica/**", "/api/convenio/**",
+						"/api/detalleConvenio/**", "/api/verMaterias/**", "/api/verCarreras/**", "/api/representantePPP/**", "/api/empresa/listar/**",
+						"/api/empresa/buscar{id}/**","/api/jasperReport/**", "/api/documentoSolicitudPracticas/**","/api/jasperReport/descargar/**",
+						"/api/documentoAnexo1/**","/api/documentoAnexo4/**","/api/documentoAnexo5/**", "/api/documentoAnexo6/**","/api/documentoAnexo7/**",
+						"/api/documentoAnexo8/**","/api/requerimientos/**", "/api/documentoAnexo6/**","/api/documentoAnexo7/**","/api/documentoAnexo8/**",
+						"/api/requerimientos/**","/api/actividades/**", "/api/convocatorias/**","/api/documentoConvocatoria/**","/api/documentoConvenio/**",
 						"/api/solicitudConvocatoria/**", "/api/actividades/**", "/api/convocatorias/**", "/api/solicitudConvocatoria/**", "/api/estudiantepracticante/**",
-						"/api/documentoSolicitudConvocatoria/**", "/api/solicitudPractica/**").permitAll()
+						"/api/documentoSolicitudConvocatoria/**", "/api/solicitudPractica/**","/api/anexo1/**","/api/anexo2/**","/api/anexo3/**","/api/anexo4/**",
+						"/api/anexo5/**","/api/anexo6/**","/api/anexo7/**","/api/anexo8/**").permitAll()
 				.anyRequest().authenticated();
 
 

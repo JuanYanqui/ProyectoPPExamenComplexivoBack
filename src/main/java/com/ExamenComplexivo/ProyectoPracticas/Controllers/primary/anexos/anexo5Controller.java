@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo5Dao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo4;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo5;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo4Service;
@@ -17,6 +18,8 @@ import java.util.List;
 public class anexo5Controller {
     @Autowired
     IAnexo5Service anexo5Service;
+    @Autowired
+    IAnexo5Dao anexo5Dao;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo5>> obtenerLista() {
@@ -43,7 +46,7 @@ public class anexo5Controller {
             try {
                 anexo.setFecha_actual(c.getFecha_actual());
                 anexo.setFecha_desde(c.getFecha_desde());
-                anexo.setHasta(c.getHasta());
+                anexo.setFecha_hasta(c.getFecha_hasta());
                 anexo.setActividades_seguimiento(c.getActividades_seguimiento());
                 anexo.setObservaciones(c.getObservaciones());
                 return new ResponseEntity<>(anexo5Service.save(anexo), HttpStatus.CREATED);
@@ -52,5 +55,22 @@ public class anexo5Controller {
             }
         }
 
+    }
+
+    @PutMapping("/updateDocument/{id}")
+    public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        if (!anexo5Dao.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El documento con ID " + idDocumento + " no existe.");
+        }
+        try {
+
+            anexo5Dao.actualizarAnexo5(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
     }
 }
