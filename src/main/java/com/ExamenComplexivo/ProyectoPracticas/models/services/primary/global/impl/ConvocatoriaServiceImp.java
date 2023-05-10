@@ -29,6 +29,9 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
         Convocatorias convocatorias=new Convocatorias();
         return convocatoriaDao.save(convocatorias);
     }
+    public Long findDocumentoIdByConvocatoriaId(Long id) {
+        return convocatoriaDao.findDocumentoIdByConvocatoriaId(id);
+    }
 
     ///para buscar el doc de convocatoria
     public Long findDocumentoIdByConvocatoriaId(Long id) {
