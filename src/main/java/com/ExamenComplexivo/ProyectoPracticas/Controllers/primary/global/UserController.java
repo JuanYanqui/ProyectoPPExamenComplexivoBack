@@ -112,6 +112,11 @@ public class UserController {
         return iUsuarioService.findUsuariosPorConvocatoria(idConvocatoria);
     }
 
+    @GetMapping("/rolnombre/{correo}")
+    public String getRolNombreByCorreo(@PathVariable String correo) {
+        return iUsuarioService.getRolNombreByCorreo(correo);
+    }
+
 
 }
 

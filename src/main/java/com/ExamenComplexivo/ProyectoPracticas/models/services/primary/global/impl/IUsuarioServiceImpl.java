@@ -110,4 +110,9 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return usuariosDao.findUsuariosPorConvocatoria(idConvocatoria);
     }
 
+    public String getRolNombreByCorreo(String correo) {
+        return usuariosDao.findRolNombreByCorreo(correo);
+    }
+
+
 }

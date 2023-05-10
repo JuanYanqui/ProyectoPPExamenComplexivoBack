@@ -30,4 +30,7 @@ public interface IUsuarioService extends UserDetailsService{
     Usuario buscarPorCorreo(String correo);
 
     List<Usuario> findUsuariosPorConvocatoria(Long idConvocatoria);
+
+    String getRolNombreByCorreo(String correo);
+
 }
