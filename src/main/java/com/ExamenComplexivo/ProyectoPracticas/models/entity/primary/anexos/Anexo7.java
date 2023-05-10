@@ -22,10 +22,6 @@ public class Anexo7 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo7;
-	private String parametro_calificar;
-	private Double calificacion;
-	private Double puntaje_total;
-
 
 	@OneToOne
 	@JoinColumn(name = "idPractica")

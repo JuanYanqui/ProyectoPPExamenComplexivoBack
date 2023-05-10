@@ -44,11 +44,8 @@ public class anexo5Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo.setFecha_actual(c.getFecha_actual());
-                anexo.setFecha_desde(c.getFecha_desde());
-                anexo.setFecha_hasta(c.getFecha_hasta());
-                anexo.setActividades_seguimiento(c.getActividades_seguimiento());
-                anexo.setObservaciones(c.getObservaciones());
+                anexo.setEstado_empresarial(c.isEstado_empresarial());
+                anexo.setEstado_academico(c.isEstado_academico());
                 return new ResponseEntity<>(anexo5Service.save(anexo), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -39,23 +39,6 @@ public class anexo8Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Anexo8> actualizarUsuario(@PathVariable Long id, @RequestBody Anexo8 c) {
-        Anexo8 anexo = anexo8Service.findById(id);
-        if (anexo == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            try {
-                anexo.setTiempo_duracion(c.getTiempo_duracion());
-                anexo.setConclusiones(c.getConclusiones());
-                return new ResponseEntity<>(anexo8Service.save(anexo), HttpStatus.CREATED);
-            } catch (Exception e) {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-    }
-
     @PutMapping("/updateDocument/{id}")
     public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
         if (!anexo8Dao.existsById(id)) {

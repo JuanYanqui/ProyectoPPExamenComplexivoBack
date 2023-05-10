@@ -56,13 +56,8 @@ public class anexo1Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo1.setItv(c.getItv());
-                anexo1.setHoras(c.getHoras());
-                anexo1.setObjetivos(c.getObjetivos());
-                anexo1.setFecha_inicio(c.getFecha_inicio());
-                anexo1.setFecha_final(c.getFecha_final());
-                anexo1.setAreas(c.getAreas());
-                anexo1.setActividades(c.getActividades());
+                anexo1.setEstado_academico(c.isEstado_academico());
+                anexo1.setEstado_empresarial(c.isEstado_empresarial());
                 return new ResponseEntity<>(anexo1Service.save(anexo1), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

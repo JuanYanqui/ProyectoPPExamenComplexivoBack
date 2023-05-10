@@ -24,16 +24,11 @@ public class Anexo6 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo6;
 	private Integer numero_semana;
-
-	private String dia;
-
-	private String hora_ingreso;
-
-	private String hora_salida;
-
-	private Integer horas_diarias;
-
-	private Integer total_horas;
+	private String fecha_inicio;
+	private String fecha_fin;
+	private boolean estado_estudiante;
+	private boolean estado_academico;
+	private boolean estado_especifico;
 
 	//Relacionado con practica de muchos a uno
 	@ManyToOne

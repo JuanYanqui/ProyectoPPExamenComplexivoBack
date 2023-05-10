@@ -22,9 +22,6 @@ public class Anexo8 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo8;
-	private String conclusiones;
-	private String tiempo_duracion;
-
 
 	@OneToOne
 	@JoinColumn(name = "idPractica")

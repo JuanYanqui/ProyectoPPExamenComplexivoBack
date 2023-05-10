@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.*;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorEmpresarial;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,8 +29,12 @@ public class Practica implements Serializable {
     private String fechaInicio;
     private String fechaFin;
     private boolean estadoPractica;
+    private String horaInicio;
+    private String horaSalida;
     private boolean estadoHorario;
-    private String horario;
+    private boolean checkAcademico;
+    private boolean checkEmpresarial;
+
 
     //Relacion con Solicitud de convocatoria de uno a uno
     @OneToOne
@@ -69,27 +74,30 @@ public class Practica implements Serializable {
     @OneToOne(mappedBy = "practica")
     private Anexo4 anexo4;
 
-
     //Anexo5
     @JsonIgnore
     @OneToOne(mappedBy = "practica")
     private Anexo5 anexo5;
 
-
     @JsonIgnore
     @OneToMany(mappedBy = "practica",cascade = CascadeType.ALL)
     private List<Anexo6> anexo6;
-
 
     //Anexo7
     @JsonIgnore
     @OneToOne(mappedBy = "practica")
     private Anexo7 anexo7;
 
-
     //Anexo8
     @JsonIgnore
     @OneToOne(mappedBy = "practica")
     private Anexo8 anexo8;
+
+    //Relacionado con documento de asignacion de tutor empresarial
+
+    @OneToOne
+    @JoinColumn(name = "id_documentoasigtutorempresarial", nullable = true)
+    private Documento_AsigTutorEmpresarial documentoasignacion;
+
 
 }
