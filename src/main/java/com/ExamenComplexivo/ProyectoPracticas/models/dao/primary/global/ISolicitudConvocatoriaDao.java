@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ISolicitudConvocatoriaDao extends JpaRepository<Solicitud_Convocatoria,Long> {
 
-    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE sc.checkDirector = true and c.idConvocatorias = :convocatoriaId")
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE sc.checkDirector = true and sc.checkResponsable = false and c.idConvocatorias = :convocatoriaId")
     List<Solicitud_Convocatoria> findByConvocatoriaId(@Param("convocatoriaId") Long convocatoriaId);
 
     @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE sc.checkDirector = true and sc.checkResponsable= true and c.idConvocatorias = :convocatoriaId")

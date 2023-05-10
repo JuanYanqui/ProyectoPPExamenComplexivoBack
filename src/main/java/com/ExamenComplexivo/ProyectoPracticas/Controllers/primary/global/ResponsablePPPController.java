@@ -92,4 +92,9 @@ public class ResponsablePPPController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/cedularesponsable/{cedula}")
+    public Responsable_PPP findByCedulaUsuario(@PathVariable String cedula) {
+        return responsableService.findByCedulaUsuario(cedula);
+    }
 }
