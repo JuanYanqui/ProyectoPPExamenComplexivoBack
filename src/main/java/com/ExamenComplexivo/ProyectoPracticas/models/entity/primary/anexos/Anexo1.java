@@ -21,13 +21,8 @@ public class Anexo1 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo1;
-	private String itv;
-	private String fecha_inicio;
-	private String fecha_final;
-	private String objetivos;
-	private String actividades;
-	private String areas;
-	private Integer horas;
+	private boolean estado_academico;
+	private boolean estado_empresarial;
 
 	//Relacionado con practica de uno a uno
 	@OneToOne

@@ -1,5 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_OficioPreseleccion;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudConvocatoria;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -69,4 +71,9 @@ public class Solicitud_Convocatoria implements Serializable {
     @JsonIgnore
     @OneToOne(mappedBy = "solicitudConvocatoria")
     private Practica practica;
+
+    //Relacionado on documento oficio uno a uno
+    @OneToOne
+    @JoinColumn(name = "id_documentoOficioPreseleccion", nullable = true)
+    private Documento_OficioPreseleccion documentooficio;
 }

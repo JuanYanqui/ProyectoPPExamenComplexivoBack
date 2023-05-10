@@ -67,7 +67,6 @@ public class PracticaController {
                 practica.setFechaInicio(p.getFechaInicio());
                 practica.setFechaFin(p.getFechaFin());
                 practica.setEstadoPractica(p.isEstadoPractica());
-                practica.setHorario(p.getHorario());
                 return new ResponseEntity<>(practicaService.save(practica), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

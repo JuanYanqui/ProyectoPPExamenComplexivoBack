@@ -44,11 +44,11 @@ public class anexo6Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo.setDia(c.getDia());
-                anexo.setHora_ingreso(c.getHora_ingreso());
-                anexo.setHora_salida(c.getHora_salida());
-                anexo.setHoras_diarias(c.getHoras_diarias());
-                anexo.setTotal_horas(c.getTotal_horas());
+                anexo.setFecha_inicio(c.getFecha_inicio());
+                anexo.setFecha_fin(c.getFecha_fin());
+                anexo.setEstado_academico(c.isEstado_academico());
+                anexo.setEstado_especifico(c.isEstado_especifico());
+                anexo.setEstado_estudiante(c.isEstado_estudiante());
                 anexo.setNumero_semana(c.getNumero_semana());
                 return new ResponseEntity<>(anexo6Service.save(anexo), HttpStatus.CREATED);
             } catch (Exception e) {
