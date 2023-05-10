@@ -11,4 +11,6 @@ public interface IResponsableService extends IGenericService<Responsable_PPP,Lon
 
 
     Integer buscarResponsablePorCarrera(String nombreCarrera);
+
+    Responsable_PPP findByCedulaUsuario(String cedula);
 }

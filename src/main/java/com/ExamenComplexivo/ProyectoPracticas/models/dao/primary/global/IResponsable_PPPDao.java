@@ -16,4 +16,6 @@ public interface IResponsable_PPPDao extends JpaRepository<Responsable_PPP,Long>
     Integer buscarResponsablePorCarrera(@Param("nombreCarrera") String nombreCarrera);
 
 
+    @Query("SELECT r FROM Responsable_PPP r JOIN r.usuario_responsable u WHERE u.cedula = :cedula")
+    Responsable_PPP findByCedulaUsuario(@Param("cedula") String cedula);
 }
