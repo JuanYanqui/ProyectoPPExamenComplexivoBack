@@ -33,9 +33,5 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
         return convocatoriaDao.findDocumentoIdByConvocatoriaId(id);
     }
 
-    ///para buscar el doc de convocatoria
-    public Long findDocumentoIdByConvocatoriaId(Long id) {
-        return convocatoriaDao.findDocumentoIdByConvocatoriaId(id);
-}
 
 }
