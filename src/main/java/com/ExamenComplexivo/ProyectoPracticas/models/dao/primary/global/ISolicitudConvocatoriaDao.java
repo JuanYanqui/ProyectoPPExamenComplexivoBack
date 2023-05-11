@@ -34,4 +34,9 @@ List<Solicitud_Convocatoria> findByConvocatoriaId(@Param("convocatoriaId") Long 
 
     List<Solicitud_Convocatoria> findByCheckResponsableAndIdSolicitudPracticas(
             @Param("idSolicitudPracticas") Long idSolicitudPracticas);
+
+    //Metodo para buscar el id documento solicitud convocatoria
+    @Query("SELECT doc.id_documentoSolicitudConvocatoria FROM Solicitud_Convocatoria con JOIN con.documentoSolicitudConvocatoria doc WHERE con.idSolicitudConvocatoria = :id")
+    Long findDocumentoIdBySolicitudCId(@Param("id")Long id);
+
 }
