@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.entity.primary;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.*;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorEmpresarial;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -98,6 +99,10 @@ public class Practica implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_documentoasigtutorempresarial", nullable = true)
     private Documento_AsigTutorEmpresarial documentoasignacion;
+
+    @OneToOne
+    @JoinColumn(name = "id_documentoasigtutoracademico", nullable = true)
+    private Documento_AsigTutorAcademico documentoasignacionaca;
 
 
 }
