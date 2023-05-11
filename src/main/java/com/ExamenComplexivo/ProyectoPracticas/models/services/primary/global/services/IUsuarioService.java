@@ -33,4 +33,5 @@ public interface IUsuarioService extends UserDetailsService{
 
     String getRolNombreByCorreo(String correo);
 
+    List<Usuario> getUsuariosByRolId(int rolId);
 }

@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -116,6 +117,13 @@ public class UserController {
     public String getRolNombreByCorreo(@PathVariable String correo) {
         return iUsuarioService.getRolNombreByCorreo(correo);
     }
+
+    @GetMapping("/rol/{rolId}")
+    public ResponseEntity<List<Usuario>> getUsuariosByRolId(@PathVariable("rolId") int rolId) {
+        List<Usuario> usuarios = iUsuarioService.getUsuariosByRolId(rolId);
+        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+    }
+
 
 
 }
