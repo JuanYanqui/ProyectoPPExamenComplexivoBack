@@ -3,5 +3,8 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.se
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.IGenericService;
 
+import java.util.List;
+
 public interface IPracticaService extends IGenericService<Practica,Long>{
+    List<Practica> getPracticasAprobadas();
 }

@@ -74,4 +74,8 @@ public class PracticaController {
 
         }
     }
+    @GetMapping("/aprobadas")
+    public List<Practica> getPracticasAprobadas() {
+        return practicaService.getPracticasAprobadas();
+    }
 }
