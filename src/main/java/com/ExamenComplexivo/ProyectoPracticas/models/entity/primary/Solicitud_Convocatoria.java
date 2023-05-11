@@ -33,6 +33,7 @@ public class Solicitud_Convocatoria implements Serializable {
     private boolean checkDirector;
     private boolean checkResponsable;
     private boolean checkEmpresarial;
+    private boolean checkPractica;
     private boolean estadoSolicitudConvo;
 
 

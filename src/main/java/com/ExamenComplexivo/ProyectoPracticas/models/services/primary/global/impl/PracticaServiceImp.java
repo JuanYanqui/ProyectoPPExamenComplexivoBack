@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implements IPracticaService {
     @Autowired
@@ -15,5 +17,9 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
     @Override
     public CrudRepository<Practica, Long> getDao() {
         return practicaDao;
+    }
+
+    public List<Practica> getPracticasAprobadas() {
+        return practicaDao.getPracticasAprobadas();
     }
 }
