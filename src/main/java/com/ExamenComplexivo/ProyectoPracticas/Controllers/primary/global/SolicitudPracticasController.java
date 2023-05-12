@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ISolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Usuario;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.ISolicitudPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -135,5 +136,8 @@ public class SolicitudPracticasController {
         List<Solicitud_Practicas> solicitudes= solicitudPracticaService.buscarPorEmpresa(idempresa);
         return ResponseEntity.ok(solicitudes);
     }
-
+    @GetMapping("/nombrestutores/{idempresa}")
+    public List<Usuario> obtenerNombresTutores(@PathVariable Long idempresa) {
+        return solicitudPracticaService.obtenerNombresTutores(idempresa);
+}
 }

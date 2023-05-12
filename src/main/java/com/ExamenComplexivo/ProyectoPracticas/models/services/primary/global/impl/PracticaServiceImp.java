@@ -31,7 +31,11 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
     @Override
     @Transactional
     public void actualizarDocumentoAsigTutorAc(Long idDocumentoAsigTutorAcademico, Long idPractica) {
-        practicaDao.actualizarDocumentoAsigTutorAc(idDocumentoAsigTutorAcademico,idPractica);
+        practicaDao.actualizarDocumentoAsigTutorAc(idDocumentoAsigTutorAcademico, idPractica);
+
+    }
+    public List<Practica> getPracticasBySolicitudPracticasId(Long solicitudpracticasId) {
+        return practicaDao.getPracticasBySolicitudPracticasId(solicitudpracticasId);
     }
 
 }

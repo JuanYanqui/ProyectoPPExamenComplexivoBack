@@ -108,4 +108,9 @@ public class PracticaController {
                     .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
         }
     }
+    @GetMapping("/usuariosxpractica/{id}")
+    public  List<Practica> getPracticasBySolicitudPracticasId(@PathVariable("id") Long solicitudpracticasId) {
+        return practicaService.getPracticasBySolicitudPracticasId(solicitudpracticasId);
+    }
+
 }
