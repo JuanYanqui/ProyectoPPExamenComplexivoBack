@@ -36,6 +36,11 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
     }
 
     @Override
+    public List<Solicitud_Practicas> buscarPorEmpresa(Long idempresa) {
+        return solicitudPracticasDao.findByEsta(idempresa);
+    }
+
+    @Override
     public Long findDocumentoIdBySolicitudId(Long id) {
         return solicitudPracticasDao.findDocumentoIdBySolicitudId(id);
     }

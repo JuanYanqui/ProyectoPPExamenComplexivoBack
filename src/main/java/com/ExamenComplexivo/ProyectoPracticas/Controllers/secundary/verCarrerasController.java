@@ -1,5 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.secundary;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.secundary.IverDocentesFDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.services.secundary.impl.IDocenteFenixService;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.secundary.impl.IverCarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,9 @@ import java.util.List;
 public class verCarrerasController {
     @Autowired
     IverCarreraService carreraService;
+
+    @Autowired
+    IDocenteFenixService iDocenteFenixService;
 
     // Metodo para listar carreras
     @GetMapping("/listar")
@@ -29,5 +34,10 @@ public class verCarrerasController {
     @GetMapping("/nombrescarrera")
     public List<String> obtenerNombresCarreras() {
         return carreraService.obtenerNombresCarreras();
+    }
+
+    @GetMapping("/nombresdocentes")
+    public List<String> obtenerNombresDocentes() {
+        return iDocenteFenixService.obtenerNombresDocentes();
     }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IPracticaService extends IGenericService<Practica,Long>{
     List<Practica> getPracticasAprobadas();
+
+    List<Practica> getPracticasByConvocatoriaId(Long convocatoriaId);
 }

@@ -130,4 +130,10 @@ public class SolicitudPracticasController {
         return ResponseEntity.ok(documentoId);
     }
 
+    @GetMapping("/buscarporempresa/{idempresa}")
+    public ResponseEntity<List<Solicitud_Practicas>> findBybuscarporempresa(@PathVariable Long idempresa) {
+        List<Solicitud_Practicas> solicitudes= solicitudPracticaService.buscarPorEmpresa(idempresa);
+        return ResponseEntity.ok(solicitudes);
+    }
+
 }
