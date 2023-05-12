@@ -8,7 +8,7 @@
 		<![CDATA[SELECT destinatario.nombres ||' '|| destinatario.apellidos as destinatario,
 usuestu.nombres ||' '|| usuestu.apellidos as estudiante,
 empresa.nombreempresa,
-remitente.nombres||' '|| remitente.nombres as remitente,
+remitente.nombres||' '|| remitente.apellidos as remitente,
 respon.carrera as carrera
 
 FROM practica pra
@@ -37,7 +37,7 @@ ON respon.idresponsableppp = solicon.idresponsableppp
 JOIN usuarios remitente
 ON remitente.idusuario = respon.idusuario
 
-WHERE pra.idpractica =  $P{idPractica} ]]>
+WHERE pra.idpractica =   $P{idPractica} ]]>
 	</queryString>
 	<field name="destinatario" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="destinatario"/>
@@ -135,7 +135,7 @@ WHERE pra.idpractica =  $P{idPractica} ]]>
 				<textElement verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[	Luego de expresarle un atento saludo y desearle éxito en las funciones que acertadamente realiza, me permito informarle que ha sido designada como TUTORA ACADÉMICA del estudiante]]></text>
+				<text><![CDATA[	Luego de expresarle un atento saludo y desearle éxito en las funciones que acertadamente realiza, me permito informarle que ha sido designado/a como TUTOR/A ACADÉMICO/A del estudiante]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="0" y="100" width="240" height="20" uuid="02c3c937-6720-4bcf-9911-e9162d96ccca"/>
