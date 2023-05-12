@@ -8,6 +8,9 @@ import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.ser
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class TutorEmpresarialServiceImp extends GenericServiceImpl<Tutor_Empresarial,Long> implements ITutorEmpresarialService {
@@ -21,4 +24,16 @@ public class TutorEmpresarialServiceImp extends GenericServiceImpl<Tutor_Empresa
     public Tutor_Empresarial findByUsuarioId(Long idUsuario) {
         return tutorEmpresarialDao.findByUsuarioId(idUsuario);
     }
+
+    @Override
+    public List<Object[]> obtenerInfoEmpresasYUsuarios() {
+        return tutorEmpresarialDao.obtenerInfoEmpresasYUsuarios();
+    }
+
+    @Override
+    @Transactional
+    public void actualizarTutorEmpresarial(Long idTutorEmpresarial) {
+        tutorEmpresarialDao.actualizarTutorEmpresarial(idTutorEmpresarial);
+    }
+
 }

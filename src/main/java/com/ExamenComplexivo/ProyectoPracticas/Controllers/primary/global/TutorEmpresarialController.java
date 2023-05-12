@@ -1,4 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ITutorEmpresarialDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Tutor_Empresarial;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.ITutorEmpresarialService;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -7,7 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
@@ -15,7 +19,7 @@ import java.util.List;
 public class TutorEmpresarialController {
     @Autowired
     ITutorEmpresarialService tutorEmpresarialService;
-
+    ITutorEmpresarialDao empresarialDao;
     @GetMapping("/listar")
     public ResponseEntity<List<Tutor_Empresarial>> obtenerLista() {
         try {
@@ -83,5 +87,38 @@ public class TutorEmpresarialController {
         }
         return ResponseEntity.ok(tutorEmpresarial);
     }
+
+    @GetMapping("/datos")
+    public ResponseEntity<List<Map<String, String>>> obtenerDatosTutorEmpresarial() {
+        List<Object[]> datos = tutorEmpresarialService.obtenerInfoEmpresasYUsuarios();
+
+        // Convertir los datos a un formato JSON
+        List<Map<String, String>> datosJSON = new ArrayList<>();
+        for (Object[] fila : datos) {
+            Map<String, String> filaJSON = new HashMap<>();
+            filaJSON.put("idUsuario", fila[0].toString());
+            filaJSON.put("nombreEmpresa", (String) fila[1]);
+            filaJSON.put("nombreUsuario", (String) fila[2]);
+            filaJSON.put("correoUsuario", (String) fila[3]);
+            filaJSON.put("telefonoUsuario", (String) fila[4]);
+            datosJSON.add(filaJSON);
+        }
+
+        // Me devuelve los datos en formato JSON
+        return new ResponseEntity<>(datosJSON, HttpStatus.OK);
+    }
+
+    @PutMapping("/updateStatus/{id}")
+    public ResponseEntity<String> actualizarTutorEmpresarial(@PathVariable("id") Long idTutorEmpresarial) {
+        try {
+            tutorEmpresarialService.actualizarTutorEmpresarial(idTutorEmpresarial);
+            return ResponseEntity.ok("Tutor empresarial actualizado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el tutor empresarial. Detalles del error: " + e.getMessage());
+        }
+    }
+
+
 
 }
