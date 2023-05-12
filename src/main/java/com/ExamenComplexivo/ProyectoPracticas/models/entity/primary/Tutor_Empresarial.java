@@ -26,6 +26,8 @@ public class Tutor_Empresarial implements Serializable {
     private String numeroContacto;
     private String cargo;
 
+    private boolean estado;
+
 
     //Relacionado con usuario de uno a uno
     @ManyToOne
