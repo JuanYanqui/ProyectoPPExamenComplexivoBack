@@ -7,6 +7,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.ser
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,12 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
 
     public List<Practica> getPracticasByConvocatoriaId(Long convocatoriaId) {
         return practicaDao.getPracticasByConvocatoriaId(convocatoriaId);
+    }
+
+    @Override
+    @Transactional
+    public void actualizarDocumentoAsigTutorAc(Long idDocumentoAsigTutorAcademico, Long idPractica) {
+        practicaDao.actualizarDocumentoAsigTutorAc(idDocumentoAsigTutorAcademico,idPractica);
     }
 
 }

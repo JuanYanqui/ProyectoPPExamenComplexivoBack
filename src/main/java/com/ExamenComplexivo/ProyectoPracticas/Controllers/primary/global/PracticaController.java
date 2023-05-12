@@ -1,4 +1,5 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
@@ -15,6 +16,8 @@ import java.util.List;
 public class PracticaController {
     @Autowired
     IPracticaService practicaService;
+    @Autowired
+    IPracticaDao practicaDao;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Practica>> obtenerLista() {
@@ -87,5 +90,22 @@ public class PracticaController {
     @GetMapping("/convocatoriaspractica/{id}")
     public  List<Practica> getPracticasByConvocatoriaId(@PathVariable("id") Long convocatoriaId) {
         return practicaService.getPracticasByConvocatoriaId(convocatoriaId);
+    }
+
+    @PutMapping("/updateDocument/{id}")
+    public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        if (!practicaDao.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El documento con ID " + idDocumento + " no existe.");
+        }
+        try {
+
+            practicaDao.actualizarDocumentoAsigTutorAc(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
     }
 }
