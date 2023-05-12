@@ -41,4 +41,10 @@ public interface UsuariosRepositoryDao extends JpaRepository<Usuario,Long> {
     List<Usuario> findUsuariosByRolId(int rolId);
 
 
+    @Query(value = "SELECT * FROM usuarios usua " +
+            "JOIN usuarioroles as usurol ON usua.idusuario = usurol.idusuario " +
+            "JOIN roles rol ON usurol.idrol = rol.idrol " +
+            "WHERE rol.idrol = 6 ", nativeQuery = true)
+    List<Usuario> findUsuariosByRolIdAcademico();
+
 }

@@ -115,4 +115,10 @@ public class ConvocatoriasController {
         }
     }
 
+    @GetMapping("/practicas")
+    public ResponseEntity<List<Convocatorias>> buscarConvocatoriasConPractica() {
+        List<Convocatorias> convocatorias = convocatoriaService.buscarConvocatoriasConPractica();
+        return ResponseEntity.ok(convocatorias);
+    }
+
 }

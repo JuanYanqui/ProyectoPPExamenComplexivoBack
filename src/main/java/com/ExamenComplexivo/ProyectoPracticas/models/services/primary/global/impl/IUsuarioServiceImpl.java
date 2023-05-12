@@ -119,5 +119,9 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return usuariosDao.findUsuariosByRolId(rolId);
     }
 
+    public List<Usuario> getUsuariosByRolIdAcademico() {
+        return usuariosDao.findUsuariosByRolIdAcademico();
+    }
+
 
 }

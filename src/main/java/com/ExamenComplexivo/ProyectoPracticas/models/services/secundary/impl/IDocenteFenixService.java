@@ -9,4 +9,6 @@ public interface IDocenteFenixService {
 
     public verdocentef findById(String cedula);
 
+    List<String> obtenerNombresDocentes();
+
 }

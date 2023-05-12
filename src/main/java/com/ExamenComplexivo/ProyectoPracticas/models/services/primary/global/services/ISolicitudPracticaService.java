@@ -11,6 +11,8 @@ public interface ISolicitudPracticaService extends IGenericService<Solicitud_Pra
     List<Solicitud_Practicas> findByEstadoActividadTrue();
     List<Solicitud_Practicas> buscarPorEstadoSolicitud(boolean estado);
 
+    List<Solicitud_Practicas> buscarPorEmpresa(Long idempresa);
+
     Long findDocumentoIdBySolicitudId(Long id);
 
 }
