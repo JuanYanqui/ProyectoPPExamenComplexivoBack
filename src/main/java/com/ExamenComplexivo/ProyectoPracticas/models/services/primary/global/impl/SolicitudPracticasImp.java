@@ -49,4 +49,12 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
         return solicitudPracticasDao.findAllNombresTutores(idempresa);
     }
 
+    public List<Solicitud_Practicas> findByEstadoSolicitudPorcarrera(String empresa) {
+        return solicitudPracticasDao.findByEstadoSolicitudPorcarrera(empresa);
+    }
+
+    public List<Solicitud_Practicas> findByEstadoSolicitudPorcarreraSolicitudaprobada(String empresa) {
+        return solicitudPracticasDao.findByEstadoSolicitudPorcarreraSolicitudaprobada(empresa);
+    }
+
 }

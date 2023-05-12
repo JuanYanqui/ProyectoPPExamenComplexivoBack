@@ -18,6 +18,10 @@ public interface ISolicitudPracticaService extends IGenericService<Solicitud_Pra
 
     List<Usuario> obtenerNombresTutores(Long idempresa);
 
+    List<Solicitud_Practicas> findByEstadoSolicitudPorcarrera(String carrera);
+
+    List<Solicitud_Practicas> findByEstadoSolicitudPorcarreraSolicitudaprobada(String carrera);
+
 
 
 }

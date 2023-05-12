@@ -18,6 +18,15 @@ public interface ISolicitudPracticasDao extends JpaRepository<Solicitud_Practica
     List<Solicitud_Practicas> findByEstadoActividadTrue();
     List<Solicitud_Practicas> findByEstadoSolicitud(boolean estado);
 
+//query buscar solicitudes por el nombre de carrera que ingresa el responsableppp
+    @Query("SELECT s FROM Solicitud_Practicas s WHERE s.estadoSolicitud = false and s.nombre_carrera = :carrera")
+    List<Solicitud_Practicas> findByEstadoSolicitudPorcarrera(@Param("carrera") String carrera);
+
+    //query buscar solicitudes por el nombre de carrera que ingresa el responsableppp para asignaractividades con estado true
+    @Query("SELECT s FROM Solicitud_Practicas s WHERE s.estadoSolicitud = true and s.nombre_carrera = :carrera")
+    List<Solicitud_Practicas> findByEstadoSolicitudPorcarreraSolicitudaprobada(@Param("carrera") String carrera);
+
+
 
     @Modifying
     @Query("UPDATE Solicitud_Practicas s SET s.documentoSolicitudPracticas.id_documentoSolicitudPrc = :id_documentoSolicitudPrc WHERE s.idSolicitudPracticas = :idSolicitudPracticas")

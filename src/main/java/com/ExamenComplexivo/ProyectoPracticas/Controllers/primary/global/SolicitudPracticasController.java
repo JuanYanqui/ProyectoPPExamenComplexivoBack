@@ -101,6 +101,18 @@ public class SolicitudPracticasController {
         List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(true);
         return ResponseEntity.ok(solicitudes);
     }
+    @GetMapping("/listarestadocarrera/{carrera}")
+    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitud(@PathVariable String carrera)  {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoSolicitudPorcarrera(carrera);
+        return ResponseEntity.ok(solicitudes);
+    }
+
+    @GetMapping("/listarestadoentrue/{carrera}")
+    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitudentrue(@PathVariable String carrera)  {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoSolicitudPorcarreraSolicitudaprobada(carrera);
+        return ResponseEntity.ok(solicitudes);
+    }
+
 
     @GetMapping("/listarestadofalse")
     public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitudfalse() {

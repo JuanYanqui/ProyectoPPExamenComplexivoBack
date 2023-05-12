@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Requerimientos;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IRequerimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -55,6 +56,11 @@ public class RequerimientosController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/porsolicitud/{idsolicitud}")
+    public List<Requerimientos> getSolicitudesPorConvocatoriatrue(@PathVariable("idsolicitud") Long idsolicitud) {
+        return requerimientoService.findByRequerimientosPorSolicitud(idsolicitud);
     }
 
 }
