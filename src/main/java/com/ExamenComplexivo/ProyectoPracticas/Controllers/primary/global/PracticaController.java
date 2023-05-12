@@ -88,4 +88,9 @@ public class PracticaController {
     public  List<Practica> getPracticasByConvocatoriaId(@PathVariable("id") Long convocatoriaId) {
         return practicaService.getPracticasByConvocatoriaId(convocatoriaId);
     }
+    @GetMapping("/usuariosxpractica/{id}")
+    public  List<Practica> getPracticasBySolicitudPracticasId(@PathVariable("id") Long solicitudpracticasId) {
+        return practicaService.getPracticasBySolicitudPracticasId(solicitudpracticasId);
+    }
+
 }

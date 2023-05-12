@@ -15,4 +15,8 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
             "FROM Convocatorias c " +
             "JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra WHERE sc.checkPractica = true AND sc.checkEmpresarial = true AND p.checkAcademico = false AND c.idConvocatorias = :convocatoriaId")
     List<Practica> getPracticasByConvocatoriaId(Long convocatoriaId);
+
+    //listar usuario por solicitud
+    @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra JOIN sc.convocatoria con JOIN con.solicitudPracticas solipra WHERE solipra.idSolicitudPracticas = :solicitudpracticasId")
+    List<Practica> getPracticasBySolicitudPracticasId(Long solicitudpracticasId);
 }
