@@ -36,4 +36,7 @@ public interface IUsuarioService extends UserDetailsService{
     List<Usuario> getUsuariosByRolId(int rolId);
 
     List<Usuario> getUsuariosByRolIdAcademico();
+
+    boolean resetPassword(String cedula, String newPassword);
+
 }

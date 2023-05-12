@@ -3,11 +3,11 @@ package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.RolRepositoryDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.UsuariosRepositoryDao;
-import com.ExamenComplexivo.ProyectoPracticas.models.dtos.request.SignupRequest;
-import com.ExamenComplexivo.ProyectoPracticas.models.dtos.response.MessageResponse;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.ResetPasswordRequest;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Rol;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Usuario;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IUsuarioService;
+import com.ExamenComplexivo.ProyectoPracticas.security.JwtUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,9 +29,13 @@ import java.util.Set;
 
 public class UserController {
 
+
+    private long resetTokenExpirationMs = 3600000L;
     @Autowired
     private IUsuarioService iUsuarioService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
     @Autowired
     private RolRepositoryDao rolrepo;
     @Autowired
@@ -129,6 +133,19 @@ public class UserController {
     public ResponseEntity<List<Usuario>> getUsuariosByRolIdAcademico() {
         List<Usuario> usuarios = iUsuarioService.getUsuariosByRolIdAcademico();
         return new ResponseEntity<>(usuarios, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
+        String cedula = request.getCedula();
+        String newPassword = request.getNewPassword();
+
+        if (iUsuarioService.resetPassword(cedula, newPassword)) {
+            return ResponseEntity.ok("Contraseña restablecida exitosamente.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró ningún usuario con el número de cédula proporcionado.");
+        }
     }
 
 

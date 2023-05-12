@@ -9,8 +9,10 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.UsuarioPrinc
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IUsuarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,8 @@ public class IUsuarioServiceImpl implements IUsuarioService {
     private final UsuariosRepositoryDao usuariosDao;
     private final RolRepositoryDao rolRepositoryDao;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
     public Rol saveRole(Rol rol) {
         log.info("Guardado nuevo rol {} en la BD", rol.getRolNombre());
@@ -123,5 +127,16 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return usuariosDao.findUsuariosByRolIdAcademico();
     }
 
+
+    public boolean resetPassword(String cedula, String newPassword) {
+        Usuario usuario = usuariosDao.findByCedula(cedula);
+        if (usuario != null) {
+            String encodedPassword = passwordEncoder.encode(newPassword);
+            usuario.setContrasenia(encodedPassword);
+            usuariosDao.save(usuario);
+            return true;
+        }
+        return false;
+    }
 
 }
