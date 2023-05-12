@@ -137,14 +137,14 @@ public class UserController {
 
 
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
+    public ResponseEntity<Object> resetPassword(@RequestBody ResetPasswordRequest request) {
         String cedula = request.getCedula();
         String newPassword = request.getNewPassword();
 
         if (iUsuarioService.resetPassword(cedula, newPassword)) {
-            return ResponseEntity.ok("Contraseña restablecida exitosamente.");
+            return ResponseEntity.ok().build(); // 200 OK sin cuerpo de respuesta
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró ningún usuario con el número de cédula proporcionado.");
+            return ResponseEntity.notFound().build(); // 404 Not Found sin cuerpo de respuesta
         }
     }
 
