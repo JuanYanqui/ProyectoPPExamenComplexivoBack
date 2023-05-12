@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AsignacionAcademico" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4a6d7ff6-2cc3-4487-834e-3ea0c597510f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexion Documento PPP"/>
+	<parameter name="idPractica" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT destinatario.nombres ||' '|| destinatario.apellidos as destinatario,
+usuestu.nombres ||' '|| usuestu.apellidos as estudiante,
+empresa.nombreempresa,
+remitente.nombres||' '|| remitente.nombres as remitente,
+respon.carrera as carrera
+
+FROM practica pra
+
+JOIN usuarios destinatario
+ON destinatario.idusuario = pra.idusuario
+
+JOIN solicitud_convocatoria solicon 
+ON solicon.idsolicitudconvocatoria = pra.idsolicitudconvocatoria
+
+JOIN estudiante_practicante estudiante
+ON estudiante.idestudiantepracticas = solicon.idestudiantepracticas
+
+JOIN usuarios usuestu
+ON usuestu.idusuario = estudiante.idusuario
+
+JOIN tutor_empresarial empre
+ON empre.idtutorempresarial = pra.idtutorempresarial
+
+JOIN empresa 
+ON empresa.idempresa = empre.idempresa
+
+JOIN responsable_ppp respon
+ON respon.idresponsableppp = solicon.idresponsableppp
+
+JOIN usuarios remitente
+ON remitente.idusuario = respon.idusuario
+
+WHERE pra.idpractica =  $P{idPractica} ]]>
+	</queryString>
+	<field name="destinatario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="destinatario"/>
+		<property name="com.jaspersoft.studio.field.label" value="destinatario"/>
+	</field>
+	<field name="estudiante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estudiante"/>
+		<property name="com.jaspersoft.studio.field.label" value="estudiante"/>
+	</field>
+	<field name="nombreempresa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreempresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreempresa"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="remitente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="remitente"/>
+		<property name="com.jaspersoft.studio.field.label" value="remitente"/>
+	</field>
+	<field name="carrera" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="carrera"/>
+		<property name="com.jaspersoft.studio.field.label" value="carrera"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="responsable_ppp"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="290" height="19" uuid="b1db812c-cd2a-4243-b675-239cd2d3b53e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ANEXO 4: Designación y obligaciones del tutor académico]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="444" y="50" width="100" height="30" uuid="96ed6aa5-025d-4d22-9142-4825da32e6b3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="169" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="40" width="79" height="19" uuid="944f3ef9-f8f5-411a-ac6b-cd01178c97d8"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Magíster]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="60" width="320" height="20" uuid="08fd6fc6-b3c3-4d0b-a143-efd62d67d904"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{destinatario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="79" height="19" uuid="4728ba72-b878-4272-b575-4e2f7c209db5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[DOCENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="379" height="19" uuid="036570dd-6ceb-4c3b-bd0f-e5fbd4733543"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO UNIVERSITARIO TECNOLÓGICO DEL AZUAY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="145" width="79" height="19" uuid="90215929-b477-4467-a378-9d23219213ac"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Su Despacho .-]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="391" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="31" width="119" height="19" uuid="880d1f94-58e8-4532-bbc7-123a5f9a6af9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[De mi consideración:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-5" y="60" width="550" height="39" uuid="b0b562c9-8655-438c-8efd-24c3e80bfbee"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[	Luego de expresarle un atento saludo y desearle éxito en las funciones que acertadamente realiza, me permito informarle que ha sido designada como TUTORA ACADÉMICA del estudiante]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="100" width="240" height="20" uuid="02c3c937-6720-4bcf-9911-e9162d96ccca"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estudiante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="101" width="270" height="19" uuid="6049c562-8949-4f13-883a-0c0b0aa8f30c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[para la ejecución de las prácticas pre ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="159" height="19" uuid="002c6bbd-4625-4b34-9597-83793979f41e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[profesionales en la empresa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="120" width="170" height="20" uuid="3d50ea8d-6ac2-4f2f-933c-1e7b4ee9d136"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreempresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="160" width="443" height="19" uuid="1d651497-fae4-4968-bfb8-c66e3be9e620"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Agradezco de antemano su valiosa colaboración con esta importante actividad.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="210" width="119" height="19" uuid="a35228db-48a8-4078-949e-81529802e46e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Atentamente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="270" width="119" height="19" uuid="4c21c87f-3a24-4a54-b5a5-f3ad98dbed5d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[___________________]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="289" width="340" height="20" uuid="d92af6c1-20f9-473b-808e-230c37c0862d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{remitente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="290" width="30" height="19" uuid="cdccde76-27d8-4d58-8295-dd7f3f868ff7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ing.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="309" width="350" height="19" uuid="05b6d847-825d-4cac-bdb8-4489badc3dd5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Responsable de Prácticas Pre Profesionales]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="330" width="370" height="20" uuid="3fe47407-ba98-41f1-bff3-efade865ce8e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="351" width="379" height="19" uuid="6d12560c-6224-4080-b342-66195dd7563d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO UNIVERSITARIO TECNOLÓGICO DEL AZUAY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="340" width="119" height="19" uuid="79411602-15da-4725-afcb-00cbd4075b52"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[___________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="359" width="60" height="19" uuid="58c4fa34-6ab8-4755-a51e-30217c967399"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Recibido]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

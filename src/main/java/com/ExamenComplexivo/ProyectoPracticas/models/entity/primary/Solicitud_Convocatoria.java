@@ -27,6 +27,7 @@ public class Solicitud_Convocatoria implements Serializable {
     private Long idSolicitudConvocatoria;
     private String fechaEnvio;
     private String fechaAprobacion;
+    private String fechaSeleccion;
     private String ciclo;
     private String periodo;
     private String numero_contacto;

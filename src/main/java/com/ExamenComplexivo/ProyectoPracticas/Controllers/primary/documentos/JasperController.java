@@ -45,4 +45,28 @@ public class JasperController {
 
     }
 
+
+    @GetMapping("/especifico/{idPractica}")
+
+    public void generateAsignacionEspecifico(HttpServletResponse response, @PathVariable("idPractica") Long idPractica) {
+        try {
+            jasperServiceImp.reportAsignacionEspecifico(response,idPractica);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
+
+
+    @GetMapping("/academico/{idPractica}")
+
+    public void generateAsignacionAcademico(HttpServletResponse response, @PathVariable("idPractica") Long idPractica) {
+        try {
+            jasperServiceImp.reportAsignacionAcademico(response,idPractica);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
+
 }

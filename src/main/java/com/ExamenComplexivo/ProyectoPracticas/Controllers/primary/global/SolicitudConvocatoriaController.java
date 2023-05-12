@@ -134,6 +134,8 @@ public class SolicitudConvocatoriaController {
     public ResponseEntity<Long> findDocumentoIdByConvocatoriaId(@PathVariable Long id) {
         Long documentoId = solicitudConvocatoriaDao.findDocumentoIdBySolicitudCId(id);
         return ResponseEntity.ok(documentoId);
+
+    }
         
     @GetMapping("/porconvocatoriatruepractica/{id}")
     public List<Solicitud_Convocatoria> getSolicitudesPorConvocatoriatrupractica(@PathVariable("id") Long convocatoriaId) {

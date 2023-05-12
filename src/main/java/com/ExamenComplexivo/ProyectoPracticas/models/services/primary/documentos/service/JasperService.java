@@ -10,4 +10,10 @@ public interface JasperService {
     public void reportConvocatorias(HttpServletResponse response, long idConvocatorias);
 
     public void reportSolicitudConvocatoria(HttpServletResponse response, long idSolicitudConvocatoria);
+
+    public void reportAsignacionEspecifico(HttpServletResponse response, long idPractica);
+
+    public void reportAsignacionAcademico(HttpServletResponse response, long idPractica);
+
+
 }

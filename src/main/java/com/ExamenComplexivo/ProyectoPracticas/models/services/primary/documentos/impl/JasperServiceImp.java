@@ -123,4 +123,77 @@ public class JasperServiceImp implements JasperService {
     }
 
 
+
+    @Override
+    public void reportAsignacionEspecifico(HttpServletResponse response, long idPractica) {
+        try {
+
+            Connection conn = dataSource.getConnection();
+
+            InputStream reportStream = getClass().getResourceAsStream("/reports/AsignacionEmpecifico.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+            // Crea un mapa de parámetros para generar documento con el id que se le proporcione
+            Map<String, Object> params = new HashMap<>();
+
+            //parametro que necesita jasper para ejecutar la consulta
+            params.put("idPractica", idPractica);
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=AsignacionEspecifico.pdf");
+            response.setContentLength(reportContent.length);
+
+            OutputStream outStream = response.getOutputStream();
+            outStream.write(reportContent);
+            outStream.flush();
+            outStream.close();
+        }catch (Exception e){
+
+            System.out.println("No encuentra");
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
+    @Override
+    public void reportAsignacionAcademico(HttpServletResponse response, long idPractica) {
+        try {
+
+            Connection conn = dataSource.getConnection();
+
+            InputStream reportStream = getClass().getResourceAsStream("/reports/AsignacionAcademico.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+            // Crea un mapa de parámetros para generar documento con el id que se le proporcione
+            Map<String, Object> params = new HashMap<>();
+
+            //parametro que necesita jasper para ejecutar la consulta
+            params.put("idPractica", idPractica);
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=AsignacionAcademico.pdf");
+            response.setContentLength(reportContent.length);
+
+            OutputStream outStream = response.getOutputStream();
+            outStream.write(reportContent);
+            outStream.flush();
+            outStream.close();
+        }catch (Exception e){
+
+            System.out.println("No encuentra");
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
 }
