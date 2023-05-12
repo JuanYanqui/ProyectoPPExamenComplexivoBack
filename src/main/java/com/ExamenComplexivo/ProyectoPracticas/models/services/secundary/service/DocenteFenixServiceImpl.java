@@ -28,4 +28,8 @@ public class DocenteFenixServiceImpl implements IDocenteFenixService {
         // TODO Auto-generated method stub
         return iverDocentesFDao.findById(id).orElse(null);
     }
+
+    public List<String> obtenerNombresDocentes() {
+        return iverDocentesFDao.findAllNombresDocentes();
+    }
 }

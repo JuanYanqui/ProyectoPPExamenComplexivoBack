@@ -125,6 +125,13 @@ public class UserController {
     }
 
 
+    @GetMapping("/rolacademico")
+    public ResponseEntity<List<Usuario>> getUsuariosByRolIdAcademico() {
+        List<Usuario> usuarios = iUsuarioService.getUsuariosByRolIdAcademico();
+        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+    }
+
+
 
 }
 

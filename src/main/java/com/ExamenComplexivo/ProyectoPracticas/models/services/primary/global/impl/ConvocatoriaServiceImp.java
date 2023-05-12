@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Service
 public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Long> implements IConvocatoriaService {
@@ -32,6 +33,8 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
     public Long findDocumentoIdByConvocatoriaId(Long id) {
         return convocatoriaDao.findDocumentoIdByConvocatoriaId(id);
     }
-
+    public List<Convocatorias> buscarConvocatoriasConPractica() {
+        return convocatoriaDao.buscarConvocatoriasConPractica();
+    }
 
 }
