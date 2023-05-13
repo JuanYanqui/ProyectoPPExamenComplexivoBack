@@ -15,4 +15,7 @@ public interface ISolicitudConvocatoriaService extends IGenericService<Solicitud
     List<Solicitud_Convocatoria> getSolicitudesPorConvocatoriatrue(Long convocatoriaId);
 
     List<Solicitud_Convocatoria> getSolicitudesPorConvocatoriatruepractica(Long convocatoriaId);
+
+    int getCountByConvocatoriaAndEstudiante(Long convocatoriaId, Long estudiantePracticasId);
+
 }

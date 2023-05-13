@@ -22,6 +22,6 @@ public interface ISolicitudPracticaService extends IGenericService<Solicitud_Pra
 
     List<Solicitud_Practicas> findByEstadoSolicitudPorcarreraSolicitudaprobada(String carrera);
 
-
+    List<Solicitud_Practicas> findByEstadoActividadTruePorResponsablePPP(Long idresponsableppp);
 
 }

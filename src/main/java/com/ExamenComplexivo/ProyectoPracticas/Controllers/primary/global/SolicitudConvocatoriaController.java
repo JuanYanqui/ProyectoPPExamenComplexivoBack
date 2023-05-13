@@ -5,6 +5,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Co
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.ISolicitudConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -140,5 +141,10 @@ public class SolicitudConvocatoriaController {
     @GetMapping("/porconvocatoriatruepractica/{id}")
     public List<Solicitud_Convocatoria> getSolicitudesPorConvocatoriatrupractica(@PathVariable("id") Long convocatoriaId) {
         return solicitudConvocatoriaService.getSolicitudesPorConvocatoriatruepractica(convocatoriaId);
+    }
+
+    @GetMapping("/count/{convocatoriaId}/{estudiantePracticasId}")
+    public int getCount(@PathVariable Long convocatoriaId, @PathVariable Long estudiantePracticasId) {
+        return solicitudConvocatoriaService.getCountByConvocatoriaAndEstudiante(convocatoriaId, estudiantePracticasId);
     }
 }

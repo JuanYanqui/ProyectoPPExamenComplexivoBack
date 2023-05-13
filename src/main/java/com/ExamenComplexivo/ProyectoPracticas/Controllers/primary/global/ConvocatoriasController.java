@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IConvocatoriaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -118,6 +119,12 @@ public class ConvocatoriasController {
     @GetMapping("/practicas")
     public ResponseEntity<List<Convocatorias>> buscarConvocatoriasConPractica() {
         List<Convocatorias> convocatorias = convocatoriaService.buscarConvocatoriasConPractica();
+        return ResponseEntity.ok(convocatorias);
+    }
+
+    @GetMapping("/convocatoriaporcarrera/{carrera}")
+        public ResponseEntity<List<Convocatorias>> buscarPorCarrera(@PathVariable String carrera)  {
+        List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporCarrera(carrera);
         return ResponseEntity.ok(convocatorias);
     }
 

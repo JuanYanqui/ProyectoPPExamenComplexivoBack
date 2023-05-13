@@ -152,4 +152,9 @@ public class SolicitudPracticasController {
     public List<Usuario> obtenerNombresTutores(@PathVariable Long idempresa) {
         return solicitudPracticaService.obtenerNombresTutores(idempresa);
 }
+    @GetMapping("/listaporidresponsableppp/{idresponsableppp}")
+    public ResponseEntity<List<Solicitud_Practicas>> findByEstadoActividadTruePorResponsablePPP(@PathVariable Long idresponsableppp)  {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoActividadTruePorResponsablePPP(idresponsableppp);
+        return ResponseEntity.ok(solicitudes);
+    }
 }

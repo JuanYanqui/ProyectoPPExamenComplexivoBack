@@ -49,4 +49,9 @@ public class SolicitudConvocatoriaServiceImpl extends GenericServiceImpl<Solicit
         return solicitudConvocatoriaDao.findByConvocatoriaIdtrueprueba(convocatoriaId);
     }
 
+
+    public int getCountByConvocatoriaAndEstudiante(Long convocatoriaId, Long estudiantePracticasId) {
+        return solicitudConvocatoriaDao.getCountByConvocatoriaAndEstudiante(convocatoriaId, estudiantePracticasId);
+    }
+
 }

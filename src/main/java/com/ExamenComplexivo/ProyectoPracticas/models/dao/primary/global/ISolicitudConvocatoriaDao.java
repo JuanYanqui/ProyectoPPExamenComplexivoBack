@@ -42,4 +42,7 @@ List<Solicitud_Convocatoria> findByConvocatoriaId(@Param("convocatoriaId") Long 
     @Query("SELECT doc.id_documentoSolicitudConvocatoria FROM Solicitud_Convocatoria con JOIN con.documentoSolicitudConvocatoria doc WHERE con.idSolicitudConvocatoria = :id")
     Long findDocumentoIdBySolicitudCId(@Param("id")Long id);
 
+
+    @Query(value = "SELECT COUNT(*) FROM solicitud_convocatoria WHERE idconvocatorias = ?1 AND idestudiantepracticas = ?2", nativeQuery = true)
+    int getCountByConvocatoriaAndEstudiante(Long convocatoriaId, Long estudiantePracticasId);
 }

@@ -3,6 +3,7 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.im
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IConvocatoriaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convenio;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
     }
     public List<Convocatorias> buscarConvocatoriasConPractica() {
         return convocatoriaDao.buscarConvocatoriasConPractica();
+    }
+
+    public List<Convocatorias> findByConvocatoriaporCarrera(String carrera) {
+        return convocatoriaDao.findByConvocatoriaporCarrera(carrera);
     }
 
 }
