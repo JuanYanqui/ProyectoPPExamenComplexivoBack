@@ -147,4 +147,14 @@ public class SolicitudConvocatoriaController {
     public int getCount(@PathVariable Long convocatoriaId, @PathVariable Long estudiantePracticasId) {
         return solicitudConvocatoriaService.getCountByConvocatoriaAndEstudiante(convocatoriaId, estudiantePracticasId);
     }
+
+    @GetMapping("/buscarcovocatoriadirector/{id}")
+    public List<Solicitud_Convocatoria> findByConvocatoriasDirector(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.findByConvocatoriasDirector(convocatoriaId);
+    }
+
+    @GetMapping("/buscarcovocatoriadirectorfalse/{id}")
+    public List<Solicitud_Convocatoria> findByConvocatoriasDirectorFalse(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.findByConvocatoriasDirectorFalse(convocatoriaId);
+    }
 }

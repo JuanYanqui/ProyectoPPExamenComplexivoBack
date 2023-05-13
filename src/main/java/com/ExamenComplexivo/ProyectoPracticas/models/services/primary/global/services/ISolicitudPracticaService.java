@@ -24,4 +24,7 @@ public interface ISolicitudPracticaService extends IGenericService<Solicitud_Pra
 
     List<Solicitud_Practicas> findByEstadoActividadTruePorResponsablePPP(Long idresponsableppp);
 
+    List<Solicitud_Practicas> findBySolicitudpracticasCheckResponsable(Long carrera);
+
+    List<Solicitud_Practicas> buscarsoliporempresa(Long idempresa);
 }

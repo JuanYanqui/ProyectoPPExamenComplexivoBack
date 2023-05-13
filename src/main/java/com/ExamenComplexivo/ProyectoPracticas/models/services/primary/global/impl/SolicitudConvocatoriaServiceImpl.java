@@ -54,4 +54,12 @@ public class SolicitudConvocatoriaServiceImpl extends GenericServiceImpl<Solicit
         return solicitudConvocatoriaDao.getCountByConvocatoriaAndEstudiante(convocatoriaId, estudiantePracticasId);
     }
 
+    public List<Solicitud_Convocatoria> findByConvocatoriasDirector(Long convocatoriaId) {
+        return solicitudConvocatoriaDao.findByConvocatoriasDirector(convocatoriaId);
+    }
+
+    public List<Solicitud_Convocatoria> findByConvocatoriasDirectorFalse(Long convocatoriaId) {
+        return solicitudConvocatoriaDao.findByConvocatoriasDirectorFalse(convocatoriaId);
+    }
+
 }

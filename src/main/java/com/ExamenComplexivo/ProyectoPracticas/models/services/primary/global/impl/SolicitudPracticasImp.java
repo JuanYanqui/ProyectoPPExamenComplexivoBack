@@ -61,4 +61,11 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
         return solicitudPracticasDao.findByEstadoActividadTruePorResponsablePPP(idresponsableppp);
     }
 
+    public List<Solicitud_Practicas> findBySolicitudpracticasCheckResponsable(Long empresa) {
+        return solicitudPracticasDao.findBySolicitudpracticasCheckResponsable(empresa);
+    }
+    public List<Solicitud_Practicas> buscarsoliporempresa(Long idempresa) {
+        return solicitudPracticasDao.buscarsoliporempresa(idempresa);
+    }
+
 }

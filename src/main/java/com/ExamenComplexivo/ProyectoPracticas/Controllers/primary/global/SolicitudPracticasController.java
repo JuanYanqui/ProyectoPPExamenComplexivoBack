@@ -157,4 +157,16 @@ public class SolicitudPracticasController {
         List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoActividadTruePorResponsablePPP(idresponsableppp);
         return ResponseEntity.ok(solicitudes);
     }
+
+    @GetMapping("/listasolicitudcheckresponsable/{idempresa}")
+    public ResponseEntity<List<Solicitud_Practicas>> findBySolicitudpracticasCheckResponsable(@PathVariable Long idempresa)  {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findBySolicitudpracticasCheckResponsable(idempresa);
+        return ResponseEntity.ok(solicitudes);
+    }
+
+    @GetMapping("/listasolicitudcheck/{idempresa}")
+    public ResponseEntity<List<Solicitud_Practicas>> buscarsoliporempresa(@PathVariable Long idempresa)  {
+        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarsoliporempresa(idempresa);
+        return ResponseEntity.ok(solicitudes);
+    }
 }

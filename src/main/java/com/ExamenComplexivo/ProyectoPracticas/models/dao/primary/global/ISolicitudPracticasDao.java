@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -49,4 +50,8 @@ public interface ISolicitudPracticasDao extends JpaRepository<Solicitud_Practica
     @Query("SELECT us FROM Usuario us JOIN us.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE empre.idEmpresa= :idempresa")
     List<Usuario> findAllNombresTutores(@Param("idempresa") Long idempresa);
 
+    @Query("SELECT s FROM Solicitud_Practicas s JOIN s.responsablePPP res JOIN res.solicitudConvocatorias soli JOIN soli.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE soli.checkResponsable = true and empre.idEmpresa = :idempresa")
+    List<Solicitud_Practicas> findBySolicitudpracticasCheckResponsable(@Param("idempresa") Long idempresa);
+    @Query("SELECT  DISTINCT s FROM Convocatorias c JOIN c.solicitudPracticas s JOIN s.tutorEmpresarial tuto JOIN tuto.empresa empre JOIN c.solicitudConvocatorias soli WHERE soli.checkResponsable = true and empre.idEmpresa = :idempresa")
+    List<Solicitud_Practicas> buscarsoliporempresa(@Param("idempresa") Long idempresa);
 }

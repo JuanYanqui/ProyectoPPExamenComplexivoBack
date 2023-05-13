@@ -42,4 +42,6 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
         return convocatoriaDao.findByConvocatoriaporCarrera(carrera);
     }
 
+
+
 }

@@ -18,4 +18,8 @@ public interface ISolicitudConvocatoriaService extends IGenericService<Solicitud
 
     int getCountByConvocatoriaAndEstudiante(Long convocatoriaId, Long estudiantePracticasId);
 
+    List<Solicitud_Convocatoria> findByConvocatoriasDirector(Long convocatoriaId);
+
+    List<Solicitud_Convocatoria> findByConvocatoriasDirectorFalse(Long convocatoriaId);
+
 }
