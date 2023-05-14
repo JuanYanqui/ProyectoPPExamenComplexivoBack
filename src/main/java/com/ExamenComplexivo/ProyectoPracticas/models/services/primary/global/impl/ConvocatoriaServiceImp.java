@@ -41,7 +41,9 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
     public List<Convocatorias> findByConvocatoriaporCarrera(String carrera) {
         return convocatoriaDao.findByConvocatoriaporCarrera(carrera);
     }
-
+    public List<Convocatorias> findByConvocatoriaporSolicitudP(Long idSolicitudPracticas) {
+        return convocatoriaDao.findByConvocatoriaporSolicitudP(idSolicitudPracticas);
+    }
 
 
 }

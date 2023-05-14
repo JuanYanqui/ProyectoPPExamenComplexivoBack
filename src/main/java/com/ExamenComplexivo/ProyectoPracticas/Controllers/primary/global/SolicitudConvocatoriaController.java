@@ -157,4 +157,13 @@ public class SolicitudConvocatoriaController {
     public List<Solicitud_Convocatoria> findByConvocatoriasDirectorFalse(@PathVariable("id") Long convocatoriaId) {
         return solicitudConvocatoriaService.findByConvocatoriasDirectorFalse(convocatoriaId);
     }
+    @GetMapping("/buscarcovocatoriatutor/{id}")
+    public List<Solicitud_Convocatoria> findByConvocatoriasTutor(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.findByConvocatoriasTutor(convocatoriaId);
+    }
+
+    @GetMapping("/buscarcovocatoriatutorfalse/{id}")
+    public List<Solicitud_Convocatoria> findByConvocatoriasTutorFalse(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.findByConvocatoriasTutorFalse(convocatoriaId);
+    }
 }

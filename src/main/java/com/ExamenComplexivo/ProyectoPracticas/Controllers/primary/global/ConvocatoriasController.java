@@ -128,4 +128,10 @@ public class ConvocatoriasController {
         return ResponseEntity.ok(convocatorias);
     }
 
+    @GetMapping("/convocatoriaporsolicitud/{idSolicitudPracticas}")
+    public ResponseEntity<List<Convocatorias>> buscarPorSolicitud(@PathVariable Long idSolicitudPracticas)  {
+        List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporSolicitudP(idSolicitudPracticas);
+        return ResponseEntity.ok(convocatorias);
+    }
+
 }

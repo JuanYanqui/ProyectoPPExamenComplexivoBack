@@ -52,4 +52,10 @@ List<Solicitud_Convocatoria> findByConvocatoriaId(@Param("convocatoriaId") Long 
 
     @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE  sc.checkDirector =true and c.idConvocatorias = :convocatoriaId")
     List<Solicitud_Convocatoria> findByConvocatoriasDirectorFalse(@Param("convocatoriaId") Long convocatoriaId);
+
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE  sc.checkEmpresarial =false and c.idConvocatorias = :convocatoriaId")
+    List<Solicitud_Convocatoria> findByConvocatoriasTutor(@Param("convocatoriaId") Long convocatoriaId);
+
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE  sc.checkEmpresarial =true and c.idConvocatorias = :convocatoriaId")
+    List<Solicitud_Convocatoria> findByConvocatoriasTutorFalse(@Param("convocatoriaId") Long convocatoriaId);
 }
