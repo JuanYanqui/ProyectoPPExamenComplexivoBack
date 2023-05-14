@@ -92,8 +92,8 @@ public class PracticaController {
         return practicaService.getPracticasByConvocatoriaId(convocatoriaId);
     }
 
-    @PutMapping("/updateDocument/{id}")
-    public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+    @PutMapping("/updateDocumentA/{id}")
+    public ResponseEntity<String> actualizarDocumentoAcademico(@PathVariable Long id, @RequestParam Long idDocumento) {
         if (!practicaDao.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("El documento con ID " + idDocumento + " no existe.");
@@ -108,6 +108,25 @@ public class PracticaController {
                     .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
         }
     }
+
+
+    @PutMapping("/updateDocumentE/{id}")
+    public ResponseEntity<String> actualizarDocumentoEmpresarial(@PathVariable Long id, @RequestParam Long idDocumento) {
+        if (!practicaDao.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El documento con ID " + idDocumento + " no existe.");
+        }
+        try {
+
+            practicaDao.actualizarDocumentoAsigTutorEmp(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/usuariosxpractica/{id}")
     public  List<Practica> getPracticasBySolicitudPracticasId(@PathVariable("id") Long solicitudpracticasId) {
         return practicaService.getPracticasBySolicitudPracticasId(solicitudpracticasId);
