@@ -62,11 +62,11 @@ public class SolicitudConvocatoriaServiceImpl extends GenericServiceImpl<Solicit
         return solicitudConvocatoriaDao.findByConvocatoriasDirectorFalse(convocatoriaId);
     }
     public List<Solicitud_Convocatoria> findByConvocatoriasTutor(Long convocatoriaId) {
-        return solicitudConvocatoriaDao.findByConvocatoriasDirector(convocatoriaId);
+        return solicitudConvocatoriaDao.findByConvocatoriasTutor(convocatoriaId);
     }
 
     public List<Solicitud_Convocatoria> findByConvocatoriasTutorFalse(Long convocatoriaId) {
-        return solicitudConvocatoriaDao.findByConvocatoriasDirectorFalse(convocatoriaId);
+        return solicitudConvocatoriaDao.findByConvocatoriasTutorFalse(convocatoriaId);
     }
 
 }

@@ -5,6 +5,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Pr
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -131,6 +132,24 @@ public class ConvocatoriasController {
     @GetMapping("/convocatoriaporsolicitud/{idSolicitudPracticas}")
     public ResponseEntity<List<Convocatorias>> buscarPorSolicitud(@PathVariable Long idSolicitudPracticas)  {
         List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporSolicitudP(idSolicitudPracticas);
+        return ResponseEntity.ok(convocatorias);
+    }
+
+    @GetMapping("/convocatoriaporempresa/{idempresa}")
+    public ResponseEntity<List<Convocatorias>> buscarPorEmpresa(@PathVariable Long idempresa)  {
+        List<Convocatorias> convocatorias = convocatoriaService.buscarsoliporempresacovocatoria(idempresa);
+        return ResponseEntity.ok(convocatorias);
+    }
+
+    @GetMapping("/convocatoriaporempresaestadosoli/{idempresa}")
+    public ResponseEntity<List<Convocatorias>> buscarsoliporempresacovocatoriaconestadosolicitud(@PathVariable Long idempresa)  {
+        List<Convocatorias> convocatorias = convocatoriaService.buscarsoliporempresacovocatoriaconestadosolicitud(idempresa);
+        return ResponseEntity.ok(convocatorias);
+    }
+
+    @GetMapping("/convocatoriaporcarreraconpractica/{carrera}")
+    public ResponseEntity<List<Convocatorias>> findByConvocatoriaporCarreraPractica(@PathVariable String carrera)  {
+        List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporCarreraPractica(carrera);
         return ResponseEntity.ok(convocatorias);
     }
 

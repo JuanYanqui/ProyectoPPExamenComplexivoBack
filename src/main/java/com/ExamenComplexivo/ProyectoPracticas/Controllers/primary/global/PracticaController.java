@@ -82,9 +82,9 @@ public class PracticaController {
 
         }
     }
-    @GetMapping("/aprobadas")
-    public List<Practica> getPracticasAprobadas() {
-        return practicaService.getPracticasAprobadas();
+    @GetMapping("/aprobadas/{idempresa}")
+    public List<Practica> getPracticasAprobadas(@PathVariable("idempresa") Long idempresa) {
+        return practicaService.getPracticasAprobadas(idempresa);
     }
 
     @GetMapping("/convocatoriaspractica/{id}")

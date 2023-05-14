@@ -34,15 +34,30 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
     public Long findDocumentoIdByConvocatoriaId(Long id) {
         return convocatoriaDao.findDocumentoIdByConvocatoriaId(id);
     }
+
+    @Override
     public List<Convocatorias> buscarConvocatoriasConPractica() {
         return convocatoriaDao.buscarConvocatoriasConPractica();
     }
+
 
     public List<Convocatorias> findByConvocatoriaporCarrera(String carrera) {
         return convocatoriaDao.findByConvocatoriaporCarrera(carrera);
     }
     public List<Convocatorias> findByConvocatoriaporSolicitudP(Long idSolicitudPracticas) {
         return convocatoriaDao.findByConvocatoriaporSolicitudP(idSolicitudPracticas);
+    }
+
+    public List<Convocatorias> buscarsoliporempresacovocatoria(Long idempresa) {
+        return convocatoriaDao.buscarsoliporempresacovocatoria(idempresa);
+    }
+
+    public List<Convocatorias> buscarsoliporempresacovocatoriaconestadosolicitud(Long idempresa) {
+        return convocatoriaDao.buscarsoliporempresacovocatoriaconestadosolicitud(idempresa);
+    }
+
+    public List<Convocatorias> findByConvocatoriaporCarreraPractica(String carrera) {
+        return convocatoriaDao.findByConvocatoriaporCarreraPractica(carrera);
     }
 
 

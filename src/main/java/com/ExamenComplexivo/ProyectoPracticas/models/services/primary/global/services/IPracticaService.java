@@ -6,7 +6,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.IG
 import java.util.List;
 
 public interface IPracticaService extends IGenericService<Practica,Long>{
-    List<Practica> getPracticasAprobadas();
+    List<Practica> getPracticasAprobadas(Long idempresa);
 
     List<Practica> getPracticasByConvocatoriaId(Long convocatoriaId);
 

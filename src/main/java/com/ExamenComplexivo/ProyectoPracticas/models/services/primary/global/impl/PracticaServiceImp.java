@@ -20,8 +20,8 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao;
     }
 
-    public List<Practica> getPracticasAprobadas() {
-        return practicaDao.getPracticasAprobadas();
+    public List<Practica> getPracticasAprobadas(Long idempresa) {
+        return practicaDao.getPracticasAprobadas(idempresa);
     }
 
     public List<Practica> getPracticasByConvocatoriaId(Long convocatoriaId) {

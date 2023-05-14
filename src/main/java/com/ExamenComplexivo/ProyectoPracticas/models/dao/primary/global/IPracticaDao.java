@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 @Transactional
 public interface IPracticaDao extends JpaRepository<Practica,Long> {
-    @Query("SELECT p FROM Practica p JOIN p.solicitudConvocatoria sol  WHERE sol.checkPractica = true AND p.checkEmpresarial = true")
-    List<Practica> getPracticasAprobadas();
+    @Query("SELECT p FROM Practica p JOIN p.solicitudConvocatoria sol  JOIN sol.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE sol.checkPractica = true AND p.checkEmpresarial = true and empre.idEmpresa= :idempresa")
+    List<Practica> getPracticasAprobadas(@Param("idempresa") Long idempresa);
 
 
     @Query("SELECT p " +
