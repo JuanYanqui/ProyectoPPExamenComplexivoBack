@@ -17,6 +17,8 @@ public interface JasperService {
 
     public void reportAnexo1(HttpServletResponse response, long idAnexo1);
     public void reportAnexo2(HttpServletResponse response, long idAnexo2);
+    public void reportAnexo3(HttpServletResponse response, long idAnexo3);
+
 
 
 }

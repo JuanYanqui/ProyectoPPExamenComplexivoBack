@@ -48,7 +48,7 @@ JOIN usuarios academico
 ON academico.idusuario = pra.idusuario
 
 
-WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
+WHERE anexo1.idanexo1 =  $P{idAnexo1}]]>
 	</queryString>
 	<field name="reprelegal" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="reprelegal"/>
@@ -222,6 +222,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{itv}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -229,6 +230,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{numconvenio}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -236,6 +238,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{estudiantenombre}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -243,6 +246,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{cedulaestudiante}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -250,6 +254,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -257,6 +262,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{reprelegal}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -264,6 +270,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{descripempresa}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -271,6 +278,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -278,6 +286,7 @@ WHERE anexo1.idanexo1 =  $P{idAnexo1} ]]>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{correoestudiante}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -783,7 +792,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -794,7 +803,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -805,7 +814,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -816,7 +825,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cicloparalelo}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -827,7 +836,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{estudiantenombre}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -838,7 +847,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{reprelegal}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -849,7 +858,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombresacademico}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -860,7 +869,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechafin}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -871,7 +880,7 @@ relacionadas]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechainicio}]]></textFieldExpression>
 			</textField>
 			<staticText>

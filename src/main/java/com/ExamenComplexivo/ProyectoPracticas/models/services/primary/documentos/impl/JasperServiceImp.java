@@ -265,4 +265,40 @@ public class JasperServiceImp implements JasperService {
     }
 
 
+    @Override
+    public void reportAnexo3(HttpServletResponse response, long idAnexo3) {
+        try {
+
+            Connection conn = dataSource.getConnection();
+
+            InputStream reportStream = getClass().getResourceAsStream("/reports/Anexo3.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+            // Crea un mapa de parámetros para generar documento con el id que se le proporcione
+            Map<String, Object> params = new HashMap<>();
+
+            //parametro que necesita jasper para ejecutar la consulta
+            params.put("idAnexo3", idAnexo3);
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=Anexo3.pdf");
+            response.setContentLength(reportContent.length);
+
+            OutputStream outStream = response.getOutputStream();
+            outStream.write(reportContent);
+            outStream.flush();
+            outStream.close();
+        }catch (Exception e){
+
+            System.out.println("No encuentra");
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
 }
