@@ -15,5 +15,6 @@ public interface JasperService {
 
     public void reportAsignacionAcademico(HttpServletResponse response, long idPractica);
 
+    public void reportAnexo1(HttpServletResponse response, long idAnexo1);
 
 }
