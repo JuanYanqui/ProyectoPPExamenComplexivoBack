@@ -35,6 +35,14 @@ public class Practica implements Serializable {
     private boolean estadoHorario;
     private boolean checkAcademico;
     private boolean checkEmpresarial;
+    private boolean estadoanexo1;
+    private boolean estadoanexo2;
+    private boolean estadoanexo3;
+    private boolean estadoanexo4;
+    private boolean estadoanexo5;
+    private boolean estadoanexo6;
+    private boolean estadoanexo7;
+    private boolean estadoanexo8;
 
 
     //Relacion con Solicitud de convocatoria de uno a uno
