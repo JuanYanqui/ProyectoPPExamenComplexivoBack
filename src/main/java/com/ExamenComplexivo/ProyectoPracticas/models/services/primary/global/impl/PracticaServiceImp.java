@@ -68,4 +68,12 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.findByCarreraRecibeAnexo3(carrera);
     }
 
+    public List<Practica> getPracticasByDocumentoAnexo5(Long convocatoriaid, Long idusuario) {
+        return practicaDao.getPracticasByDocumentoAnexo5(convocatoriaid, idusuario);
+    }
+
+    public List<Practica> getPracticasByEstudianteAnexo6(String cedula) {
+        return practicaDao.getPracticasByEstudianteAnexo6(cedula);
+    }
+
 }

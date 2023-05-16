@@ -182,6 +182,16 @@ public class PracticaController {
         return ResponseEntity.ok(practicas);
     }
 
+    @GetMapping("/practicaparaanexo5/{id}/{idusuario}")
+    public  List<Practica> getPracticasByDocumentoAnexo5(@PathVariable("id") Long idconvocatoria, @PathVariable("idusuario") Long idusuario) {
+        return practicaService.getPracticasByDocumentoAnexo5(idconvocatoria, idusuario);
+    }
+
+    @GetMapping("/practicaporestudianteanexo6/{cedula}")
+    public  List<Practica> getPracticasByEstudianteAnexo6(@PathVariable("cedula") String cedula) {
+        return practicaService.getPracticasByEstudianteAnexo6(cedula);
+    }
+
 
 
 }
