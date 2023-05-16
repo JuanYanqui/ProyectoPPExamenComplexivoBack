@@ -2,6 +2,9 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.im
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +54,18 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
 
     public List<Practica> getPracticasByEstudianteAnexo3(String cedula) {
         return practicaDao.getPracticasByEstudianteAnexo3(cedula);
+    }
+
+
+    public List<Anexo1> getPracticasByCarrera(String carrera) {
+        return practicaDao.findByCarreraRecibeAnexo(carrera);
+    }
+    public List<Anexo2> getPracticasByCarrera2(String carrera) {
+        return practicaDao.findByCarreraRecibeAnexo2(carrera);
+    }
+
+    public List<Anexo3> getPracticasByCarrera3(String carrera) {
+        return practicaDao.findByCarreraRecibeAnexo3(carrera);
     }
 
 }

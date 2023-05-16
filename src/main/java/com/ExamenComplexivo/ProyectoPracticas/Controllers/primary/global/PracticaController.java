@@ -2,6 +2,9 @@ package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -159,6 +162,24 @@ public class PracticaController {
     @GetMapping("/practicaporestudianteanexo3/{cedula}")
     public  List<Practica> getPracticasByEstudianteAnexo3(@PathVariable("cedula") String cedula) {
         return practicaService.getPracticasByEstudianteAnexo3(cedula);
+    }
+
+    @GetMapping("/carreraparaanexo/{carrera}")
+    public ResponseEntity<List<Anexo1>> getPracticasByCarrera(@PathVariable String carrera) {
+        List<Anexo1> practicas = practicaService.getPracticasByCarrera(carrera);
+        return ResponseEntity.ok(practicas);
+    }
+
+    @GetMapping("/carreraparaanexo2/{carrera}")
+    public ResponseEntity<List<Anexo2>> getPracticasByCarrera2(@PathVariable String carrera) {
+        List<Anexo2> practicas = practicaService.getPracticasByCarrera2(carrera);
+        return ResponseEntity.ok(practicas);
+    }
+
+    @GetMapping("/carreraparaanexo3/{carrera}")
+    public ResponseEntity<List<Anexo3>> getPracticasByCarrera3(@PathVariable String carrera) {
+        List<Anexo3> practicas = practicaService.getPracticasByCarrera3(carrera);
+        return ResponseEntity.ok(practicas);
     }
 
 

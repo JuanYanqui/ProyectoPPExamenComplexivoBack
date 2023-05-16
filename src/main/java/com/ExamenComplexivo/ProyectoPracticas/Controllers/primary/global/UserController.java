@@ -148,6 +148,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/nombresape/{userId}")
+    public ResponseEntity<Object[]> getNombresAndApellidos(@PathVariable Long userId) {
+        Object[] nombresApellidos = iUsuarioService.getNombresAndApellidosByUserId(userId);
+        return ResponseEntity.ok(nombresApellidos);
+    }
+
 
 
 }
