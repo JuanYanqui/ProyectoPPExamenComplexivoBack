@@ -38,4 +38,12 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.getPracticasBySolicitudPracticasId(solicitudpracticasId);
     }
 
+    public List<Practica> getPracticasByAcademico(String cedula) {
+        return practicaDao.getPracticasByAcademico(cedula);
+    }
+
+    public List<Practica> getPracticasByDocumentoAnexo(Long convocatoriaid) {
+        return practicaDao.getPracticasByDocumentoAnexo(convocatoriaid);
+    }
+
 }
