@@ -71,4 +71,12 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
             "WHERE  r.carrera = :carrera")
     List<Anexo3> findByCarreraRecibeAnexo3(String carrera);
 
+    @Query("SELECT p " +
+            "FROM Convocatorias c " +
+            "JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN p.usuario us WHERE sc.checkPractica = true AND sc.checkEmpresarial = true AND p.checkAcademico = true AND p.checkEmpresarial= true AND p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = false AND us.idUsuario = :idusuario AND  c.idConvocatorias = :convocatoriaId")
+    List<Practica> getPracticasByDocumentoAnexo5(Long convocatoriaId, Long idusuario);
+
+    @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = true  AND uspra.cedula = :cedula")
+    List<Practica> getPracticasByEstudianteAnexo6(String cedula);
+
 }
