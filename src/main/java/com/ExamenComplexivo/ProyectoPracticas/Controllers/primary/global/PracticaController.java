@@ -75,6 +75,15 @@ public class PracticaController {
                 practica.setCheckEmpresarial(p.isCheckEmpresarial());
                 practica.setUsuario(p.getUsuario());
                 practica.setTutorEmpresarial(p.getTutorEmpresarial());
+                practica.setEstadoanexo1(p.isEstadoanexo1());
+                practica.setEstadoanexo2(p.isEstadoanexo2());
+                practica.setEstadoanexo3(p.isEstadoanexo3());
+                practica.setEstadoanexo4(p.isEstadoanexo4());
+                practica.setEstadoanexo5(p.isEstadoanexo5());
+                practica.setEstadoanexo6(p.isEstadoanexo6());
+                practica.setEstadoanexo7(p.isEstadoanexo7());
+                practica.setEstadoanexo8(p.isEstadoanexo8());
+
                 return new ResponseEntity<>(practicaService.save(practica), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -137,9 +146,14 @@ public class PracticaController {
         return practicaService.getPracticasByAcademico(cedula);
     }
 
-    @GetMapping("/practicaparaanexo/{id}")
-    public  List<Practica> getPracticasByDocumentoAnexo(@PathVariable("id") Long idconvocatoria) {
-        return practicaService.getPracticasByDocumentoAnexo(idconvocatoria);
+    @GetMapping("/practicaparaanexo/{id}/{idusuario}")
+    public  List<Practica> getPracticasByDocumentoAnexo(@PathVariable("id") Long idconvocatoria, @PathVariable("idusuario") Long idusuario) {
+        return practicaService.getPracticasByDocumentoAnexo(idconvocatoria, idusuario);
+    }
+
+    @GetMapping("/practicaporestudiante/{cedula}")
+    public  List<Practica> getPracticasByEstudiante(@PathVariable("cedula") String cedula) {
+        return practicaService.getPracticasByEstudiante(cedula);
     }
 
 
