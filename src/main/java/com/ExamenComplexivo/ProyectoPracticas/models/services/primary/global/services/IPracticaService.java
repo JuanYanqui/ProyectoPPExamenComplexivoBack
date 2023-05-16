@@ -18,4 +18,6 @@ public interface IPracticaService extends IGenericService<Practica,Long>{
     List<Practica> getPracticasByDocumentoAnexo(Long convocatoriaId, Long idusuario);
 
     List<Practica> getPracticasByEstudiante(String cedula);
+
+    List<Practica> getPracticasByEstudianteAnexo3(String cedula);
 }
