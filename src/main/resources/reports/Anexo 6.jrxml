@@ -3,6 +3,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Anexo 6" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cd99a15e-7fe8-47f9-ad12-1db15e7512e8">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexion Documento PPP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="idAnexo6" class="java.lang.Long"/>
 	<queryString>
 		<![CDATA[SELECT empresarial.nombres ||' '|| empresarial.apellidos as reprelegal,
 empre.nombreempresa as empresa, empre.descripcion as descripempresa,
@@ -12,7 +13,8 @@ usuest.nombres||' '|| usuest.apellidos as estudiantenombre,
 usuest.correo as correoestudiante, usuest.cedula as cedulaestudiante,
 pra.fechainicio, pra.fechafin,
 soli.ciclo as cicloparalelo, soli.periodo,
-academico.nombres||' '||academico.apellidos as nombresacademico
+academico.nombres||' '||academico.apellidos as nombresacademico,
+anexo6.numero_semana, anexo6.fecha_inicio, anexo6.fecha_fin
 
 FROM anexo6
 
@@ -47,7 +49,7 @@ JOIN usuarios academico
 ON academico.idusuario = pra.idusuario
 
 
-WHERE anexo6.idanexo6 = 1]]>
+WHERE anexo6.idanexo6 =  $P{idAnexo6} ]]>
 	</queryString>
 	<field name="reprelegal" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="reprelegal"/>
@@ -115,6 +117,21 @@ WHERE anexo6.idanexo6 = 1]]>
 	<field name="nombresacademico" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nombresacademico"/>
 		<property name="com.jaspersoft.studio.field.label" value="nombresacademico"/>
+	</field>
+	<field name="numero_semana" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="numero_semana"/>
+		<property name="com.jaspersoft.studio.field.label" value="numero_semana"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="anexo6"/>
+	</field>
+	<field name="fecha_inicio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_inicio"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_inicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="anexo6"/>
+	</field>
+	<field name="fecha_fin" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_fin"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_fin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="anexo6"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -205,6 +222,19 @@ Reportes semanales de aprendizaje
 				</textElement>
 				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="270" y="81" width="120" height="19" uuid="793dcc87-0358-4037-bfa9-45e7bd0f0bc2"/>
+				<textFieldExpression><![CDATA[$F{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="81" width="100" height="18" uuid="bf097a3b-bb9f-4f9d-a182-d2c2fb9d4d5c"/>
+				<textFieldExpression><![CDATA[$F{fecha_fin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="81" width="40" height="18" uuid="e5b30f29-8e29-4f36-97f6-678927a9534d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[al]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -667,6 +697,13 @@ semana]]></text>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="10" y="50" width="50" height="40" uuid="7d0ec35d-06ba-4c83-8392-a2cf75273c2f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_semana}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<columnFooter>
