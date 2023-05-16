@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
@@ -21,11 +22,13 @@ public class Anexo2 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo2;
 
+
+	@Column(nullable = true)
 	private byte documento_anexo2;
 
 
 	@OneToOne
-	@JoinColumn(name = "idPractica")
+	@JoinColumn(name = "idPractica", nullable = true)
 	private Practica practica;
 
 }
