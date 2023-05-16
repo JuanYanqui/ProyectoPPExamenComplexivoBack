@@ -1,6 +1,9 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.IGenericService;
 
 import java.util.List;
@@ -20,4 +23,10 @@ public interface IPracticaService extends IGenericService<Practica,Long>{
     List<Practica> getPracticasByEstudiante(String cedula);
 
     List<Practica> getPracticasByEstudianteAnexo3(String cedula);
+
+
+    List<Anexo1> getPracticasByCarrera(String carrera);
+    List<Anexo2> getPracticasByCarrera2(String carrera);
+
+    List<Anexo3> getPracticasByCarrera3(String carrera);
 }

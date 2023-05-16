@@ -1,6 +1,9 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -47,6 +50,25 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = false AND uspra.cedula = :cedula")
     List<Practica> getPracticasByEstudianteAnexo3(String cedula);
 
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo1 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.responsablePPP r " +
+            "WHERE a.estado_academico = true AND r.carrera = :carrera")
+    List<Anexo1> findByCarreraRecibeAnexo(String carrera);
 
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo2 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.responsablePPP r " +
+            "WHERE  r.carrera = :carrera")
+    List<Anexo2> findByCarreraRecibeAnexo2(String carrera);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo3 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.responsablePPP r " +
+            "WHERE  r.carrera = :carrera")
+    List<Anexo3> findByCarreraRecibeAnexo3(String carrera);
 
 }

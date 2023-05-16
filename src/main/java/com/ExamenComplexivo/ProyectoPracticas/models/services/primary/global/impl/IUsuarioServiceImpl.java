@@ -139,4 +139,8 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return false;
     }
 
+    public Object[] getNombresAndApellidosByUserId(Long userId) {
+        return usuariosDao.findNombresAndApellidosByUserId(userId);
+    }
+
 }
