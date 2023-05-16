@@ -2,6 +2,7 @@ package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ISolicitudConvocatoriaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.ISolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.ISolicitudConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
@@ -166,4 +170,25 @@ public class SolicitudConvocatoriaController {
     public List<Solicitud_Convocatoria> findByConvocatoriasTutorFalse(@PathVariable("id") Long convocatoriaId) {
         return solicitudConvocatoriaService.findByConvocatoriasTutorFalse(convocatoriaId);
     }
+
+    @GetMapping("/listadoAprobados/{idTutorEmpresarial}")
+    public ResponseEntity<List<Map<String, String>>> buscarEstudiantesAprobados(@PathVariable("idTutorEmpresarial") Long idTutorEmpresarial) {
+        List<Object[]> datos = solicitudConvocatoriaDao.obtenerEstudiantesAprobados(idTutorEmpresarial);
+        // Convertir los datos a un formato JSON
+        List<Map<String, String>> datosJSON = new ArrayList<>();
+        for (Object[] fila : datos) {
+            Map<String, String> filaJSON = new HashMap<>();
+            filaJSON.put("nombreConvocatoria", (String) fila[0]);
+            filaJSON.put("cedula", (String) fila[1]);
+            filaJSON.put("nombres", (String) fila[2]);
+            filaJSON.put("carrera", (String) fila[3]);
+            filaJSON.put("fechaAprobacion", (String) fila[4]);
+            datosJSON.add(filaJSON);
+        }
+
+        // Me devuelve los datos en formato JSON
+        return new ResponseEntity<>(datosJSON, HttpStatus.OK);
+    }
+
+
 }

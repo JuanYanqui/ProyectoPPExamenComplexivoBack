@@ -58,4 +58,13 @@ List<Solicitud_Convocatoria> findByConvocatoriaId(@Param("convocatoriaId") Long 
 
     @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE  sc.checkEmpresarial =true and c.idConvocatorias = :convocatoriaId")
     List<Solicitud_Convocatoria> findByConvocatoriasTutorFalse(@Param("convocatoriaId") Long convocatoriaId);
+
+    //Query para sacar la lista de los estudiantes aprobados segun el check del responsable y del tutor que este logeado ese momento
+    @Query("SELECT c.nombreConvocatoria, u.cedula, CONCAT(u.nombres, '', u.apellidos) AS nombres, u.carrera, s.fechaAprobacion " +
+            "FROM Solicitud_Convocatoria s " +
+            "INNER JOIN s.convocatoria c " +
+            "INNER JOIN s.estudiantePracticante e " +
+            "INNER JOIN e.usuario_estudiante_practicante u " +
+            "WHERE s.checkResponsable = true AND s.tutorEmpresarial.idTutorEmpresarial = :idTutorEmpresarial")
+    List<Object[]> obtenerEstudiantesAprobados(@Param("idTutorEmpresarial") Long idTutorEmpresarial);
 }

@@ -23,15 +23,13 @@ public interface ISolicitudPracticasDao extends JpaRepository<Solicitud_Practica
 
     List<Solicitud_Practicas> findByEstadoSolicitud(boolean estado);
 
-//query buscar solicitudes por el nombre de carrera que ingresa el responsableppp
+    //query buscar solicitudes por el nombre de carrera que ingresa el responsableppp
     @Query("SELECT s FROM Solicitud_Practicas s WHERE s.estadoSolicitud = false and s.nombre_carrera = :carrera")
     List<Solicitud_Practicas> findByEstadoSolicitudPorcarrera(@Param("carrera") String carrera);
 
     //query buscar solicitudes por el nombre de carrera que ingresa el responsableppp para asignaractividades con estado true
     @Query("SELECT s FROM Solicitud_Practicas s WHERE s.estadoSolicitud = true and s.nombre_carrera = :carrera")
     List<Solicitud_Practicas> findByEstadoSolicitudPorcarreraSolicitudaprobada(@Param("carrera") String carrera);
-
-
 
     @Modifying
     @Query("UPDATE Solicitud_Practicas s SET s.documentoSolicitudPracticas.id_documentoSolicitudPrc = :id_documentoSolicitudPrc WHERE s.idSolicitudPracticas = :idSolicitudPracticas")
@@ -46,12 +44,16 @@ public interface ISolicitudPracticasDao extends JpaRepository<Solicitud_Practica
     @Query("SELECT s FROM Solicitud_Practicas s JOIN s.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE s.estadoSolicitud = true and empre.idEmpresa = :idempresa")
     List<Solicitud_Practicas> findByEsta(@Param("idempresa") Long idempresa);
 
+    @Query("SELECT s FROM Solicitud_Practicas s JOIN s.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE  empre.idEmpresa = :idempresa")
+    List<Solicitud_Practicas> findbyTodas(@Param("idempresa") Long idempresa);
+
     ///listar tutores por empresa
     @Query("SELECT us FROM Usuario us JOIN us.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE empre.idEmpresa= :idempresa")
     List<Usuario> findAllNombresTutores(@Param("idempresa") Long idempresa);
 
     @Query("SELECT s FROM Solicitud_Practicas s JOIN s.responsablePPP res JOIN res.solicitudConvocatorias soli JOIN soli.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE soli.checkResponsable = true and empre.idEmpresa = :idempresa")
     List<Solicitud_Practicas> findBySolicitudpracticasCheckResponsable(@Param("idempresa") Long idempresa);
+
     @Query("SELECT  DISTINCT s FROM Convocatorias c JOIN c.solicitudPracticas s JOIN s.tutorEmpresarial tuto JOIN tuto.empresa empre JOIN c.solicitudConvocatorias soli WHERE soli.checkResponsable = true and empre.idEmpresa = :idempresa")
     List<Solicitud_Practicas> buscarsoliporempresa(@Param("idempresa") Long idempresa);
 }
