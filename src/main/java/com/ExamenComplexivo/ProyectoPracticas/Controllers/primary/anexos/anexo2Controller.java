@@ -1,13 +1,17 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo2Dao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo4;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = { "*" })
@@ -16,6 +20,8 @@ import java.util.List;
 public class anexo2Controller {
     @Autowired
     IAnexo2Service anexo2Service;
+    @Autowired
+    IAnexo2Dao anexo2Dao;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo2>> obtenerLista() {
@@ -23,7 +29,7 @@ public class anexo2Controller {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<Anexo2> crear(@RequestBody Anexo2 c){
+    public ResponseEntity<Anexo2> crear(@RequestBody Anexo2 c) {
         return new ResponseEntity<>(anexo2Service.save(c), HttpStatus.CREATED);
     }
 
@@ -40,7 +46,7 @@ public class anexo2Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
-                anexo2.setDocumento_anexo2(c.getDocumento_anexo2());
+                anexo2.setIdAnexo2(c.getIdAnexo2());
                 anexo2.setPractica(c.getPractica());
                 return new ResponseEntity<>(anexo2Service.save(anexo2), HttpStatus.CREATED);
             } catch (Exception e) {
@@ -49,4 +55,23 @@ public class anexo2Controller {
         }
 
     }
+
+
+    @PutMapping("/updateDocument/{id}")
+    public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
+        if (!anexo2Dao.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El documento con ID " + idDocumento + " no existe.");
+        }
+        try {
+
+            anexo2Dao.actualizarAnexo2(idDocumento, id);
+            return ResponseEntity.ok("Documento actualizado correctamente.");
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
+    }
+
 }
