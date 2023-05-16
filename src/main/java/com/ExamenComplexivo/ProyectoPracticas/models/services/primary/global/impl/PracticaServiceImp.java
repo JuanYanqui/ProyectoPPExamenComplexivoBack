@@ -37,5 +37,11 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
     public List<Practica> getPracticasBySolicitudPracticasId(Long solicitudpracticasId) {
         return practicaDao.getPracticasBySolicitudPracticasId(solicitudpracticasId);
     }
+    public Boolean getPracticasByEstadoxUsuario(Long idUsuario) {
+        return practicaDao.getPracticasByEstadoxUsuario(idUsuario);
+    }
 
+    public Boolean getConvocatoriaLanzada(String nombre_carrera){
+        return practicaDao.getConvocatoriaLanzada(nombre_carrera);
+    }
 }

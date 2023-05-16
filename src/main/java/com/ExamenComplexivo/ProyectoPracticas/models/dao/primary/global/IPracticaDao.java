@@ -29,7 +29,21 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
     void actualizarDocumentoAsigTutorEmp(@Param("id_documentoasigtutorempresarial") Long id_documentoasigtutorempresarial, @Param("idPractica") Long idPractica);
 
 
-    //listar usuario por solicitud
+//    listar usuario por solicitud
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra JOIN sc.convocatoria con JOIN con.solicitudPracticas solipra WHERE solipra.idSolicitudPracticas = :solicitudpracticasId")
     List<Practica> getPracticasBySolicitudPracticasId(Long solicitudpracticasId);
+
+
+    //moviles
+    @Query("SELECT p.checkEmpresarial FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN " +
+            "estu.usuario_estudiante_practicante uspra JOIN sc.convocatoria con JOIN " +
+            "con.solicitudPracticas solipra WHERE p.checkEmpresarial = true and uspra.idUsuario = :idUsuario")
+    Boolean getPracticasByEstadoxUsuario(Long idUsuario);
+
+    @Query("SELECT c.estadoConvocatoria FROM Convocatorias c JOIN c.solicitudPracticas s where c.estadoConvocatoria = true and s.nombre_carrera = :nombre_carrera")
+    Boolean getConvocatoriaLanzada(String nombre_carrera);
 }
+//    select convocatorias.estadoconvocatoria from convocatorias  join solicitud_practicas
+//        ON convocatorias.idsolicitudpracticas = solicitud_practicas.idsolicitudpracticas
+//        where convocatorias.estadoconvocatoria=true
+//        and solicitud_practicas.nombre_carrera ='DESARROLLO INFANTIL INTEGRAL R'

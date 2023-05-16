@@ -12,4 +12,7 @@ public interface IPracticaService extends IGenericService<Practica,Long>{
 
     void actualizarDocumentoAsigTutorAc(Long idDocumentoAsigTutorAcademico, Long idPractica);
     List<Practica>getPracticasBySolicitudPracticasId(Long solicitudpracticasId);
+
+    Boolean getPracticasByEstadoxUsuario(Long idUsuario);
+    Boolean getConvocatoriaLanzada(String nombre_carrera);
 }
