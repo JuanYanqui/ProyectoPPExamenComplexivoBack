@@ -300,5 +300,75 @@ public class JasperServiceImp implements JasperService {
     }
 
 
+    @Override
+    public void reportAnexo5(HttpServletResponse response, long idAnexo5) {
+        try {
+
+            Connection conn = dataSource.getConnection();
+
+            InputStream reportStream = getClass().getResourceAsStream("/reports/Anexo 5.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+            // Crea un mapa de parámetros para generar documento con el id que se le proporcione
+            Map<String, Object> params = new HashMap<>();
+
+            //parametro que necesita jasper para ejecutar la consulta
+            params.put("idAnexo5", idAnexo5);
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=Anexo5.pdf");
+            response.setContentLength(reportContent.length);
+
+            OutputStream outStream = response.getOutputStream();
+            outStream.write(reportContent);
+            outStream.flush();
+            outStream.close();
+        }catch (Exception e){
+
+            System.out.println("No encuentra");
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    @Override
+    public void reportAnexo6(HttpServletResponse response, long idAnexo6) {
+        try {
+
+            Connection conn = dataSource.getConnection();
+
+            InputStream reportStream = getClass().getResourceAsStream("/reports/Anexo 6.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+            // Crea un mapa de parámetros para generar documento con el id que se le proporcione
+            Map<String, Object> params = new HashMap<>();
+
+            //parametro que necesita jasper para ejecutar la consulta
+            params.put("idAnexo6", idAnexo6);
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+            byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=Anexo6.pdf");
+            response.setContentLength(reportContent.length);
+
+            OutputStream outStream = response.getOutputStream();
+            outStream.write(reportContent);
+            outStream.flush();
+            outStream.close();
+        }catch (Exception e){
+
+            System.out.println("No encuentra");
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
 }
