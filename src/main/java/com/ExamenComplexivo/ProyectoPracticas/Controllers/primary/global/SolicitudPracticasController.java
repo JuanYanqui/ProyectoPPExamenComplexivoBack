@@ -148,6 +148,12 @@ public class SolicitudPracticasController {
         List<Solicitud_Practicas> solicitudes= solicitudPracticaService.buscarPorEmpresa(idempresa);
         return ResponseEntity.ok(solicitudes);
     }
+
+    @GetMapping("/buscarTodas/{idempresa}")
+    public ResponseEntity<List<Solicitud_Practicas>> findBybuscarporempresaTodas(@PathVariable Long idempresa) {
+        List<Solicitud_Practicas> solicitudes= solicitudPracticasDao.findbyTodas(idempresa);
+        return ResponseEntity.ok(solicitudes);
+    }
     @GetMapping("/nombrestutores/{idempresa}")
     public List<Usuario> obtenerNombresTutores(@PathVariable Long idempresa) {
         return solicitudPracticaService.obtenerNombresTutores(idempresa);
@@ -169,4 +175,5 @@ public class SolicitudPracticasController {
         List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarsoliporempresa(idempresa);
         return ResponseEntity.ok(solicitudes);
     }
+
 }
