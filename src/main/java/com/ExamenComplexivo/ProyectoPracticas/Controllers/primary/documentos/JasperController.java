@@ -129,6 +129,26 @@ public class JasperController {
     }
 
 
+    @GetMapping("/anexo7/{idAnexo7}")
 
+    public void generateAnexo7(HttpServletResponse response, @PathVariable("idAnexo7") Long idAnexo7) {
+        try {
+            jasperServiceImp.reportAnexo7(response,idAnexo7);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
+
+    @GetMapping("/anexo8/{idAnexo8}")
+
+    public void generateAnexo8(HttpServletResponse response, @PathVariable("idAnexo8") Long idAnexo8) {
+        try {
+            jasperServiceImp.reportAnexo8(response,idAnexo8);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
 
 }

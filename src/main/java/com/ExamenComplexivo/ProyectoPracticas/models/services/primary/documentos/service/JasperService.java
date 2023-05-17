@@ -23,6 +23,11 @@ public interface JasperService {
 
     public void reportAnexo6(HttpServletResponse response, long idAnexo6);
 
+    public void reportAnexo7(HttpServletResponse response, long idAnexo7);
+
+    public void reportAnexo8(HttpServletResponse response, long idAnexo8);
+
+
 
 
 
