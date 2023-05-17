@@ -195,4 +195,15 @@ public class SolicitudConvocatoriaController {
         return solicitudConvocatoriaService.findByAnexo1(convocatoriaId);
     }
 
+    @GetMapping("/buscaranexo5/{id}")
+    public List<Solicitud_Convocatoria> findByAnexo5(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.findByAnexo5(convocatoriaId);
+    }
+
+    @GetMapping("/buscaranexo7/{id}")
+    public List<Solicitud_Convocatoria> findByAnexo7(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.findByAnexo7(convocatoriaId);
+    }
+
+
 }

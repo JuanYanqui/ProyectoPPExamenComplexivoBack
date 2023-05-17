@@ -5,6 +5,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -37,7 +38,7 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra JOIN sc.convocatoria con JOIN con.solicitudPracticas solipra WHERE p.estadoPractica =false AND solipra.idSolicitudPracticas = :solicitudpracticasId")
     List<Practica> getPracticasBySolicitudPracticasId(Long solicitudpracticasId);
 
-    @Query("SELECT c FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN p.usuario usu JOIN sc.convocatoria con JOIN con.solicitudPracticas WHERE usu.cedula = :cedula")
+    @Query("SELECT DISTINCT c FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN p.usuario usu JOIN sc.convocatoria con JOIN con.solicitudPracticas WHERE usu.cedula = :cedula")
     List<Convocatorias> getPracticasByAcademico(String cedula);
 
     @Query("SELECT p " +
@@ -72,6 +73,13 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
             "WHERE  r.carrera = :carrera")
     List<Anexo3> findByCarreraRecibeAnexo3(String carrera);
 
+    @Query("SELECT p FROM Practica p " +
+            "JOIN p.documentoasignacionaca a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.responsablePPP r " +
+            "WHERE  r.carrera = :carrera")
+    List<Practica> findByCarreraRecibeAnexo4(String carrera);
+
     @Query("SELECT p " +
             "FROM Convocatorias c " +
             "JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN p.usuario us WHERE sc.checkPractica = true AND sc.checkEmpresarial = true AND p.checkAcademico = true AND p.checkEmpresarial= true AND p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = false AND us.idUsuario = :idusuario AND  c.idConvocatorias = :convocatoriaId")
@@ -80,8 +88,8 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = true  AND uspra.cedula = :cedula")
     List<Practica> getPracticasByEstudianteAnexo6(String cedula);
 
-    @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = true  AND p.estadoanexo6 =true AND empre.idEmpresa = :idempresa")
-    List<Practica> getPracticasByEmpresarialAnexo7(Long idempresa);
+    @Query("SELECT DISTINCT c FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = true  AND p.estadoanexo6 =true AND empre.idEmpresa = :idempresa")
+    List<Convocatorias> getPracticasByEmpresarialAnexo7(Long idempresa);
 
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.tutorEmpresarial tuto JOIN tuto.empresa empre WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = true  AND p.estadoanexo6 =true AND p.estadoanexo7 = false AND  tuto.idTutorEmpresarial = :tutor")
     List<Practica> getPracticasBylistarAnexo7(Long tutor);
