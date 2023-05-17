@@ -192,6 +192,19 @@ public class PracticaController {
         return practicaService.getPracticasByEstudianteAnexo6(cedula);
     }
 
+    @GetMapping("/practicaporempresaanexo7/{id}")
+    public  List<Practica> getPracticasByEmpresarialAnexo7(@PathVariable("id") Long idempresa) {
+        return practicaService.getPracticasByEmpresarialAnexo7(idempresa);
+    }
 
+    @GetMapping("/practicalistaranexo7/{id}")
+    public  List<Practica> getPracticasBylistarAnexo7(@PathVariable("id") Long tutor) {
+        return practicaService.getPracticasBylistarAnexo7(tutor);
+    }
+
+    @GetMapping("/practicaporestudianteanexo8/{cedula}")
+    public  List<Practica> getPracticasByEstudianteAnexo8(@PathVariable("cedula") String cedula) {
+        return practicaService.getPracticasByEstudianteAnexo8(cedula);
+    }
 
 }
