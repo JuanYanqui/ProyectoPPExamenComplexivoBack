@@ -87,4 +87,17 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
 
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = true  AND p.estadoanexo6 =true AND p.estadoanexo7 = true AND p.estadoanexo8 = false AND uspra.cedula = :cedula")
     List<Practica> getPracticasByEstudianteAnexo8(String cedula);
+
+    //Query para devolver los estudiantes asignados a un tutor academico
+    @Query("SELECT c.nombreConvocatoria, CONCAT(u2.nombres, ' ', u2.apellidos) as estudiante, u2.carrera, p.fechaInicio as Inicio, p.fechaFin AS Fin " +
+            "FROM Practica p " +
+            "INNER JOIN p.usuario u " +
+            "INNER JOIN p.solicitudConvocatoria s " +
+            "INNER JOIN s.convocatoria c " +
+            "INNER JOIN s.estudiantePracticante e " +
+            "INNER JOIN e.usuario_estudiante_practicante u2 " +
+            "WHERE p.checkAcademico = true and u.cedula = :cedulaTutorAcademico")
+    List<Object[]> findPracticasByCedulaTutorAcademico(@Param("cedulaTutorAcademico") String cedulaTutorAcademico);
+
+
 }
