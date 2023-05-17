@@ -67,4 +67,7 @@ public interface ISolicitudConvocatoriaDao extends JpaRepository<Solicitud_Convo
             "INNER JOIN e.usuario_estudiante_practicante u " +
             "WHERE s.checkResponsable = true AND s.tutorEmpresarial.idTutorEmpresarial = :idTutorEmpresarial")
     List<Object[]> obtenerEstudiantesAprobados(@Param("idTutorEmpresarial") Long idTutorEmpresarial);
+
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c JOIN sc.tutorEmpresarial tuto JOIN tuto.empresa empre JOIN sc.practica p WHERE p.estadoanexo1 = false and c.idConvocatorias = :convocatoriaId")
+    List<Solicitud_Convocatoria> findByAnexo1(@Param("convocatoriaId") Long convocatoriaId);
 }

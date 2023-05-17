@@ -190,5 +190,9 @@ public class SolicitudConvocatoriaController {
         return new ResponseEntity<>(datosJSON, HttpStatus.OK);
     }
 
+    @GetMapping("/buscaranexo1/{id}")
+    public List<Solicitud_Convocatoria> findByAnexo1(@PathVariable("id") Long convocatoriaId) {
+        return solicitudConvocatoriaService.findByAnexo1(convocatoriaId);
+    }
 
 }

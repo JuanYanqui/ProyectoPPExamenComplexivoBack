@@ -25,4 +25,6 @@ public interface ISolicitudConvocatoriaService extends IGenericService<Solicitud
 
     List<Solicitud_Convocatoria> findByConvocatoriasTutorFalse(Long convocatoriaId);
 
+    List<Solicitud_Convocatoria> findByAnexo1(Long convocatoriaId);
+
 }

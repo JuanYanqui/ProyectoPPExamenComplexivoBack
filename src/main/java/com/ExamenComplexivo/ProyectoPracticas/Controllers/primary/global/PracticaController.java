@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
@@ -145,7 +146,7 @@ public class PracticaController {
     }
 
     @GetMapping("/practicaporacademico/{cedula}")
-    public  List<Practica> getPracticasByAcademico(@PathVariable("cedula") String cedula) {
+    public  List<Convocatorias> getPracticasByAcademico(@PathVariable("cedula") String cedula) {
         return practicaService.getPracticasByAcademico(cedula);
     }
 
@@ -205,6 +206,12 @@ public class PracticaController {
     @GetMapping("/practicaporestudianteanexo8/{cedula}")
     public  List<Practica> getPracticasByEstudianteAnexo8(@PathVariable("cedula") String cedula) {
         return practicaService.getPracticasByEstudianteAnexo8(cedula);
+    }
+
+    @GetMapping("/convocatoriasparaanexo1/{convocatoriaId}")
+    public ResponseEntity<Long> getPracticasByConvocatoriaIdAnexo1(@PathVariable Long convocatoriaId) {
+        Long id = practicaService.getPracticasByConvocatoriaIdAnexo1(convocatoriaId);
+        return ResponseEntity.ok(id);
     }
 
 }

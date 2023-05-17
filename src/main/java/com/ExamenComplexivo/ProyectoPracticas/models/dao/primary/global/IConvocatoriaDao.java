@@ -41,4 +41,5 @@ public interface IConvocatoriaDao extends JpaRepository<Convocatorias,Long> {
     @Query("SELECT DISTINCT s FROM Convocatorias s JOIN s.solicitudPracticas soli JOIN s.solicitudConvocatorias solcon WHERE solcon.checkPractica = true and soli.nombre_carrera = :carrera")
     List<Convocatorias> findByConvocatoriaporCarreraPractica(@Param("carrera") String carrera);
 
+
 }

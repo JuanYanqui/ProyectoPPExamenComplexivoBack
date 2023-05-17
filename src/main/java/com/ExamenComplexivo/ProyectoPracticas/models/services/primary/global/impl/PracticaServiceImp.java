@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.impl;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
@@ -41,7 +42,7 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.getPracticasBySolicitudPracticasId(solicitudpracticasId);
     }
 
-    public List<Practica> getPracticasByAcademico(String cedula) {
+    public List<Convocatorias> getPracticasByAcademico(String cedula) {
         return practicaDao.getPracticasByAcademico(cedula);
     }
 
@@ -86,6 +87,10 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
 
     public List<Practica> getPracticasByEstudianteAnexo8(String cedula) {
         return practicaDao.getPracticasByEstudianteAnexo8(cedula);
+    }
+
+    public Long getPracticasByConvocatoriaIdAnexo1(Long solicitudpracticasId) {
+        return practicaDao.getPracticasByConvocatoriaIdAnexo1(solicitudpracticasId);
     }
 
 }

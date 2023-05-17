@@ -56,4 +56,6 @@ public interface ISolicitudPracticasDao extends JpaRepository<Solicitud_Practica
 
     @Query("SELECT  DISTINCT s FROM Convocatorias c JOIN c.solicitudPracticas s JOIN s.tutorEmpresarial tuto JOIN tuto.empresa empre JOIN c.solicitudConvocatorias soli WHERE soli.checkResponsable = true and empre.idEmpresa = :idempresa")
     List<Solicitud_Practicas> buscarsoliporempresa(@Param("idempresa") Long idempresa);
+
+
 }

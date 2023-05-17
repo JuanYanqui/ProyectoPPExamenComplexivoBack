@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
@@ -36,8 +37,8 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra JOIN sc.convocatoria con JOIN con.solicitudPracticas solipra WHERE p.estadoPractica =false AND solipra.idSolicitudPracticas = :solicitudpracticasId")
     List<Practica> getPracticasBySolicitudPracticasId(Long solicitudpracticasId);
 
-    @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN p.usuario usu JOIN sc.convocatoria con JOIN con.solicitudPracticas WHERE usu.cedula = :cedula")
-    List<Practica> getPracticasByAcademico(String cedula);
+    @Query("SELECT c FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN p.usuario usu JOIN sc.convocatoria con JOIN con.solicitudPracticas WHERE usu.cedula = :cedula")
+    List<Convocatorias> getPracticasByAcademico(String cedula);
 
     @Query("SELECT p " +
             "FROM Convocatorias c " +
@@ -87,4 +88,9 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
 
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = true  AND p.estadoanexo6 =true AND p.estadoanexo7 = true AND p.estadoanexo8 = false AND uspra.cedula = :cedula")
     List<Practica> getPracticasByEstudianteAnexo8(String cedula);
+
+    @Query("SELECT p.idPractica " +
+            "FROM Convocatorias c " +
+            "JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra WHERE sc.idSolicitudConvocatoria = :convocatoriaId")
+    Long getPracticasByConvocatoriaIdAnexo1(Long convocatoriaId);
 }
