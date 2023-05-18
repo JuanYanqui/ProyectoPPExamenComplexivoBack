@@ -176,4 +176,15 @@ public class SolicitudPracticasController {
         return ResponseEntity.ok(solicitudes);
     }
 
+    @GetMapping("listasoltuto/{idUsuario}")
+    public ResponseEntity<List<Object[]>> buscarsolportutor(@PathVariable Long idUsuario) {
+        List<Object[]> solicitudes = solicitudPracticaService.buscarsolportutor(idUsuario);
+        return ResponseEntity.ok(solicitudes);
+    }
+
+    @GetMapping("listasoltutoaceptadas/{idUsuario}")
+    public ResponseEntity<List<Object[]>> buscarsolportutoraceptadas(@PathVariable Long idUsuario) {
+        List<Object[]> solicitudes = solicitudPracticaService.buscarsolportutoraceptadas(idUsuario);
+        return ResponseEntity.ok(solicitudes);
+    }
 }

@@ -148,10 +148,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/nombresape/{userId}")
-    public ResponseEntity<Object[]> getNombresAndApellidos(@PathVariable Long userId) {
-        Object[] nombresApellidos = iUsuarioService.getNombresAndApellidosByUserId(userId);
-        return ResponseEntity.ok(nombresApellidos);
+    @GetMapping("listartuto/{idUsuario}")
+    public ResponseEntity<List<Object[]>> findUsuariosPorTutorEmpresarial(@PathVariable Long idUsuario) {
+        List<Object[]> usuarios = iUsuarioService.findUsuariosPorTutorEmpresarial(idUsuario);
+        return ResponseEntity.ok(usuarios);
     }
 
 

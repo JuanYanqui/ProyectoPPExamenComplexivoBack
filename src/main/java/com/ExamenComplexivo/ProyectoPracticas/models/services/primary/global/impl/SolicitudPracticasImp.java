@@ -68,4 +68,13 @@ public class SolicitudPracticasImp extends GenericServiceImpl<Solicitud_Practica
         return solicitudPracticasDao.buscarsoliporempresa(idempresa);
     }
 
+
+    public List<Object[]> buscarsolportutor(Long idUsuario) {
+        return solicitudPracticasDao.buscarsolportutor(idUsuario);
+    }
+
+
+    public List<Object[]> buscarsolportutoraceptadas(Long idUsuario) {
+        return solicitudPracticasDao.buscarsolportutoraceptadas(idUsuario);
+    }
 }
