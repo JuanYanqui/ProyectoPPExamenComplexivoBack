@@ -149,7 +149,10 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return usuariosDao.buscarTutoresC();
     }
 
-
+    @Override
+    public List<Object[]> getUsuariosBytutoracademico(Long idUsuario) {
+        return usuariosDao.getUsuariosBytutoracademico(idUsuario);
+}
 
 
 }

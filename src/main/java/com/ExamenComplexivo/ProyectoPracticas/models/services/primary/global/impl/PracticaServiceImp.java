@@ -94,4 +94,8 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
     public Boolean getConvocatoriaLanzada(String nombre_carrera){
         return practicaDao.getConvocatoriaLanzada(nombre_carrera);
     }
+    @Override
+    public List<Object[]> getConvocatoriaDisp(String nombre_carrera) {
+        return practicaDao.getConvocatoriaDisp(nombre_carrera);
+}
 }

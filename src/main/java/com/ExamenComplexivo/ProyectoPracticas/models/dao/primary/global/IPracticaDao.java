@@ -98,4 +98,8 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
 
     @Query("SELECT c.estadoConvocatoria FROM Convocatorias c JOIN c.solicitudPracticas s where c.estadoConvocatoria = true and s.nombre_carrera = :nombre_carrera")
     Boolean getConvocatoriaLanzada(String nombre_carrera);
+    @Query("SELECT c.nombreConvocatoria, c.fechaPublicacion, c.fechaExpiracion " +
+            "FROM Convocatorias c JOIN c.solicitudPracticas s " +
+            "where c.estadoConvocatoria = true and s.nombre_carrera = :nombre_carrera")
+    List<Object[]> getConvocatoriaDisp(String nombre_carrera);
 }

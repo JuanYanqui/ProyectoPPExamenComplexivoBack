@@ -214,5 +214,9 @@ public class PracticaController {
     public  List<Practica> getPracticasByEstudianteAnexo8(@PathVariable("cedula") String cedula) {
         return practicaService.getPracticasByEstudianteAnexo8(cedula);
     }
+    @GetMapping("/convocatoriadisp/{nombre_carrera}")
+    public  List<Object[]> getConvocatoriaDisp(@PathVariable("nombre_carrera") String nombre_carrera) {
+        return practicaService.getConvocatoriaDisp(nombre_carrera);
+}
 
 }

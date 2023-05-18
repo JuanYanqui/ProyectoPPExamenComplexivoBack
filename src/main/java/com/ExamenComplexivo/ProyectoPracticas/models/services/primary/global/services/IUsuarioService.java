@@ -42,4 +42,5 @@ public interface IUsuarioService extends UserDetailsService{
     List<Object[]> findUsuariosPorTutorEmpresarial(Long idUsuario);
     List<Object[]> buscarEstudiantesAxresponsable(Long idusuario);
     List<Object[]> buscarTutoresC();
+    List<Object[]> getUsuariosBytutoracademico(Long idUsuario);
 }

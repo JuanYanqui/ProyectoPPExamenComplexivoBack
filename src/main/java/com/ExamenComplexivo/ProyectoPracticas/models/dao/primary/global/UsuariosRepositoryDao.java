@@ -60,6 +60,10 @@ public interface UsuariosRepositoryDao extends JpaRepository<Usuario,Long> {
     //lista de tutores empresariales
     @Query("select us.cedula, us.nombres, us.apellidos, t.cargo, em.nombreEmpresa  from Usuario us join us.tutorEmpresarial t join t.empresa em")
     List<Object[]> buscarTutoresC();
-
+    @Query("SELECT u.nombres, u.apellidos, u.cedula FROM Usuario u " +
+            "JOIN u.estudiantePracticante ep JOIN ep.solicitudConvocatorias sc" +
+            " JOIN sc.practica p JOIN p.usuario pu" +
+            " WHERE pu.idUsuario = :idUsuario")
+    List<Object[]> getUsuariosBytutoracademico(@Param("idUsuario") Long idUsuario);
 
 }
