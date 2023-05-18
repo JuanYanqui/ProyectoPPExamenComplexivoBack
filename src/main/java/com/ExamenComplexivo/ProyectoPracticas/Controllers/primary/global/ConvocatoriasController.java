@@ -14,7 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
@@ -151,6 +154,27 @@ public class ConvocatoriasController {
     public ResponseEntity<List<Convocatorias>> findByConvocatoriaporCarreraPractica(@PathVariable String carrera)  {
         List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporCarreraPractica(carrera);
         return ResponseEntity.ok(convocatorias);
+    }
+
+    //Metodo para listar convocatorias con datos relacionados desde otras tablas en ROL Responsable
+    @GetMapping("/datos/{idResponsable}")
+    public ResponseEntity<List<Map<String, String>>> obtenerDatosConvocatoria(@PathVariable("idResponsable") Long idResponsable){
+        List<Object[]> datos = convocatoriaDao.listarConvocatorias(idResponsable);
+
+        // Convertir los datos a un formato JSON
+        List<Map<String, String>> datosJSON = new ArrayList<>();
+        for (Object[] fila : datos) {
+            Map<String, String> filaJSON = new HashMap<>();
+            filaJSON.put("convocatoria", fila[0].toString());
+            filaJSON.put("FechaPublicacion", (String) fila[1]);
+            filaJSON.put("FechaExpiracion", (String) fila[2]);
+            filaJSON.put("carrera", (String) fila[3]);
+            filaJSON.put("estado", String.valueOf((Boolean) fila[4]));
+            filaJSON.put("fechaAprobacion", (String) fila[5]);
+            datosJSON.add(filaJSON);
+        }
+        // Me devuelve los datos en formato JSON
+        return new ResponseEntity<>(datosJSON, HttpStatus.OK);
     }
 
 }
