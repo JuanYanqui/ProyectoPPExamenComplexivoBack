@@ -2,9 +2,7 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.se
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.*;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.IGenericService;
 
@@ -44,5 +42,12 @@ public interface IPracticaService extends IGenericService<Practica,Long>{
     List<Practica> getPracticasByEstudianteAnexo8(String cedula);
 
     Long getPracticasByConvocatoriaIdAnexo1(Long solicitudpracticasId);
+
+    List<Anexo6> getPracticasByCarrera6(String cedula);
+
+    List<Anexo7> getPracticasByCarrera7(String cedula);
+
+    List<Anexo8> getPracticasByCarrera8(String cedula);
+
 
 }

@@ -3,9 +3,7 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.im
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.*;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
@@ -94,8 +92,21 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.getPracticasByEstudianteAnexo8(cedula);
     }
 
+
     public Long getPracticasByConvocatoriaIdAnexo1(Long solicitudpracticasId) {
         return practicaDao.getPracticasByConvocatoriaIdAnexo1(solicitudpracticasId);
+    }
+
+    public List<Anexo6> getPracticasByCarrera6(String cedula) {
+        return practicaDao.findByCarreraRecibeAnexo6(cedula);
+    }
+
+    public List<Anexo7> getPracticasByCarrera7(String cedula) {
+        return practicaDao.findByCarreraRecibeAnexo7(cedula);
+    }
+
+    public List<Anexo8> getPracticasByCarrera8(String cedula) {
+        return practicaDao.findByCarreraRecibeAnexo8(cedula);
     }
 
 }

@@ -2,9 +2,7 @@ package com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
-import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.*;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -79,6 +77,27 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
             "JOIN soli.responsablePPP r " +
             "WHERE  r.carrera = :carrera")
     List<Practica> findByCarreraRecibeAnexo4(String carrera);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo6 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN p.usuario usu " +
+            "WHERE  usu.cedula = :cedula")
+    List<Anexo6> findByCarreraRecibeAnexo6(String cedula);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo7 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN p.usuario usu " +
+            "WHERE  usu.cedula = :cedula")
+    List<Anexo7> findByCarreraRecibeAnexo7(String cedula);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo8 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN p.usuario usu " +
+            "WHERE  usu.cedula = :cedula")
+    List<Anexo8> findByCarreraRecibeAnexo8(String cedula);
 
     @Query("SELECT p " +
             "FROM Convocatorias c " +
