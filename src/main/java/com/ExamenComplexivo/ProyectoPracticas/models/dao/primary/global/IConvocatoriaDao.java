@@ -44,4 +44,13 @@ public interface IConvocatoriaDao extends JpaRepository<Convocatorias,Long> {
     //lista de convocatorias
     @Query("select c.nombreConvocatoria, sol.nombreSolicitud, sol.fechaEnvioSolicitud, sol.fechaAceptacion from Convocatorias c join c.solicitudPracticas sol")
     List<Object[]> buscarConvocatoriasC();
+
+    
+    @Query("SELECT c.nombreConvocatoria, c.fechaPublicacion, c.fechaExpiracion, sp.nombre_carrera, c.estadoConvocatoria, sc.fechaAprobacion " +
+            "FROM Convocatorias c " +
+            "JOIN c.solicitudConvocatorias sc " +
+            "JOIN c.solicitudPracticas sp WHERE sp.responsablePPP.idResponsablePPP= :idResponsablePPP ORDER BY sc.fechaAprobacion DESC")
+    List<Object[]> listarConvocatorias(@Param("idResponsablePPP") Long idResponsablePPP);
+
+
 }
