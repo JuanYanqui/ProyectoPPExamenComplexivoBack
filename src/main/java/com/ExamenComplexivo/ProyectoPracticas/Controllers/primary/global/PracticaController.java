@@ -1,10 +1,12 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -149,7 +151,7 @@ public class PracticaController {
     }
 
     @GetMapping("/practicaporacademico/{cedula}")
-    public  List<Practica> getPracticasByAcademico(@PathVariable("cedula") String cedula) {
+    public  List<Convocatorias> getPracticasByAcademico(@PathVariable("cedula") String cedula) {
         return practicaService.getPracticasByAcademico(cedula);
     }
 
@@ -186,6 +188,12 @@ public class PracticaController {
         return ResponseEntity.ok(practicas);
     }
 
+    @GetMapping("/carreraparaanexo4/{carrera}")
+    public ResponseEntity<List<Practica>> getPracticasByCarrera4(@PathVariable String carrera) {
+        List<Practica> practicas = practicaService.getPracticasByCarrera4(carrera);
+        return ResponseEntity.ok(practicas);
+    }
+
     @GetMapping("/practicaparaanexo5/{id}/{idusuario}")
     public  List<Practica> getPracticasByDocumentoAnexo5(@PathVariable("id") Long idconvocatoria, @PathVariable("idusuario") Long idusuario) {
         return practicaService.getPracticasByDocumentoAnexo5(idconvocatoria, idusuario);
@@ -197,7 +205,7 @@ public class PracticaController {
     }
 
     @GetMapping("/practicaporempresaanexo7/{id}")
-    public  List<Practica> getPracticasByEmpresarialAnexo7(@PathVariable("id") Long idempresa) {
+    public  List<Convocatorias> getPracticasByEmpresarialAnexo7(@PathVariable("id") Long idempresa) {
         return practicaService.getPracticasByEmpresarialAnexo7(idempresa);
     }
 
@@ -211,6 +219,13 @@ public class PracticaController {
         return practicaService.getPracticasByEstudianteAnexo8(cedula);
     }
 
+    @GetMapping("/convocatoriasparaanexo1/{convocatoriaId}")
+    public ResponseEntity<Long> getPracticasByConvocatoriaIdAnexo1(@PathVariable Long convocatoriaId) {
+        Long id = practicaService.getPracticasByConvocatoriaIdAnexo1(convocatoriaId);
+        return ResponseEntity.ok(id);
+
+    }
+    
     @GetMapping("/listadoAprobados/{cedulaTutor}")
     public ResponseEntity<List<Map<String, String>>> buscarEstudiantesAprobados(@PathVariable("cedulaTutor") String cedulaTutor) {
         List<Object[]> datos = practicaDao.findPracticasByCedulaTutorAcademico(cedulaTutor);

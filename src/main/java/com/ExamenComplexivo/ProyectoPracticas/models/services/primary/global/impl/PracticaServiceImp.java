@@ -1,10 +1,12 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.impl;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.getPracticasBySolicitudPracticasId(solicitudpracticasId);
     }
 
-    public List<Practica> getPracticasByAcademico(String cedula) {
+    public List<Convocatorias> getPracticasByAcademico(String cedula) {
         return practicaDao.getPracticasByAcademico(cedula);
     }
 
@@ -68,6 +70,10 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.findByCarreraRecibeAnexo3(carrera);
     }
 
+    public List<Practica> getPracticasByCarrera4(String carrera) {
+        return practicaDao.findByCarreraRecibeAnexo4(carrera);
+    }
+
     public List<Practica> getPracticasByDocumentoAnexo5(Long convocatoriaid, Long idusuario) {
         return practicaDao.getPracticasByDocumentoAnexo5(convocatoriaid, idusuario);
     }
@@ -76,7 +82,7 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.getPracticasByEstudianteAnexo6(cedula);
     }
 
-    public List<Practica> getPracticasByEmpresarialAnexo7(Long idempresa) {
+    public List<Convocatorias> getPracticasByEmpresarialAnexo7(Long idempresa) {
         return practicaDao.getPracticasByEmpresarialAnexo7(idempresa);
     }
 
@@ -86,6 +92,10 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
 
     public List<Practica> getPracticasByEstudianteAnexo8(String cedula) {
         return practicaDao.getPracticasByEstudianteAnexo8(cedula);
+    }
+
+    public Long getPracticasByConvocatoriaIdAnexo1(Long solicitudpracticasId) {
+        return practicaDao.getPracticasByConvocatoriaIdAnexo1(solicitudpracticasId);
     }
 
 }
