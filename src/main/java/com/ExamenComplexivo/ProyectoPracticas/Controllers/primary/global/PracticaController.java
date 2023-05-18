@@ -147,6 +147,14 @@ public class PracticaController {
     public  List<Practica> getPracticasBySolicitudPracticasId(@PathVariable("id") Long solicitudpracticasId) {
         return practicaService.getPracticasBySolicitudPracticasId(solicitudpracticasId);
     }
+    @GetMapping("/estadoxusuario/{idUsuario}")
+    public  Boolean getPracticasByEstadoxUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        return practicaService.getPracticasByEstadoxUsuario(idUsuario);
+    }
+    @GetMapping("/convocatoriaxusuario/{nombre_carrera}")
+    public  Boolean getConvocatoriaLanzada(@PathVariable("nombre_carrera") String  nombre_carrera) {
+        return practicaService.getConvocatoriaLanzada(nombre_carrera);
+    }
 
     @GetMapping("/practicaporacademico/{cedula}")
     public  List<Convocatorias> getPracticasByAcademico(@PathVariable("cedula") String cedula) {
@@ -216,6 +224,10 @@ public class PracticaController {
     public  List<Practica> getPracticasByEstudianteAnexo8(@PathVariable("cedula") String cedula) {
         return practicaService.getPracticasByEstudianteAnexo8(cedula);
     }
+    @GetMapping("/convocatoriadisp/{nombre_carrera}")
+    public  List<Object[]> getConvocatoriaDisp(@PathVariable("nombre_carrera") String nombre_carrera) {
+        return practicaService.getConvocatoriaDisp(nombre_carrera);
+}
 
     @GetMapping("/convocatoriasparaanexo1/{convocatoriaId}")
     public ResponseEntity<Long> getPracticasByConvocatoriaIdAnexo1(@PathVariable Long convocatoriaId) {

@@ -39,5 +39,8 @@ public interface IUsuarioService extends UserDetailsService{
 
     boolean resetPassword(String cedula, String newPassword);
 
-    Object[] getNombresAndApellidosByUserId(Long userId);
+    List<Object[]> findUsuariosPorTutorEmpresarial(Long idUsuario);
+    List<Object[]> buscarEstudiantesAxresponsable(Long idusuario);
+    List<Object[]> buscarTutoresC();
+    List<Object[]> getUsuariosBytutoracademico(Long idUsuario);
 }

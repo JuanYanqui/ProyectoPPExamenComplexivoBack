@@ -50,5 +50,8 @@ public interface IPracticaService extends IGenericService<Practica,Long>{
 
     List<Anexo8> getPracticasByCarrera8(String carrera);
 
+    Boolean getPracticasByEstadoxUsuario(Long idUsuario);
+    Boolean getConvocatoriaLanzada(String nombre_carrera);
+    List<Object[]> getConvocatoriaDisp(String nombre_carrera);
 
 }

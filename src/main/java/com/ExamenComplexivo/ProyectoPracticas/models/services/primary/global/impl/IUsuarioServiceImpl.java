@@ -139,8 +139,20 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return false;
     }
 
-    public Object[] getNombresAndApellidosByUserId(Long userId) {
-        return usuariosDao.findNombresAndApellidosByUserId(userId);
+    public List<Object[]> findUsuariosPorTutorEmpresarial(Long idUsuario) {
+        return usuariosDao.findUsuariosPorTutorEmpresarial(idUsuario);
     }
+    public List<Object[]> buscarEstudiantesAxresponsable(Long idusuario) {
+        return usuariosDao.buscarEstudiantesAxresponsable(idusuario);
+    }
+    public List<Object[]> buscarTutoresC() {
+        return usuariosDao.buscarTutoresC();
+    }
+
+    @Override
+    public List<Object[]> getUsuariosBytutoracademico(Long idUsuario) {
+        return usuariosDao.getUsuariosBytutoracademico(idUsuario);
+}
+
 
 }

@@ -47,10 +47,23 @@ public interface UsuariosRepositoryDao extends JpaRepository<Usuario,Long> {
             "WHERE rol.idrol = 6 ", nativeQuery = true)
     List<Usuario> findUsuariosByRolIdAcademico();
 
-    @Query("SELECT u2.nombres, u2.apellidos FROM Usuario u JOIN u.tutorEmpresarial t " +
-            "JOIN t.solicitudConvocatorias sc JOIN sc.convocatoria c " +
+    @Query("SELECT u2.nombres, u2.apellidos, u2.cedula FROM Usuario u JOIN u.tutorEmpresarial te " +
+            "JOIN te.solicitudConvocatorias sc JOIN sc.convocatoria c " +
             "JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante u2 " +
-            "WHERE u.idUsuario= :userId")
-    Object[] findNombresAndApellidosByUserId(Long userId);
+            "WHERE u.idUsuario = :idUsuario")
+    List<Object[]> findUsuariosPorTutorEmpresarial(@Param("idUsuario") Long idUsuario);
+    //Estudiantes aprobados x responsable
+    @Query("select us.cedula, us.nombres, us.apellidos, us.carrera from Usuario us join us.estudiantePracticante est join est.solicitudConvocatorias soli join soli.responsablePPP resp join resp.usuario_responsable usresp " +
+            "where usresp.idUsuario = :idusuario")
+    List<Object[]> buscarEstudiantesAxresponsable(@Param("idusuario") Long idusuario);
+
+    //lista de tutores empresariales
+    @Query("select us.cedula, us.nombres, us.apellidos, t.cargo, em.nombreEmpresa  from Usuario us join us.tutorEmpresarial t join t.empresa em")
+    List<Object[]> buscarTutoresC();
+    @Query("SELECT u.nombres, u.apellidos, u.cedula FROM Usuario u " +
+            "JOIN u.estudiantePracticante ep JOIN ep.solicitudConvocatorias sc" +
+            " JOIN sc.practica p JOIN p.usuario pu" +
+            " WHERE pu.idUsuario = :idUsuario")
+    List<Object[]> getUsuariosBytutoracademico(@Param("idUsuario") Long idUsuario);
 
 }
