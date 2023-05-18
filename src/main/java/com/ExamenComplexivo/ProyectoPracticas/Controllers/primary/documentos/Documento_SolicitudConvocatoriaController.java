@@ -6,7 +6,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDoc
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudConvocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
-import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudConvocatoriaService;
+//import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudConvocatoriaService;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudPracticasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -29,8 +29,8 @@ public class Documento_SolicitudConvocatoriaController {
     @Autowired
     IDocumento_SolicitudConvocatoriaDao documentoDao;
 
-    @Autowired
-    IDocumento_SolicitudConvocatoriaService documentoSolicitudConvocatoriaService;
+    /*@Autowired
+    IDocumento_SolicitudConvocatoriaService documentoSolicitudConvocatoriaService;*/
     @Autowired
     private DataSource dataSource;
 

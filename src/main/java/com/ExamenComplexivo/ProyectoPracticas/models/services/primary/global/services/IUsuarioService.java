@@ -2,6 +2,7 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.se
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Rol;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Usuario;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -39,4 +40,5 @@ public interface IUsuarioService extends UserDetailsService{
 
     boolean resetPassword(String cedula, String newPassword);
 
+    List<Object[]> getUsuariosBytutoracademico(Long idUsuario);
 }

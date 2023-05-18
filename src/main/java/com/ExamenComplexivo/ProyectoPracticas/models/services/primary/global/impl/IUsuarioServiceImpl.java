@@ -139,4 +139,9 @@ public class IUsuarioServiceImpl implements IUsuarioService {
         return false;
     }
 
+    @Override
+    public List<Object[]> getUsuariosBytutoracademico(Long idUsuario) {
+        return usuariosDao.getUsuariosBytutoracademico(idUsuario);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global;
 
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -42,4 +43,10 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
 
     @Query("SELECT c.estadoConvocatoria FROM Convocatorias c JOIN c.solicitudPracticas s where c.estadoConvocatoria = true and s.nombre_carrera = :nombre_carrera")
     Boolean getConvocatoriaLanzada(String nombre_carrera);
+
+    @Query("SELECT c.nombreConvocatoria, c.fechaPublicacion, c.fechaExpiracion " +
+            "FROM Convocatorias c JOIN c.solicitudPracticas s " +
+            "where c.estadoConvocatoria = true and s.nombre_carrera = :nombre_carrera")
+    List<Object[]> getConvocatoriaDisp(String nombre_carrera);
+
 }

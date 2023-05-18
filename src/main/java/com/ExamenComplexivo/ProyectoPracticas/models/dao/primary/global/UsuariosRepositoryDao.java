@@ -47,4 +47,12 @@ public interface UsuariosRepositoryDao extends JpaRepository<Usuario,Long> {
             "WHERE rol.idrol = 6 ", nativeQuery = true)
     List<Usuario> findUsuariosByRolIdAcademico();
 
+
+
+    @Query("SELECT u.nombres, u.apellidos, u.cedula FROM Usuario u " +
+            "JOIN u.estudiantePracticante ep JOIN ep.solicitudConvocatorias sc" +
+            " JOIN sc.practica p JOIN p.usuario pu" +
+            " WHERE pu.idUsuario = :idUsuario")
+    List<Object[]> getUsuariosBytutoracademico(@Param("idUsuario") Long idUsuario);
+
 }

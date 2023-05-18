@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.impl;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
@@ -43,5 +44,10 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
 
     public Boolean getConvocatoriaLanzada(String nombre_carrera){
         return practicaDao.getConvocatoriaLanzada(nombre_carrera);
+    }
+
+    @Override
+    public List<Object[]> getConvocatoriaDisp(String nombre_carrera) {
+        return practicaDao.getConvocatoriaDisp(nombre_carrera);
     }
 }

@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.global;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
@@ -140,4 +141,8 @@ public class PracticaController {
         return practicaService.getConvocatoriaLanzada(nombre_carrera);
     }
 
+    @GetMapping("/convocatoriadisp/{nombre_carrera}")
+    public  List<Object[]> getConvocatoriaDisp(@PathVariable("nombre_carrera") String nombre_carrera) {
+        return practicaService.getConvocatoriaDisp(nombre_carrera);
+    }
 }

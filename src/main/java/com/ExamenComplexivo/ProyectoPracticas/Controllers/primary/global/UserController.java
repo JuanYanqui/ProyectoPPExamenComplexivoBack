@@ -148,6 +148,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/listaestudiante/{idUsuario}")
+    public ResponseEntity<List<Object[]>> getUsuariosBytutoracademico(@PathVariable("idUsuario") Long idUsuario) {
+        List<Object[]> usuarios = iUsuarioService.getUsuariosBytutoracademico(idUsuario);
+        return ResponseEntity.ok(usuarios);
+    }
+
 
 
 }

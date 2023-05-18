@@ -5,7 +5,7 @@ import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDoc
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.documentos.IDocumento_SolicitudPracticasDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudConvocatoria;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_SolicitudPracticas;
-import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudConvocatoriaService;
+//import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudConvocatoriaService;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.documentos.service.IDocumento_SolicitudPracticasService;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Service
+/*@Service
 public class Documento_SolicitudConvocatoriaImp extends GenericServiceImpl<Documento_SolicitudConvocatoria, Long> implements IDocumento_SolicitudConvocatoriaService {
 
     @Autowired
@@ -34,4 +34,4 @@ public class Documento_SolicitudConvocatoriaImp extends GenericServiceImpl<Docum
         archivo.setDocumento_solicitud_convocatoria(documento);
         return documentoSolicitudConvocatoriaDao.save(archivo);
     }
-}
+}*/
