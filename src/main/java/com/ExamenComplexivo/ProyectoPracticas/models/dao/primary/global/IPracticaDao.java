@@ -79,25 +79,32 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
     List<Practica> findByCarreraRecibeAnexo4(String carrera);
 
     @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo5 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.responsablePPP r " +
+            "WHERE  r.carrera = :carrera")
+    List<Anexo5> findByCarreraRecibeAnexo5(String carrera);
+
+    @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo6 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN p.usuario usu " +
-            "WHERE  usu.cedula = :cedula")
-    List<Anexo6> findByCarreraRecibeAnexo6(String cedula);
+            "JOIN soli.responsablePPP r " +
+            "WHERE  r.carrera = :carrera")
+    List<Anexo6> findByCarreraRecibeAnexo6(String carrera);
 
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo7 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN p.usuario usu " +
-            "WHERE  usu.cedula = :cedula")
-    List<Anexo7> findByCarreraRecibeAnexo7(String cedula);
+            "JOIN soli.responsablePPP r " +
+            "WHERE  r.carrera = :carrera")
+    List<Anexo7> findByCarreraRecibeAnexo7(String carrera);
 
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo8 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN p.usuario usu " +
-            "WHERE  usu.cedula = :cedula")
-    List<Anexo8> findByCarreraRecibeAnexo8(String cedula);
+            "JOIN soli.responsablePPP r " +
+            "WHERE  r.carrera = :carrera")
+    List<Anexo8> findByCarreraRecibeAnexo8(String carrera);
 
     @Query("SELECT p " +
             "FROM Convocatorias c " +

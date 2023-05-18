@@ -97,16 +97,20 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.getPracticasByConvocatoriaIdAnexo1(solicitudpracticasId);
     }
 
-    public List<Anexo6> getPracticasByCarrera6(String cedula) {
-        return practicaDao.findByCarreraRecibeAnexo6(cedula);
+    public List<Anexo5> getPracticasByCarrera5(String carrera) {
+        return practicaDao.findByCarreraRecibeAnexo5(carrera);
     }
 
-    public List<Anexo7> getPracticasByCarrera7(String cedula) {
-        return practicaDao.findByCarreraRecibeAnexo7(cedula);
+    public List<Anexo6> getPracticasByCarrera6(String carrera) {
+        return practicaDao.findByCarreraRecibeAnexo6(carrera);
     }
 
-    public List<Anexo8> getPracticasByCarrera8(String cedula) {
-        return practicaDao.findByCarreraRecibeAnexo8(cedula);
+    public List<Anexo7> getPracticasByCarrera7(String carrera) {
+        return practicaDao.findByCarreraRecibeAnexo7(carrera);
+    }
+
+    public List<Anexo8> getPracticasByCarrera8(String carrera) {
+        return practicaDao.findByCarreraRecibeAnexo8(carrera);
     }
 
 }

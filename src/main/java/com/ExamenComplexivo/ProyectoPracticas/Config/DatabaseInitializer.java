@@ -9,16 +9,16 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
-@Configuration
-public class DatabaseInitializer {
-
-    @Autowired
-    private DataSource dataSource;
-
-    @PostConstruct
-    public void initialize() {
-        ResourceDatabasePopulator populator = new ResourceDatabasePopulator(new ClassPathResource("import.sql"));
-        populator.execute(dataSource);
-    }
-
-}
+//@Configuration
+//public class DatabaseInitializer {
+//
+//    @Autowired
+//    private DataSource dataSource;
+//
+//    @PostConstruct
+//    public void initialize() {
+//        ResourceDatabasePopulator populator = new ResourceDatabasePopulator(new ClassPathResource("import.sql"));
+//        populator.execute(dataSource);
+//    }
+//
+//}

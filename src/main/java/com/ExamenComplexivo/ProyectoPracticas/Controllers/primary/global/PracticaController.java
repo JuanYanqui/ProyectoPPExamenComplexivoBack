@@ -243,21 +243,26 @@ public class PracticaController {
         return new ResponseEntity<>(datosJSON, HttpStatus.OK);
     }
 
-    @GetMapping("/empresarialanexo6/{cedula}")
-    public ResponseEntity<List<Anexo6>> getPracticasByCarrera6(@PathVariable String cedula) {
-        List<Anexo6> practicas = practicaService.getPracticasByCarrera6(cedula);
+    @GetMapping("/carreraparaanexo5/{carrera}")
+    public ResponseEntity<List<Anexo5>> getPracticasByCarrera5(@PathVariable String carrera) {
+        List<Anexo5> practicas = practicaService.getPracticasByCarrera5(carrera);
+        return ResponseEntity.ok(practicas);
+    }
+    @GetMapping("/carreraparaanexo6/{carrera}")
+    public ResponseEntity<List<Anexo6>> getPracticasByCarrera6(@PathVariable String carrera) {
+        List<Anexo6> practicas = practicaService.getPracticasByCarrera6(carrera);
         return ResponseEntity.ok(practicas);
     }
 
-    @GetMapping("/empresarialanexo7/{cedula}")
-    public ResponseEntity<List<Anexo7>> getPracticasByCarrera7(@PathVariable String cedula) {
-        List<Anexo7> practicas = practicaService.getPracticasByCarrera7(cedula);
+    @GetMapping("/carreraparaanexo7/{carrera}")
+    public ResponseEntity<List<Anexo7>> getPracticasByCarrera7(@PathVariable String carrera) {
+        List<Anexo7> practicas = practicaService.getPracticasByCarrera7(carrera);
         return ResponseEntity.ok(practicas);
     }
 
-    @GetMapping("/empresarialanexo8/{cedula}")
-    public ResponseEntity<List<Anexo8>> getPracticasByCarrera8(@PathVariable String cedula) {
-        List<Anexo8> practicas = practicaService.getPracticasByCarrera8(cedula);
+    @GetMapping("/carreraparaanexo8/{carrera}")
+    public ResponseEntity<List<Anexo8>> getPracticasByCarrera8(@PathVariable String carrera) {
+        List<Anexo8> practicas = practicaService.getPracticasByCarrera8(carrera);
         return ResponseEntity.ok(practicas);
     }
 
