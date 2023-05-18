@@ -143,6 +143,14 @@ public class PracticaController {
     public  List<Practica> getPracticasBySolicitudPracticasId(@PathVariable("id") Long solicitudpracticasId) {
         return practicaService.getPracticasBySolicitudPracticasId(solicitudpracticasId);
     }
+    @GetMapping("/estadoxusuario/{idUsuario}")
+    public  Boolean getPracticasByEstadoxUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        return practicaService.getPracticasByEstadoxUsuario(idUsuario);
+    }
+    @GetMapping("/convocatoriaxusuario/{nombre_carrera}")
+    public  Boolean getConvocatoriaLanzada(@PathVariable("nombre_carrera") String  nombre_carrera) {
+        return practicaService.getConvocatoriaLanzada(nombre_carrera);
+    }
 
     @GetMapping("/practicaporacademico/{cedula}")
     public  List<Practica> getPracticasByAcademico(@PathVariable("cedula") String cedula) {

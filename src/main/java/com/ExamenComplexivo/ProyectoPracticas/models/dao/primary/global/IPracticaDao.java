@@ -87,4 +87,17 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
 
     @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra WHERE p.estadoanexo1 = true AND p.estadoanexo2 = true AND p.estadoanexo3 = true AND p.estadoanexo5 = true  AND p.estadoanexo6 =true AND p.estadoanexo7 = true AND p.estadoanexo8 = false AND uspra.cedula = :cedula")
     List<Practica> getPracticasByEstudianteAnexo8(String cedula);
+//    listar usuario por solicitud
+    @Query("SELECT p FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN estu.usuario_estudiante_practicante uspra JOIN sc.convocatoria con JOIN con.solicitudPracticas solipra WHERE solipra.idSolicitudPracticas = :solicitudpracticasId")
+    List<Practica> getPracticasBySolicitudPracticasId(Long solicitudpracticasId);
+
+
+    //moviles
+    @Query("SELECT p.checkEmpresarial FROM Convocatorias c JOIN c.solicitudConvocatorias sc JOIN sc.practica p JOIN sc.estudiantePracticante estu JOIN " +
+            "estu.usuario_estudiante_practicante uspra JOIN sc.convocatoria con JOIN " +
+            "con.solicitudPracticas solipra WHERE p.checkEmpresarial = true and uspra.idUsuario = :idUsuario")
+    Boolean getPracticasByEstadoxUsuario(Long idUsuario);
+
+    @Query("SELECT c.estadoConvocatoria FROM Convocatorias c JOIN c.solicitudPracticas s where c.estadoConvocatoria = true and s.nombre_carrera = :nombre_carrera")
+    Boolean getConvocatoriaLanzada(String nombre_carrera);
 }
