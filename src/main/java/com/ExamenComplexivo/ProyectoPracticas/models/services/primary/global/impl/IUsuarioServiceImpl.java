@@ -142,5 +142,14 @@ public class IUsuarioServiceImpl implements IUsuarioService {
     public List<Object[]> findUsuariosPorTutorEmpresarial(Long idUsuario) {
         return usuariosDao.findUsuariosPorTutorEmpresarial(idUsuario);
     }
+    public List<Object[]> buscarEstudiantesAxresponsable(Long idusuario) {
+        return usuariosDao.buscarEstudiantesAxresponsable(idusuario);
+    }
+    public List<Object[]> buscarTutoresC() {
+        return usuariosDao.buscarTutoresC();
+    }
+
+
+
 
 }

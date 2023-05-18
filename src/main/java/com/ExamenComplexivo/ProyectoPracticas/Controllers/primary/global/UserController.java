@@ -148,12 +148,21 @@ public class UserController {
         }
     }
 
-    @GetMapping("listartuto/{idUsuario}")
+    @GetMapping("/listartuto/{idUsuario}")
     public ResponseEntity<List<Object[]>> findUsuariosPorTutorEmpresarial(@PathVariable Long idUsuario) {
         List<Object[]> usuarios = iUsuarioService.findUsuariosPorTutorEmpresarial(idUsuario);
         return ResponseEntity.ok(usuarios);
     }
-
+    @GetMapping("/EstudiantesARespon/{idusuario}")
+    public ResponseEntity<List<Object[]>> buscarEstudiantesAxresponsable(@PathVariable Long idusuario) {
+        List<Object[]> usuarios = iUsuarioService.buscarEstudiantesAxresponsable(idusuario);
+        return ResponseEntity.ok(usuarios);
+    }
+    @GetMapping("/ListaTutoresC")
+    public ResponseEntity<List<Object[]>> buscarTutoresC() {
+        List<Object[]> usuarios = iUsuarioService.buscarTutoresC();
+        return ResponseEntity.ok(usuarios);
+    }
 
 
 }

@@ -153,4 +153,10 @@ public class ConvocatoriasController {
         return ResponseEntity.ok(convocatorias);
     }
 
+    @GetMapping("/ListaConvocatoriasC")
+    public ResponseEntity<List<Object[]>> buscarConvocatoriasC() {
+        List<Object[]> convocatorias = convocatoriaService.buscarConvocatoriasC();
+        return ResponseEntity.ok(convocatorias);
+    }
+
 }

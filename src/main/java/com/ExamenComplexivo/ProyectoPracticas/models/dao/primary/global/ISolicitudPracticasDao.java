@@ -62,4 +62,7 @@ public interface ISolicitudPracticasDao extends JpaRepository<Solicitud_Practica
 
     @Query("SELECT sp.nombreSolicitud, sp.fechaEnvioSolicitud, sp.fechaAceptacion FROM Usuario u JOIN u.tutorEmpresarial te JOIN te.solicitudPracticas sp WHERE sp.estadoSolicitud = true AND u.idUsuario = :idUsuario")
     List<Object[]> buscarsolportutoraceptadas(@Param("idUsuario") Long idUsuario);
+
+
 }
+

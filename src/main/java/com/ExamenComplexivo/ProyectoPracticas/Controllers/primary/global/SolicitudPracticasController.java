@@ -187,4 +187,9 @@ public class SolicitudPracticasController {
         List<Object[]> solicitudes = solicitudPracticaService.buscarsolportutoraceptadas(idUsuario);
         return ResponseEntity.ok(solicitudes);
     }
+
+
+
+
+
 }
