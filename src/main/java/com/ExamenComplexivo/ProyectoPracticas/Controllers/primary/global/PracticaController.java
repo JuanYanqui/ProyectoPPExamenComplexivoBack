@@ -11,7 +11,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
@@ -217,6 +221,26 @@ public class PracticaController {
     public ResponseEntity<Long> getPracticasByConvocatoriaIdAnexo1(@PathVariable Long convocatoriaId) {
         Long id = practicaService.getPracticasByConvocatoriaIdAnexo1(convocatoriaId);
         return ResponseEntity.ok(id);
+
+    }
+    
+    @GetMapping("/listadoAprobados/{cedulaTutor}")
+    public ResponseEntity<List<Map<String, String>>> buscarEstudiantesAprobados(@PathVariable("cedulaTutor") String cedulaTutor) {
+        List<Object[]> datos = practicaDao.findPracticasByCedulaTutorAcademico(cedulaTutor);
+        // Convertir los datos a un formato JSON
+        List<Map<String, String>> datosJSON = new ArrayList<>();
+        for (Object[] fila : datos) {
+            Map<String, String> filaJSON = new HashMap<>();
+            filaJSON.put("nombreConvocatoria", (String) fila[0]);
+            filaJSON.put("nombres", (String) fila[1]);
+            filaJSON.put("carrera", (String) fila[2]);
+            filaJSON.put("fechainicio", (String) fila[3]);
+            filaJSON.put("fechafin", (String) fila[4]);
+            datosJSON.add(filaJSON);
+        }
+
+        // Me devuelve los datos en formato JSON
+        return new ResponseEntity<>(datosJSON, HttpStatus.OK);
     }
 
     @GetMapping("/empresarialanexo6/{cedula}")
