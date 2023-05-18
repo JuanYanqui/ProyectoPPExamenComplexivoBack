@@ -25,10 +25,7 @@ public class TutorEmpresarialServiceImp extends GenericServiceImpl<Tutor_Empresa
         return tutorEmpresarialDao.findByUsuarioId(idUsuario);
     }
 
-    @Override
-    public List<Object[]> obtenerInfoEmpresasYUsuarios() {
-        return tutorEmpresarialDao.obtenerInfoEmpresasYUsuarios();
-    }
+
 
     @Override
     @Transactional

@@ -10,7 +10,5 @@ public interface ITutorEmpresarialService extends IGenericService<Tutor_Empresar
 
     Tutor_Empresarial findByUsuarioId(Long idUsuario);
 
-    List<Object[]> obtenerInfoEmpresasYUsuarios();
-
     void actualizarTutorEmpresarial(Long idTutorEmpresarial);
 }

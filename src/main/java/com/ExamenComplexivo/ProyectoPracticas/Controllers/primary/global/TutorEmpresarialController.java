@@ -19,6 +19,7 @@ import java.util.Map;
 public class TutorEmpresarialController {
     @Autowired
     ITutorEmpresarialService tutorEmpresarialService;
+    @Autowired
     ITutorEmpresarialDao empresarialDao;
     @GetMapping("/listar")
     public ResponseEntity<List<Tutor_Empresarial>> obtenerLista() {
@@ -88,9 +89,9 @@ public class TutorEmpresarialController {
         return ResponseEntity.ok(tutorEmpresarial);
     }
 
-    @GetMapping("/datos")
-    public ResponseEntity<List<Map<String, String>>> obtenerDatosTutorEmpresarial() {
-        List<Object[]> datos = tutorEmpresarialService.obtenerInfoEmpresasYUsuarios();
+    @GetMapping("/datos/{idResponsable}")
+    public ResponseEntity<List<Map<String, String>>> obtenerDatosTutorEmpresarial(@PathVariable("idResponsable") Long idResponsable) {
+        List<Object[]> datos = empresarialDao.obtenerInfoEmpresasYUsuarios(idResponsable);
 
         // Convertir los datos a un formato JSON
         List<Map<String, String>> datosJSON = new ArrayList<>();
