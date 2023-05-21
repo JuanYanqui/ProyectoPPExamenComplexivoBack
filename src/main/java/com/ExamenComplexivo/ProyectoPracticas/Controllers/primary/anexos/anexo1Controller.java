@@ -17,38 +17,40 @@ public class anexo1Controller {
     IAnexo1Service anexo1Service;
     @Autowired
     IAnexo1Dao anexo1Dao;
+
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo1>> obtenerLista() {
-        return new ResponseEntity<>(anexo1Service.findByAll(), HttpStatus.OK);
+        try {
+            List<Anexo1> listaAnexos1 = anexo1Service.findByAll();
+            if (listaAnexos1.isEmpty()) {
+                // Si no se encontraron registros
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                // Devuelve la lista de Anexo1 encontrada
+                return new ResponseEntity<>(listaAnexos1, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @PostMapping("/crear")
-    public ResponseEntity<Anexo1> crear(@RequestBody Anexo1 c){
-        return new ResponseEntity<>(anexo1Service.save(c), HttpStatus.CREATED);
-    }
-
-
-    /*
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id,@RequestBody Anexo1 c) {
-
-        Anexo1 anexo = anexo1Service.findById(id);
-        if (anexo == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            try {
-                anexo.setHabilitado(f.isHabilitado());
-                return new ResponseEntity<>(ficha_odontologiaService.save(fichaOdontologica), HttpStatus.CREATED);
-            } catch (Exception e) {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Anexo1> crear(@RequestBody Anexo1 c) {
+        try {
+            if (c == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
+            Anexo1 nuevoAnexo1 = anexo1Service.save(c);
+            return new ResponseEntity<>(nuevoAnexo1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-
-        anexo1Service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
-*/
+
+
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Anexo1> actualizarUsuario(@PathVariable Long id, @RequestBody Anexo1 c) {
         Anexo1 anexo1 = anexo1Service.findById(id);
@@ -65,11 +67,7 @@ public class anexo1Controller {
         }
 
     }
-    /*
-    @PutMapping("/updateDocument/{id}")
-    public void actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
-        anexo1Dao.actualizarAnexo1(idDocumento, id);
-    }*/
+
 
     @PutMapping("/updateDocument/{id}")
     public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {

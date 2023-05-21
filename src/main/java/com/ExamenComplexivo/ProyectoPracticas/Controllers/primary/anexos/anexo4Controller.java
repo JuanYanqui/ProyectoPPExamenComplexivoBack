@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo4Dao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo4;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo3Service;
@@ -20,14 +21,37 @@ public class anexo4Controller {
     IAnexo4Service anexo4Service;
     @Autowired
     IAnexo4Dao anexo4Dao;
+
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo4>> obtenerLista() {
-        return new ResponseEntity<>(anexo4Service.findByAll(), HttpStatus.OK);
+        try {
+            List<Anexo4> listaAnexos4 = anexo4Service.findByAll();
+            if (listaAnexos4.isEmpty()) {
+                // Si no se encontraron registros
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                // Devuelve la lista de Anexo1 encontrada
+                return new ResponseEntity<>(listaAnexos4, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+
     @PostMapping("/crear")
-    public ResponseEntity<Anexo4> crear(@RequestBody Anexo4 c){
-        return new ResponseEntity<>(anexo4Service.save(c), HttpStatus.CREATED);
+    public ResponseEntity<Anexo4> crear(@RequestBody Anexo4 c) {
+        try {
+            if (c == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Anexo4 nuevoAnexo4 = anexo4Service.save(c);
+            return new ResponseEntity<>(nuevoAnexo4, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/eliminar/{id}")

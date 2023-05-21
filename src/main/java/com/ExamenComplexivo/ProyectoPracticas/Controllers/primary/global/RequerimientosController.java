@@ -59,8 +59,15 @@ public class RequerimientosController {
     }
 
     @GetMapping("/porsolicitud/{idsolicitud}")
-    public List<Requerimientos> getSolicitudesPorConvocatoriatrue(@PathVariable("idsolicitud") Long idsolicitud) {
-        return requerimientoService.findByRequerimientosPorSolicitud(idsolicitud);
+    public ResponseEntity<List<Requerimientos>> getSolicitudesPorConvocatoriatrue(@PathVariable("idsolicitud") Long idsolicitud) {
+        List<Requerimientos> requerimientos = requerimientoService.findByRequerimientosPorSolicitud(idsolicitud);
+
+        if (!requerimientos.isEmpty()) {
+            return ResponseEntity.ok(requerimientos);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
 }

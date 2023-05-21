@@ -83,7 +83,7 @@ public class Documento_ConvenioController {
             byte[] fileContent = pdfFile.getDocumentoConvenio();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvocatoria.pdf").build());
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvenio.pdf").build());
             return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();

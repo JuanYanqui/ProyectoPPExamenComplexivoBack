@@ -40,13 +40,17 @@ public class EstudiantePracticanteController {
     @PostMapping("/crear")
     public ResponseEntity<Estudiante_Practicante> crear(@RequestBody Estudiante_Practicante p) {
         try {
-            return new ResponseEntity<>(iEstudiantePracticanteService.save(p), HttpStatus.CREATED);
+            Estudiante_Practicante nuevoEstudiantePracticante = iEstudiantePracticanteService.save(p);
+            if (nuevoEstudiantePracticante != null) {
+                return new ResponseEntity<>(nuevoEstudiantePracticante, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 
 
     @DeleteMapping("/eliminar/{id}")
@@ -81,13 +85,34 @@ public class EstudiantePracticanteController {
 
     @GetMapping("/buscarPorCedula/{cedula}")
     public ResponseEntity<List<Estudiante_Practicante>> buscarPorCedula(@PathVariable String cedula) {
-        List<Estudiante_Practicante> estudiantes = iEstudiantePracticanteService.findByCedula(cedula);
-        return ResponseEntity.ok(estudiantes);
+        try {
+
+            List<Estudiante_Practicante> estudiantes = iEstudiantePracticanteService.findByCedula(cedula);
+            if (estudiantes.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+
+            return ResponseEntity.ok(estudiantes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/estudiantePracticante/{cedula}")
     public ResponseEntity<Long> findIdByCedula(@PathVariable String cedula) {
-        Long id = iEstudiantePracticanteService.findIdByCedula(cedula);
-        return ResponseEntity.ok(id);
+        try {
+            Long id = iEstudiantePracticanteService.findIdByCedula(cedula);
+
+            if (id == null) {
+                return ResponseEntity.noContent().build();
+            }
+
+            return ResponseEntity.ok(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 }

@@ -27,7 +27,7 @@ public class Documento_AsigTutoresEmpController {
             byte[] fileContent = pdfFile.getDocumento_asigtutorempresarial();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvocatoria.pdf").build());
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("Asignacion_Tutor_Empresarial.pdf").build());
             return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();

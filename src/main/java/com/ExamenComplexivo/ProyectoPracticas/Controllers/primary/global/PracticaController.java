@@ -98,15 +98,39 @@ public class PracticaController {
 
         }
     }
+
     @GetMapping("/aprobadas/{idempresa}")
-    public List<Practica> getPracticasAprobadas(@PathVariable("idempresa") Long idempresa) {
-        return practicaService.getPracticasAprobadas(idempresa);
+    public ResponseEntity<List<Practica>> getPracticasAprobadas(@PathVariable("idempresa") Long idempresa) {
+        try {
+            List<Practica> practicas = practicaService.getPracticasAprobadas(idempresa);
+            if (!practicas.isEmpty()) {
+                return ResponseEntity.ok(practicas);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
+
     @GetMapping("/convocatoriaspractica/{id}")
-    public  List<Practica> getPracticasByConvocatoriaId(@PathVariable("id") Long convocatoriaId) {
-        return practicaService.getPracticasByConvocatoriaId(convocatoriaId);
+    public ResponseEntity<List<Practica>> getPracticasByConvocatoriaId(@PathVariable("id") Long convocatoriaId) {
+        try {
+            List<Practica> practicas = practicaService.getPracticasByConvocatoriaId(convocatoriaId);
+
+            if (!practicas.isEmpty()) {
+                return ResponseEntity.ok(practicas);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @PutMapping("/updateDocumentA/{id}")
     public ResponseEntity<String> actualizarDocumentoAcademico(@PathVariable Long id, @RequestParam Long idDocumento) {
@@ -144,98 +168,249 @@ public class PracticaController {
     }
 
     @GetMapping("/usuariosxpractica/{id}")
-    public  List<Practica> getPracticasBySolicitudPracticasId(@PathVariable("id") Long solicitudpracticasId) {
-        return practicaService.getPracticasBySolicitudPracticasId(solicitudpracticasId);
+    public ResponseEntity<List<Practica>> getPracticasBySolicitudPracticasId(@PathVariable("id") Long solicitudpracticasId) {
+        try {
+            List<Practica> practicas = practicaService.getPracticasBySolicitudPracticasId(solicitudpracticasId);
+
+            if (!practicas.isEmpty()) {
+                return ResponseEntity.ok(practicas);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
     @GetMapping("/estadoxusuario/{idUsuario}")
-    public  Boolean getPracticasByEstadoxUsuario(@PathVariable("idUsuario") Long idUsuario) {
-        return practicaService.getPracticasByEstadoxUsuario(idUsuario);
+    public ResponseEntity<Boolean> getPracticasByEstadoxUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        try {
+            Boolean estado = practicaService.getPracticasByEstadoxUsuario(idUsuario);
+            return ResponseEntity.ok(estado);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
     @GetMapping("/convocatoriaxusuario/{nombre_carrera}")
-    public  Boolean getConvocatoriaLanzada(@PathVariable("nombre_carrera") String  nombre_carrera) {
-        return practicaService.getConvocatoriaLanzada(nombre_carrera);
+    public ResponseEntity<Boolean> getConvocatoriaLanzada(@PathVariable("nombre_carrera") String nombre_carrera) {
+        try {
+            Boolean convocatoriaLanzada = practicaService.getConvocatoriaLanzada(nombre_carrera);
+            return ResponseEntity.ok(convocatoriaLanzada);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/practicaporacademico/{cedula}")
-    public  List<Convocatorias> getPracticasByAcademico(@PathVariable("cedula") String cedula) {
-        return practicaService.getPracticasByAcademico(cedula);
+    public ResponseEntity<List<Convocatorias>> getPracticasByAcademico(@PathVariable("cedula") String cedula) {
+        try {
+            List<Convocatorias> practicas = practicaService.getPracticasByAcademico(cedula);
+
+            if (!practicas.isEmpty()) {
+                return ResponseEntity.ok(practicas);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/practicaparaanexo/{id}/{idusuario}")
-    public  List<Practica> getPracticasByDocumentoAnexo(@PathVariable("id") Long idconvocatoria, @PathVariable("idusuario") Long idusuario) {
-        return practicaService.getPracticasByDocumentoAnexo(idconvocatoria, idusuario);
+    public ResponseEntity<List<Practica>> getPracticasByDocumentoAnexo(@PathVariable("id") Long idconvocatoria, @PathVariable("idusuario") Long idusuario) {
+        try {
+            List<Practica> practicas = practicaService.getPracticasByDocumentoAnexo(idconvocatoria, idusuario);
+
+            if (!practicas.isEmpty()) {
+                return ResponseEntity.ok(practicas);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/practicaporestudiante/{cedula}")
-    public  List<Practica> getPracticasByEstudiante(@PathVariable("cedula") String cedula) {
-        return practicaService.getPracticasByEstudiante(cedula);
+    public ResponseEntity<List<Practica>> getPracticasByEstudiante(@PathVariable("cedula") String cedula) {
+        try {
+            List<Practica> practicas = practicaService.getPracticasByEstudiante(cedula);
+
+            if (!practicas.isEmpty()) {
+                return ResponseEntity.ok(practicas);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
+
     @GetMapping("/practicaporestudianteanexo3/{cedula}")
-    public  List<Practica> getPracticasByEstudianteAnexo3(@PathVariable("cedula") String cedula) {
-        return practicaService.getPracticasByEstudianteAnexo3(cedula);
+    public ResponseEntity<List<Practica>> getPracticasByEstudianteAnexo3(@PathVariable("cedula") String cedula) {
+        try {
+            List<Practica> practicas = practicaService.getPracticasByEstudianteAnexo3(cedula);
+
+            if (!practicas.isEmpty()) {
+                return ResponseEntity.ok(practicas);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/carreraparaanexo/{carrera}")
     public ResponseEntity<List<Anexo1>> getPracticasByCarrera(@PathVariable String carrera) {
-        List<Anexo1> practicas = practicaService.getPracticasByCarrera(carrera);
-        return ResponseEntity.ok(practicas);
+        try {
+            List<Anexo1> practicas = practicaService.getPracticasByCarrera(carrera);
+
+            if (!practicas.isEmpty()) {
+                return ResponseEntity.ok(practicas);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/carreraparaanexo2/{carrera}")
     public ResponseEntity<List<Anexo2>> getPracticasByCarrera2(@PathVariable String carrera) {
         List<Anexo2> practicas = practicaService.getPracticasByCarrera2(carrera);
-        return ResponseEntity.ok(practicas);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
     @GetMapping("/carreraparaanexo3/{carrera}")
     public ResponseEntity<List<Anexo3>> getPracticasByCarrera3(@PathVariable String carrera) {
         List<Anexo3> practicas = practicaService.getPracticasByCarrera3(carrera);
-        return ResponseEntity.ok(practicas);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
     @GetMapping("/carreraparaanexo4/{carrera}")
     public ResponseEntity<List<Practica>> getPracticasByCarrera4(@PathVariable String carrera) {
         List<Practica> practicas = practicaService.getPracticasByCarrera4(carrera);
-        return ResponseEntity.ok(practicas);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
     @GetMapping("/practicaparaanexo5/{id}/{idusuario}")
-    public  List<Practica> getPracticasByDocumentoAnexo5(@PathVariable("id") Long idconvocatoria, @PathVariable("idusuario") Long idusuario) {
-        return practicaService.getPracticasByDocumentoAnexo5(idconvocatoria, idusuario);
+    public ResponseEntity<List<Practica>> getPracticasByDocumentoAnexo5(@PathVariable("id") Long idconvocatoria, @PathVariable("idusuario") Long idusuario) {
+        List<Practica> practicas = practicaService.getPracticasByDocumentoAnexo5(idconvocatoria, idusuario);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
+
     @GetMapping("/practicaporestudianteanexo6/{cedula}")
-    public  List<Practica> getPracticasByEstudianteAnexo6(@PathVariable("cedula") String cedula) {
-        return practicaService.getPracticasByEstudianteAnexo6(cedula);
+    public ResponseEntity<List<Practica>> getPracticasByEstudianteAnexo6(@PathVariable("cedula") String cedula) {
+        List<Practica> practicas = practicaService.getPracticasByEstudianteAnexo6(cedula);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @GetMapping("/practicaporempresaanexo7/{id}")
-    public  List<Convocatorias> getPracticasByEmpresarialAnexo7(@PathVariable("id") Long idempresa) {
-        return practicaService.getPracticasByEmpresarialAnexo7(idempresa);
+    public ResponseEntity<List<Convocatorias>> getPracticasByEmpresarialAnexo7(@PathVariable("id") Long idempresa) {
+        List<Convocatorias> convocatorias = practicaService.getPracticasByEmpresarialAnexo7(idempresa);
+
+        if (!convocatorias.isEmpty()) {
+            return ResponseEntity.ok(convocatorias);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
     @GetMapping("/practicalistaranexo7/{id}")
-    public  List<Practica> getPracticasBylistarAnexo7(@PathVariable("id") Long tutor) {
-        return practicaService.getPracticasBylistarAnexo7(tutor);
+    public ResponseEntity<List<Practica>> getPracticasBylistarAnexo7(@PathVariable("id") Long tutor) {
+        List<Practica> practicas = practicaService.getPracticasBylistarAnexo7(tutor);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
+
     @GetMapping("/practicaporestudianteanexo8/{cedula}")
-    public  List<Practica> getPracticasByEstudianteAnexo8(@PathVariable("cedula") String cedula) {
-        return practicaService.getPracticasByEstudianteAnexo8(cedula);
+    public ResponseEntity<List<Practica>> getPracticasByEstudianteAnexo8(@PathVariable("cedula") String cedula) {
+        List<Practica> practicas = practicaService.getPracticasByEstudianteAnexo8(cedula);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
+
     @GetMapping("/convocatoriadisp/{nombre_carrera}")
-    public  List<Object[]> getConvocatoriaDisp(@PathVariable("nombre_carrera") String nombre_carrera) {
-        return practicaService.getConvocatoriaDisp(nombre_carrera);
-}
+    public ResponseEntity<List<Object[]>> getConvocatoriaDisp(@PathVariable("nombre_carrera") String nombre_carrera) {
+        List<Object[]> convocatorias = practicaService.getConvocatoriaDisp(nombre_carrera);
+
+        if (!convocatorias.isEmpty()) {
+            return ResponseEntity.ok(convocatorias);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
 
     @GetMapping("/convocatoriasparaanexo1/{convocatoriaId}")
     public ResponseEntity<Long> getPracticasByConvocatoriaIdAnexo1(@PathVariable Long convocatoriaId) {
         Long id = practicaService.getPracticasByConvocatoriaIdAnexo1(convocatoriaId);
-        return ResponseEntity.ok(id);
 
+        if (id != null) {
+            return ResponseEntity.ok(id);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
-    
+
+
     @GetMapping("/listadoAprobados/{cedulaTutor}")
     public ResponseEntity<List<Map<String, String>>> buscarEstudiantesAprobados(@PathVariable("cedulaTutor") String cedulaTutor) {
         List<Object[]> datos = practicaDao.findPracticasByCedulaTutorAcademico(cedulaTutor);
@@ -258,24 +433,48 @@ public class PracticaController {
     @GetMapping("/carreraparaanexo5/{carrera}")
     public ResponseEntity<List<Anexo5>> getPracticasByCarrera5(@PathVariable String carrera) {
         List<Anexo5> practicas = practicaService.getPracticasByCarrera5(carrera);
-        return ResponseEntity.ok(practicas);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
     @GetMapping("/carreraparaanexo6/{carrera}")
     public ResponseEntity<List<Anexo6>> getPracticasByCarrera6(@PathVariable String carrera) {
         List<Anexo6> practicas = practicaService.getPracticasByCarrera6(carrera);
-        return ResponseEntity.ok(practicas);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
     @GetMapping("/carreraparaanexo7/{carrera}")
     public ResponseEntity<List<Anexo7>> getPracticasByCarrera7(@PathVariable String carrera) {
         List<Anexo7> practicas = practicaService.getPracticasByCarrera7(carrera);
-        return ResponseEntity.ok(practicas);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
     @GetMapping("/carreraparaanexo8/{carrera}")
     public ResponseEntity<List<Anexo8>> getPracticasByCarrera8(@PathVariable String carrera) {
         List<Anexo8> practicas = practicaService.getPracticasByCarrera8(carrera);
-        return ResponseEntity.ok(practicas);
+
+        if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
 }

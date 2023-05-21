@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo5Dao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo4;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo5;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo4Service;
@@ -23,14 +24,35 @@ public class anexo5Controller {
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo5>> obtenerLista() {
-        return new ResponseEntity<>(anexo5Service.findByAll(), HttpStatus.OK);
+        try {
+            List<Anexo5> listaAnexos5 = anexo5Service.findByAll();
+            if (listaAnexos5.isEmpty()) {
+                // Si no se encontraron registros
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                // Devuelve la lista de Anexo1 encontrada
+                return new ResponseEntity<>(listaAnexos5, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @PostMapping("/crear")
-    public ResponseEntity<Anexo5> crear(@RequestBody Anexo5 c){
-        return new ResponseEntity<>(anexo5Service.save(c), HttpStatus.CREATED);
+    public ResponseEntity<Anexo5> crear(@RequestBody Anexo5 c) {
+        try {
+            if (c == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Anexo5 nuevoAnexo5 = anexo5Service.save(c);
+            return new ResponseEntity<>(nuevoAnexo5, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Anexo5> eliminar(@PathVariable Long id) {
         anexo5Service.delete(id);

@@ -45,7 +45,7 @@ public class Documento_Anexo5Controller {
             byte[] fileContent = pdfFile.getDocumento_anexo5();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvocatoria.pdf").build());
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoAnexo5.pdf").build());
             return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();

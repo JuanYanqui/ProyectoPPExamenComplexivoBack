@@ -25,12 +25,33 @@ public class anexo8Controller {
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo8>> obtenerLista() {
-        return new ResponseEntity<>(anexo8Service.findByAll(), HttpStatus.OK);
+        try {
+            List<Anexo8> listaAnexos = anexo8Service.findByAll();
+            if (listaAnexos.isEmpty()) {
+                // Si no se encontraron registros
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                // Devuelve la lista de Anexo1 encontrada
+                return new ResponseEntity<>(listaAnexos, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<Anexo8> crear(@RequestBody Anexo8 c){
-        return new ResponseEntity<>(anexo8Service.save(c), HttpStatus.CREATED);
+    public ResponseEntity<Anexo8> crear(@RequestBody Anexo8 c) {
+        try {
+            if (c == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Anexo8 nuevoAnexo = anexo8Service.save(c);
+            return new ResponseEntity<>(nuevoAnexo, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/eliminar/{id}")

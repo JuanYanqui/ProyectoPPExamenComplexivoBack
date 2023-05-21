@@ -39,11 +39,18 @@ public class EmpresaController {
     @PostMapping("/crear")
     public ResponseEntity<Empresa> crear(@RequestBody Empresa p) {
         try {
-            return new ResponseEntity<>(empresaService.save(p), HttpStatus.CREATED);
+            Empresa nuevaEmpresa = empresaService.save(p);
+            if (nuevaEmpresa != null) {
+                return new ResponseEntity<>(nuevaEmpresa, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {

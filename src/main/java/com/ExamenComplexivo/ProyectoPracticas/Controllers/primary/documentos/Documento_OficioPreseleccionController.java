@@ -29,7 +29,7 @@ public class Documento_OficioPreseleccionController {
             byte[] fileContent = pdfFile.getDocumento_oficiopreseleccion();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("DocumentoConvocatoria.pdf").build());
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename("Oficio_Preseleccion.pdf").build());
             return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();

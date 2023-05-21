@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo7p1_EvaluaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo6;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo7;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo7Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,35 @@ public class anexo7Controller {
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo7>> obtenerLista() {
-        return new ResponseEntity<>(anexo7Service.findByAll(), HttpStatus.OK);
+        try {
+            List<Anexo7> listaAnexos = anexo7Service.findByAll();
+            if (listaAnexos.isEmpty()) {
+                // Si no se encontraron registros
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                // Devuelve la lista de Anexo1 encontrada
+                return new ResponseEntity<>(listaAnexos, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/crear")
     public ResponseEntity<Anexo7> crear(@RequestBody Anexo7 c) {
-        return new ResponseEntity<>(anexo7Service.save(c), HttpStatus.CREATED);
+        try {
+            if (c == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Anexo7 nuevoAnexo = anexo7Service.save(c);
+            return new ResponseEntity<>(nuevoAnexo, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Anexo7> eliminar(@PathVariable Long id) {

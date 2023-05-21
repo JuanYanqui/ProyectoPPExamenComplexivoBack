@@ -30,9 +30,21 @@ public class DetalleConvenioController {
     }
 
     @GetMapping("listarXempresa/{idEmpresa}")
-    public List<Detalle_Convenio> getDetallesConvenioPorEmpresa(@PathVariable Long idEmpresa) {
-        return detalleConvenioDao.findByEmpresaId(idEmpresa);
+    public ResponseEntity<List<Detalle_Convenio>> getDetallesConvenioPorEmpresa(@PathVariable Long idEmpresa) {
+        try {
+            // Obtener los detalles de convenio por empresa desde el DAO
+            List<Detalle_Convenio> detallesConvenio = detalleConvenioDao.findByEmpresaId(idEmpresa);
+
+            if (detallesConvenio.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(detallesConvenio);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/buscar/{id}")
     public ResponseEntity<Detalle_Convenio> getById(@PathVariable("id") Long id) {

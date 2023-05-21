@@ -68,7 +68,6 @@ public class ConvocatoriasController {
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
-
         try {
             convocatoriaService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -99,9 +98,19 @@ public class ConvocatoriasController {
     }
     @GetMapping("/convocatoria/documento/{id}")
     public ResponseEntity<Long> findDocumentoIdByConvocatoriaId(@PathVariable Long id) {
-        Long documentoId = convocatoriaService.findDocumentoIdByConvocatoriaId(id);
-        return ResponseEntity.ok(documentoId);
-}
+        try {
+            // Obtener el ID del documento por ID de convocatoria desde el servicio
+            Long documentoId = convocatoriaService.findDocumentoIdByConvocatoriaId(id);
+            if (documentoId == null) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(documentoId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 
     @PutMapping("/updateDocument/{id}")
     public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
@@ -122,45 +131,113 @@ public class ConvocatoriasController {
 
     @GetMapping("/practicas")
     public ResponseEntity<List<Convocatorias>> buscarConvocatoriasConPractica() {
-        List<Convocatorias> convocatorias = convocatoriaService.buscarConvocatoriasConPractica();
-        return ResponseEntity.ok(convocatorias);
+        try {
+            List<Convocatorias> convocatorias = convocatoriaService.buscarConvocatoriasConPractica();
+            // Verificar si se encontraron convocatorias con prácticas
+            if (convocatorias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(convocatorias);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/convocatoriaporcarrera/{carrera}")
-        public ResponseEntity<List<Convocatorias>> buscarPorCarrera(@PathVariable String carrera)  {
-        List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporCarrera(carrera);
-        return ResponseEntity.ok(convocatorias);
+    public ResponseEntity<List<Convocatorias>> buscarPorCarrera(@PathVariable String carrera) {
+        try {
+            List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporCarrera(carrera);
+            // Verificar si se encontraron convocatorias
+            if (convocatorias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(convocatorias);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/convocatoriaporsolicitud/{idSolicitudPracticas}")
-    public ResponseEntity<List<Convocatorias>> buscarPorSolicitud(@PathVariable Long idSolicitudPracticas)  {
-        List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporSolicitudP(idSolicitudPracticas);
-        return ResponseEntity.ok(convocatorias);
+    public ResponseEntity<List<Convocatorias>> buscarPorSolicitud(@PathVariable Long idSolicitudPracticas) {
+        try {
+
+            List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporSolicitudP(idSolicitudPracticas);
+            // Verificar si se encontraron convocatorias
+            if (convocatorias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+
+            return ResponseEntity.ok(convocatorias);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/convocatoriaporempresa/{idempresa}")
-    public ResponseEntity<List<Convocatorias>> buscarPorEmpresa(@PathVariable Long idempresa)  {
-        List<Convocatorias> convocatorias = convocatoriaService.buscarsoliporempresacovocatoria(idempresa);
-        return ResponseEntity.ok(convocatorias);
+    public ResponseEntity<List<Convocatorias>> buscarPorEmpresa(@PathVariable Long idempresa) {
+        try {
+
+            List<Convocatorias> convocatorias = convocatoriaService.buscarsoliporempresacovocatoria(idempresa);
+            // Verificar si se encontraron convocatorias
+            if (convocatorias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(convocatorias);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/convocatoriaporempresaestadosoli/{idempresa}")
-    public ResponseEntity<List<Convocatorias>> buscarsoliporempresacovocatoriaconestadosolicitud(@PathVariable Long idempresa)  {
-        List<Convocatorias> convocatorias = convocatoriaService.buscarsoliporempresacovocatoriaconestadosolicitud(idempresa);
-        return ResponseEntity.ok(convocatorias);
+    public ResponseEntity<List<Convocatorias>> buscarsoliporempresacovocatoriaconestadosolicitud(@PathVariable Long idempresa) {
+        try {
+            List<Convocatorias> convocatorias = convocatoriaService.buscarsoliporempresacovocatoriaconestadosolicitud(idempresa);
+            // Verificar si se encontraron convocatorias
+            if (convocatorias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(convocatorias);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
+
     @GetMapping("/convocatoriaporcarreraconpractica/{carrera}")
-    public ResponseEntity<List<Convocatorias>> findByConvocatoriaporCarreraPractica(@PathVariable String carrera)  {
-        List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporCarreraPractica(carrera);
-        return ResponseEntity.ok(convocatorias);
+    public ResponseEntity<List<Convocatorias>> findByConvocatoriaporCarreraPractica(@PathVariable String carrera) {
+        try {
+            List<Convocatorias> convocatorias = convocatoriaService.findByConvocatoriaporCarreraPractica(carrera);
+            if (convocatorias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(convocatorias);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/ListaConvocatoriasC")
     public ResponseEntity<List<Object[]>> buscarConvocatoriasC() {
-        List<Object[]> convocatorias = convocatoriaService.buscarConvocatoriasC();
-        return ResponseEntity.ok(convocatorias);
+        try {
+            List<Object[]> convocatorias = convocatoriaService.buscarConvocatoriasC();
+            if (convocatorias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(convocatorias);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
     
     //Metodo para listar convocatorias con datos relacionados desde otras tablas en ROL Responsable
     @GetMapping("/datos/{idResponsable}")

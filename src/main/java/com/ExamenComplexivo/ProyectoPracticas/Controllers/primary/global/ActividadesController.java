@@ -76,9 +76,28 @@ public class ActividadesController {
         }
     }
 
+    @GetMapping("/convocatoriasid/{convocatoriaId}")
+    public ResponseEntity<List<Actividades>> obtenerActividadesPorConvocatoria(@PathVariable Long convocatoriaId) {
+        try {
+            // Obtener la lista de actividades por convocatoria desde el servicio
+            List<Actividades> listaActividades = actividadesService.obtenerActividadesPorConvocatoria(convocatoriaId);
+            // Verificar si se encontraron actividades para la convocatoria
+            if (listaActividades.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            // Devolver una respuesta exitosa con la lista de actividades
+            return ResponseEntity.ok(listaActividades);
+        } catch (Exception e) {
+            // Manejo de excepciones
+            e.printStackTrace();
 
+            // Devolver una respuesta de error en caso de excepción
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    /*
     @GetMapping("/convocatoriasid/{convocatoriaId}")
     public List<Actividades> obtenerActividadesPorConvocatoria(@PathVariable Long convocatoriaId) {
         return actividadesService.obtenerActividadesPorConvocatoria(convocatoriaId);
-    }
+    }*/
 }

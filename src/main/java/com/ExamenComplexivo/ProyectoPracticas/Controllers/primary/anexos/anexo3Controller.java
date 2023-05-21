@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo3Dao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo2;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo3;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo3Service;
@@ -23,12 +24,34 @@ public class anexo3Controller {
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo3>> obtenerLista() {
-        return new ResponseEntity<>(anexo3Service.findByAll(), HttpStatus.OK);
+        try {
+            List<Anexo3> listaAnexos3 = anexo3Service.findByAll();
+            if (listaAnexos3.isEmpty()) {
+                // Si no se encontraron registros
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                // Devuelve la lista de Anexo1 encontrada
+                return new ResponseEntity<>(listaAnexos3, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+
     @PostMapping("/crear")
-    public ResponseEntity<Anexo3> crear(@RequestBody Anexo3 c){
-        return new ResponseEntity<>(anexo3Service.save(c), HttpStatus.CREATED);
+    public ResponseEntity<Anexo3> crear(@RequestBody Anexo3 c) {
+        try {
+            if (c == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Anexo3 nuevoAnexo3 = anexo3Service.save(c);
+            return new ResponseEntity<>(nuevoAnexo3, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/eliminar/{id}")

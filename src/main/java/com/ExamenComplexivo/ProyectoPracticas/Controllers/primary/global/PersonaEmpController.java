@@ -73,12 +73,36 @@ public class PersonaEmpController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping(value = "/buscarcedula/{cedula}")
-    public Personas_empresa findByCedula(@PathVariable("cedula") String cedula) {
-        return this.personaService.findbyCedula(cedula);
+    public ResponseEntity<Personas_empresa> findByCedula(@PathVariable("cedula") String cedula) {
+        try {
+            Personas_empresa persona = this.personaService.findbyCedula(cedula);
+            if (persona != null) {
+                return ResponseEntity.ok(persona);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
     @GetMapping(value = "/buscarcorreo/{correo}")
-    public Personas_empresa findByCorreo(@PathVariable("correo") String correo) {
-        return this.personaService.findbyCorreo(correo);
+    public ResponseEntity<Personas_empresa> findByCorreo(@PathVariable("correo") String correo) {
+        try {
+            Personas_empresa persona = this.personaService.findbyCorreo(correo);
+
+            if (persona != null) {
+                return ResponseEntity.ok(persona);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 }

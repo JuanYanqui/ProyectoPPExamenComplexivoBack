@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo6_DetallePracticaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo5;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo6;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo5Service;
@@ -23,12 +24,34 @@ public class anexo6Controller {
 
     @GetMapping("/listar")
     public ResponseEntity<List<Anexo6>> obtenerLista() {
-        return new ResponseEntity<>(anexo6Service.findByAll(), HttpStatus.OK);
+        try {
+            List<Anexo6> listaAnexos = anexo6Service.findByAll();
+            if (listaAnexos.isEmpty()) {
+                // Si no se encontraron registros
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                // Devuelve la lista de Anexo1 encontrada
+                return new ResponseEntity<>(listaAnexos, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+
     @PostMapping("/crear")
-    public ResponseEntity<Anexo6> crear(@RequestBody Anexo6 c){
-        return new ResponseEntity<>(anexo6Service.save(c), HttpStatus.CREATED);
+    public ResponseEntity<Anexo6> crear(@RequestBody Anexo6 c) {
+        try {
+            if (c == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Anexo6 nuevoAnexo = anexo6Service.save(c);
+            return new ResponseEntity<>(nuevoAnexo, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/eliminar/{id}")

@@ -76,11 +76,18 @@ public class ResponsablePPPController {
         }
     }
 
+
     @GetMapping("/carrera/{carrera}")
     public ResponseEntity<List<String>> getNombresCompletosDeResponsablesPorCarrera(@PathVariable String carrera) {
         List<String> nombresCompletos = responsableService.getNombresCompletosDeResponsablesPorCarrera(carrera);
-        return ResponseEntity.ok(nombresCompletos);
+
+        if (!nombresCompletos.isEmpty()) {
+            return ResponseEntity.ok(nombresCompletos);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
 
 
     @GetMapping("/carreraID/{nombreCarrera}")
@@ -94,7 +101,18 @@ public class ResponsablePPPController {
     }
 
     @GetMapping("/cedularesponsable/{cedula}")
-    public Responsable_PPP findByCedulaUsuario(@PathVariable String cedula) {
-        return responsableService.findByCedulaUsuario(cedula);
+    public ResponseEntity<?> findByCedulaUsuario(@PathVariable String cedula) {
+        try {
+            Responsable_PPP responsable = responsableService.findByCedulaUsuario(cedula);
+            if (responsable != null) {
+                return ResponseEntity.ok(responsable);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
 }

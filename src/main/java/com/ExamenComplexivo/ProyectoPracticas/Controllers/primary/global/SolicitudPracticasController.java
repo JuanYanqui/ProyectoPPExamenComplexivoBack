@@ -95,30 +95,50 @@ public class SolicitudPracticasController {
         }
     }
 
-
     @GetMapping("/listarestado")
     public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitud() {
-        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(true);
-        return ResponseEntity.ok(solicitudes);
-    }
-    @GetMapping("/listarestadocarrera/{carrera}")
-    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitud(@PathVariable String carrera)  {
-        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoSolicitudPorcarrera(carrera);
-        return ResponseEntity.ok(solicitudes);
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(true);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
+
+    @GetMapping("/listarestadocarrera/{carrera}")
+    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitud(@PathVariable String carrera) {
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoSolicitudPorcarrera(carrera);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
+
     @GetMapping("/listarestadoentrue/{carrera}")
-    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitudentrue(@PathVariable String carrera)  {
-        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoSolicitudPorcarreraSolicitudaprobada(carrera);
-        return ResponseEntity.ok(solicitudes);
+    public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitudentrue(@PathVariable String carrera) {
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoSolicitudPorcarreraSolicitudaprobada(carrera);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 
     @GetMapping("/listarestadofalse")
     public ResponseEntity<List<Solicitud_Practicas>> buscarPorEstadoSolicitudfalse() {
-        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(false);
-        return ResponseEntity.ok(solicitudes);
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEstadoSolicitud(false);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @PutMapping("/updateDocument/{id}")
     public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
@@ -139,53 +159,97 @@ public class SolicitudPracticasController {
 
     @GetMapping("/buscardocument/{id}")
     public ResponseEntity<Long> findDocumentoIdByConvocatoriaId(@PathVariable Long id) {
-        Long documentoId = solicitudPracticasDao.findDocumentoIdBySolicitudId(id);
-        return ResponseEntity.ok(documentoId);
+        try {
+            Long documentoId = solicitudPracticasDao.findDocumentoIdBySolicitudId(id);
+            return ResponseEntity.ok(documentoId);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/buscarporempresa/{idempresa}")
     public ResponseEntity<List<Solicitud_Practicas>> findBybuscarporempresa(@PathVariable Long idempresa) {
-        List<Solicitud_Practicas> solicitudes= solicitudPracticaService.buscarPorEmpresa(idempresa);
-        return ResponseEntity.ok(solicitudes);
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarPorEmpresa(idempresa);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/buscarTodas/{idempresa}")
     public ResponseEntity<List<Solicitud_Practicas>> findBybuscarporempresaTodas(@PathVariable Long idempresa) {
-        List<Solicitud_Practicas> solicitudes= solicitudPracticasDao.findbyTodas(idempresa);
-        return ResponseEntity.ok(solicitudes);
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticasDao.findbyTodas(idempresa);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
     @GetMapping("/nombrestutores/{idempresa}")
-    public List<Usuario> obtenerNombresTutores(@PathVariable Long idempresa) {
-        return solicitudPracticaService.obtenerNombresTutores(idempresa);
-}
+    public ResponseEntity<List<Usuario>> obtenerNombresTutores(@PathVariable Long idempresa) {
+        try {
+            List<Usuario> tutores = solicitudPracticaService.obtenerNombresTutores(idempresa);
+            return ResponseEntity.ok(tutores);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
     @GetMapping("/listaporidresponsableppp/{idresponsableppp}")
-    public ResponseEntity<List<Solicitud_Practicas>> findByEstadoActividadTruePorResponsablePPP(@PathVariable Long idresponsableppp)  {
-        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoActividadTruePorResponsablePPP(idresponsableppp);
-        return ResponseEntity.ok(solicitudes);
+    public ResponseEntity<List<Solicitud_Practicas>> findByEstadoActividadTruePorResponsablePPP(@PathVariable Long idresponsableppp) {
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findByEstadoActividadTruePorResponsablePPP(idresponsableppp);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/listasolicitudcheckresponsable/{idempresa}")
-    public ResponseEntity<List<Solicitud_Practicas>> findBySolicitudpracticasCheckResponsable(@PathVariable Long idempresa)  {
-        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findBySolicitudpracticasCheckResponsable(idempresa);
-        return ResponseEntity.ok(solicitudes);
+    public ResponseEntity<List<Solicitud_Practicas>> findBySolicitudpracticasCheckResponsable(@PathVariable Long idempresa) {
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticaService.findBySolicitudpracticasCheckResponsable(idempresa);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/listasolicitudcheck/{idempresa}")
-    public ResponseEntity<List<Solicitud_Practicas>> buscarsoliporempresa(@PathVariable Long idempresa)  {
-        List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarsoliporempresa(idempresa);
-        return ResponseEntity.ok(solicitudes);
+    public ResponseEntity<List<Solicitud_Practicas>> buscarsoliporempresa(@PathVariable Long idempresa) {
+        try {
+            List<Solicitud_Practicas> solicitudes = solicitudPracticaService.buscarsoliporempresa(idempresa);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    @GetMapping("listasoltuto/{idUsuario}")
+
+    @GetMapping("/listasoltuto/{idUsuario}")
     public ResponseEntity<List<Object[]>> buscarsolportutor(@PathVariable Long idUsuario) {
-        List<Object[]> solicitudes = solicitudPracticaService.buscarsolportutor(idUsuario);
-        return ResponseEntity.ok(solicitudes);
+        try {
+            List<Object[]> solicitudes = solicitudPracticaService.buscarsolportutor(idUsuario);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    @GetMapping("listasoltutoaceptadas/{idUsuario}")
+
+    @GetMapping("/listasoltutoaceptadas/{idUsuario}")
     public ResponseEntity<List<Object[]>> buscarsolportutoraceptadas(@PathVariable Long idUsuario) {
-        List<Object[]> solicitudes = solicitudPracticaService.buscarsolportutoraceptadas(idUsuario);
-        return ResponseEntity.ok(solicitudes);
+        try {
+            List<Object[]> solicitudes = solicitudPracticaService.buscarsolportutoraceptadas(idUsuario);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 

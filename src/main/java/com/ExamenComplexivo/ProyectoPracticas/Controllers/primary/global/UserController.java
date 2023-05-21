@@ -74,30 +74,71 @@ public class UserController {
     }
 
     @GetMapping("/search/{id}")
-    public Usuario show(@PathVariable long id) {
-        return iUsuarioService.findById(id);
+    public ResponseEntity<Usuario> show(@PathVariable long id) {
+        try {
+            Usuario usuario = iUsuarioService.findById(id);
+            if (usuario != null) {
+                return ResponseEntity.ok(usuario);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping()
-    public List<Usuario> listarUsuarios() {
-        return iUsuarioService.findAllUsuario();
+    public ResponseEntity<List<Usuario>> listarUsuarios() {
+        try {
+            List<Usuario> usuarios = iUsuarioService.findAllUsuario();
+            return ResponseEntity.ok(usuarios);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/{cedula}")
     public ResponseEntity<List<Usuario>> getAllUserByCedula(@PathVariable("cedula") String cedula) {
-        return ResponseEntity.ok(iUsuarioService.buscarUsuario(cedula));
-
+        try {
+            List<Usuario> usuarios = iUsuarioService.buscarUsuario(cedula);
+            return ResponseEntity.ok(usuarios);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
+
 
     @GetMapping(value = "/buscar/{id}")
-    public Usuario findById(@PathVariable("id") Long id) {
-        return this.iUsuarioService.findByIdUsuario(id);
+    public ResponseEntity<Usuario> findById(@PathVariable("id") Long id) {
+        try {
+            Usuario usuario = iUsuarioService.findByIdUsuario(id);
+            if (usuario != null) {
+                return ResponseEntity.ok(usuario);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+
     @GetMapping(value = "/buscarcedula/{cedula}")
-    public Usuario findByCedula(@PathVariable("cedula") String cedula) {
-        return this.iUsuarioService.findbyCedula(cedula);
+    public ResponseEntity<Usuario> findByCedula(@PathVariable("cedula") String cedula) {
+        try {
+            Usuario usuario = iUsuarioService.findbyCedula(cedula);
+            if (usuario != null) {
+                return ResponseEntity.ok(usuario);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @GetMapping("/correo/{correo}")
     public ResponseEntity<Usuario> buscarPorCorreo(@PathVariable String correo) {
@@ -109,28 +150,45 @@ public class UserController {
         }
     }
 
-    @GetMapping("listarconvo/{idConvocatoria}")
-    public List<Usuario> getUsuariosPorConvocatoria(@PathVariable Long idConvocatoria) {
-        return iUsuarioService.findUsuariosPorConvocatoria(idConvocatoria);
+    @GetMapping("/listarconvo/{idConvocatoria}")
+    public ResponseEntity<List<Usuario>> getUsuariosPorConvocatoria(@PathVariable Long idConvocatoria) {
+        try {
+            List<Usuario> usuarios = iUsuarioService.findUsuariosPorConvocatoria(idConvocatoria);
+            return ResponseEntity.ok(usuarios);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @GetMapping("/rolnombre/{correo}")
     public String getRolNombreByCorreo(@PathVariable String correo) {
         return iUsuarioService.getRolNombreByCorreo(correo);
     }
 
+
     @GetMapping("/rol/{rolId}")
     public ResponseEntity<List<Usuario>> getUsuariosByRolId(@PathVariable("rolId") int rolId) {
-        List<Usuario> usuarios = iUsuarioService.getUsuariosByRolId(rolId);
-        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+        try {
+            List<Usuario> usuarios = iUsuarioService.getUsuariosByRolId(rolId);
+            return new ResponseEntity<>(usuarios, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
 
     @GetMapping("/rolacademico")
     public ResponseEntity<List<Usuario>> getUsuariosByRolIdAcademico() {
-        List<Usuario> usuarios = iUsuarioService.getUsuariosByRolIdAcademico();
-        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+        try {
+            List<Usuario> usuarios = iUsuarioService.getUsuariosByRolIdAcademico();
+            return new ResponseEntity<>(usuarios, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
 
     @PostMapping("/reset-password")
@@ -147,24 +205,47 @@ public class UserController {
 
     @GetMapping("/listartuto/{idUsuario}")
     public ResponseEntity<List<Object[]>> findUsuariosPorTutorEmpresarial(@PathVariable Long idUsuario) {
-        List<Object[]> usuarios = iUsuarioService.findUsuariosPorTutorEmpresarial(idUsuario);
-        return ResponseEntity.ok(usuarios);
+        try {
+            List<Object[]> usuarios = iUsuarioService.findUsuariosPorTutorEmpresarial(idUsuario);
+            return ResponseEntity.ok(usuarios);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
+
     @GetMapping("/EstudiantesARespon/{idusuario}")
     public ResponseEntity<List<Object[]>> buscarEstudiantesAxresponsable(@PathVariable Long idusuario) {
-        List<Object[]> usuarios = iUsuarioService.buscarEstudiantesAxresponsable(idusuario);
-        return ResponseEntity.ok(usuarios);
+        try {
+            List<Object[]> usuarios = iUsuarioService.buscarEstudiantesAxresponsable(idusuario);
+            return ResponseEntity.ok(usuarios);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
     @GetMapping("/ListaTutoresC")
     public ResponseEntity<List<Object[]>> buscarTutoresC() {
-        List<Object[]> usuarios = iUsuarioService.buscarTutoresC();
-        return ResponseEntity.ok(usuarios);
+        try {
+            List<Object[]> usuarios = iUsuarioService.buscarTutoresC();
+            return ResponseEntity.ok(usuarios);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
     @GetMapping("/listaestudiante/{idUsuario}")
     public ResponseEntity<List<Object[]>> getUsuariosBytutoracademico(@PathVariable("idUsuario") Long idUsuario) {
-        List<Object[]> usuarios = iUsuarioService.getUsuariosBytutoracademico(idUsuario);
-        return ResponseEntity.ok(usuarios);
-}
+        try {
+            List<Object[]> usuarios = iUsuarioService.getUsuariosBytutoracademico(idUsuario);
+            return ResponseEntity.ok(usuarios);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 
 }
 
