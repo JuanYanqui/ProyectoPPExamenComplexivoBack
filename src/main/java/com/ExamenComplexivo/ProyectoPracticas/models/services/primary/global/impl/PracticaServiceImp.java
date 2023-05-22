@@ -3,7 +3,9 @@ package com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.im
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPracticaDao;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.*;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.generic.GenericServiceImpl;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
@@ -57,19 +59,19 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
     }
 
 
-    public List<Anexo1> getPracticasByCarrera(String carrera) {
-        return practicaDao.findByCarreraRecibeAnexo(carrera);
+    public List<Anexo1> getPracticasByCarrera(Long idconvo) {
+        return practicaDao.findByCarreraRecibeAnexo(idconvo);
     }
-    public List<Anexo2> getPracticasByCarrera2(String carrera) {
-        return practicaDao.findByCarreraRecibeAnexo2(carrera);
-    }
-
-    public List<Anexo3> getPracticasByCarrera3(String carrera) {
-        return practicaDao.findByCarreraRecibeAnexo3(carrera);
+    public List<Anexo2> getPracticasByCarrera2(Long idconvo) {
+        return practicaDao.findByCarreraRecibeAnexo2(idconvo);
     }
 
-    public List<Practica> getPracticasByCarrera4(String carrera) {
-        return practicaDao.findByCarreraRecibeAnexo4(carrera);
+    public List<Anexo3> getPracticasByCarrera3(Long idconvo) {
+        return practicaDao.findByCarreraRecibeAnexo3(idconvo);
+    }
+
+    public List<Practica> getPracticasByCarrera4(Long idconvo) {
+        return practicaDao.findByCarreraRecibeAnexo4(idconvo);
     }
 
     public List<Practica> getPracticasByDocumentoAnexo5(Long convocatoriaid, Long idusuario) {
@@ -97,20 +99,59 @@ public class PracticaServiceImp extends GenericServiceImpl<Practica,Long> implem
         return practicaDao.getPracticasByConvocatoriaIdAnexo1(solicitudpracticasId);
     }
 
-    public List<Anexo5> getPracticasByCarrera5(String carrera) {
-        return practicaDao.findByCarreraRecibeAnexo5(carrera);
+    public List<Anexo5> getPracticasByCarrera5(Long idconvo) {
+        return practicaDao.findByCarreraRecibeAnexo5(idconvo);
     }
 
-    public List<Anexo6> getPracticasByCarrera6(String carrera) {
-        return practicaDao.findByCarreraRecibeAnexo6(carrera);
+    public List<Anexo6> getPracticasByCarrera6(Long idconvo) {
+        return practicaDao.findByCarreraRecibeAnexo6(idconvo);
     }
 
-    public List<Anexo7> getPracticasByCarrera7(String carrera) {
-        return practicaDao.findByCarreraRecibeAnexo7(carrera);
+    public List<Anexo7> getPracticasByCarrera7(Long idconvo) {
+        return practicaDao.findByCarreraRecibeAnexo7(idconvo);
     }
 
-    public List<Anexo8> getPracticasByCarrera8(String carrera) {
-        return practicaDao.findByCarreraRecibeAnexo8(carrera);
+    public List<Anexo8> getPracticasByCarrera8(Long idconvo) {
+        return practicaDao.findByCarreraRecibeAnexo8(idconvo);
     }
 
+    public List<Anexo1> findByDocumentoA1(Long idpractica) {
+        return practicaDao.findByDocumentoA1(idpractica);
+    }
+
+    public List<Convocatorias> findByPracticaAnexo1(String cedula) {
+        return practicaDao.findByPracticaAnexo1(cedula);
+    }
+
+    public List<Convocatorias> findByPracticaAnexoParaAcademixoRecibe(String cedula) {
+        return practicaDao.findByPracticaAnexoParaAcademixoRecibe(cedula);
+    }
+
+    public List<Convocatorias> findByPracticaAnexoParaResponsableFinal(String cedula) {
+        return practicaDao.findByPracticaAnexoParaResponsableFinal(cedula);
+    }
+
+    public List<Anexo5> findByDocumentoA5(Long convocatoria) {
+        return practicaDao.findByDocumentoA5(convocatoria);
+    }
+
+    public List<Anexo6> findByDocumentoA6(Long convocatoria) {
+        return practicaDao.findByDocumentoA6(convocatoria);
+    }
+
+    public List<Anexo6> findByParaAcademicoDocumentoA6(Long convocatoria) {
+        return practicaDao.findByParaAcademicoDocumentoA6(convocatoria);
+    }
+
+    public List<Anexo7> findByParaEmpresarialDocumentoA7(Long convocatoria) {
+        return practicaDao.findByParaEmpresarialDocumentoA7(convocatoria);
+    }
+
+    public List<Anexo8> findByParaAcademicoDocumentoA8(Long convocatoria) {
+        return practicaDao.findByParaAcademicoDocumentoA8(convocatoria);
+    }
+
+    public List<Anexo8> findByParaEmpresarialDocumentoA8(Long convocatoria) {
+        return practicaDao.findByParaEmpresarialDocumentoA8(convocatoria);
+    }
 }

@@ -2,7 +2,9 @@ package com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.*;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -53,58 +55,158 @@ public interface IPracticaDao extends JpaRepository<Practica,Long> {
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo1 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN soli.responsablePPP r " +
-            "WHERE a.estado_academico = true AND r.carrera = :carrera")
-    List<Anexo1> findByCarreraRecibeAnexo(String carrera);
+            "JOIN soli.convocatoria con " +
+            "WHERE a.estado_academico = true AND a.estado_empresarial = true AND con.idConvocatorias = :idconvo")
+    List<Anexo1> findByCarreraRecibeAnexo(Long idconvo);
+
+    @Query("SELECT DISTINCT con FROM Practica p " +
+            "JOIN p.anexo1 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN con.solicitudPracticas soliprac " +
+            "JOIN soli.responsablePPP respo " +
+            "JOIN respo.usuario_responsable usu WHERE usu.cedula = :cedula")
+    List<Convocatorias> findByPracticaAnexoParaResponsableFinal(String cedula);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo1 a " +
+            "JOIN a.documentoAnexo1 doc1 " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN p.tutorEmpresarial tuto " +
+            "JOIN tuto.usuario_empresarial usuem " +
+            "WHERE a.estado_academico = true AND a.estado_empresarial = false AND con.idConvocatorias = :idpractica")
+    List<Anexo1> findByDocumentoA1(Long idpractica);
+
+    @Query("SELECT DISTINCT con FROM Practica p " +
+            "JOIN p.anexo1 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN con.solicitudPracticas soliprac " +
+            "JOIN p.tutorEmpresarial tuto " +
+            "JOIN tuto.usuario_empresarial usuem " +
+            "WHERE usuem.cedula = :cedula")
+    List<Convocatorias> findByPracticaAnexo1(String cedula);
+
+    @Query("SELECT DISTINCT con FROM Practica p " +
+            "JOIN p.anexo1 a " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN con.solicitudPracticas soliprac " +
+            "JOIN p.usuario usu " +
+            "WHERE usu.cedula = :cedula")
+    List<Convocatorias> findByPracticaAnexoParaAcademixoRecibe(String cedula);
 
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo2 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN soli.responsablePPP r " +
-            "WHERE  r.carrera = :carrera")
-    List<Anexo2> findByCarreraRecibeAnexo2(String carrera);
+            "JOIN soli.convocatoria con " +
+            "WHERE  con.idConvocatorias = :idconvo")
+    List<Anexo2> findByCarreraRecibeAnexo2(Long idconvo);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo5 a " +
+            "JOIN a.documentoAnexo5 doc5 " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN p.tutorEmpresarial tuto " +
+            "JOIN tuto.usuario_empresarial usuem " +
+            "WHERE a.estado_academico = true AND a.estado_empresarial = false AND con.idConvocatorias = :convocatoria")
+    List<Anexo5> findByDocumentoA5(Long convocatoria);
 
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo3 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN soli.responsablePPP r " +
-            "WHERE  r.carrera = :carrera")
-    List<Anexo3> findByCarreraRecibeAnexo3(String carrera);
+            "JOIN soli.convocatoria con " +
+            "WHERE  con.idConvocatorias = :idconvo")
+    List<Anexo3> findByCarreraRecibeAnexo3(Long idconvo);
 
     @Query("SELECT p FROM Practica p " +
             "JOIN p.documentoasignacionaca a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN soli.responsablePPP r " +
-            "WHERE  r.carrera = :carrera")
-    List<Practica> findByCarreraRecibeAnexo4(String carrera);
+            "JOIN soli.convocatoria con " +
+            "WHERE  con.idConvocatorias = :idconvo")
+    List<Practica> findByCarreraRecibeAnexo4(Long idconvo);
 
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo5 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN soli.responsablePPP r " +
-            "WHERE  r.carrera = :carrera")
-    List<Anexo5> findByCarreraRecibeAnexo5(String carrera);
+            "JOIN soli.convocatoria con " +
+            "WHERE  a.estado_academico = true AND a.estado_empresarial = true AND con.idConvocatorias = :idconvo")
+    List<Anexo5> findByCarreraRecibeAnexo5(Long idconvo);
 
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo6 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN soli.responsablePPP r " +
-            "WHERE  r.carrera = :carrera")
-    List<Anexo6> findByCarreraRecibeAnexo6(String carrera);
+            "JOIN soli.convocatoria con " +
+            "WHERE  a.estado_academico = true AND a.estado_estudiante = true AND a.estado_especifico = true AND con.idConvocatorias = :idconvo")
+    List<Anexo6> findByCarreraRecibeAnexo6(Long idconvo);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo6 a " +
+            "JOIN a.documento_anexo6 doc6 " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN p.tutorEmpresarial tuto " +
+            "JOIN tuto.usuario_empresarial usuem " +
+            "WHERE  a.estado_estudiante = true AND a.estado_academico = true AND a.estado_especifico = false AND con.idConvocatorias = :convocatoria")
+    List<Anexo6> findByDocumentoA6(Long convocatoria);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo6 a " +
+            "JOIN a.documento_anexo6 doc6 " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN p.tutorEmpresarial tuto " +
+            "JOIN tuto.usuario_empresarial usuem " +
+            "WHERE  a.estado_estudiante = true AND a.estado_academico = false AND con.idConvocatorias = :convocatoria")
+    List<Anexo6> findByParaAcademicoDocumentoA6(Long convocatoria);
+
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo7 a " +
+            "JOIN a.documentoAnexo7 doc7 " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN p.tutorEmpresarial tuto " +
+            "JOIN tuto.usuario_empresarial usuem " +
+            "WHERE   a.estado_especifico = true AND a.estado_academico = false AND con.idConvocatorias = :convocatoria")
+    List<Anexo7> findByParaEmpresarialDocumentoA7(Long convocatoria);
+
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo8 a " +
+            "JOIN a.documentoAnexo8 doc8 " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN p.tutorEmpresarial tuto " +
+            "JOIN tuto.usuario_empresarial usuem " +
+            "WHERE   a.estado_estudiante= true AND a.estado_especifico = false AND a.estado_academico = false AND con.idConvocatorias = :convocatoria")
+    List<Anexo8> findByParaAcademicoDocumentoA8(Long convocatoria);
+
+    @Query("SELECT a FROM Practica p " +
+            "JOIN p.anexo8 a " +
+            "JOIN a.documentoAnexo8 doc8 " +
+            "JOIN p.solicitudConvocatoria soli " +
+            "JOIN soli.convocatoria con " +
+            "JOIN p.tutorEmpresarial tuto " +
+            "JOIN tuto.usuario_empresarial usuem " +
+            "WHERE a.estado_estudiante= true AND a.estado_especifico = false AND a.estado_academico = true AND con.idConvocatorias = :convocatoria")
+    List<Anexo8> findByParaEmpresarialDocumentoA8(Long convocatoria);
 
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo7 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN soli.responsablePPP r " +
-            "WHERE  r.carrera = :carrera")
-    List<Anexo7> findByCarreraRecibeAnexo7(String carrera);
+            "JOIN soli.convocatoria con " +
+            "WHERE con.idConvocatorias = :idconvo")
+    List<Anexo7> findByCarreraRecibeAnexo7(Long idconvo);
 
     @Query("SELECT a FROM Practica p " +
             "JOIN p.anexo8 a " +
             "JOIN p.solicitudConvocatoria soli " +
-            "JOIN soli.responsablePPP r " +
-            "WHERE  r.carrera = :carrera")
-    List<Anexo8> findByCarreraRecibeAnexo8(String carrera);
+            "JOIN soli.convocatoria con " +
+            "WHERE con.idConvocatorias = :idconvo")
+    List<Anexo8> findByCarreraRecibeAnexo8(Long idconvo);
 
     @Query("SELECT p " +
             "FROM Convocatorias c " +

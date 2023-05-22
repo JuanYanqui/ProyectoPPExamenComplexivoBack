@@ -1,5 +1,6 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo7p1_EvaluaDao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo6;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo7;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo7Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,31 @@ public class anexo7Controller {
         }
     }
 
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Anexo7> actualizarUsuario(@PathVariable Long id, @RequestBody Anexo7 c) {
+        Anexo7 anexo = anexo7Service.findById(id);
+        if (anexo == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                anexo.setEstado_especifico(c.isEstado_especifico());
+                anexo.setEstado_academico(c.isEstado_academico());
+                return new ResponseEntity<>(anexo7Service.save(anexo), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
 
+    }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<Anexo7> getById(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(anexo7Service.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
 

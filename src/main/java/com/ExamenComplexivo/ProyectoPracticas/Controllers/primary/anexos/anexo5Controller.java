@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo5Dao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo4;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo5;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo4Service;
@@ -70,4 +71,14 @@ public class anexo5Controller {
                     .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
         }
     }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<Anexo5> getById(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(anexo5Service.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

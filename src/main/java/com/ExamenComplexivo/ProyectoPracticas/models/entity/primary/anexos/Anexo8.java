@@ -23,6 +23,9 @@ public class Anexo8 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo8;
 
+	private boolean estado_estudiante;
+	private boolean estado_academico;
+	private boolean estado_especifico;
 	@OneToOne
 	@JoinColumn(name = "idPractica")
 	private Practica practica;

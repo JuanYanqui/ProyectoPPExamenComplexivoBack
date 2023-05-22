@@ -39,6 +39,24 @@ public class anexo8Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Anexo8> actualizarUsuario(@PathVariable Long id, @RequestBody Anexo8 c) {
+        Anexo8 anexo = anexo8Service.findById(id);
+        if (anexo == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                anexo.setEstado_especifico(c.isEstado_especifico());
+                anexo.setEstado_academico(c.isEstado_academico());
+                anexo.setEstado_estudiante(c.isEstado_estudiante());
+                return new ResponseEntity<>(anexo8Service.save(anexo), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+    }
+
     @PutMapping("/updateDocument/{id}")
     public ResponseEntity<String> actualizarDocumento(@PathVariable Long id, @RequestParam Long idDocumento) {
         if (!anexo8Dao.existsById(id)) {
@@ -53,6 +71,15 @@ public class anexo8Controller {
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<Anexo8> getById(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(anexo8Service.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

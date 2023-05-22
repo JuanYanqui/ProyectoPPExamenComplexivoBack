@@ -1,6 +1,7 @@
 package com.ExamenComplexivo.ProyectoPracticas.Controllers.primary.anexos;
 
 import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.anexos.IAnexo1Dao;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.anexos.service.IAnexo1Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,15 @@ public class anexo1Controller {
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<Anexo1> getById(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(anexo1Service.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

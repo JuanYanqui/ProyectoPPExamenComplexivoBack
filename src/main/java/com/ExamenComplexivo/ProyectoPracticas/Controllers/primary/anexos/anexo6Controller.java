@@ -74,4 +74,13 @@ public class anexo6Controller {
                     .body("No se pudo actualizar el documento. Detalles del error: " + e.getMessage());
         }
     }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<Anexo6> getById(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(anexo6Service.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

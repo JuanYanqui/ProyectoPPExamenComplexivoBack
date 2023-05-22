@@ -37,7 +37,7 @@ public class Documento_Anexo7Controller {
 
 
     //Metodo para descargar
-    @GetMapping("download/{id}")
+    @GetMapping("/download/{id}")
     public ResponseEntity<byte[]> getPdfFile(@PathVariable Long id) {
         Optional<Documento_Anexo7> optionalPdfFile = documentoAnexo7Dao.findById(id);
         if (optionalPdfFile.isPresent()) {
