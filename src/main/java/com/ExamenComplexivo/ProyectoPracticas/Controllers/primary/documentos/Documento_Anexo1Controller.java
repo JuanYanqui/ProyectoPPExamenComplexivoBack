@@ -16,7 +16,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/documentoAnexo1")
-public class Documento_Anexo1Controller {
+public class
+Documento_Anexo1Controller {
 
     @Autowired
     IDocumento_Anexo1Dao documentoAnexo1Dao;
@@ -35,7 +36,7 @@ public class Documento_Anexo1Controller {
     }
 
     //Metodo para descargar
-    @GetMapping("download/{id}")
+    @GetMapping("/download/{id}")
     public ResponseEntity<byte[]> getPdfFile(@PathVariable Long id) {
         Optional<Documento_Anexo1> optionalPdfFile = documentoAnexo1Dao.findById(id);
         if (optionalPdfFile.isPresent()) {

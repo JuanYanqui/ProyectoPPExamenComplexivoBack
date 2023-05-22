@@ -3,7 +3,9 @@ import com.ExamenComplexivo.ProyectoPracticas.models.dao.primary.global.IPractic
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Convocatorias;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Practica;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Convocatoria;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.Solicitud_Practicas;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.anexos.*;
+import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_Anexo1;
 import com.ExamenComplexivo.ProyectoPracticas.models.entity.primary.documentos.Documento_AsigTutorAcademico;
 import com.ExamenComplexivo.ProyectoPracticas.models.services.primary.global.services.IPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -224,6 +226,10 @@ public class PracticaController {
         }
     }
 
+    @GetMapping("/convocatoriasporresponsable/{cedula}")
+    public  List<Convocatorias> findByPracticaAnexoParaResponsableFinal(@PathVariable("cedula") String cedula) {
+        return practicaService.findByPracticaAnexoParaResponsableFinal(cedula);
+    }
 
     @GetMapping("/practicaparaanexo/{id}/{idusuario}")
     public ResponseEntity<List<Practica>> getPracticasByDocumentoAnexo(@PathVariable("id") Long idconvocatoria, @PathVariable("idusuario") Long idusuario) {
@@ -275,11 +281,10 @@ public class PracticaController {
         }
     }
 
-
-    @GetMapping("/carreraparaanexo/{carrera}")
-    public ResponseEntity<List<Anexo1>> getPracticasByCarrera(@PathVariable String carrera) {
+    @GetMapping("/carreraparaanexo/{idconvo}")
+    public ResponseEntity<List<Anexo1>> getPracticasByCarrera(@PathVariable Long idconvo) {
         try {
-            List<Anexo1> practicas = practicaService.getPracticasByCarrera(carrera);
+            List<Anexo1> practicas = practicaService.getPracticasByCarrera(idconvo);
 
             if (!practicas.isEmpty()) {
                 return ResponseEntity.ok(practicas);
@@ -292,36 +297,30 @@ public class PracticaController {
         }
     }
 
-
-    @GetMapping("/carreraparaanexo2/{carrera}")
-    public ResponseEntity<List<Anexo2>> getPracticasByCarrera2(@PathVariable String carrera) {
-        List<Anexo2> practicas = practicaService.getPracticasByCarrera2(carrera);
-
-        if (!practicas.isEmpty()) {
+    @GetMapping("/carreraparaanexo2/{idconvo}")
+    public ResponseEntity<List<Anexo2>> getPracticasByCarrera2(@PathVariable Long idconvo) {
+        List<Anexo2> practicas = practicaService.getPracticasByCarrera2(idconvo);
+                if (!practicas.isEmpty()) {
             return ResponseEntity.ok(practicas);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
 
-
-    @GetMapping("/carreraparaanexo3/{carrera}")
-    public ResponseEntity<List<Anexo3>> getPracticasByCarrera3(@PathVariable String carrera) {
-        List<Anexo3> practicas = practicaService.getPracticasByCarrera3(carrera);
-
-        if (!practicas.isEmpty()) {
+    @GetMapping("/carreraparaanexo3/{idconvo}")
+    public ResponseEntity<List<Anexo3>> getPracticasByCarrera3(@PathVariable Long idconvo) {
+        List<Anexo3> practicas = practicaService.getPracticasByCarrera3(idconvo);
+            if (!practicas.isEmpty()) {
             return ResponseEntity.ok(practicas);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
 
-
-    @GetMapping("/carreraparaanexo4/{carrera}")
-    public ResponseEntity<List<Practica>> getPracticasByCarrera4(@PathVariable String carrera) {
-        List<Practica> practicas = practicaService.getPracticasByCarrera4(carrera);
-
-        if (!practicas.isEmpty()) {
+    @GetMapping("/carreraparaanexo4/{idconvo}")
+    public ResponseEntity<List<Practica>> getPracticasByCarrera4(@PathVariable Long idconvo) {
+        List<Practica> practicas = practicaService.getPracticasByCarrera4(idconvo);
+                if (!practicas.isEmpty()) {
             return ResponseEntity.ok(practicas);
         } else {
             return ResponseEntity.noContent().build();
@@ -430,22 +429,69 @@ public class PracticaController {
         return new ResponseEntity<>(datosJSON, HttpStatus.OK);
     }
 
-    @GetMapping("/carreraparaanexo5/{carrera}")
-    public ResponseEntity<List<Anexo5>> getPracticasByCarrera5(@PathVariable String carrera) {
-        List<Anexo5> practicas = practicaService.getPracticasByCarrera5(carrera);
-
-        if (!practicas.isEmpty()) {
+    @GetMapping("/carreraparaanexo5/{idconvo}")
+    public ResponseEntity<List<Anexo5>> getPracticasByCarrera5(@PathVariable Long idconvo) {
+        List<Anexo5> practicas = practicaService.getPracticasByCarrera5(idconvo);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+    @GetMapping("/carreraparaanexo6/{idconvo}")
+    public ResponseEntity<List<Anexo6>> getPracticasByCarrera6(@PathVariable Long idconvo) {
+        List<Anexo6> practicas = practicaService.getPracticasByCarrera6(idconvo);
+          if (!practicas.isEmpty()) {
             return ResponseEntity.ok(practicas);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
 
-    @GetMapping("/carreraparaanexo6/{carrera}")
-    public ResponseEntity<List<Anexo6>> getPracticasByCarrera6(@PathVariable String carrera) {
-        List<Anexo6> practicas = practicaService.getPracticasByCarrera6(carrera);
+    @GetMapping("/carreraparaanexo7/{idconvo}")
+    public ResponseEntity<List<Anexo7>> getPracticasByCarrera7(@PathVariable Long idconvo) {
+        List<Anexo7> practicas = practicaService.getPracticasByCarrera7(idconvo);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
 
-        if (!practicas.isEmpty()) {
+    @GetMapping("/carreraparaanexo8/{idconvo}")
+    public ResponseEntity<List<Anexo8>> getPracticasByCarrera8(@PathVariable Long idconvo) {
+        List<Anexo8> practicas = practicaService.getPracticasByCarrera8(idconvo);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("/documentoanexo1/{idpractica}")
+    public ResponseEntity<List<Anexo1>> findByDocumentoA1(@PathVariable Long idpractica) {
+        List<Anexo1> practicas = practicaService.findByDocumentoA1(idpractica);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("/documentoanexoPractica/{cedula}")
+    public ResponseEntity<List<Convocatorias>> findByPracticaAnexo1(@PathVariable String cedula) {
+        List<Convocatorias> practicas = practicaService.findByPracticaAnexo1(cedula);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("/documentoanexoParaAcademico/{cedula}")
+    public ResponseEntity<List<Convocatorias>> findByPracticaAnexoParaAcademixoRecibe(@PathVariable String cedula) {
+        List<Convocatorias> practicas = practicaService.findByPracticaAnexoParaAcademixoRecibe(cedula);
+          if (!practicas.isEmpty()) {
             return ResponseEntity.ok(practicas);
         } else {
             return ResponseEntity.noContent().build();
@@ -453,23 +499,60 @@ public class PracticaController {
     }
 
 
-    @GetMapping("/carreraparaanexo7/{carrera}")
-    public ResponseEntity<List<Anexo7>> getPracticasByCarrera7(@PathVariable String carrera) {
-        List<Anexo7> practicas = practicaService.getPracticasByCarrera7(carrera);
-
-        if (!practicas.isEmpty()) {
+    @GetMapping("/documentoanexo5/{convocatoria}")
+    public ResponseEntity<List<Anexo5>> findByDocumentoA5(@PathVariable Long convocatoria) {
+        List<Anexo5> practicas = practicaService.findByDocumentoA5(convocatoria);
+          if (!practicas.isEmpty()) {
             return ResponseEntity.ok(practicas);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
 
+    @GetMapping("/documentoanexo6/{convocatoria}")
+    public ResponseEntity<List<Anexo6>> findByDocumentoA6(@PathVariable Long convocatoria) {
+        List<Anexo6> practicas = practicaService.findByDocumentoA6(convocatoria);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
 
-    @GetMapping("/carreraparaanexo8/{carrera}")
-    public ResponseEntity<List<Anexo8>> getPracticasByCarrera8(@PathVariable String carrera) {
-        List<Anexo8> practicas = practicaService.getPracticasByCarrera8(carrera);
+    @GetMapping("/documentoAcademicoanexo6/{convocatoria}")
+    public ResponseEntity<List<Anexo6>> findByParaAcademicoDocumentoA6(@PathVariable Long convocatoria) {
+        List<Anexo6> practicas = practicaService.findByParaAcademicoDocumentoA6(convocatoria);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
 
-        if (!practicas.isEmpty()) {
+    @GetMapping("/documentoEmpresarialanexo7/{convocatoria}")
+    public ResponseEntity<List<Anexo7>> findByParaEmpresarialDocumentoA7(@PathVariable Long convocatoria) {
+        List<Anexo7> practicas = practicaService.findByParaEmpresarialDocumentoA7(convocatoria);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("/documentoAcademicoanexo8/{convocatoria}")
+    public ResponseEntity<List<Anexo8>> findByParaAcademicoDocumentoA8(@PathVariable Long convocatoria) {
+        List<Anexo8> practicas = practicaService.findByParaAcademicoDocumentoA8(convocatoria);
+          if (!practicas.isEmpty()) {
+            return ResponseEntity.ok(practicas);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("/documentoEmpresarialanexo8/{convocatoria}")
+    public ResponseEntity<List<Anexo8>> findByParaEmpresarialDocumentoA8(@PathVariable Long convocatoria) {
+        List<Anexo8> practicas = practicaService.findByParaEmpresarialDocumentoA8(convocatoria);
+          if (!practicas.isEmpty()) {
             return ResponseEntity.ok(practicas);
         } else {
             return ResponseEntity.noContent().build();

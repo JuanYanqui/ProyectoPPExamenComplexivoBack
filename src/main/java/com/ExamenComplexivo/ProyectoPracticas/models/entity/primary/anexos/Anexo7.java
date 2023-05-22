@@ -22,7 +22,8 @@ public class Anexo7 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAnexo7;
-
+	private boolean estado_academico;
+	private boolean estado_especifico;
 	@OneToOne
 	@JoinColumn(name = "idPractica")
 	private Practica practica;
