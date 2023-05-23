@@ -62,5 +62,7 @@ public class ConvocatoriaServiceImp extends GenericServiceImpl<Convocatorias,Lon
     public List<Object[]> buscarConvocatoriasC() {
         return convocatoriaDao.buscarConvocatoriasC();
     }
-
+    public List<Convocatorias> BuscarConvocatoriaporCarrera(String carrera) {
+        return convocatoriaDao.BuscarConvocatoriaporCarrera(carrera);
+    }
 }

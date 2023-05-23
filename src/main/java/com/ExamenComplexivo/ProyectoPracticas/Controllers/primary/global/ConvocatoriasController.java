@@ -159,7 +159,6 @@ public class ConvocatoriasController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @GetMapping("/convocatoriaporsolicitud/{idSolicitudPracticas}")
     public ResponseEntity<List<Convocatorias>> buscarPorSolicitud(@PathVariable Long idSolicitudPracticas) {
         try {
@@ -258,6 +257,20 @@ public class ConvocatoriasController {
         }
         // Me devuelve los datos en formato JSON
         return new ResponseEntity<>(datosJSON, HttpStatus.OK);
+    }
+    @GetMapping("/convocatoriasoli/{carrera}")
+    public ResponseEntity<List<Convocatorias>> buscarConvocatoriaSoli(@PathVariable String carrera) {
+        try {
+            List<Convocatorias> convocatorias = convocatoriaService.BuscarConvocatoriaporCarrera(carrera);
+            if (convocatorias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(convocatorias);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 }

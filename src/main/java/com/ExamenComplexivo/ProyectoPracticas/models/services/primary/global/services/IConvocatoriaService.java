@@ -27,4 +27,5 @@ public interface IConvocatoriaService extends IGenericService<Convocatorias,Long
     List<Convocatorias> findByConvocatoriaporCarreraPractica(String carrera);
 
     List<Object[]> buscarConvocatoriasC();
+    List<Convocatorias> BuscarConvocatoriaporCarrera(String carrera);
 }
