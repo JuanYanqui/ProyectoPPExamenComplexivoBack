@@ -80,4 +80,12 @@ public class SolicitudConvocatoriaServiceImpl extends GenericServiceImpl<Solicit
     public List<Solicitud_Convocatoria> findByAnexo7(Long convocatoriaId) {
         return solicitudConvocatoriaDao.findByAnexo7(convocatoriaId);
     }
+
+        public List<Solicitud_Convocatoria> findSolicitudConvocatoriaPorEstudianteSinCancelar(String cedula) {
+        return solicitudConvocatoriaDao.findSolicitudConvocatoriaPorEstudianteSinCancelar(cedula);
+    }
+
+    public List<Solicitud_Convocatoria> findSolicitudConvocatoriaPorEstudianteCancelado(String cedula) {
+        return solicitudConvocatoriaDao.findSolicitudConvocatoriaPorEstudianteCancelado(cedula);
+    }
 }

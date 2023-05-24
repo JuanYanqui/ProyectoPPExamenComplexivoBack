@@ -87,6 +87,7 @@ public class SolicitudConvocatoriaController {
                 solicitudConvocatoria.setTutorEmpresarial(p.getTutorEmpresarial());
                 solicitudConvocatoria.setUsuario(p.getUsuario());
                 solicitudConvocatoria.setCheckPractica(p.isCheckPractica());
+                solicitudConvocatoria.setEstadoestudiante(p.isEstadoestudiante());
                 return new ResponseEntity<>(solicitudConvocatoriaService.save(solicitudConvocatoria), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -288,6 +289,26 @@ public class SolicitudConvocatoriaController {
     public ResponseEntity<List<Solicitud_Convocatoria>> findByAnexo7(@PathVariable("id") Long convocatoriaId) {
         try {
             List<Solicitud_Convocatoria> solicitudes = solicitudConvocatoriaService.findByAnexo7(convocatoriaId);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/SolicitudEstudianteNoCancelado/{cedula}")
+    public ResponseEntity<List<Solicitud_Convocatoria>> findSolicitudConvocatoriaPorEstudianteSinCancelar(@PathVariable("cedula") String cedula) {
+        try {
+            List<Solicitud_Convocatoria> solicitudes = solicitudConvocatoriaService.findSolicitudConvocatoriaPorEstudianteSinCancelar(cedula);
+            return ResponseEntity.ok(solicitudes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/SolicitudEstudianteCancelado/{cedula}")
+    public ResponseEntity<List<Solicitud_Convocatoria>> findSolicitudConvocatoriaPorEstudianteCancelado(@PathVariable("cedula") String cedula) {
+        try {
+            List<Solicitud_Convocatoria> solicitudes = solicitudConvocatoriaService.findSolicitudConvocatoriaPorEstudianteCancelado(cedula);
             return ResponseEntity.ok(solicitudes);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
