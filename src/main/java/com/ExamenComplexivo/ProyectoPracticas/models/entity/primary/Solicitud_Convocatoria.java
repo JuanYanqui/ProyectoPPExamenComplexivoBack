@@ -37,6 +37,8 @@ public class Solicitud_Convocatoria implements Serializable {
     private boolean checkPractica;
     private boolean estadoSolicitudConvo;
 
+    private boolean estadoestudiante;
+
 
     @OneToOne
     @JoinColumn(name = "id_documento_solicitud", nullable = true)

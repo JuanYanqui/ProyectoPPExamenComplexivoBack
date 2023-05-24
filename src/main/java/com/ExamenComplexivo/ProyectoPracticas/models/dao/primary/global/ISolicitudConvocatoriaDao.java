@@ -47,7 +47,7 @@ public interface ISolicitudConvocatoriaDao extends JpaRepository<Solicitud_Convo
     int getCountByConvocatoriaAndEstudiante(Long convocatoriaId, Long estudiantePracticasId);
 
 
-    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE  sc.checkDirector =false and c.idConvocatorias = :convocatoriaId")
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE  sc.checkDirector =false and sc.estadoestudiante = false and c.idConvocatorias = :convocatoriaId")
     List<Solicitud_Convocatoria> findByConvocatoriasDirector(@Param("convocatoriaId") Long convocatoriaId);
 
     @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c WHERE  sc.checkDirector =true and c.idConvocatorias = :convocatoriaId")
@@ -76,4 +76,10 @@ public interface ISolicitudConvocatoriaDao extends JpaRepository<Solicitud_Convo
 
     @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us JOIN sc.convocatoria c JOIN sc.tutorEmpresarial tuto JOIN tuto.empresa empre JOIN sc.practica p WHERE p.estadoanexo1 = true and p.estadoanexo2 = true and p.estadoanexo3 = true and p.estadoanexo5 = true and p.estadoanexo6 = true and p.estadoanexo7 = false and c.idConvocatorias = :convocatoriaId")
     List<Solicitud_Convocatoria> findByAnexo7(@Param("convocatoriaId") Long convocatoriaId);
+
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us WHERE sc.estadoestudiante = false and us.cedula = :cedula ")
+    List<Solicitud_Convocatoria> findSolicitudConvocatoriaPorEstudianteSinCancelar(@Param("cedula") String cedula);
+
+    @Query("SELECT sc FROM Solicitud_Convocatoria sc JOIN sc.estudiantePracticante ep JOIN ep.usuario_estudiante_practicante us WHERE sc.estadoestudiante = true and us.cedula = :cedula ")
+    List<Solicitud_Convocatoria> findSolicitudConvocatoriaPorEstudianteCancelado(@Param("cedula") String cedula);
 }
