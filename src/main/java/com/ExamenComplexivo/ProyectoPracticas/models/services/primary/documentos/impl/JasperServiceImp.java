@@ -38,7 +38,7 @@ public class JasperServiceImp implements JasperService {
             byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
 
             response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=solicitudpracticas.pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=SolicitudPracticas.pdf");
             response.setContentLength(reportContent.length);
 
             OutputStream outStream = response.getOutputStream();
@@ -73,7 +73,7 @@ public class JasperServiceImp implements JasperService {
             byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
 
             response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=convocatorias.pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=ConvocatoriaISTA.pdf");
             response.setContentLength(reportContent.length);
 
             OutputStream outStream = response.getOutputStream();
@@ -108,7 +108,7 @@ public class JasperServiceImp implements JasperService {
             byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
 
             response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=solicitudconvocatoria.pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=SolicitudConvocatoria.pdf");
             response.setContentLength(reportContent.length);
 
             OutputStream outStream = response.getOutputStream();

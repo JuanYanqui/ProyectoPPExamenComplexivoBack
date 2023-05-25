@@ -38,7 +38,7 @@ ON estudiante.idusuario = usuaestu.idusuario
 JOIN empresa emp
 ON emp.idempresa = tutemp.idempresa
 
-WHERE pra.idpractica =  $P{idPractica} ]]>
+WHERE pra.idpractica =  $P{idPractica}]]>
 	</queryString>
 	<field name="carrera" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="carrera"/>
@@ -75,155 +75,162 @@ WHERE pra.idpractica =  $P{idPractica} ]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="78" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="20" width="340" height="30" uuid="d2857fdf-9be6-43d9-95cc-1234959ddda8"/>
-				<textElement>
-					<font size="16"/>
-				</textElement>
-				<text><![CDATA[Documento: Designación Tutor Especifico]]></text>
-			</staticText>
-			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="444" y="48" width="100" height="30" uuid="e1ae421e-7e65-49a9-9a39-5c7eba178bee"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
-	</title>
 	<columnHeader>
-		<band height="125" splitType="Stretch">
+		<band height="225" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="20" width="100" height="20" uuid="d0946e32-103a-4cc0-918a-39c985741d45"/>
+				<reportElement x="0" y="118" width="100" height="20" uuid="d0946e32-103a-4cc0-918a-39c985741d45"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Magíster]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="40" width="444" height="20" uuid="694fed5f-c9ff-452d-90a2-03fcec0cafd8"/>
+				<reportElement x="0" y="138" width="444" height="20" uuid="694fed5f-c9ff-452d-90a2-03fcec0cafd8"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{destinatario}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="60" width="444" height="20" uuid="142d5d0a-53f0-4a96-bf14-7c5b740c45ff"/>
+				<reportElement x="0" y="158" width="444" height="20" uuid="142d5d0a-53f0-4a96-bf14-7c5b740c45ff"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Responsable de Prácticas Pre Profesionales ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="80" width="444" height="20" uuid="a61bb869-21da-40da-9fc7-5a3d3f7276d8"/>
+				<reportElement x="0" y="178" width="444" height="20" uuid="a61bb869-21da-40da-9fc7-5a3d3f7276d8"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="100" width="444" height="20" uuid="79643ada-11f1-470f-95c9-199e4bacf2fe"/>
+				<reportElement x="0" y="198" width="444" height="20" uuid="79643ada-11f1-470f-95c9-199e4bacf2fe"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Instituto Superior Universitario Tecnológico del Azuay]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="65" width="340" height="30" uuid="d2857fdf-9be6-43d9-95cc-1234959ddda8"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento: Designación Tutor Especifico]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="440" y="100" width="100" height="20" uuid="e1ae421e-7e65-49a9-9a39-5c7eba178bee"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="5" y="5" width="170" height="90" uuid="bc87e86e-aa51-49b4-ae3b-4f8b291073bb"/>
+				<imageExpression><![CDATA["https://dev2020.tecazuay.edu.ec/wp-content/uploads/2022/11/cropped-LOGO-RECTANGULAR_SIN-FONDO.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="390" y="100" width="50" height="20" uuid="3f7ba92d-517c-4f84-bc00-a8e78d275d30"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cuenca,]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="330" splitType="Stretch">
+		<band height="365" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="25" width="120" height="20" uuid="f206daf4-e538-412d-992b-6f664f248d26"/>
+				<reportElement x="0" y="60" width="120" height="20" uuid="f206daf4-e538-412d-992b-6f664f248d26"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Su Despacho .-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="70" width="150" height="20" uuid="b941bd5c-6839-4d98-a0d9-797c283d2a09"/>
+				<reportElement x="0" y="105" width="150" height="20" uuid="b941bd5c-6839-4d98-a0d9-797c283d2a09"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[De mi consideración:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="110" width="400" height="20" uuid="10f6a1a7-4fac-47af-9783-1a70cacffcad"/>
+				<reportElement x="-2" y="145" width="390" height="20" uuid="10f6a1a7-4fac-47af-9783-1a70cacffcad"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[	Luego de expresarle un atento saludo me permito informar que el]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="390" y="110" width="160" height="20" uuid="80322731-7106-421e-9c3f-0035aa3032d4"/>
+				<reportElement x="390" y="145" width="160" height="20" uuid="80322731-7106-421e-9c3f-0035aa3032d4"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cargoempresarial}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="20" y="130" width="220" height="20" uuid="10e1d574-f4a6-4b8e-8c34-e3ec90a81660"/>
+				<reportElement x="20" y="165" width="220" height="20" uuid="10e1d574-f4a6-4b8e-8c34-e3ec90a81660"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{remitente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="240" y="130" width="180" height="20" uuid="ca2b1c74-b3aa-4dc5-9f6f-5c6292b4790f"/>
+				<reportElement x="240" y="165" width="180" height="20" uuid="ca2b1c74-b3aa-4dc5-9f6f-5c6292b4790f"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[con cédula de identidad número:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="420" y="130" width="80" height="20" uuid="6bc5fa85-d491-4292-97c5-f7b024cb700c"/>
+				<reportElement x="420" y="165" width="80" height="20" uuid="6bc5fa85-d491-4292-97c5-f7b024cb700c"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="150" width="330" height="20" uuid="7bb188d8-f7ca-415d-b8e2-1b0f05a00318"/>
+				<reportElement x="20" y="185" width="330" height="20" uuid="7bb188d8-f7ca-415d-b8e2-1b0f05a00318"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[ha sido designado como TUTOR ESPECIFICO del estudiante]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="360" y="150" width="220" height="20" uuid="15bfc019-561e-4754-aee6-8ede33d87fd5"/>
+				<reportElement x="360" y="185" width="220" height="20" uuid="15bfc019-561e-4754-aee6-8ede33d87fd5"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{estudiante}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="200" width="20" height="20" uuid="260dfa0a-c6bb-465a-bf68-5d77fb1ee536"/>
+				<reportElement x="0" y="235" width="20" height="20" uuid="260dfa0a-c6bb-465a-bf68-5d77fb1ee536"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[El ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="20" y="200" width="70" height="20" uuid="01d0d756-7327-4355-8a4b-30b6e7f186a1"/>
+				<reportElement x="20" y="235" width="70" height="20" uuid="01d0d756-7327-4355-8a4b-30b6e7f186a1"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cargoempresarial}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="90" y="200" width="200" height="20" uuid="7363208a-3a18-42ae-931b-2efd4de94a32"/>
+				<reportElement x="90" y="235" width="200" height="20" uuid="7363208a-3a18-42ae-931b-2efd4de94a32"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{remitente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="290" y="200" width="210" height="20" uuid="8ea64f6e-10b4-42a6-9bdb-38c795b51518"/>
+				<reportElement x="290" y="235" width="210" height="20" uuid="8ea64f6e-10b4-42a6-9bdb-38c795b51518"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[se compromete a colaborar y guiar en]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="220" width="499" height="110" uuid="cfa967c6-fa04-4d48-96ef-07975eac5825"/>
+				<reportElement x="0" y="255" width="499" height="110" uuid="cfa967c6-fa04-4d48-96ef-07975eac5825"/>
 				<textElement verticalAlignment="Top">
 					<font size="12"/>
 				</textElement>
@@ -235,7 +242,7 @@ Sin más que informar, me despido augurando éxito en las funciones que realiza.
 		</band>
 	</detail>
 	<summary>
-		<band height="180" splitType="Stretch">
+		<band height="212" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="40" width="90" height="20" uuid="09771406-0e8c-423e-b0bf-845d1af3a08f"/>
 				<textElement>

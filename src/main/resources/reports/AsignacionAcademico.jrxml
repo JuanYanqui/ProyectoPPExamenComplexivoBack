@@ -37,7 +37,7 @@ ON respon.idresponsableppp = solicon.idresponsableppp
 JOIN usuarios remitente
 ON remitente.idusuario = respon.idusuario
 
-WHERE pra.idpractica =   $P{idPractica} ]]>
+WHERE pra.idpractica =   $P{idPractica}]]>
 	</queryString>
 	<field name="destinatario" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="destinatario"/>
@@ -65,21 +65,32 @@ WHERE pra.idpractica =   $P{idPractica} ]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="128" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="10" width="290" height="19" uuid="b1db812c-cd2a-4243-b675-239cd2d3b53e"/>
+				<reportElement x="0" y="70" width="420" height="19" uuid="b1db812c-cd2a-4243-b675-239cd2d3b53e"/>
 				<textElement>
-					<font size="12"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ANEXO 4: Designación y obligaciones del tutor académico]]></text>
 			</staticText>
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="444" y="50" width="100" height="30" uuid="96ed6aa5-025d-4d22-9142-4825da32e6b3"/>
+				<reportElement x="446" y="103" width="100" height="18" uuid="96ed6aa5-025d-4d22-9142-4825da32e6b3"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="5" y="5" width="170" height="90" uuid="0c0d0acb-d175-460b-b766-5f521ad94dfe"/>
+				<imageExpression><![CDATA["https://dev2020.tecazuay.edu.ec/wp-content/uploads/2022/11/cropped-LOGO-RECTANGULAR_SIN-FONDO.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="400" y="103" width="46" height="20" uuid="353467be-373e-4a01-8d78-9f273532ab3a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cuenca,]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>

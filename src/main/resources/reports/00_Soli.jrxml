@@ -21,7 +21,7 @@ INNER JOIN empresa emp ON tut.idempresa = emp.idempresa
 INNER JOIN responsable_ppp res ON s.idresponsableppp = res.idresponsableppp
 INNER JOIN usuarios destinatario ON res.idusuario = destinatario.idusuario
 
-WHERE s.idsolicitudpracticas =  $P{idSolicitudPracticas}]]>
+WHERE s.idsolicitudpracticas =    $P{idSolicitudPracticas}]]>
 	</queryString>
 	<field name="idsolicitudpracticas" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="idsolicitudpracticas"/>
@@ -70,41 +70,48 @@ WHERE s.idsolicitudpracticas =  $P{idSolicitudPracticas}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="90" splitType="Stretch">
+		<band height="118" splitType="Stretch">
 			<staticText>
-				<reportElement x="159" y="20" width="236" height="30" uuid="0b8763c6-babb-4f23-b63a-f0c6af9fbf01"/>
+				<reportElement x="0" y="50" width="330" height="30" uuid="0b8763c6-babb-4f23-b63a-f0c6af9fbf01"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[SOLICITUD EMITIDA POR ENTIDAD RECEPTORA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="60" width="40" height="30" uuid="e608e984-3dc1-45a1-a6c6-588ac1a039f0"/>
+				<reportElement x="410" y="80" width="40" height="30" uuid="e608e984-3dc1-45a1-a6c6-588ac1a039f0"/>
 				<text><![CDATA[Cuenca,]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="460" y="60" width="114" height="30" uuid="31cfd11a-f0bc-4117-9896-7976e5b330ed"/>
+				<reportElement x="450" y="80" width="114" height="30" uuid="31cfd11a-f0bc-4117-9896-7976e5b330ed"/>
 				<textFieldExpression><![CDATA[$F{fechaenviosolicitud}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="394" y="-10" width="170" height="90" uuid="f57cb573-fc4c-498f-93b4-a6dffd214b5b"/>
+				<imageExpression><![CDATA["https://dev2020.tecazuay.edu.ec/wp-content/uploads/2022/11/cropped-LOGO-RECTANGULAR_SIN-FONDO.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="99" splitType="Stretch">
+		<band height="124" splitType="Stretch">
 			<staticText>
-				<reportElement x="10" y="5" width="100" height="14" uuid="23b062d0-2434-47da-9153-5e0935469cf2"/>
+				<reportElement x="10" y="25" width="100" height="14" uuid="23b062d0-2434-47da-9153-5e0935469cf2"/>
 				<text><![CDATA[Magister]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="10" y="20" width="240" height="20" uuid="081635cc-db32-477c-b08f-63c6f93ea423"/>
+				<reportElement x="10" y="40" width="240" height="20" uuid="081635cc-db32-477c-b08f-63c6f93ea423"/>
 				<textFieldExpression><![CDATA[$F{destinatario}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="40" width="300" height="14" uuid="f7f9da43-0fb5-49cd-86b2-05e367937f15"/>
+				<reportElement x="10" y="60" width="300" height="14" uuid="f7f9da43-0fb5-49cd-86b2-05e367937f15"/>
 				<text><![CDATA[Responsable de Prácticas Pre Profesionales]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="60" width="330" height="14" uuid="c8c4f503-d071-4948-bc76-3609ba339659"/>
-				<text><![CDATA[INSTITUTO SUPERIOR UNIVERSITARIO TECNOLOGICO DEL AZUAY]]></text>
+				<reportElement x="10" y="80" width="330" height="14" uuid="c8c4f503-d071-4948-bc76-3609ba339659"/>
+				<text><![CDATA[INSTITUTO SUPERIOR UNIVERSITARIO TECNOLÓGICO DEL AZUAY ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="80" width="100" height="19" uuid="c536481d-3bac-4b30-a1cc-37c670ca4d03"/>
+				<reportElement x="10" y="100" width="100" height="19" uuid="c536481d-3bac-4b30-a1cc-37c670ca4d03"/>
 				<text><![CDATA[Su Despacho .-]]></text>
 			</staticText>
 		</band>
@@ -113,48 +120,47 @@ WHERE s.idsolicitudpracticas =  $P{idSolicitudPracticas}]]>
 		<band height="480" splitType="Stretch">
 			<staticText>
 				<reportElement x="10" y="120" width="230" height="20" uuid="86b21b56-6dfa-4308-a9fc-c14791700e8c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
 				<text><![CDATA[Reciba un cordial saludo de quienes conformamos 
-]]></text>
+ ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="240" y="120" width="100" height="16" uuid="ded3124c-fdf2-41e3-96c6-dd452589b6c6"/>
+				<reportElement x="240" y="120" width="140" height="16" uuid="ded3124c-fdf2-41e3-96c6-dd452589b6c6"/>
 				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="310" y="120" width="219" height="20" uuid="c49dc0a3-1c79-4e61-b351-00229699a491"/>
-				<text><![CDATA[en atencion del convenio que mantenemos]]></text>
+				<reportElement x="380" y="118" width="199" height="20" uuid="c49dc0a3-1c79-4e61-b351-00229699a491"/>
+				<text><![CDATA[en atención del convenio que ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="140" width="370" height="20" uuid="c0a03e44-d999-4a39-b0b7-5679299165a9"/>
-				<text><![CDATA[con el Instituto Superior Tecnologico del Azuay, doy a conocer que se requiere de]]></text>
+				<reportElement x="10" y="140" width="499" height="20" uuid="c0a03e44-d999-4a39-b0b7-5679299165a9"/>
+				<text><![CDATA[mantenemos con el Instituto Superior Universitario Tecnológico del Azuay, doy a conocer que se requiere de]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="380" y="140" width="114" height="20" uuid="e7da664b-ca44-46b1-9e8b-cd0933a4ad8e"/>
+				<reportElement x="500" y="140" width="114" height="20" uuid="e7da664b-ca44-46b1-9e8b-cd0933a4ad8e"/>
 				<textFieldExpression><![CDATA[$F{numeroestudiantes}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="400" y="140" width="170" height="20" uuid="4165c4c9-d91d-4faf-b27d-3e41c5587412"/>
-				<text><![CDATA[estudiantes para realizar ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="10" y="160" width="148" height="20" uuid="abaa5d1a-c48f-4434-bf61-11a724c188a3"/>
-				<text><![CDATA[actividades relacionadas con:]]></text>
+				<reportElement x="10" y="160" width="340" height="20" uuid="4165c4c9-d91d-4faf-b27d-3e41c5587412"/>
+				<text><![CDATA[estudiantes para realizar actividades relacionadas con:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="10" y="200" width="484" height="30" uuid="f07b2108-be23-40b9-a28c-d962ebb2ce77"/>
+				<reportElement x="10" y="190" width="484" height="30" uuid="f07b2108-be23-40b9-a28c-d962ebb2ce77"/>
 				<textFieldExpression><![CDATA[$F{descripcionactividades}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="280" width="484" height="30" uuid="932e0211-caad-4635-aa6c-2a9dfd5e2cb1"/>
+				<reportElement x="10" y="310" width="484" height="30" uuid="932e0211-caad-4635-aa6c-2a9dfd5e2cb1"/>
 				<text><![CDATA[Agradezco de antemano la atención que brinde a la presente.
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="240" width="484" height="40" uuid="ca1927f8-7a03-4ad3-a09a-090767da2af5"/>
-				<text><![CDATA[Solicito comedidamente se me informe si esta petición es viable, y en caso de serlo, se me haga conocer el listado de estudiantes que podrían ingresar a la empresa.]]></text>
+				<reportElement x="10" y="240" width="534" height="20" uuid="ca1927f8-7a03-4ad3-a09a-090767da2af5"/>
+				<text><![CDATA[Solicito comedidamente se me informe si esta petición es viable, y en caso de serlo, se me haga conocer el listado ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="360" width="100" height="30" uuid="3aa8e887-f7d4-48c1-ab36-ea96dc8abbfb"/>
+				<reportElement x="10" y="350" width="100" height="30" uuid="3aa8e887-f7d4-48c1-ab36-ea96dc8abbfb"/>
 				<text><![CDATA[Atentamente]]></text>
 			</staticText>
 			<textField>
@@ -162,8 +168,8 @@ WHERE s.idsolicitudpracticas =  $P{idSolicitudPracticas}]]>
 				<textFieldExpression><![CDATA[$F{numerocontacto}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="410" width="170" height="20" uuid="673cb0bf-4de3-4d23-84b3-e49623d4a948"/>
-				<text><![CDATA[-------------------------------]]></text>
+				<reportElement x="10" y="400" width="200" height="20" uuid="673cb0bf-4de3-4d23-84b3-e49623d4a948"/>
+				<text><![CDATA[____________________________]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="10" y="440" width="170" height="20" uuid="76750f40-eec6-42c0-8370-4ba9f56eaa90"/>
@@ -176,6 +182,10 @@ WHERE s.idsolicitudpracticas =  $P{idSolicitudPracticas}]]>
 			<staticText>
 				<reportElement x="10" y="70" width="160" height="19" uuid="49ae8db8-df03-4f41-a9ff-2071505d5515"/>
 				<text><![CDATA[         De mi consideración:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="260" width="534" height="19" uuid="74c37767-40d4-4d9d-b810-6329360f8456"/>
+				<text><![CDATA[de estudiantes que podrían ingresar a la empresa.]]></text>
 			</staticText>
 		</band>
 	</detail>

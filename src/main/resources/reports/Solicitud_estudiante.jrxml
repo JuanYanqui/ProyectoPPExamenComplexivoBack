@@ -5,8 +5,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="idSolicitudConvocatoria" class="java.lang.Long"/>
 	<queryString>
-		<![CDATA[
-SELECT soli.fechaenvio, resp.carrera, 
+		<![CDATA[SELECT soli.fechaenvio, resp.carrera, 
 	destinatario.nombres||' '|| destinatario.apellidos AS nombresdestinatario,
 	remitente.nombres||' '|| remitente.apellidos AS nombresremitente,
 	remitente.cedula as cedulaestudiante,
@@ -24,7 +23,7 @@ JOIN usuarios remitente ON remitente.idusuario = estud.idusuario
 JOIN tutor_empresarial tut ON tut.idtutorempresarial = solip.idtutorempresarial
 JOIN empresa emp ON tut.idempresa = emp.idempresa
 
-WHERE idsolicitudconvocatoria =  $P{idSolicitudConvocatoria} ]]>
+WHERE idsolicitudconvocatoria =  $P{idSolicitudConvocatoria}]]>
 	</queryString>
 	<field name="fechaenvio" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="fechaenvio"/>
@@ -83,9 +82,9 @@ WHERE idsolicitudconvocatoria =  $P{idSolicitudConvocatoria} ]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="67" splitType="Stretch">
+		<band height="140" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="20" width="339" height="20" uuid="9738d9ff-8bd3-436a-b923-de0743e33283"/>
+				<reportElement x="0" y="80" width="339" height="20" uuid="9738d9ff-8bd3-436a-b923-de0743e33283"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -93,164 +92,181 @@ WHERE idsolicitudconvocatoria =  $P{idSolicitudConvocatoria} ]]>
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="360" y="50" width="180" height="17" uuid="ae80432d-2d9e-4fae-b1f5-e3d54ae54462"/>
+				<reportElement x="480" y="93" width="80" height="17" uuid="ae80432d-2d9e-4fae-b1f5-e3d54ae54462"/>
 				<textFieldExpression><![CDATA[$F{fechaenvio}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="5" y="5" width="170" height="90" uuid="a118d347-9646-40e5-8982-fa8181cdcca1"/>
+				<imageExpression><![CDATA["https://dev2020.tecazuay.edu.ec/wp-content/uploads/2022/11/cropped-LOGO-RECTANGULAR_SIN-FONDO.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="440" y="93" width="40" height="20" uuid="f02ade05-927a-45f0-a760-c95899834d7f"/>
+				<text><![CDATA[Cuenca,]]></text>
+			</staticText>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="105" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="20" width="350" height="15" uuid="f0e7c61a-a9bf-4159-9e7c-e5830507eaad"/>
-				<text><![CDATA[RESPONSABLE DE PRÁCTICAS PRE PROFESIONALES DE ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="50" width="370" height="35" uuid="fac282f3-d321-47c2-86ab-753964e443f8"/>
-				<text><![CDATA[INSTITUTO SUPERIOR UNIVERSITARIO TECNOLÓGICO DEL AZUAY
-Su Despacho
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="90" width="370" height="15" uuid="d69ea630-a247-49d1-a53a-c629534f4a63"/>
-				<textElement textAlignment="Justified"/>
-				<text><![CDATA[De mi consideración:
-]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="0" y="33" width="430" height="17" uuid="01bd455a-df8e-4191-86e4-9178d35f9bdf"/>
-				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="3" width="230" height="17" uuid="fc76357d-fac1-45b6-8911-195396469522"/>
-				<textFieldExpression><![CDATA[$F{nombresdestinatario}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageHeader>
 	<columnHeader>
-		<band height="350" splitType="Stretch">
+		<band height="576" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="140" height="15" uuid="b2359b63-6e7d-4793-bdb7-0987ad50f14e"/>
+				<reportElement x="0" y="182" width="140" height="15" uuid="b2359b63-6e7d-4793-bdb7-0987ad50f14e"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Por medio de la presente, Yo,]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="140" y="-1" width="180" height="15" uuid="5a7ca8af-de33-4be8-8a4e-ee5deb968656"/>
+				<reportElement x="140" y="181" width="180" height="15" uuid="5a7ca8af-de33-4be8-8a4e-ee5deb968656"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{nombresremitente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="320" y="0" width="110" height="15" uuid="98bf42af-88a1-430d-86a5-815811d1f185"/>
+				<reportElement x="320" y="182" width="110" height="15" uuid="98bf42af-88a1-430d-86a5-815811d1f185"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[ con número de cédula ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="430" y="-1" width="120" height="15" uuid="3d86fcdc-856f-45fc-b556-873cecfac6bd"/>
+				<reportElement x="430" y="181" width="120" height="15" uuid="3d86fcdc-856f-45fc-b556-873cecfac6bd"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{cedulaestudiante}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="15" width="70" height="15" uuid="210b6140-184b-423d-8a8b-f6035e6c53ee"/>
+				<reportElement x="0" y="200" width="70" height="15" uuid="210b6140-184b-423d-8a8b-f6035e6c53ee"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[estudiante del]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="70" y="15" width="90" height="15" uuid="8843e113-9624-41d5-8f98-b9643ccb0bcb"/>
+				<reportElement x="70" y="200" width="79" height="15" uuid="8843e113-9624-41d5-8f98-b9643ccb0bcb"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{ciclo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="160" y="15" width="110" height="15" uuid="d1b8a89e-182a-40ee-befd-831f9c1cb35b"/>
+				<reportElement x="150" y="200" width="110" height="15" uuid="d1b8a89e-182a-40ee-befd-831f9c1cb35b"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[del periodo académico]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="270" y="14" width="180" height="16" uuid="e35a1841-6387-4555-afa1-ecdb14e6fe80"/>
+				<reportElement x="260" y="199" width="170" height="16" uuid="e35a1841-6387-4555-afa1-ecdb14e6fe80"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="450" y="15" width="100" height="15" uuid="40c60139-4dc3-44c9-807e-1277cdffe034"/>
+				<reportElement x="430" y="200" width="100" height="15" uuid="40c60139-4dc3-44c9-807e-1277cdffe034"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[ de la carrera de]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="30" width="210" height="15" uuid="3ef7abd9-bae4-4774-847e-9aec8ae610f7"/>
+				<reportElement x="320" y="220" width="210" height="15" uuid="3ef7abd9-bae4-4774-847e-9aec8ae610f7"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[solicito comedidamente se autorice mi ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="45" width="380" height="15" uuid="43e2cb29-4445-4e2a-9bb3-0fde76103a60"/>
+				<reportElement x="-1" y="242" width="380" height="15" uuid="43e2cb29-4445-4e2a-9bb3-0fde76103a60"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[postulación para realizar las 240 horas de prácticas pre profesionales en la empresa]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="30" width="340" height="15" uuid="baa4c9c3-462e-45e3-b701-6183614f30ed"/>
+				<reportElement x="-1" y="220" width="320" height="15" uuid="baa4c9c3-462e-45e3-b701-6183614f30ed"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="45" width="170" height="15" uuid="3350be86-6595-48d6-850f-92f822efb27a"/>
+				<reportElement x="379" y="242" width="170" height="15" uuid="3350be86-6595-48d6-850f-92f822efb27a"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="60" width="80" height="15" uuid="cb22af53-c316-4ca0-b4db-f57b409187db"/>
+				<reportElement x="-1" y="260" width="80" height="15" uuid="cb22af53-c316-4ca0-b4db-f57b409187db"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[. según solicitud:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="80" y="60" width="340" height="15" uuid="605523c3-bd95-4116-85c9-246553b2382c"/>
+				<reportElement x="79" y="260" width="340" height="15" uuid="605523c3-bd95-4116-85c9-246553b2382c"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{nombreconvocatoria}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="112" width="550" height="78" uuid="31775fa7-a3b9-406f-879e-a14b1aea8319"/>
+				<reportElement x="0" y="294" width="555" height="15" uuid="31775fa7-a3b9-406f-879e-a14b1aea8319"/>
 				<textElement textAlignment="Justified"/>
-				<text><![CDATA[Acepto realizar el proceso de selección determinado por la empresa receptora y en caso de ser elegido, me comprometo a cumplir con la normativa de la empresa, presentar los requisitos solicitados por el Instituto Superior Tecnológico del Azuay como prueba de las actividades realizadas y demostrar profesionalismo, dedicación y honestidad en todo momento, dejando en alto el nombre de la institución educativa y colaborando en el fortalecimiento de la empresa receptora que me brinda la posibilidad de formarme en sus instalaciones.
-]]></text>
+				<text><![CDATA[Acepto realizar el proceso de selección determinado por la empresa receptora y en caso de ser elegido, me comprometo a ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="190" width="550" height="15" uuid="38d1fe98-7170-44e8-8f85-c3504980186c"/>
-				<textElement textAlignment="Justified"/>
+				<reportElement x="-1" y="410" width="550" height="15" uuid="38d1fe98-7170-44e8-8f85-c3504980186c"/>
+				<textElement textAlignment="Left"/>
 				<text><![CDATA[Sin más que informar me despido agradeciendo de antemano su colaboración.
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="260" width="550" height="15" uuid="ac05f560-f559-4a1e-81dc-3f1f55083ea7"/>
+				<reportElement x="0" y="442" width="550" height="15" uuid="ac05f560-f559-4a1e-81dc-3f1f55083ea7"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Atentamente
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="290" width="550" height="15" uuid="57ea19ad-5202-491f-b742-108060039c6b"/>
+				<reportElement x="0" y="510" width="550" height="15" uuid="57ea19ad-5202-491f-b742-108060039c6b"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[______________________
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="335" width="240" height="15" uuid="8bf9e4ad-4a73-4f15-b895-4a97e5d1f973"/>
+				<reportElement x="0" y="555" width="240" height="15" uuid="8bf9e4ad-4a73-4f15-b895-4a97e5d1f973"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{correoestudiante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="305" width="240" height="15" uuid="60a49614-e20a-4ed5-8e22-4b2e4122752c"/>
+				<reportElement x="0" y="525" width="240" height="15" uuid="60a49614-e20a-4ed5-8e22-4b2e4122752c"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{nombresremitente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="320" width="240" height="15" uuid="892234de-9af9-48a0-8467-fc17837847a6"/>
+				<reportElement x="0" y="540" width="240" height="15" uuid="892234de-9af9-48a0-8467-fc17837847a6"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{numero_contacto}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="230" height="17" uuid="fc76357d-fac1-45b6-8911-195396469522"/>
+				<textFieldExpression><![CDATA[$F{nombresdestinatario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="50" width="350" height="15" uuid="f0e7c61a-a9bf-4159-9e7c-e5830507eaad"/>
+				<text><![CDATA[RESPONSABLE DE PRÁCTICAS PRE PROFESIONALES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="65" width="350" height="14" uuid="cbdb5f86-d3ac-41f3-a8a1-197d7fb83d17"/>
+				<textFieldExpression><![CDATA[$F{carrera}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="79" width="350" height="15" uuid="1108611d-3a38-480b-8aa9-a97ec6d87ffc"/>
+				<text><![CDATA[INSTITUTO SUPERIOR UNIVERSITARIO TECNOLÓGICO DEL AZUAY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="140" height="15" uuid="8b03ac18-e7b7-462a-81c5-7a4c280d828d"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Su Despacho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="150" width="140" height="15" uuid="1a256717-d743-4d66-ab9d-0e3da193dd26"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[De mi consideración:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="360" width="550" height="15" uuid="7bdc3645-6b61-4015-8830-6915ac105bf5"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[en alto el nombre de la institución educativa y colaborando en el fortalecimiento de la empresa receptora que me brinda la ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="380" width="550" height="15" uuid="97f95f43-7b71-4250-b6d8-1f9eb09c30d0"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[posibilidad de formarme en sus instalaciones.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="340" width="550" height="15" uuid="ca76a8ad-7397-408c-9ec4-ac5b6ac98b1e"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[como prueba de las actividades realizadas y demostrar profesionalismo, dedicación y honestidad en todo momento, dejando 
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="315" width="550" height="15" uuid="78fe7c58-c4ae-4519-a7f7-3d252269287b"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[cumplir con la normativa de la empresa, presentar los requisitos solicitados por el Instituto Superior Tecnológico del Azuay]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
-	<columnFooter>
-		<band height="75" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
